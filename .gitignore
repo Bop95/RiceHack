@@ -1,8 +1,38 @@
+# Environment and secrets
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+
+# Python
 __pycache__/
-*.pyc
+**/__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
 .venv/
 venv/
 env/
-.env
+
+# Node and frontend builds
+node_modules/
+.next/
+dist/
+build/
+
+# System and local tool files
 .DS_Store
 .claude/settings.local.json
+
+# Local or generated data
+data/raw/*
+!data/raw/.gitkeep
+data/external/*
+!data/external/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+data/synthetic/*
+!data/synthetic/.gitkeep
+*.parquet
+
+# Generated reports
+reports/interactive/*.html
