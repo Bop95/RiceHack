@@ -14,6 +14,7 @@ data/summaries/visits_by_category.csv
 data/summaries/visits_by_market.csv
 data/summaries/weekday_patterns.csv
 data/summaries/monthly_trends.csv
+data/summaries/run_metadata.json
 """
 
 from __future__ import annotations
@@ -22,7 +23,9 @@ import argparse
 import csv
 import glob
 import gzip
+import hashlib
 import json
+import platform
 import re
 import shutil
 from datetime import datetime, timezone
@@ -63,6 +66,7 @@ SUMMARY_FILENAMES = [
     "visits_by_market.csv",
     "weekday_patterns.csv",
     "monthly_trends.csv",
+    "run_metadata.json",
 ]
 
 MEMORY_PATTERN = re.compile(r"^[1-9][0-9]*(?:MB|GB)$", re.IGNORECASE)
@@ -89,6 +93,11 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         "--memory-limit",
         default="8GB",
         help="DuckDB memory limit such as 4GB or 8000MB (default: 8GB).",
+    )
+    parser.add_argument(
+        "--temp-limit",
+        default="20GB",
+        help="Maximum DuckDB temporary-disk use such as 10GB (default: 20GB).",
     )
     parser.add_argument(
         "--limit",
@@ -163,10 +172,101 @@ def ensure_safe_options(args: argparse.Namespace) -> None:
         raise ValueError("--threads must be at least 1.")
     if not MEMORY_PATTERN.fullmatch(args.memory_limit):
         raise ValueError("--memory-limit must look like 4GB or 8000MB.")
+    if not MEMORY_PATTERN.fullmatch(args.temp_limit):
+        raise ValueError("--temp-limit must look like 10GB or 8000MB.")
     if args.limit is not None and args.limit < 1:
         raise ValueError("--limit must be at least 1 when supplied.")
     if args.overwrite and args.resume:
         raise ValueError("Use either --overwrite or --resume, not both.")
+
+
+def storage_size_bytes(value: str) -> int:
+    """Convert the already-validated MB/GB option into decimal bytes."""
+    if MEMORY_PATTERN.fullmatch(value) is None:
+        raise ValueError(f"Invalid storage size: {value}")
+    number = int(value[:-2])
+    multiplier = 1_000_000_000 if value.upper().endswith("GB") else 1_000_000
+    return number * multiplier
+
+
+def check_temporary_disk_space(output_root: Path, temp_limit: str) -> None:
+    """Fail early when the configured spill allowance exceeds free disk space."""
+    probe = output_root.resolve()
+    while not probe.exists() and probe != probe.parent:
+        probe = probe.parent
+    free_bytes = shutil.disk_usage(probe).free
+    required_bytes = storage_size_bytes(temp_limit)
+    if free_bytes < required_bytes:
+        raise OSError(
+            f"Only {free_bytes / 1_000_000_000:.1f} GB is free near {output_root}, "
+            f"below --temp-limit {temp_limit}. Choose a smaller safe limit or free disk."
+        )
+
+
+def input_fingerprint(files: list[Path]) -> list[dict[str, Any]]:
+    """Record enough source metadata to reject an unsafe resume."""
+    return [
+        {
+            "path": path.as_posix(),
+            "size_bytes": path.stat().st_size,
+            "modified_time_ns": path.stat().st_mtime_ns,
+        }
+        for path in files
+    ]
+
+
+def base_run_metadata(
+    files: list[Path],
+    args: argparse.Namespace,
+    percentiles: dict[str, int],
+) -> dict[str, Any]:
+    script_path = Path(__file__).resolve()
+    return {
+        "pipeline": script_path.name,
+        "pipeline_sha256": hashlib.sha256(script_path.read_bytes()).hexdigest(),
+        "input_files": input_fingerprint(files),
+        "parameters": {
+            "limit": args.limit,
+            "threads": args.threads,
+            "memory_limit": args.memory_limit.upper(),
+            "temp_limit": args.temp_limit.upper(),
+        },
+        "software": {
+            "python": platform.python_version(),
+            "duckdb": duckdb.__version__,
+        },
+        "exact_visit_percentiles_before_deduplication": percentiles,
+        "high_visit_threshold": percentiles["p999"],
+    }
+
+
+def validate_resume_metadata(
+    path: Path,
+    expected: dict[str, Any],
+) -> None:
+    if not path.exists():
+        raise FileNotFoundError(
+            f"--resume requires the run manifest created with the candidate: {path}"
+        )
+    saved = json.loads(path.read_text(encoding="utf-8"))
+    checks = [
+        ("input_files", saved.get("input_files"), expected["input_files"]),
+        (
+            "limit",
+            saved.get("parameters", {}).get("limit"),
+            expected["parameters"]["limit"],
+        ),
+        (
+            "high_visit_threshold",
+            saved.get("high_visit_threshold"),
+            expected["high_visit_threshold"],
+        ),
+    ]
+    for label, saved_value, expected_value in checks:
+        if saved_value != expected_value:
+            raise ValueError(
+                f"Cannot resume: saved {label} does not match the current run."
+            )
 
 
 def expected_output_paths(output_root: Path) -> list[Path]:
@@ -179,7 +279,7 @@ def expected_output_paths(output_root: Path) -> list[Path]:
 def prepare_workspace(output_root: Path, overwrite: bool, resume: bool) -> Path:
     outputs = expected_output_paths(output_root)
     existing = [path for path in outputs if path.exists()]
-    if existing and not overwrite:
+    if existing and not (overwrite or resume):
         raise FileExistsError(
             f"Output already exists: {existing[0]}. Use --overwrite to replace outputs."
         )
@@ -188,17 +288,21 @@ def prepare_workspace(output_root: Path, overwrite: bool, resume: bool) -> Path:
     if resume:
         candidate = work_root / "processed" / "store_visits_clean_candidate.parquet"
         clean = work_root / "processed" / "store_visits_clean.parquet"
-        if not candidate.exists() or clean.exists():
+        manifest = work_root / "run_manifest.json"
+        if candidate.exists() == clean.exists() or not manifest.exists():
             raise FileNotFoundError(
-                "--resume requires an existing clean candidate and no completed work "
-                f"Parquet under {work_root / 'processed'}."
+                "--resume requires exactly one candidate/clean work Parquet plus its "
+                f"run manifest under {work_root}."
             )
         (work_root / "summaries").mkdir(parents=True, exist_ok=True)
         for name in SUMMARY_FILENAMES:
             partial = work_root / "summaries" / name
             if partial.exists():
                 partial.unlink()
-        (output_root / "duckdb_tmp").mkdir(parents=True, exist_ok=True)
+        duckdb_temp = output_root / "duckdb_tmp"
+        if duckdb_temp.exists():
+            shutil.rmtree(duckdb_temp)
+        duckdb_temp.mkdir(parents=True)
         return work_root
 
     if work_root.exists():
@@ -209,7 +313,10 @@ def prepare_workspace(output_root: Path, overwrite: bool, resume: bool) -> Path:
         shutil.rmtree(work_root)
     (work_root / "processed").mkdir(parents=True)
     (work_root / "summaries").mkdir(parents=True)
-    (output_root / "duckdb_tmp").mkdir(parents=True, exist_ok=True)
+    duckdb_temp = output_root / "duckdb_tmp"
+    if duckdb_temp.exists():
+        shutil.rmtree(duckdb_temp)
+    duckdb_temp.mkdir(parents=True)
     return work_root
 
 
@@ -218,11 +325,14 @@ def configure_connection(
     output_root: Path,
     threads: int,
     memory_limit: str,
+    temp_limit: str,
 ) -> None:
     connection.execute(f"SET threads = {threads}")
     connection.execute(f"SET memory_limit = {sql_literal(memory_limit.upper())}")
     connection.execute("SET preserve_insertion_order = false")
-    connection.execute("SET max_temp_directory_size = '20GB'")
+    connection.execute(
+        f"SET max_temp_directory_size = {sql_literal(temp_limit.upper())}"
+    )
     temp_path = (output_root / "duckdb_tmp").resolve().as_posix()
     connection.execute(f"SET temp_directory = {sql_literal(temp_path)}")
 
@@ -239,8 +349,13 @@ def create_source_views(
     )
     if limit is not None:
         source = f"SELECT * FROM ({source}) LIMIT {limit}"
-
-    connection.execute(f"CREATE TEMP VIEW raw_store_visits AS {source}")
+        # A table freezes one sample for every downstream check. A view would
+        # rescan the unordered LIMIT and could give different rows per query.
+        connection.execute("SET preserve_insertion_order = true")
+        connection.execute(f"CREATE TEMP TABLE raw_store_visits AS {source}")
+        connection.execute("SET preserve_insertion_order = false")
+    else:
+        connection.execute(f"CREATE TEMP VIEW raw_store_visits AS {source}")
     connection.execute(
         """
         CREATE TEMP VIEW typed_store_visits AS
@@ -290,14 +405,24 @@ def collect_raw_quality(connection: duckdb.DuckDBPyConnection) -> dict[str, Any]
             COUNT_IF(local_date > CURRENT_DATE) AS future_dates,
             COUNT_IF(state IS NOT NULL AND NOT REGEXP_FULL_MATCH(state, '[A-Z]{{2}}'))
                 AS suspicious_state_values,
-            COUNT_IF(naics_code IS NOT NULL AND NOT REGEXP_FULL_MATCH(naics_code, '[0-9]{{6}}'))
-                AS suspicious_naics_values,
+            COUNT_IF(naics_code IS NOT NULL AND LENGTH(naics_code) = 4)
+                AS naics_4_digit_rows,
+            COUNT_IF(
+                naics_code IS NOT NULL
+                AND LENGTH(naics_code) = 4
+                AND sub_category IS NULL
+            ) AS naics_4_digit_missing_sub_category_rows,
+            COUNT_IF(naics_code IS NOT NULL AND LENGTH(naics_code) = 5)
+                AS naics_5_digit_rows,
+            COUNT_IF(naics_code IS NOT NULL AND LENGTH(naics_code) = 6)
+                AS naics_6_digit_rows,
+            COUNT_IF(
+                naics_code IS NOT NULL AND LENGTH(naics_code) NOT IN (4, 5, 6)
+            ) AS naics_other_length_rows,
             MIN(local_date) AS earliest_valid_date,
             MAX(local_date) AS latest_valid_date,
             MIN(daily_visits) FILTER (WHERE daily_visits >= 0) AS minimum_valid_visits,
             MAX(daily_visits) FILTER (WHERE daily_visits >= 0) AS maximum_valid_visits,
-            APPROX_QUANTILE(daily_visits, 0.999)
-                FILTER (WHERE daily_visits >= 0) AS high_visit_threshold,
             COUNT_IF(
                 store_id IS NOT NULL
                 AND local_date IS NOT NULL
@@ -309,6 +434,56 @@ def collect_raw_quality(connection: duckdb.DuckDBPyConnection) -> dict[str, Any]
     cursor = connection.execute(query)
     columns = [item[0] for item in cursor.description]
     return dict(zip(columns, cursor.fetchone(), strict=True))
+
+
+def exact_visit_percentiles(
+    connection: duckdb.DuckDBPyConnection,
+    relation: str,
+    where_clause: str = "TRUE",
+) -> dict[str, int]:
+    """Calculate discrete nearest-rank percentiles from a compact histogram."""
+    probabilities = {
+        "p25": 0.25,
+        "p50": 0.50,
+        "p75": 0.75,
+        "p95": 0.95,
+        "p99": 0.99,
+        "p999": 0.999,
+    }
+    expressions = ",\n".join(
+        f"MIN(value) FILTER (WHERE cumulative_count >= "
+        f"CEIL(total_count * {probability})) AS {name}"
+        for name, probability in probabilities.items()
+    )
+    cursor = connection.execute(
+        f"""
+        WITH histogram AS (
+            SELECT daily_visits AS value, COUNT(*)::BIGINT AS frequency
+            FROM {relation}
+            WHERE {where_clause}
+            GROUP BY daily_visits
+        ),
+        cumulative AS (
+            SELECT
+                value,
+                SUM(frequency) OVER (
+                    ORDER BY value ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+                ) AS cumulative_count,
+                SUM(frequency) OVER () AS total_count
+            FROM histogram
+        )
+        SELECT {expressions}
+        FROM cumulative
+        """
+    )
+    columns = [item[0] for item in cursor.description]
+    row = cursor.fetchone()
+    if row is None or any(value is None for value in row):
+        raise ValueError("No valid DAILY_VISITS values were found for percentiles.")
+    return {
+        name: int(value)
+        for name, value in zip(columns, row, strict=True)
+    }
 
 
 def clean_candidate_query(high_visit_threshold: int) -> str:
@@ -502,25 +677,15 @@ def create_summary_tables(
     high_visit_threshold: int,
 ) -> dict[str, Any]:
     clean = f"read_parquet({sql_literal(clean_path.as_posix())})"
-
-    percentile_cursor = connection.execute(
-        f"""
-        SELECT
-            APPROX_QUANTILE(daily_visits, 0.25) AS p25,
-            APPROX_QUANTILE(daily_visits, 0.50) AS p50,
-            APPROX_QUANTILE(daily_visits, 0.75) AS p75,
-            APPROX_QUANTILE(daily_visits, 0.95) AS p95,
-            APPROX_QUANTILE(daily_visits, 0.99) AS p99
-        FROM {clean}
-        """
+    percentiles = exact_visit_percentiles(connection, clean)
+    percentile_output: dict[str, Any] = {
+        **percentiles,
+        "high_visit_threshold": int(high_visit_threshold),
+        "data_type": "derived",
+    }
+    write_single_row_csv(
+        summary_dir / "visit_percentiles.csv", percentile_output
     )
-    percentile_columns = [item[0] for item in percentile_cursor.description]
-    percentiles = dict(
-        zip(percentile_columns, percentile_cursor.fetchone(), strict=True)
-    )
-    percentiles["p999"] = int(high_visit_threshold)
-    percentiles["data_type"] = "derived"
-    write_single_row_csv(summary_dir / "visit_percentiles.csv", percentiles)
 
     summary_query = f"""
         SELECT
@@ -534,7 +699,7 @@ def create_summary_tables(
             MAX(local_date) AS latest_date,
             SUM(daily_visits) AS total_visits,
             ROUND(AVG(daily_visits), 2) AS mean_daily_visits,
-            {int(percentiles['p50'])} AS approximate_median_daily_visits,
+            {int(percentiles['p50'])} AS median_daily_visits,
             MIN(daily_visits) AS minimum_daily_visits,
             MAX(daily_visits) AS maximum_daily_visits,
             ROUND(STDDEV_SAMP(daily_visits), 2) AS standard_deviation_daily_visits,
@@ -644,20 +809,61 @@ def duplicate_store_date_metrics(
     clean_path: Path,
 ) -> tuple[int, int]:
     clean = f"read_parquet({sql_literal(clean_path.as_posix())})"
-    row = connection.execute(
+    bucket_root = clean_path.parent / "store_date_buckets"
+    if bucket_root.exists():
+        shutil.rmtree(bucket_root)
+    connection.execute(
         f"""
-        SELECT
-            COUNT(*)::BIGINT AS duplicate_groups,
-            COALESCE(SUM(group_size - 1), 0)::BIGINT AS extra_rows
-        FROM (
-            SELECT store_id, local_date, COUNT(*) AS group_size
+        COPY (
+            SELECT
+                store_id,
+                local_date,
+                (HASH(store_id, local_date) % {DUPLICATE_BUCKET_COUNT})::INTEGER
+                    AS store_date_bucket
             FROM {clean}
-            GROUP BY store_id, local_date
-            HAVING COUNT(*) > 1
+        ) TO {sql_literal(bucket_root.as_posix())}
+        (
+            FORMAT PARQUET,
+            COMPRESSION ZSTD,
+            PARTITION_BY (store_date_bucket),
+            ROW_GROUP_SIZE 122880,
+            OVERWRITE_OR_IGNORE
         )
         """
-    ).fetchone()
-    return int(row[0]), int(row[1])
+    )
+
+    duplicate_groups = 0
+    extra_rows = 0
+    try:
+        bucket_directories = sorted(
+            bucket_root.glob("store_date_bucket=*"),
+            key=lambda path: int(path.name.split("=", 1)[1]),
+        )
+        if not bucket_directories:
+            raise ValueError("Store-date partitioning produced no buckets.")
+        for bucket_directory in bucket_directories:
+            bucket_glob = (bucket_directory / "*.parquet").as_posix()
+            row = connection.execute(
+                f"""
+                SELECT
+                    COUNT(*)::BIGINT AS duplicate_groups,
+                    COALESCE(SUM(group_size - 1), 0)::BIGINT AS extra_rows
+                FROM (
+                    SELECT store_id, local_date, COUNT(*) AS group_size
+                    FROM read_parquet(
+                        {sql_literal(bucket_glob)}, hive_partitioning = false
+                    )
+                    GROUP BY store_id, local_date
+                    HAVING COUNT(*) > 1
+                )
+                """
+            ).fetchone()
+            duplicate_groups += int(row[0])
+            extra_rows += int(row[1])
+    finally:
+        if bucket_root.exists():
+            shutil.rmtree(bucket_root)
+    return duplicate_groups, extra_rows
 
 
 def missing_counts_from_quality(quality: dict[str, Any]) -> list[tuple[str, int]]:
@@ -698,6 +904,19 @@ def write_quality_report(
     excluded = raw_rows - excluded
     generated_at = datetime.now(timezone.utc).isoformat().replace("+00:00", "Z")
     scope = "LIMITED TEST RUN" if limited_run else "COMPLETE SOURCE RUN"
+    naics_rows = [
+        ("4 digits", int(quality["naics_4_digit_rows"])),
+        ("5 digits", int(quality["naics_5_digit_rows"])),
+        ("6 digits", int(quality["naics_6_digit_rows"])),
+        ("Other lengths", int(quality["naics_other_length_rows"])),
+    ]
+    naics_table = [
+        "| NAICS code length | Rows | Percent of inspected rows |",
+        "| --- | ---: | ---: |",
+    ]
+    for label, count in naics_rows:
+        percentage = (count / raw_rows * 100) if raw_rows else 0
+        naics_table.append(f"| {label} | {count:,} | {percentage:.3f}% |")
 
     report = f"""# Store Visits Data-Quality Report
 
@@ -721,7 +940,7 @@ def write_quality_report(
 - Exclude negative visit counts.
 - Remove exact duplicate rows after normalization.
 - Retain zero visits and flag them with `is_zero_visits`.
-- Retain values above the approximate 99.9th percentile and flag them with
+- Retain values above the exact discrete 99.9th percentile and flag them with
   `is_suspicious_high_visits`; high values are review candidates, not automatic errors.
 - Retain non-identical duplicate store-date records and report them for later review.
 
@@ -739,15 +958,23 @@ def write_quality_report(
 | Extra rows within duplicate store-date groups | {duplicate_store_date_extra_rows:,} |
 | Future-dated rows | {int(quality['future_dates']):,} |
 | Suspicious state-format rows | {int(quality['suspicious_state_values']):,} |
-| Suspicious NAICS-format rows | {int(quality['suspicious_naics_values']):,} |
-| Approximate high-visit review threshold | > {format_value(quality['high_visit_threshold'])} |
+| Exact high-visit review threshold (p99.9) | > {format_value(quality['high_visit_threshold'])} |
 | High-visit rows retained and flagged | {int(summary['suspicious_high_visit_rows']):,} |
 | Earliest / latest valid date | {quality['earliest_valid_date']} / {quality['latest_valid_date']} |
 | Minimum / maximum nonnegative visits | {format_value(quality['minimum_valid_visits'])} / {format_value(quality['maximum_valid_visits'])} |
 
-## Missing values in raw input
+## Missing values after trimming
 
 {chr(10).join(missing_table)}
+
+## NAICS classification granularity
+
+{chr(10).join(naics_table)}
+
+The 4-, 5-, and 6-digit values are retained as classification levels, not labeled as
+invalid. All {int(quality['naics_4_digit_missing_sub_category_rows']):,} inspected
+4-digit rows also have a missing `SUB_CATEGORY`, which is consistent with a broader
+classification level. The official dictionary is still needed to confirm this meaning.
 
 ## Important summary statistics
 
@@ -759,14 +986,15 @@ def write_quality_report(
 | Unique markets | {int(summary['unique_markets']):,} |
 | Total visits | {int(summary['total_visits']):,} |
 | Mean daily visits | {format_value(summary['mean_daily_visits'])} |
-| Approximate median daily visits | {format_value(summary['approximate_median_daily_visits'])} |
+| Median daily visits | {format_value(summary['median_daily_visits'])} |
 | Standard deviation | {format_value(summary['standard_deviation_daily_visits'])} |
 
 ## Interpretation and limitations
 
 The output is suitable for relative historical commercial-activity analysis. It is not
 measured World Cup attendance, pedestrian flow, transit ridership, or an exact future
-forecast. Approximate quantiles are used because the dataset is very large. A duplicate
+forecast. Percentiles are exact discrete nearest-rank values calculated from a compact
+visit-count histogram. A duplicate
 `STORE_ID` plus `LOCAL_DATE` is not automatically deleted when other fields differ;
 those records require a business-rule decision with the team.
 """
@@ -774,6 +1002,9 @@ those records require a business-rule decision with the team.
 
 
 def promote_outputs(work_root: Path, output_root: Path, overwrite: bool) -> None:
+    summary_names = [
+        name for name in SUMMARY_FILENAMES if name != "data_quality_report.md"
+    ] + ["data_quality_report.md"]
     pairs = [
         (
             work_root / "processed" / "store_visits_clean.parquet",
@@ -781,16 +1012,44 @@ def promote_outputs(work_root: Path, output_root: Path, overwrite: bool) -> None
         ),
         *[
             (work_root / "summaries" / name, output_root / "summaries" / name)
-            for name in SUMMARY_FILENAMES
+            for name in summary_names
         ],
     ]
-    for source, destination in pairs:
-        destination.parent.mkdir(parents=True, exist_ok=True)
-        if destination.exists():
-            if not overwrite:
-                raise FileExistsError(f"Output already exists: {destination}")
-            destination.unlink()
-        source.replace(destination)
+    missing = [source for source, _ in pairs if not source.exists()]
+    if missing:
+        raise FileNotFoundError(f"Completed work output is missing: {missing[0]}")
+
+    backup_root = work_root / "promotion_backup"
+    backups: list[tuple[Path, Path]] = []
+    promoted: list[tuple[Path, Path]] = []
+    try:
+        for _, destination in pairs:
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            if destination.exists():
+                if not overwrite:
+                    raise FileExistsError(f"Output already exists: {destination}")
+                relative = destination.relative_to(output_root)
+                backup = backup_root / relative
+                backup.parent.mkdir(parents=True, exist_ok=True)
+                destination.replace(backup)
+                backups.append((backup, destination))
+
+        for source, destination in pairs:
+            source.replace(destination)
+            promoted.append((destination, source))
+    except Exception:
+        for destination, source in reversed(promoted):
+            if destination.exists():
+                source.parent.mkdir(parents=True, exist_ok=True)
+                destination.replace(source)
+        for backup, destination in reversed(backups):
+            if backup.exists():
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                backup.replace(destination)
+        raise
+
+    if backup_root.exists():
+        shutil.rmtree(backup_root)
     shutil.rmtree(work_root)
     duckdb_temp = output_root / "duckdb_tmp"
     if duckdb_temp.exists() and not any(duckdb_temp.iterdir()):
@@ -802,6 +1061,7 @@ def run_pipeline(args: argparse.Namespace) -> dict[str, Any]:
     files = discover_input_files(args.input)
     validate_headers(files)
     output_root = args.output_root.resolve()
+    check_temporary_disk_space(output_root, args.temp_limit)
     work_root = prepare_workspace(output_root, args.overwrite, args.resume)
     work_processed = work_root / "processed"
     work_summaries = work_root / "summaries"
@@ -812,34 +1072,70 @@ def run_pipeline(args: argparse.Namespace) -> dict[str, Any]:
     connection = duckdb.connect()
     try:
         configure_connection(
-            connection, output_root, args.threads, args.memory_limit
+            connection,
+            output_root,
+            args.threads,
+            args.memory_limit,
+            args.temp_limit,
         )
         create_source_views(connection, files, args.limit)
 
         print("Checking missing values, dates, numeric values, and suspicious values...", flush=True)
         quality = collect_raw_quality(connection)
-        threshold = quality["high_visit_threshold"]
-        if threshold is None:
-            raise ValueError("No valid nonnegative DAILY_VISITS values were found.")
+        raw_percentiles = exact_visit_percentiles(
+            connection,
+            "typed_store_visits",
+            "daily_visits >= 0",
+        )
+        threshold = raw_percentiles["p999"]
+        quality["high_visit_threshold"] = threshold
+        run_metadata = base_run_metadata(files, args, raw_percentiles)
+        manifest_path = work_root / "run_manifest.json"
 
         if args.resume:
-            print("Reusing the completed clean candidate Parquet...", flush=True)
-            threshold = recover_candidate_threshold(
-                connection, candidate_path, int(threshold)
-            )
-            quality["high_visit_threshold"] = threshold
+            validate_resume_metadata(manifest_path, run_metadata)
+            if clean_path.exists():
+                print("Reusing the completed clean work Parquet...", flush=True)
+                clean_rows = int(
+                    connection.execute(
+                        f"SELECT COUNT(*) FROM read_parquet("
+                        f"{sql_literal(clean_path.as_posix())})"
+                    ).fetchone()[0]
+                )
+                exact_duplicates = (
+                    int(quality["valid_rows_before_deduplication"]) - clean_rows
+                )
+                if exact_duplicates < 0:
+                    raise ValueError(
+                        "Cannot resume: clean work has more rows than valid source input."
+                    )
+            else:
+                print("Reusing the completed clean candidate Parquet...", flush=True)
+                candidate_threshold = recover_candidate_threshold(
+                    connection, candidate_path, threshold
+                )
+                if candidate_threshold != threshold:
+                    raise ValueError(
+                        "Cannot resume: candidate flags do not match the exact threshold."
+                    )
+                print("Checking and removing exact normalized duplicates...", flush=True)
+                exact_duplicates, clean_rows = remove_exact_duplicates(
+                    connection, candidate_path, clean_path
+                )
         else:
             print("Writing typed clean candidate Parquet...", flush=True)
             write_parquet(
                 connection,
-                clean_candidate_query(int(threshold)),
+                clean_candidate_query(threshold),
                 candidate_path,
             )
-
-        print("Checking and removing exact normalized duplicates...", flush=True)
-        exact_duplicates, clean_rows = remove_exact_duplicates(
-            connection, candidate_path, clean_path
-        )
+            manifest_path.write_text(
+                json.dumps(run_metadata, indent=2) + "\n", encoding="utf-8"
+            )
+            print("Checking and removing exact normalized duplicates...", flush=True)
+            exact_duplicates, clean_rows = remove_exact_duplicates(
+                connection, candidate_path, clean_path
+            )
         if clean_rows == 0:
             raise ValueError("Cleaning produced zero rows; outputs were not promoted.")
 
@@ -863,10 +1159,25 @@ def run_pipeline(args: argparse.Namespace) -> dict[str, Any]:
             duplicate_extra_rows,
             limited_run=args.limit is not None,
         )
+        run_metadata.update(
+            {
+                "completed_at_utc": datetime.now(timezone.utc)
+                .isoformat()
+                .replace("+00:00", "Z"),
+                "scope": "limited test" if args.limit is not None else "complete source",
+                "raw_rows": int(quality["raw_rows"]),
+                "clean_rows": int(summary["total_rows"]),
+                "exact_duplicates_removed": exact_duplicates,
+                "duplicate_store_date_groups": duplicate_groups,
+            }
+        )
+        (work_summaries / "run_metadata.json").write_text(
+            json.dumps(run_metadata, indent=2) + "\n", encoding="utf-8"
+        )
     finally:
         connection.close()
 
-    promote_outputs(work_root, output_root, args.overwrite)
+    promote_outputs(work_root, output_root, args.overwrite or args.resume)
     result = {
         "scope": "limited test" if args.limit is not None else "complete source",
         "source_files": len(files),
@@ -889,7 +1200,13 @@ def run_pipeline(args: argparse.Namespace) -> dict[str, Any]:
 def main(argv: list[str] | None = None) -> int:
     try:
         run_pipeline(parse_args(argv))
-    except (FileNotFoundError, FileExistsError, OSError, ValueError) as error:
+    except (
+        duckdb.Error,
+        FileNotFoundError,
+        FileExistsError,
+        OSError,
+        ValueError,
+    ) as error:
         print(f"Error: {error}", flush=True)
         return 1
     return 0

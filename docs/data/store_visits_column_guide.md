@@ -18,7 +18,7 @@ clean any values.
 | `STOCK_SYMBOL` | Text | Public-company ticker when available. Often blank and not central to FinalFlow. | Metadata | Inferred; verify with official dictionary |
 | `STORE_ID` | Text identifier | Stable-looking store/location identifier used to count stores and follow the same location over dates. Never treat it as a number. | Main | Leader's guide |
 | `SUB_CATEGORY` | Text | More detailed commercial classification nested below the broad category. | Main | Leader's guide |
-| `VERSION_ID` | Text/version | Dataset or record-version metadata. The inspected sample contains only `9.0`; it is not a business metric. | Metadata | Inferred; verify with official dictionary |
+| `VERSION_ID` | Text/version | Dataset or record-version metadata. Both the 100,000-row sample and the complete cleaned dataset contain only `9.0`; it is not a business metric. | Metadata | Inferred; verify with official dictionary |
 
 ## Most important relationships
 
