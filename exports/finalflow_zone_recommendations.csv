@@ -1,0 +1,11 @@
+placekey,location_name,latitude,longitude,top_category,spending_level,customer_activity_level,includes_parking,nearby_uhi,commercial_opportunity,heat_concern,recommendation,reason
+225-224@627-rwc-c5z,Bronx Zoo,40.849281,-73.877064,"Museums, Historical Sites, and Similar Institutions",High,High,True,1.0,High,Low/Moderate,Recommended,High commercial opportunity with manageable heat
+223-222@627-sp2-jy9,Yonkers Kia,40.961757,-73.839724,Automobile Dealers,High,High,True,4.0,High,Low/Moderate,Recommended,High commercial opportunity with manageable heat
+zzy-224@5pw-nsy-n89,Gas N Wash,41.606677,-88.241722,Gasoline Stations,High,High,True,1.0,High,Low/Moderate,Recommended,High commercial opportunity with manageable heat
+223-223@5pv-9x6-yqf,Marathon,39.696343,-86.372105,Gasoline Stations,High,High,True,4.0,High,Low/Moderate,Recommended,High commercial opportunity with manageable heat
+224-222@627-scv-kvf,Gedney Service,41.019096,-73.757612,Automotive Repair and Maintenance,High,High,True,2.0,High,Low/Moderate,Recommended,High commercial opportunity with manageable heat
+zzw-222@63j-vjh-cnq,Sunoco,40.07963,-82.263191,Gasoline Stations,High,High,True,1.0,High,Low/Moderate,Recommended,High commercial opportunity with manageable heat
+zzw-222@627-sm8-qvf,Dunwoodie Golf Course,40.938817,-73.872326,Other Amusement and Recreation Industries,High,High,True,1.0,High,Low/Moderate,Recommended,High commercial opportunity with manageable heat
+zzw-222@63r-txb-7nq,Wawa,38.632637,-77.276115,Grocery Stores,High,High,False,4.0,High,Low/Moderate,Recommended,High commercial opportunity with manageable heat
+222-222@62k-kyc-wff,Walmart Supercenter,41.798617,-71.913817,"General Merchandise Stores, including Warehouse Clubs and Supercenters",High,High,False,1.0,High,Low/Moderate,Recommended,High commercial opportunity with manageable heat
+zzw-223@5pw-ntd-rp9,Jewel-Osco,41.566474,-88.198025,Grocery Stores,High,High,False,3.0,High,Low/Moderate,Recommended,High commercial opportunity with manageable heat
