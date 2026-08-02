@@ -65,6 +65,7 @@ Implemented:
 
 - `scripts/data/audit_data.py`: audits a local CSV, JSON Lines file, or supported Parquet file and optionally writes a JSON summary.
 - `scripts/data/clean_store_visits.py`: streams the complete store-visit CSV/CSV.GZ dataset through DuckDB, writes a cleaned Parquet file, checks data quality, and produces summary tables.
+- `scripts/visualization/create_store_visit_charts.py`: builds four static PNG charts, two self-contained interactive Plotly charts, and synchronized interpretation notes from the cleaned store-visit outputs.
 
 Example complete store-visit run:
 
@@ -94,6 +95,17 @@ The generated outputs are:
 
 These derived outputs remain local and ignored by Git until the team explicitly
 approves sharing them.
+
+Example store-visit visualization run:
+
+```bash
+python scripts/visualization/create_store_visit_charts.py
+```
+
+The visualization script reads `data/summaries/` plus the clean Parquet file and
+writes outputs under `reports/figures/`, `reports/interactive/`, and
+`reports/summaries/`. Use `--overwrite` only when intentionally regenerating this
+script's existing charts and notes.
 
 Placeholders:
 
