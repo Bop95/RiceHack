@@ -14,10 +14,14 @@ scripts/
 
 ## Running scripts
 
-Use `python3` from the repository root:
+Install the declared dependency and run scripts from the repository root:
 
 ```bash
-python3 scripts/data/audit_data.py --help
+python -m pip install -r requirements.txt
+```
+
+```bash
+python scripts/data/audit_data.py --help
 ```
 
 Example audit command:
@@ -60,12 +64,52 @@ Unsupported formats fail with a clear message.
 Implemented:
 
 - `scripts/data/audit_data.py`: audits a local CSV, JSON Lines file, or supported Parquet file and optionally writes a JSON summary.
+- `scripts/data/clean_store_visits.py`: streams the complete store-visit CSV/CSV.GZ dataset through DuckDB, writes a cleaned Parquet file, checks data quality, and produces summary tables.
+- `scripts/visualization/create_store_visit_charts.py`: builds four static PNG charts, two self-contained interactive Plotly charts, and synchronized interpretation notes from the cleaned store-visit outputs.
+
+Example complete store-visit run:
+
+```bash
+python scripts/data/clean_store_visits.py \
+  --input /local/path/to/store-visits-rice \
+  --output-root data \
+  --threads 4 \
+  --memory-limit 8GB \
+  --temp-limit 20GB
+```
+
+Use `--limit 10000` for a fast internally consistent test run. Use `--overwrite`
+only to replace this pipeline's existing generated outputs. `--resume` is reserved
+for a complete candidate or clean work Parquet left by an interrupted run; the script
+verifies the saved source fingerprint, row limit, and high-visit threshold before
+reusing it.
+
+The generated outputs are:
+
+- `data/processed/store_visits_clean.parquet`
+- `data/summaries/data_quality_report.md`
+- `data/summaries/summary_statistics.csv`
+- `data/summaries/visit_percentiles.csv`
+- five grouped summary CSV files
+- `data/summaries/run_metadata.json`
+
+These derived outputs remain local and ignored by Git until the team explicitly
+approves sharing them.
+
+Example store-visit visualization run:
+
+```bash
+python scripts/visualization/create_store_visit_charts.py
+```
+
+The visualization script reads `data/summaries/` plus the clean Parquet file and
+writes outputs under `reports/figures/`, `reports/interactive/`, and
+`reports/summaries/`. Use `--overwrite` only when intentionally regenerating this
+script's existing charts and notes.
 
 Placeholders:
 
-- `scripts/data/clean_store_visits.py`
 - `scripts/data/clean_weather.py`
-- `scripts/data/summarize_store_visits.py`
 - `scripts/data/summarize_weather.py`
 - `scripts/data/build_business_features.py`
 - `scripts/data/build_weather_features.py`

@@ -30,6 +30,10 @@ data/external/*
 !data/external/.gitkeep
 data/processed/*
 !data/processed/.gitkeep
+data/summaries/*
+!data/summaries/.gitkeep
+data/.store_visits_work/
+data/duckdb_tmp/
 data/synthetic/*
 !data/synthetic/.gitkeep
 *.parquet
