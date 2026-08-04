@@ -32,10 +32,22 @@ data/processed/*
 !data/processed/.gitkeep
 data/summaries/*
 !data/summaries/.gitkeep
+!data/summaries/summary_statistics.csv
+!data/summaries/visit_percentiles.csv
+!data/summaries/visits_by_brand.csv
+!data/summaries/visits_by_category.csv
+!data/summaries/visits_by_market.csv
+!data/summaries/weekday_patterns.csv
+!data/summaries/monthly_trends.csv
+!data/summaries/brand_monthly_trends.csv
+!data/summaries/category_monthly_trends.csv
+!data/summaries/brand_category_mix.csv
 data/.store_visits_work/
 data/duckdb_tmp/
 data/synthetic/*
 !data/synthetic/.gitkeep
+!data/synthetic/store_visit_scenarios.csv
+!data/synthetic/store_visit_scenarios_dictionary.md
 *.parquet
 
 # Generated reports

@@ -1,0 +1,8 @@
+weekday_number,weekday,is_weekend,total_visits,record_count,unique_stores,mean_daily_visits,data_type
+1,Monday,false,17541073804,31906424,143574,549.77,derived
+2,Tuesday,false,18634932294,31905908,143574,584.06,derived
+3,Wednesday,false,19209923839,31906052,143574,602.08,derived
+4,Thursday,false,19041478401,31906009,143574,596.8,derived
+5,Friday,false,22623783629,31906034,143574,709.08,derived
+6,Saturday,true,23214764547,31905864,143574,727.6,derived
+7,Sunday,true,18377511976,31905872,143574,575.99,derived
