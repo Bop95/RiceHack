@@ -128,6 +128,8 @@ python3 -m unittest discover -s tests -v
 - [Dataset layout](docs/data/dataset-layout.md)
 - [Scripts guide](scripts/README.md)
 - [Streamlit prototype guide](paddydash/README.md)
+- [CI/CD beginner guide](docs/engineering/ci-cd-beginner-guide.md)
+- [CI/CD and GitHub Actions guide](docs/engineering/ci-cd-guide.md)
 - [AWS handoff template](docs/handoff/minh-tue-aws-handoff.md)
 
 ## Data Policy

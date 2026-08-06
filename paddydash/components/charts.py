@@ -9,7 +9,6 @@ from typing import Any
 
 import plotly.graph_objects as go
 
-from paddydash.services.analytics import get_scenario_summary
 from paddydash.services.data_service import DashboardData
 
 

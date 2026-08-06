@@ -22,7 +22,7 @@ The repository includes:
 
 You need:
 
-1. A GitHub account with access to the repository and the `HaiNam` branch.
+1. A GitHub account with access to the repository and the `main` branch.
 2. A Streamlit Community Cloud account connected to GitHub.
 3. An OpenAI API project with billing/credits and a project API key.
 
@@ -50,9 +50,15 @@ reports a warning because prepared-data mode is still deployable.
 
 ## 4. Push the approved application
 
-Only after reviewing the local changes, commit and push them to the existing
-`HaiNam` branch. Streamlit cannot deploy local uncommitted files; every required
-application file and compact CSV must exist on GitHub.
+The repository CI workflow runs the Python 3.12 quality gate on pull requests.
+Before connecting automatic deployment, a maintainer should protect the branch
+and require that check. See `docs/engineering/ci-cd-guide.md` for the exact
+GitHub settings and the relationship between CI and Streamlit auto-deployment.
+
+Commit changes to a feature branch, open a pull request into `main`, and merge
+only after review and the required CI check pass. Streamlit cannot deploy local
+uncommitted files; every required application file and compact CSV must exist on
+GitHub's `main` branch.
 
 Do not push:
 
@@ -70,7 +76,7 @@ file list before committing.
 1. Sign in to Streamlit Community Cloud with GitHub.
 2. Select **Create app**.
 3. Choose the GitHub repository.
-4. Choose branch `HaiNam`.
+4. Choose branch `main`.
 5. Enter `paddydash/app.py` as the main file path.
 6. In Advanced settings, use Python 3.12 if a version choice is shown.
 7. Deploy once without an OpenAI key if you want to verify the visual pages
@@ -135,8 +141,8 @@ Open the hosted URL in a private/incognito browser window and check:
 ## 9. Updating the live app
 
 Community Cloud watches the selected GitHub branch. After later approved changes
-are committed and pushed to `HaiNam`, the hosted app rebuilds from that branch.
-Run the tests and readiness checker before each push.
+are merged into `main`, the hosted app rebuilds from that branch. Run the tests
+and readiness checker before opening or updating each pull request.
 
 ## 10. Troubleshooting
 
