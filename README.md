@@ -55,9 +55,10 @@ This repository currently contains:
 - data and notebook folder conventions;
 - Python script scaffolds;
 - a working dependency-free data audit utility;
-- a preserved Streamlit mock dashboard in `paddydash/`.
+- a four-page, prepared-data Streamlit store-visit prototype in `paddydash/`;
+- a reproducible synthetic scenario generator and clearly labeled scenario data.
 
-It does **not** yet contain the completed analysis, AI chatbot, backend API, TypeScript frontend, real Rice datasets, or AWS deployment.
+It does **not** yet contain the standalone backend API, TypeScript frontend, restricted raw Rice datasets, or AWS deployment.
 
 ## Workflow Diagram
 

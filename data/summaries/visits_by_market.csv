@@ -1,0 +1,10 @@
+market,total_visits,record_count,unique_stores,mean_daily_visits,data_type
+Los Angeles / SF Bay Area,30948725327,46255700,29696,669.08,derived
+Dallas / Houston,28562568755,46982880,30456,607.94,derived
+Miami,22735174077,32689506,21162,695.49,derived
+New York/New Jersey,18579046565,31114783,20261,597.11,derived
+Atlanta,11234595074,17240568,11049,651.64,derived
+Philadelphia,9712154038,17106216,10747,567.76,derived
+Kansas City,7194764040,14357015,9033,501.13,derived
+Seattle,5225596979,9384765,5956,556.82,derived
+Boston,4450843635,8210730,5214,542.08,derived

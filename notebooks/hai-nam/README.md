@@ -27,6 +27,13 @@ Suggested filenames:
 - `store_visits_cleaning_notes.ipynb`
 - `store_visits_summary_exports.ipynb`
 
+Completed visualization handoff:
+
+- `store_visits_visualizations.ipynb` - one executed notebook containing the
+  visualization code, six plot outputs, interpretations, and limitations. It
+  uses the compact version-controlled summary CSVs and can be rerun from top to
+  bottom from anywhere inside the repository.
+
 Do not commit:
 
 - raw `store-visits-rice` files;

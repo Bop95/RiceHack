@@ -1,0 +1,51 @@
+brand,category,record_count,total_visits,mean_daily_visits,data_type
+7-Eleven,Grocery Stores,2128175,699775975,328.82,derived
+7-Eleven Fuel,Gasoline Stations,633442,1002870178,1583.21,derived
+ALDI,Grocery Stores,338963,1373123688,4050.95,derived
+ARCO,Gasoline Stations,463643,900772081,1942.81,derived
+Arby's,Restaurants and Other Eating Places,361687,591442753,1635.23,derived
+Burger King,Restaurants and Other Eating Places,1149565,2333294461,2029.72,derived
+CVS,Health and Personal Care Stores,1552792,1524442394,981.74,derived
+Chevron,Gasoline Stations,1620082,3064245527,1891.41,derived
+Chick-fil-A,Restaurants and Other Eating Places,508468,1021266840,2008.52,derived
+Chipotle Mexican Grill,Restaurants and Other Eating Places,606926,1330449864,2192.11,derived
+Circle K,Grocery Stores,971508,536743998,552.49,derived
+Dairy Queen,Restaurants and Other Eating Places,631141,1240889102,1966.1,derived
+Dollar General,"General Merchandise Stores, including Warehouse Clubs and Supercenters",2328475,1354542100,581.73,derived
+Dollar Tree,"General Merchandise Stores, including Warehouse Clubs and Supercenters",1312418,703402610,535.96,derived
+Domino's Pizza,Restaurants and Other Eating Places,1193080,2197904505,1842.21,derived
+Dunkin',Restaurants and Other Eating Places,2060632,3453273039,1675.83,derived
+Exxon Mobil,Gasoline Stations,1035633,790206648,763.02,derived
+Family Dollar Stores,"General Merchandise Stores, including Warehouse Clubs and Supercenters",1196407,669727667,559.78,derived
+Jack in the Box,Restaurants and Other Eating Places,647597,1065808061,1645.79,derived
+Jersey Mike's,Restaurants and Other Eating Places,442732,781547170,1765.28,derived
+Jimmy John's,Restaurants and Other Eating Places,305012,566427363,1857.07,derived
+KFC,Restaurants and Other Eating Places,647615,1184305814,1828.72,derived
+Kohl's,Department Stores,215282,597263196,2774.33,derived
+Kroger,Grocery Stores,149418,637640957,4267.5,derived
+Lowe's,Building Material and Supplies Dealers,288334,653129583,2265.18,derived
+Marathon,Gasoline Stations,456750,709979481,1554.42,derived
+McDonald's,Restaurants and Other Eating Places,2194981,4539683382,2068.21,derived
+Panda Express,Restaurants and Other Eating Places,472668,988549734,2091.43,derived
+Panera Bread,Restaurants and Other Eating Places,364561,608881572,1670.18,derived
+Papa John's,Restaurants and Other Eating Places,464605,785814169,1691.36,derived
+Pizza Hut,Restaurants and Other Eating Places,1106754,644341692,582.19,derived
+Popeyes Louisiana Kitchen,Restaurants and Other Eating Places,556316,1148472041,2064.42,derived
+Publix Super Markets,Grocery Stores,384815,834748198,2169.22,derived
+Safeway,Grocery Stores,158002,639684612,4048.59,derived
+Sam's Club,"General Merchandise Stores, including Warehouse Clubs and Supercenters",98658,951304628,9642.45,derived
+Shell Oil,Gasoline Stations,1995753,874668441,438.26,derived
+Sonic,Restaurants and Other Eating Places,594495,1104698567,1858.21,derived
+Speedway,Gasoline Stations,359742,674998139,1876.34,derived
+Starbucks,Restaurants and Other Eating Places,2992389,3103714207,1037.2,derived
+Subway,Restaurants and Other Eating Places,3425987,4002985150,1168.42,derived
+Sunoco,Gasoline Stations,1058496,1690392060,1596.98,derived
+T.J. Maxx,Department Stores,228589,682651402,2986.37,derived
+Taco Bell,Restaurants and Other Eating Places,1199059,2399718213,2001.33,derived
+Target,"General Merchandise Stores, including Warehouse Clubs and Supercenters",364378,1279009385,3510.12,derived
+The Home Depot,Building Material and Supplies Dealers,417443,1104809390,2646.61,derived
+Walgreens,Health and Personal Care Stores,1349073,1331510431,986.98,derived
+Walmart,"General Merchandise Stores, including Warehouse Clubs and Supercenters",664840,5347685565,8043.57,derived
+Wendy's,Restaurants and Other Eating Places,983110,2003743450,2038.17,derived
+Whataburger,Restaurants and Other Eating Places,326710,623212504,1907.54,derived
+Whole Foods Market,Grocery Stores,128987,557625194,4323.11,derived

@@ -65,7 +65,10 @@ Implemented:
 
 - `scripts/data/audit_data.py`: audits a local CSV, JSON Lines file, or supported Parquet file and optionally writes a JSON summary.
 - `scripts/data/clean_store_visits.py`: streams the complete store-visit CSV/CSV.GZ dataset through DuckDB, writes a cleaned Parquet file, checks data quality, and produces summary tables.
+- `scripts/data/build_streamlit_summaries.py`: creates compact monthly brand/category tables for the deployed explorer without making the app scan the full Parquet file.
 - `scripts/visualization/create_store_visit_charts.py`: builds four static PNG charts, two self-contained interactive Plotly charts, and synchronized interpretation notes from the cleaned store-visit outputs.
+- `scripts/visualization/create_market_hotspot_map.py`: builds an interactive broad-market geographic hotspot map from the cleaned store-visit data and sourced Census place centroids.
+- `scripts/synthetic/generate_store_visit_scenarios.py`: reproducibly creates 5,000-20,000 clearly labeled scenario records plus a data dictionary.
 
 Example complete store-visit run:
 
@@ -93,8 +96,9 @@ The generated outputs are:
 - five grouped summary CSV files
 - `data/summaries/run_metadata.json`
 
-These derived outputs remain local and ignored by Git until the team explicitly
-approves sharing them.
+The large clean Parquet, quality report, and run metadata remain local. The small
+approved summary tables required by the Streamlit prototype are explicitly
+versioned; restricted raw data remains ignored.
 
 Example store-visit visualization run:
 
@@ -107,13 +111,36 @@ writes outputs under `reports/figures/`, `reports/interactive/`, and
 `reports/summaries/`. Use `--overwrite` only when intentionally regenerating this
 script's existing charts and notes.
 
+Build the deployable monthly explorer summaries and synthetic scenarios with:
+
+```bash
+python scripts/data/build_streamlit_summaries.py --overwrite
+python scripts/synthetic/generate_store_visit_scenarios.py --overwrite
+```
+
+The builder creates monthly explorer summaries and a prepared brand-category
+relationship table, scanning the full clean Parquet during preparation only.
+The scenario generator defaults to 12,000 rows, seed `2026`, six documented
+scenarios, normalized zone effects, observed brand-category pairings,
+non-negative values, and the required `synthetic` label.
+
+Example geographic hotspot-map run:
+
+```bash
+python scripts/visualization/create_market_hotspot_map.py
+```
+
+The first full run creates the reusable local cache
+`data/summaries/visits_by_market_year.csv`; later runs reuse it unless the clean
+Parquet file is newer. The generated HTML needs internet access for its CARTO dark
+basemap. Its hotspots are broad market proxies, not store or street locations.
+
 Placeholders:
 
 - `scripts/data/clean_weather.py`
 - `scripts/data/summarize_weather.py`
 - `scripts/data/build_business_features.py`
 - `scripts/data/build_weather_features.py`
-- `scripts/synthetic/generate_store_visit_scenarios.py`
 - `scripts/validation/validate_exports.py`
 
 ## Adding new scripts

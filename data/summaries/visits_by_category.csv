@@ -1,0 +1,133 @@
+category,total_visits,record_count,unique_stores,mean_daily_visits,data_type
+Restaurants and Other Eating Places,59726362463,47277321,30388,1263.32,derived
+Gasoline Stations,16122800670,16969951,10904,950.08,derived
+Grocery Stores,16112751479,10386231,6427,1551.36,derived
+"General Merchandise Stores, including Warehouse Clubs and Supercenters",11915322225,7105433,4342,1676.93,derived
+Health and Personal Care Stores,5476968086,14152390,8599,387.0,derived
+Clothing Stores,3986963657,7575745,5085,526.28,derived
+Building Material and Supplies Dealers,3619327179,4524932,2705,799.86,derived
+Traveler Accommodation,3140968787,5832605,3724,538.52,derived
+Department Stores,3019540312,1933977,1258,1561.31,derived
+Shoe Stores,1412519219,2426030,1618,582.23,derived
+Other Amusement and Recreation Industries,1357152150,4716545,3329,287.74,derived
+"Sporting Goods, Hobby, and Musical Instrument Stores",1322644418,2274307,1465,581.56,derived
+"Automotive Parts, Accessories, and Tire Stores",1261846718,6307379,3718,200.06,derived
+Depository Credit Intermediation,1096387522,10228155,6786,107.19,derived
+Other Miscellaneous Store Retailers,771779285,1737042,1054,444.31,derived
+Wired and Wireless Telecommunications Carriers,614724129,6337251,5366,97.0,derived
+Used Merchandise Stores,597980168,1226238,785,487.65,derived
+Personal Care Services,586819470,4638875,3095,126.5,derived
+Automotive Repair and Maintenance,543293928,4350164,2940,124.89,derived
+Electronics and Appliance Stores,516006208,1214298,756,424.94,derived
+"Office Supplies, Stationery, and Gift Stores",449409892,1264828,807,355.31,derived
+Furniture Stores,439659646,2058267,1386,213.61,derived
+Home Furnishings Stores,386070672,1029050,690,375.17,derived
+"Agencies, Brokerages, and Other Insurance Related Activities",354154372,12241497,7356,28.93,derived
+Book Stores and News Dealers,329479308,335190,210,982.96,derived
+Motion Picture and Video Industries,321659524,389695,239,825.41,derived
+Lessors of Real Estate,284838532,2422613,1785,117.57,derived
+Other Personal Services,251149363,298226,211,842.14,derived
+"Jewelry, Luggage, and Leather Goods Stores",249450315,1219286,780,204.59,derived
+Postal Service,244049228,4134237,2271,59.03,derived
+Automobile Dealers,220523075,2258523,1330,97.64,derived
+"Beer, Wine, and Liquor Stores",191580861,788932,464,242.84,derived
+Specialty Food Stores,173803787,1065404,725,163.13,derived
+Automotive Equipment Rental and Leasing,152407823,3184994,2488,47.85,derived
+Couriers and Express Delivery Services,126028960,1946099,1136,64.76,derived
+"Machinery, Equipment, and Supplies Merchant Wholesalers",122360827,1457219,892,83.97,derived
+Nondepository Credit Intermediation,89927684,1733249,1149,51.88,derived
+Other Schools and Instruction,76170213,973774,612,78.22,derived
+"Accounting, Tax Preparation, Bookkeeping, and Payroll Services",70928734,2672600,1602,26.54,derived
+Other Motor Vehicle Dealers,57394087,1044334,630,54.96,derived
+Cable and Other Subscription Programming,52949195,312701,214,169.33,derived
+"Other Professional, Scientific, and Technical Services",50519460,1047147,635,48.24,derived
+Offices of Other Health Practitioners,46542291,901372,575,51.63,derived
+Drinking Places (Alcoholic Beverages),46406776,96343,61,481.68,derived
+Amusement Parks and Arcades,40268622,65674,51,613.16,derived
+Offices of Real Estate Agents and Brokers,39909226,1672885,1061,23.86,derived
+Warehousing and Storage,37736653,1104291,727,34.17,derived
+Other Financial Investment Activities,35207496,3026620,1999,11.63,derived
+Grocery and Related Product Merchant Wholesalers,32956732,113643,70,290.0,derived
+"Colleges, Universities, and Professional Schools",28862309,16376,13,1762.48,derived
+Miscellaneous Durable Goods Merchant Wholesalers,28269122,327809,220,86.24,derived
+Converted Paper Product Manufacturing,28215713,91929,51,306.93,derived
+Insurance Carriers,27744554,657957,428,42.17,derived
+Offices of Dentists,26285006,903826,607,29.08,derived
+Activities Related to Credit Intermediation,22654188,770682,466,29.39,derived
+Basic Chemical Manufacturing,21748329,98658,54,220.44,derived
+"Hardware, and Plumbing and Heating Equipment and Supplies Merchant Wholesalers",18210930,712661,415,25.55,derived
+"Data Processing, Hosting, and Related Services",17979082,157639,91,114.05,derived
+Grantmaking and Giving Services,17484052,201182,117,86.91,derived
+Nonmetallic Mineral Mining and Quarrying,17392542,235683,129,73.8,derived
+Residential Building Construction,13545070,282001,162,48.03,derived
+General Rental Centers,12875157,342096,194,37.64,derived
+Electronic and Precision Equipment Repair and Maintenance,11673670,192471,145,60.65,derived
+General Freight Trucking,10821230,67963,42,159.22,derived
+Employment Services,9503093,876644,565,10.84,derived
+Commercial and Industrial Machinery and Equipment Rental and Leasing,9247534,698064,438,13.25,derived
+Beverage Manufacturing,8335314,49207,27,169.39,derived
+Special Food Services,7540872,31151,19,242.07,derived
+Household Appliances and Electrical and Electronic Goods Merchant Wholesalers,7111816,263247,154,27.02,derived
+Sawmills and Wood Preservation,6988531,7308,4,956.29,derived
+Lawn and Garden Equipment and Supplies Stores,6474735,81720,65,79.23,derived
+Motor Vehicle and Motor Vehicle Parts and Supplies Merchant Wholesalers,6229514,195215,111,31.91,derived
+Drycleaning and Laundry Services,5238954,156623,102,33.45,derived
+Plastics Product Manufacturing,4903218,10962,6,447.29,derived
+RV (Recreational Vehicle) Parks and Recreational Camps,4816873,140713,84,34.23,derived
+Consumer Goods Rental,4692347,265474,192,17.68,derived
+Services to Buildings and Dwellings,4537880,418639,267,10.84,derived
+"Water, Sewage and Other Systems",4404241,3654,2,1205.32,derived
+"Pesticide, Fertilizer, and Other Agricultural Chemical Manufacturing",4187612,18270,10,229.21,derived
+Lumber and Other Construction Materials Merchant Wholesalers,3943529,138625,99,28.45,derived
+"Management, Scientific, and Technical Consulting Services",3855857,103319,61,37.32,derived
+Specialized Freight Trucking,3701676,91512,58,40.45,derived
+"Advertising, Public Relations, and Related Services",3212490,108744,68,29.54,derived
+Printing and Related Support Activities,3200937,267469,157,11.97,derived
+Petroleum and Petroleum Products Merchant Wholesalers,3005542,42995,26,69.9,derived
+Personal and Household Goods Repair and Maintenance,2926332,178077,123,16.43,derived
+Other Leather and Allied Product Manufacturing,2893076,26484,16,109.24,derived
+Other General Purpose Machinery Manufacturing,2862053,3654,2,783.27,derived
+"Boiler, Tank, and Shipping Container Manufacturing",2700887,7308,4,369.58,derived
+Interurban and Rural Bus Transportation,2691840,190537,129,14.13,derived
+Securities and Commodity Contracts Intermediation and Brokerage,2549336,207971,153,12.26,derived
+Rail Transportation,2368123,158725,95,14.92,derived
+Technical and Trade Schools,2309508,34131,21,67.67,derived
+Direct Selling Establishments,2288976,167904,94,13.63,derived
+"Paint, Coating, and Adhesive Manufacturing",2123045,5481,3,387.35,derived
+Glass and Glass Product Manufacturing,1657520,18270,10,90.72,derived
+Spectator Sports,1646745,19493,15,84.48,derived
+Chemical and Allied Products Merchant Wholesalers,1531992,181776,124,8.43,derived
+"Resin, Synthetic Rubber, and Artificial and Synthetic Fibers and Filaments Manufacturing",1300020,7308,4,177.89,derived
+Other Support Services,1219951,38339,24,31.82,derived
+Waste Treatment and Disposal,1143889,109620,60,10.44,derived
+Apparel Accessories and Other Apparel Manufacturing,1063369,62606,45,16.99,derived
+Other Chemical Product and Preparation Manufacturing,1052655,9135,5,115.23,derived
+Pharmaceutical and Medicine Manufacturing,1038257,15438,9,67.25,derived
+Management of Companies and Enterprises,1027597,81638,51,12.59,derived
+Natural Gas Distribution,869827,47684,28,18.24,derived
+Business Support Services,856684,42842,24,20.0,derived
+Freight Transportation Arrangement,784924,64342,36,12.2,derived
+"Foundation, Structure, and Building Exterior Contractors",772286,68640,50,11.25,derived
+Other Support Activities for Transportation,649018,34863,21,18.62,derived
+Clay Product and Refractory Manufacturing,624312,67263,37,9.28,derived
+"Veneer, Plywood, and Engineered Wood Product Manufacturing",555913,1827,1,304.28,derived
+Professional and Commercial Equipment and Supplies Merchant Wholesalers,520738,73568,44,7.08,derived
+Florists,512688,20430,13,25.09,derived
+Investigation and Security Services,487912,45277,25,10.78,derived
+"Pulp, Paper, and Paperboard Mills",443548,32764,18,13.54,derived
+Business Schools and Computer and Management Training,410285,48051,34,8.54,derived
+Building Equipment Contractors,408290,41141,27,9.92,derived
+Waste Collection,399851,40529,27,9.87,derived
+Other Telecommunications,369442,1827,1,202.21,derived
+Building Finishing Contractors,364597,33435,20,10.9,derived
+Petroleum and Coal Products Manufacturing,344435,1827,1,188.52,derived
+Industrial Machinery Manufacturing,235965,5481,3,43.05,derived
+Other Investment Pools and Funds,199655,14158,9,14.1,derived
+Animal Food Manufacturing,167405,1827,1,91.63,derived
+Footwear Manufacturing,149933,2864,4,52.35,derived
+Travel Arrangement and Reservation Services,123249,3654,2,33.73,derived
+Other Wood Product Manufacturing,106847,12789,7,8.35,derived
+"Engine, Turbine, and Power Transmission Equipment Manufacturing",38384,1827,1,21.01,derived
+Sugar and Confectionery Product Manufacturing,28179,1827,1,15.42,derived
+Computer and Peripheral Equipment Manufacturing,28136,3654,2,7.7,derived
+Remediation and Other Waste Management Services,25870,1827,1,14.16,derived

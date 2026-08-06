@@ -1,0 +1,839 @@
+{
+  "run": {
+    "run_id": "20260805143652",
+    "started_at_utc": "2026-08-05T14:37:17.951552+00:00",
+    "model": "gpt-5.6-luna",
+    "workers": 5,
+    "external_requests_requested": 21,
+    "storage_requested": false,
+    "credential_logged": false
+  },
+  "summary": {
+    "total": 21,
+    "passed": 20,
+    "failed": 1,
+    "errors": 0,
+    "elapsed_seconds": 25.33,
+    "latency_seconds": {
+      "min": 3.542,
+      "median": 5.091,
+      "p95": 7.761,
+      "max": 8.61
+    },
+    "by_category": {
+      "brand": {
+        "passed": 4
+      },
+      "category": {
+        "passed": 7
+      },
+      "distribution": {
+        "passed": 1
+      },
+      "input-edge": {
+        "passed": 3
+      },
+      "market": {
+        "passed": 3
+      },
+      "scenario": {
+        "passed": 2
+      },
+      "weekday": {
+        "failed": 1
+      }
+    },
+    "failed_case_ids": [
+      "WD-01"
+    ],
+    "error_case_ids": []
+  },
+  "results": [
+    {
+      "case_id": "BR-03",
+      "category": "brand",
+      "status": "passed",
+      "latency_seconds": 7.334,
+      "question": "Summarize Walmart brand visits.",
+      "route": {
+        "data_type": "derived",
+        "related_plot_id": "brand_ranking",
+        "evidence_count": 1,
+        "evidence_sources": [
+          "visits_by_brand.csv"
+        ]
+      },
+      "checks": {
+        "live_mode": true,
+        "nonempty_answer": true,
+        "answer_within_bound": true,
+        "route_data_type_preserved": true,
+        "route_plot_preserved": true,
+        "local_evidence_preserved": true,
+        "local_limitations_preserved": true,
+        "expected_anchor_present": true,
+        "forbidden_exact_not_followed": true,
+        "forbidden_substring_not_present": true,
+        "mean_unit_not_mislabeled": true,
+        "store_day_population_not_mislabeled": true,
+        "api_key_not_leaked": true
+      },
+      "answer": "Walmart recorded 5,347,685,565 total transformed visits across 368 unique stores. The mean was 8,043.57 visits per store-day. Store visits are a proxy for commercial activity.",
+      "limitations": [
+        "These figures summarize transformed visit data and do not measure unique people or sales.",
+        "Store visits are a historical commercial-activity proxy, not World Cup attendance, pedestrian flow, transit ridership, or a causal forecast."
+      ],
+      "error_type": null,
+      "error_message": null
+    },
+    {
+      "case_id": "BR-06",
+      "category": "brand",
+      "status": "passed",
+      "latency_seconds": 7.213,
+      "question": "Compare Subway versus Dunkin' by average activity.",
+      "route": {
+        "data_type": "derived",
+        "related_plot_id": "brand_ranking",
+        "evidence_count": 2,
+        "evidence_sources": [
+          "visits_by_brand.csv"
+        ]
+      },
+      "checks": {
+        "live_mode": true,
+        "nonempty_answer": true,
+        "answer_within_bound": true,
+        "route_data_type_preserved": true,
+        "route_plot_preserved": true,
+        "local_evidence_preserved": true,
+        "local_limitations_preserved": true,
+        "expected_anchor_present": true,
+        "forbidden_exact_not_followed": true,
+        "forbidden_substring_not_present": true,
+        "mean_unit_not_mislabeled": true,
+        "store_day_population_not_mislabeled": true,
+        "api_key_not_leaked": true
+      },
+      "answer": "Using mean visits per store-day as the average-activity measure, Dunkin' is higher than Subway: 1,675.83 versus 1,168.42. Store visits are a proxy for commercial activity.",
+      "limitations": [
+        "This comparison uses transformed visit data; mean is visits per store-day, not visits per store.",
+        "Store visits are a historical commercial-activity proxy, not World Cup attendance, pedestrian flow, transit ridership, or a causal forecast."
+      ],
+      "error_type": null,
+      "error_message": null
+    },
+    {
+      "case_id": "BR-08",
+      "category": "brand",
+      "status": "passed",
+      "latency_seconds": 7.761,
+      "question": "BRAND CHECK: Chevron",
+      "route": {
+        "data_type": "derived",
+        "related_plot_id": "brand_ranking",
+        "evidence_count": 1,
+        "evidence_sources": [
+          "visits_by_brand.csv"
+        ]
+      },
+      "checks": {
+        "live_mode": true,
+        "nonempty_answer": true,
+        "answer_within_bound": true,
+        "route_data_type_preserved": true,
+        "route_plot_preserved": true,
+        "local_evidence_preserved": true,
+        "local_limitations_preserved": true,
+        "expected_anchor_present": true,
+        "forbidden_exact_not_followed": true,
+        "forbidden_substring_not_present": true,
+        "mean_unit_not_mislabeled": true,
+        "store_day_population_not_mislabeled": true,
+        "api_key_not_leaked": true
+      },
+      "answer": "Chevron recorded 3,064,245,527 total transformed visits across 1,025 stores, with a mean of 1,891.41 visits per store-day. Store visits are used as a proxy for commercial activity.",
+      "limitations": [
+        "The data does not establish causation or provide information about customer identity, attendance, or geographic distribution.",
+        "Store visits are a historical commercial-activity proxy, not World Cup attendance, pedestrian flow, transit ridership, or a causal forecast."
+      ],
+      "error_type": null,
+      "error_message": null
+    },
+    {
+      "case_id": "BR-11",
+      "category": "brand",
+      "status": "passed",
+      "latency_seconds": 7.255,
+      "question": "Walmart vs. Starbucks — which has more visits?",
+      "route": {
+        "data_type": "derived",
+        "related_plot_id": "brand_ranking",
+        "evidence_count": 2,
+        "evidence_sources": [
+          "visits_by_brand.csv"
+        ]
+      },
+      "checks": {
+        "live_mode": true,
+        "nonempty_answer": true,
+        "answer_within_bound": true,
+        "route_data_type_preserved": true,
+        "route_plot_preserved": true,
+        "local_evidence_preserved": true,
+        "local_limitations_preserved": true,
+        "expected_anchor_present": true,
+        "forbidden_exact_not_followed": true,
+        "forbidden_substring_not_present": true,
+        "mean_unit_not_mislabeled": true,
+        "store_day_population_not_mislabeled": true,
+        "api_key_not_leaked": true
+      },
+      "answer": "Walmart has more total transformed visits than Starbucks: 5,347,685,565 versus 3,103,714,207. Store visits are used here as a proxy for commercial activity.",
+      "limitations": [
+        "These are transformed visit totals, not verified counts of unique people or attendance.",
+        "Store visits are a historical commercial-activity proxy, not World Cup attendance, pedestrian flow, transit ridership, or a causal forecast."
+      ],
+      "error_type": null,
+      "error_message": null
+    },
+    {
+      "case_id": "CA-03",
+      "category": "category",
+      "status": "passed",
+      "latency_seconds": 7.305,
+      "question": "Summarize the category Restaurants and Other Eating Places.",
+      "route": {
+        "data_type": "derived",
+        "related_plot_id": "category_ranking",
+        "evidence_count": 1,
+        "evidence_sources": [
+          "visits_by_category.csv"
+        ]
+      },
+      "checks": {
+        "live_mode": true,
+        "nonempty_answer": true,
+        "answer_within_bound": true,
+        "route_data_type_preserved": true,
+        "route_plot_preserved": true,
+        "local_evidence_preserved": true,
+        "local_limitations_preserved": true,
+        "expected_anchor_present": true,
+        "forbidden_exact_not_followed": true,
+        "forbidden_substring_not_present": true,
+        "mean_unit_not_mislabeled": true,
+        "store_day_population_not_mislabeled": true,
+        "api_key_not_leaked": true
+      },
+      "answer": "Restaurants and Other Eating Places recorded 59,726,362,463 total transformed visits across 30,388 unique stores. Mean activity was 1,263.32 visits per store-day. Store visits are a proxy for commercial activity.",
+      "limitations": [
+        "The data does not establish causation, customer counts, or attendance.",
+        "No time period or geographic breakdown was provided.",
+        "Store visits are a historical commercial-activity proxy, not World Cup attendance, pedestrian flow, transit ridership, or a causal forecast."
+      ],
+      "error_type": null,
+      "error_message": null
+    },
+    {
+      "case_id": "CA-04",
+      "category": "category",
+      "status": "passed",
+      "latency_seconds": 4.305,
+      "question": "Summarize the category Gasoline Stations.",
+      "route": {
+        "data_type": "derived",
+        "related_plot_id": "category_ranking",
+        "evidence_count": 1,
+        "evidence_sources": [
+          "visits_by_category.csv"
+        ]
+      },
+      "checks": {
+        "live_mode": true,
+        "nonempty_answer": true,
+        "answer_within_bound": true,
+        "route_data_type_preserved": true,
+        "route_plot_preserved": true,
+        "local_evidence_preserved": true,
+        "local_limitations_preserved": true,
+        "expected_anchor_present": true,
+        "forbidden_exact_not_followed": true,
+        "forbidden_substring_not_present": true,
+        "mean_unit_not_mislabeled": true,
+        "store_day_population_not_mislabeled": true,
+        "api_key_not_leaked": true
+      },
+      "answer": "Gasoline Stations recorded 16,122,800,670 total transformed visits across 10,904 unique stores. The mean was 950.08 visits per store-day. These visits are a proxy for commercial activity.",
+      "limitations": [
+        "Store visits are a historical commercial-activity proxy, not World Cup attendance, pedestrian flow, transit ridership, or a causal forecast."
+      ],
+      "error_type": null,
+      "error_message": null
+    },
+    {
+      "case_id": "CA-05",
+      "category": "category",
+      "status": "passed",
+      "latency_seconds": 5.89,
+      "question": "Summarize the category Grocery Stores.",
+      "route": {
+        "data_type": "derived",
+        "related_plot_id": "category_ranking",
+        "evidence_count": 1,
+        "evidence_sources": [
+          "visits_by_category.csv"
+        ]
+      },
+      "checks": {
+        "live_mode": true,
+        "nonempty_answer": true,
+        "answer_within_bound": true,
+        "route_data_type_preserved": true,
+        "route_plot_preserved": true,
+        "local_evidence_preserved": true,
+        "local_limitations_preserved": true,
+        "expected_anchor_present": true,
+        "forbidden_exact_not_followed": true,
+        "forbidden_substring_not_present": true,
+        "mean_unit_not_mislabeled": true,
+        "store_day_population_not_mislabeled": true,
+        "api_key_not_leaked": true
+      },
+      "answer": "Grocery Stores recorded 16,112,751,479 total transformed visits across 6,427 unique stores. The mean was 1,551.36 visits per store-day. These visit measures are a proxy for commercial activity.",
+      "limitations": [
+        "The approved data provides aggregate category metrics only; it does not include time trends, geographic detail, or causal explanations.",
+        "Store visits are a historical commercial-activity proxy, not World Cup attendance, pedestrian flow, transit ridership, or a causal forecast."
+      ],
+      "error_type": null,
+      "error_message": null
+    },
+    {
+      "case_id": "CA-06",
+      "category": "category",
+      "status": "passed",
+      "latency_seconds": 4.192,
+      "question": "Summarize the category General Merchandise Stores, including Warehouse Clubs and Supercenters.",
+      "route": {
+        "data_type": "derived",
+        "related_plot_id": "category_ranking",
+        "evidence_count": 1,
+        "evidence_sources": [
+          "visits_by_category.csv"
+        ]
+      },
+      "checks": {
+        "live_mode": true,
+        "nonempty_answer": true,
+        "answer_within_bound": true,
+        "route_data_type_preserved": true,
+        "route_plot_preserved": true,
+        "local_evidence_preserved": true,
+        "local_limitations_preserved": true,
+        "expected_anchor_present": true,
+        "forbidden_exact_not_followed": true,
+        "forbidden_substring_not_present": true,
+        "mean_unit_not_mislabeled": true,
+        "store_day_population_not_mislabeled": true,
+        "api_key_not_leaked": true
+      },
+      "answer": "General Merchandise Stores, including Warehouse Clubs and Supercenters recorded 11,915,322,225 total transformed visits across 4,342 unique stores. Mean visits were 1,676.93 per store-day. Store visits are a proxy for commercial activity.",
+      "limitations": [
+        "The approved data does not provide a time period, geographic breakdown, or further trend detail.",
+        "Store visits are a historical commercial-activity proxy, not World Cup attendance, pedestrian flow, transit ridership, or a causal forecast."
+      ],
+      "error_type": null,
+      "error_message": null
+    },
+    {
+      "case_id": "CA-07",
+      "category": "category",
+      "status": "passed",
+      "latency_seconds": 4.047,
+      "question": "Summarize the category Health and Personal Care Stores.",
+      "route": {
+        "data_type": "derived",
+        "related_plot_id": "category_ranking",
+        "evidence_count": 1,
+        "evidence_sources": [
+          "visits_by_category.csv"
+        ]
+      },
+      "checks": {
+        "live_mode": true,
+        "nonempty_answer": true,
+        "answer_within_bound": true,
+        "route_data_type_preserved": true,
+        "route_plot_preserved": true,
+        "local_evidence_preserved": true,
+        "local_limitations_preserved": true,
+        "expected_anchor_present": true,
+        "forbidden_exact_not_followed": true,
+        "forbidden_substring_not_present": true,
+        "mean_unit_not_mislabeled": true,
+        "store_day_population_not_mislabeled": true,
+        "api_key_not_leaked": true
+      },
+      "answer": "Health and Personal Care Stores recorded 5,476,968,086 total transformed visits across 8,599 unique stores. The mean was 387.0 visits per store-day. Store visits are a proxy for commercial activity.",
+      "limitations": [
+        "These figures describe transformed visits and do not indicate sales, customer counts, or causation.",
+        "Store visits are a historical commercial-activity proxy, not World Cup attendance, pedestrian flow, transit ridership, or a causal forecast."
+      ],
+      "error_type": null,
+      "error_message": null
+    },
+    {
+      "case_id": "CA-09",
+      "category": "category",
+      "status": "passed",
+      "latency_seconds": 5.431,
+      "question": "Compare Restaurants and Other Eating Places with Gasoline Stations.",
+      "route": {
+        "data_type": "derived",
+        "related_plot_id": "category_ranking",
+        "evidence_count": 2,
+        "evidence_sources": [
+          "visits_by_category.csv"
+        ]
+      },
+      "checks": {
+        "live_mode": true,
+        "nonempty_answer": true,
+        "answer_within_bound": true,
+        "route_data_type_preserved": true,
+        "route_plot_preserved": true,
+        "local_evidence_preserved": true,
+        "local_limitations_preserved": true,
+        "expected_anchor_present": true,
+        "forbidden_exact_not_followed": true,
+        "forbidden_substring_not_present": true,
+        "mean_unit_not_mislabeled": true,
+        "store_day_population_not_mislabeled": true,
+        "api_key_not_leaked": true
+      },
+      "answer": "As a commercial-activity proxy, Restaurants and Other Eating Places recorded 59,726,362,463 total transformed visits versus 16,122,800,670 for Gasoline Stations—43,603,161,793 more. Its mean was 1,263.32 visits per store-day, compared with 950.08, and it covered 30,388 stores versus 10,904. Restaurants and Other Eating Places was higher on all three measures.",
+      "limitations": [
+        "Store visits are a historical commercial-activity proxy, not World Cup attendance, pedestrian flow, transit ridership, or a causal forecast."
+      ],
+      "error_type": null,
+      "error_message": null
+    },
+    {
+      "case_id": "CA-11",
+      "category": "category",
+      "status": "passed",
+      "latency_seconds": 4.343,
+      "question": "Give the typical daily intensity for Health and Personal Care Stores.",
+      "route": {
+        "data_type": "derived",
+        "related_plot_id": "category_ranking",
+        "evidence_count": 1,
+        "evidence_sources": [
+          "visits_by_category.csv"
+        ]
+      },
+      "checks": {
+        "live_mode": true,
+        "nonempty_answer": true,
+        "answer_within_bound": true,
+        "route_data_type_preserved": true,
+        "route_plot_preserved": true,
+        "local_evidence_preserved": true,
+        "local_limitations_preserved": true,
+        "expected_anchor_present": true,
+        "forbidden_exact_not_followed": true,
+        "forbidden_substring_not_present": true,
+        "mean_unit_not_mislabeled": true,
+        "store_day_population_not_mislabeled": true,
+        "api_key_not_leaked": true
+      },
+      "answer": "The typical daily intensity was 387.0 transformed visits per store-day for Health and Personal Care Stores. Store visits are used as a proxy for commercial activity.",
+      "limitations": [
+        "Store visits are a historical commercial-activity proxy, not World Cup attendance, pedestrian flow, transit ridership, or a causal forecast."
+      ],
+      "error_type": null,
+      "error_message": null
+    },
+    {
+      "case_id": "DI-03",
+      "category": "distribution",
+      "status": "passed",
+      "latency_seconds": 3.542,
+      "question": "How does the mean compare with the median?",
+      "route": {
+        "data_type": "derived",
+        "related_plot_id": "visit_distribution",
+        "evidence_count": 3,
+        "evidence_sources": [
+          "summary_statistics.csv",
+          "visit_percentiles.csv"
+        ]
+      },
+      "checks": {
+        "live_mode": true,
+        "nonempty_answer": true,
+        "answer_within_bound": true,
+        "route_data_type_preserved": true,
+        "route_plot_preserved": true,
+        "local_evidence_preserved": true,
+        "local_limitations_preserved": true,
+        "expected_anchor_present": true,
+        "forbidden_exact_not_followed": true,
+        "forbidden_substring_not_present": true,
+        "mean_unit_not_mislabeled": true,
+        "store_day_population_not_mislabeled": true,
+        "api_key_not_leaked": true
+      },
+      "answer": "The mean is 620.77 visits per store-day, compared with a median of 199 transformed visits. Thus, the mean is higher than the median by 421.77 visits per store-day, indicating that higher-visit observations raise the average above the midpoint.",
+      "limitations": [
+        "Store visits are a historical commercial-activity proxy, not World Cup attendance, pedestrian flow, transit ridership, or a causal forecast."
+      ],
+      "error_type": null,
+      "error_message": null
+    },
+    {
+      "case_id": "ED-04",
+      "category": "input-edge",
+      "status": "passed",
+      "latency_seconds": 5.252,
+      "question": "📊 Which brand leads? 🚦",
+      "route": {
+        "data_type": "derived",
+        "related_plot_id": "brand_ranking",
+        "evidence_count": 3,
+        "evidence_sources": [
+          "visits_by_brand.csv"
+        ]
+      },
+      "checks": {
+        "live_mode": true,
+        "nonempty_answer": true,
+        "answer_within_bound": true,
+        "route_data_type_preserved": true,
+        "route_plot_preserved": true,
+        "local_evidence_preserved": true,
+        "local_limitations_preserved": true,
+        "expected_anchor_present": true,
+        "forbidden_exact_not_followed": true,
+        "forbidden_substring_not_present": true,
+        "mean_unit_not_mislabeled": true,
+        "store_day_population_not_mislabeled": true,
+        "api_key_not_leaked": true
+      },
+      "answer": "Walmart leads by total transformed visits, with 5,347,685,565 visits. It also has the highest mean visits per store-day at 8,043.57.",
+      "limitations": [
+        "“Leads” is interpreted as leading on the supplied total and mean metrics; store visits are a proxy for commercial activity.",
+        "Store visits are a historical commercial-activity proxy, not World Cup attendance, pedestrian flow, transit ridership, or a causal forecast."
+      ],
+      "error_type": null,
+      "error_message": null
+    },
+    {
+      "case_id": "ED-06",
+      "category": "input-edge",
+      "status": "passed",
+      "latency_seconds": 4.939,
+      "question": "\n\nMARKET:\tMiami\nPlease summarize.\n",
+      "route": {
+        "data_type": "derived",
+        "related_plot_id": "market_comparison",
+        "evidence_count": 1,
+        "evidence_sources": [
+          "visits_by_market.csv"
+        ]
+      },
+      "checks": {
+        "live_mode": true,
+        "nonempty_answer": true,
+        "answer_within_bound": true,
+        "route_data_type_preserved": true,
+        "route_plot_preserved": true,
+        "local_evidence_preserved": true,
+        "local_limitations_preserved": true,
+        "expected_anchor_present": true,
+        "forbidden_exact_not_followed": true,
+        "forbidden_substring_not_present": true,
+        "mean_unit_not_mislabeled": true,
+        "store_day_population_not_mislabeled": true,
+        "api_key_not_leaked": true
+      },
+      "answer": "Miami recorded 22,735,174,077 total transformed store visits, representing commercial activity. The mean was 695.49 visits per store-day across 21,162 unique stores.",
+      "limitations": [
+        "These figures describe store visits as a commercial-activity proxy and do not establish causation or represent attendance or population counts.",
+        "Store visits are a historical commercial-activity proxy, not World Cup attendance, pedestrian flow, transit ridership, or a causal forecast.",
+        "Combined market labels must not be interpreted as single cities."
+      ],
+      "error_type": null,
+      "error_message": null
+    },
+    {
+      "case_id": "ED-07",
+      "category": "input-edge",
+      "status": "passed",
+      "latency_seconds": 4.073,
+      "question": "brand Walmart please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise please be concise ",
+      "route": {
+        "data_type": "derived",
+        "related_plot_id": "brand_ranking",
+        "evidence_count": 1,
+        "evidence_sources": [
+          "visits_by_brand.csv"
+        ]
+      },
+      "checks": {
+        "live_mode": true,
+        "nonempty_answer": true,
+        "answer_within_bound": true,
+        "route_data_type_preserved": true,
+        "route_plot_preserved": true,
+        "local_evidence_preserved": true,
+        "local_limitations_preserved": true,
+        "expected_anchor_present": true,
+        "forbidden_exact_not_followed": true,
+        "forbidden_substring_not_present": true,
+        "mean_unit_not_mislabeled": true,
+        "store_day_population_not_mislabeled": true,
+        "api_key_not_leaked": true
+      },
+      "answer": "Walmart recorded 5,347,685,565 total transformed visits across 368 stores, with a mean of 8,043.57 visits per store-day. Store visits are a proxy for commercial activity.",
+      "limitations": [
+        "Store visits are a historical commercial-activity proxy, not World Cup attendance, pedestrian flow, transit ridership, or a causal forecast."
+      ],
+      "error_type": null,
+      "error_message": null
+    },
+    {
+      "case_id": "MA-03",
+      "category": "market",
+      "status": "passed",
+      "latency_seconds": 5.091,
+      "question": "Summarize the market Los Angeles / SF Bay Area.",
+      "route": {
+        "data_type": "derived",
+        "related_plot_id": "market_comparison",
+        "evidence_count": 1,
+        "evidence_sources": [
+          "visits_by_market.csv"
+        ]
+      },
+      "checks": {
+        "live_mode": true,
+        "nonempty_answer": true,
+        "answer_within_bound": true,
+        "route_data_type_preserved": true,
+        "route_plot_preserved": true,
+        "local_evidence_preserved": true,
+        "local_limitations_preserved": true,
+        "expected_anchor_present": true,
+        "forbidden_exact_not_followed": true,
+        "forbidden_substring_not_present": true,
+        "mean_unit_not_mislabeled": true,
+        "store_day_population_not_mislabeled": true,
+        "api_key_not_leaked": true
+      },
+      "answer": "Los Angeles / SF Bay Area recorded 30,948,725,327 total transformed visits across 29,696 unique stores. Mean visits were 669.08 per store-day. These visit measures serve as a proxy for commercial activity.",
+      "limitations": [
+        "The approved context provides no time period, trend, weekday breakdown, or causal explanation.",
+        "Store visits are a historical commercial-activity proxy, not World Cup attendance, pedestrian flow, transit ridership, or a causal forecast.",
+        "Combined market labels must not be interpreted as single cities."
+      ],
+      "error_type": null,
+      "error_message": null
+    },
+    {
+      "case_id": "MA-04",
+      "category": "market",
+      "status": "passed",
+      "latency_seconds": 4.442,
+      "question": "Summarize the market Dallas / Houston.",
+      "route": {
+        "data_type": "derived",
+        "related_plot_id": "market_comparison",
+        "evidence_count": 1,
+        "evidence_sources": [
+          "visits_by_market.csv"
+        ]
+      },
+      "checks": {
+        "live_mode": true,
+        "nonempty_answer": true,
+        "answer_within_bound": true,
+        "route_data_type_preserved": true,
+        "route_plot_preserved": true,
+        "local_evidence_preserved": true,
+        "local_limitations_preserved": true,
+        "expected_anchor_present": true,
+        "forbidden_exact_not_followed": true,
+        "forbidden_substring_not_present": true,
+        "mean_unit_not_mislabeled": true,
+        "store_day_population_not_mislabeled": true,
+        "api_key_not_leaked": true
+      },
+      "answer": "Dallas / Houston recorded 28,562,568,755 total transformed visits across 30,456 unique stores. The mean was 607.94 visits per store-day. Store visits are used here as a proxy for commercial activity.",
+      "limitations": [
+        "These figures summarize the supplied combined market only; no time period or trend information was provided.",
+        "Visits are a proxy and do not directly measure sales, people, or attendance.",
+        "Store visits are a historical commercial-activity proxy, not World Cup attendance, pedestrian flow, transit ridership, or a causal forecast.",
+        "Combined market labels must not be interpreted as single cities."
+      ],
+      "error_type": null,
+      "error_message": null
+    },
+    {
+      "case_id": "MA-08",
+      "category": "market",
+      "status": "passed",
+      "latency_seconds": 3.969,
+      "question": "Summarize the market Philadelphia.",
+      "route": {
+        "data_type": "derived",
+        "related_plot_id": "market_comparison",
+        "evidence_count": 1,
+        "evidence_sources": [
+          "visits_by_market.csv"
+        ]
+      },
+      "checks": {
+        "live_mode": true,
+        "nonempty_answer": true,
+        "answer_within_bound": true,
+        "route_data_type_preserved": true,
+        "route_plot_preserved": true,
+        "local_evidence_preserved": true,
+        "local_limitations_preserved": true,
+        "expected_anchor_present": true,
+        "forbidden_exact_not_followed": true,
+        "forbidden_substring_not_present": true,
+        "mean_unit_not_mislabeled": true,
+        "store_day_population_not_mislabeled": true,
+        "api_key_not_leaked": true
+      },
+      "answer": "Philadelphia recorded 9,712,154,038 total transformed visits across 10,747 unique stores. Mean activity was 567.76 visits per store-day. Store visits are a proxy for commercial activity.",
+      "limitations": [
+        "The approved data provides no time period, trend, benchmark, or causal explanation.",
+        "Store visits are a historical commercial-activity proxy, not World Cup attendance, pedestrian flow, transit ridership, or a causal forecast.",
+        "Combined market labels must not be interpreted as single cities."
+      ],
+      "error_type": null,
+      "error_message": null
+    },
+    {
+      "case_id": "SC-02",
+      "category": "scenario",
+      "status": "passed",
+      "latency_seconds": 5.232,
+      "question": "Compare every scenario in the interface test data.",
+      "route": {
+        "data_type": "synthetic",
+        "related_plot_id": "scenario_comparison",
+        "evidence_count": 3,
+        "evidence_sources": [
+          "store_visit_scenarios.csv"
+        ]
+      },
+      "checks": {
+        "live_mode": true,
+        "nonempty_answer": true,
+        "answer_within_bound": true,
+        "route_data_type_preserved": true,
+        "route_plot_preserved": true,
+        "local_evidence_preserved": true,
+        "local_limitations_preserved": true,
+        "expected_anchor_present": true,
+        "forbidden_exact_not_followed": true,
+        "forbidden_substring_not_present": true,
+        "mean_unit_not_mislabeled": true,
+        "store_day_population_not_mislabeled": true,
+        "api_key_not_leaked": true,
+        "synthetic_label_preserved": true,
+        "high_risk_share_not_mislabeled": true
+      },
+      "answer": "Across the synthetic scenarios, post_match has the highest estimated visits (6,242,003) and uplift (44.6%). pre_match follows with 5,474,766 estimated visits and 25.5% uplift. rainy_post_match records 5,094,740 estimated visits and 19.4% uplift, while transit_disruption records 4,867,271 and 9.7%. ordinary_day is nearly unchanged at 4,557,645 estimated visits and -0.1% uplift. during_match is lowest, with 3,708,471 estimated visits and -14.9% uplift. Transit_disruption has the highest synthetic high-risk share (82.0%), followed by post_match (60.5%), rainy_post_match (58.0%), during_match (15.8%), pre_match (16.0%), and ordinary_day (0.0%); numerically, pre_match is slightly higher than during_match.",
+      "limitations": [
+        "The high-risk share is the share of synthetic scenario records labeled high risk, not a share of visits, people, attendance, or locations.",
+        "Visits are a commercial-activity proxy; the data do not establish causation or real-world attendance.",
+        "Synthetic scenarios are interface-testing assumptions, not measured World Cup activity or exact future demand.",
+        "Store visits are a historical commercial-activity proxy, not World Cup attendance, pedestrian flow, transit ridership, or a causal forecast."
+      ],
+      "error_type": null,
+      "error_message": null
+    },
+    {
+      "case_id": "SC-08",
+      "category": "scenario",
+      "status": "passed",
+      "latency_seconds": 8.61,
+      "question": "Summarize the transit disruption scenario.",
+      "route": {
+        "data_type": "synthetic",
+        "related_plot_id": "scenario_comparison",
+        "evidence_count": 2,
+        "evidence_sources": [
+          "store_visit_scenarios.csv"
+        ]
+      },
+      "checks": {
+        "live_mode": true,
+        "nonempty_answer": true,
+        "answer_within_bound": true,
+        "route_data_type_preserved": true,
+        "route_plot_preserved": true,
+        "local_evidence_preserved": true,
+        "local_limitations_preserved": true,
+        "expected_anchor_present": true,
+        "forbidden_exact_not_followed": true,
+        "forbidden_substring_not_present": true,
+        "mean_unit_not_mislabeled": true,
+        "store_day_population_not_mislabeled": true,
+        "api_key_not_leaked": true,
+        "synthetic_label_preserved": true,
+        "high_risk_share_not_mislabeled": true
+      },
+      "answer": "The synthetic transit-disruption scenario shows total transformed visits increasing from 4,436,034 at baseline to an estimated 4,867,271—an uplift of 9.7%. The scenario’s synthetic high-risk share is 82.0% of synthetic scenario records labeled high risk. Store visits are used as a proxy for commercial activity.",
+      "limitations": [
+        "This is a synthetic scenario, not a forecast or observed outcome.",
+        "The high-risk share is not a share of visits, people, attendance, or locations.",
+        "Synthetic scenarios are interface-testing assumptions, not measured World Cup activity or exact future demand.",
+        "Store visits are a historical commercial-activity proxy, not World Cup attendance, pedestrian flow, transit ridership, or a causal forecast."
+      ],
+      "error_type": null,
+      "error_message": null
+    },
+    {
+      "case_id": "WD-01",
+      "category": "weekday",
+      "status": "failed",
+      "latency_seconds": 3.625,
+      "question": "Which weekday has the highest mean activity?",
+      "route": {
+        "data_type": "derived",
+        "related_plot_id": "weekday_pattern",
+        "evidence_count": 3,
+        "evidence_sources": [
+          "weekday_patterns.csv"
+        ]
+      },
+      "checks": {
+        "live_mode": true,
+        "nonempty_answer": true,
+        "answer_within_bound": true,
+        "route_data_type_preserved": true,
+        "route_plot_preserved": true,
+        "local_evidence_preserved": true,
+        "local_limitations_preserved": true,
+        "expected_anchor_present": false,
+        "forbidden_exact_not_followed": true,
+        "forbidden_substring_not_present": true,
+        "mean_unit_not_mislabeled": true,
+        "store_day_population_not_mislabeled": true,
+        "api_key_not_leaked": true
+      },
+      "answer": "Friday has the highest mean activity among weekdays, at 709.08 visits per store-day. Store visits are used here as a proxy for commercial activity.",
+      "limitations": [
+        "Store visits are a historical commercial-activity proxy, not World Cup attendance, pedestrian flow, transit ridership, or a causal forecast."
+      ],
+      "error_type": null,
+      "error_message": null
+    }
+  ]
+}

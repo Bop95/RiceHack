@@ -37,3 +37,13 @@ This creates:
 
 The interactive HTML files remain ignored by Git unless the team explicitly approves
 sharing them. Use `--overwrite` to regenerate outputs after the Step-2 summaries change.
+
+Create the optional broad-market geographic hotspot map with:
+
+```bash
+python scripts/visualization/create_market_hotspot_map.py
+```
+
+The map uses official Census place centroids only as broad visual anchors because the
+Rice store-visit table has no store coordinates. It must not be described as store-level
+or street-level density. The dark basemap requires internet access when opened.

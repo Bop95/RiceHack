@@ -1,0 +1,2 @@
+total_rows,unique_stores,unique_brands,unique_categories,unique_markets,unique_dates,earliest_date,latest_date,total_visits,mean_daily_visits,median_daily_visits,minimum_daily_visits,maximum_daily_visits,standard_deviation_daily_visits,zero_visit_rows,suspicious_high_visit_rows,data_type
+223342163,143574,5036,132,9,1827,2020-01-01,2024-12-31,138643468490,620.77,199,0,441377,1035.41,18552477,223295,derived
