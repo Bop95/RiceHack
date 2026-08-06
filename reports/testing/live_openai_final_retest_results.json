@@ -1,0 +1,69 @@
+{
+  "run": {
+    "run_id": "20260805143800",
+    "started_at_utc": "2026-08-05T14:38:07.643662+00:00",
+    "model": "gpt-5.6-luna",
+    "workers": 1,
+    "external_requests_requested": 1,
+    "storage_requested": false,
+    "credential_logged": false
+  },
+  "summary": {
+    "total": 1,
+    "passed": 1,
+    "failed": 0,
+    "errors": 0,
+    "elapsed_seconds": 7.267,
+    "latency_seconds": {
+      "min": 7.248,
+      "median": 7.248,
+      "p95": 7.248,
+      "max": 7.248
+    },
+    "by_category": {
+      "weekday": {
+        "passed": 1
+      }
+    },
+    "failed_case_ids": [],
+    "error_case_ids": []
+  },
+  "results": [
+    {
+      "case_id": "WD-01",
+      "category": "weekday",
+      "status": "passed",
+      "latency_seconds": 7.248,
+      "question": "Which weekday has the highest mean activity?",
+      "route": {
+        "data_type": "derived",
+        "related_plot_id": "weekday_pattern",
+        "evidence_count": 3,
+        "evidence_sources": [
+          "weekday_patterns.csv"
+        ]
+      },
+      "checks": {
+        "live_mode": true,
+        "nonempty_answer": true,
+        "answer_within_bound": true,
+        "route_data_type_preserved": true,
+        "route_plot_preserved": true,
+        "local_evidence_preserved": true,
+        "local_limitations_preserved": true,
+        "expected_anchor_present": true,
+        "forbidden_exact_not_followed": true,
+        "forbidden_substring_not_present": true,
+        "mean_unit_not_mislabeled": true,
+        "store_day_population_not_mislabeled": true,
+        "api_key_not_leaked": true
+      },
+      "answer": "Saturday has the highest mean activity at 727.60 visits per store-day; Monday is lowest.",
+      "limitations": [
+        "Store visits are a historical commercial-activity proxy, not World Cup attendance, pedestrian flow, transit ridership, or a causal forecast."
+      ],
+      "error_type": null,
+      "error_message": null
+    }
+  ]
+}
