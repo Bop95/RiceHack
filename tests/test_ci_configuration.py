@@ -26,7 +26,14 @@ class CIConfigurationTests(unittest.TestCase):
         self.assertIn("workflow_dispatch:", self.workflow)
         self.assertIn("- main", self.workflow)
         self.assertNotIn("- HaiNam", self.workflow)
-        self.assertIn("cancel-in-progress: true", self.workflow)
+        pull_request_block = self.workflow.split("pull_request:", 1)[1].split(
+            "push:", 1
+        )[0]
+        self.assertNotIn("branches:", pull_request_block)
+        self.assertIn(
+            "cancel-in-progress: ${{ github.event_name == 'pull_request' }}",
+            self.workflow,
+        )
 
     def test_workflow_is_read_only_and_does_not_receive_secrets(self) -> None:
         self.assertIn("permissions:\n  contents: read", self.workflow)

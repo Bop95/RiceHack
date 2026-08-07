@@ -174,8 +174,6 @@ Recommended settings:
 - block force pushes and branch deletion; and
 - limit bypass permission to the smallest maintainer group.
 
-Apply the same rule to `main` when it becomes the production integration branch.
-
 Branch protection is what makes CI a gate. Without it, someone can push broken
 code directly to the branch and Streamlit may deploy it.
 

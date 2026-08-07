@@ -115,7 +115,7 @@ generation, evidence-based fallback responses, and all four Streamlit pages.
 
 ## Hosted Streamlit Community Cloud deployment
 
-Create an app from the GitHub repository, select branch `HaiNam`, and use:
+Create an app from the GitHub repository, select branch `main`, and use:
 
 ```text
 paddydash/app.py
