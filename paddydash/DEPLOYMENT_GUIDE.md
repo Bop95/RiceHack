@@ -15,14 +15,14 @@ The repository includes:
 - evidence, data-type labels, limitations, and related plots;
 - deterministic prepared-data answers when OpenAI is unavailable;
 - a 500-character question limit and configurable per-session AI allowance;
-- pinned application dependencies; and
+- a single root runtime dependency manifest;
 - a deployment readiness checker.
 
 ## 2. Accounts and credentials you provide
 
 You need:
 
-1. A GitHub account with access to the repository and the `HaiNam` branch.
+1. A GitHub account with access to the repository and the `main` branch.
 2. A Streamlit Community Cloud account connected to GitHub.
 3. An OpenAI API project with billing/credits and a project API key.
 
@@ -50,9 +50,15 @@ reports a warning because prepared-data mode is still deployable.
 
 ## 4. Push the approved application
 
-Only after reviewing the local changes, commit and push them to the existing
-`HaiNam` branch. Streamlit cannot deploy local uncommitted files; every required
-application file and compact CSV must exist on GitHub.
+The repository CI workflow runs the Python 3.12 quality gate on pull requests.
+Before connecting automatic deployment, a maintainer should protect the branch
+and require that check. See `docs/engineering/ci-cd-guide.md` for the exact
+GitHub settings and the relationship between CI and Streamlit auto-deployment.
+
+Commit changes to a feature branch, open a pull request into `main`, and merge
+only after review and the required CI check passes. Streamlit cannot deploy local
+uncommitted files; every required application file and compact CSV must exist on
+GitHub's `main` branch.
 
 Do not push:
 
@@ -70,11 +76,16 @@ file list before committing.
 1. Sign in to Streamlit Community Cloud with GitHub.
 2. Select **Create app**.
 3. Choose the GitHub repository.
-4. Choose branch `HaiNam`.
+4. Choose branch `main`.
 5. Enter `paddydash/app.py` as the main file path.
 6. In Advanced settings, use Python 3.12 if a version choice is shown.
 7. Deploy once without an OpenAI key if you want to verify the visual pages
    first. Ask FinalFlow will clearly operate in prepared-data mode.
+
+The repository intentionally has one runtime dependency file at root:
+`requirements.txt`. Do not add another requirements file beside
+`paddydash/app.py`; Streamlit gives an entrypoint-directory file precedence over
+the complete root manifest.
 
 The result is a hosted URL that other people can open. It is not tied to your
 local PowerShell window or computer.
@@ -93,6 +104,8 @@ FINALFLOW_MAX_AI_REQUESTS_PER_SESSION = "10"
 The tracked `.env.example` file documents the same variable names for local
 development. Never edit that example to contain a real value. For Community
 Cloud, paste the equivalent TOML values only into the deployment's Secrets box.
+`FINALFLOW_DISABLE_OPENAI` is also supported as a process/CI safety switch but
+does not need to be added to hosted Secrets during normal operation.
 
 Streamlit exposes root-level secret entries to the server process as environment
 variables. The OpenAI Python SDK reads `OPENAI_API_KEY` there. The application
@@ -135,8 +148,8 @@ Open the hosted URL in a private/incognito browser window and check:
 ## 9. Updating the live app
 
 Community Cloud watches the selected GitHub branch. After later approved changes
-are committed and pushed to `HaiNam`, the hosted app rebuilds from that branch.
-Run the tests and readiness checker before each push.
+are merged into `main`, the hosted app rebuilds from that branch. Run the tests
+and readiness checker before opening or updating each pull request.
 
 ## 10. Troubleshooting
 
@@ -160,3 +173,11 @@ installs it from the repository during deployment.
 
 Run the readiness checker with `--require-tracked`. A local file that was never
 committed is invisible to Streamlit Community Cloud.
+
+## 11. Handoff references
+
+- `README.md`: supported release, setup, environment, and repository map;
+- `docs/api/application-api.md`: implemented in-process service contract;
+- `docs/handoff/minh-tue-deployment-handoff.md`: ownership, acceptance,
+  deployment, smoke, rollback, and completion checklist; and
+- `reports/testing/final_handoff_validation_report.md`: final local evidence.

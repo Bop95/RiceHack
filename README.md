@@ -4,160 +4,227 @@
 
 # FinalFlow
 
-**Match-synchronized mobility readiness for the 2026 World Cup Final.**
+FinalFlow is a tested Streamlit application for exploring commercial activity
+and illustrative mobility-readiness scenarios around the 2026 World Cup Final.
+The case study follows the Midtown Manhattan to New York New Jersey Stadium
+corridor for a hypothetical Spain versus Argentina final.
 
-FinalFlow is a transportation and urban-sustainability project that studies how spectators, transit systems, roads, weather, commercial activity, and resilience planning interact before, during, and after a major match.
+The application combines compact approved store-visit summaries, clearly
+labeled synthetic scenarios, interactive charts, deterministic analytics, and
+optional server-side OpenAI narration. It never loads the restricted raw Rice
+datasets or the multi-gigabyte clean Parquet file at runtime.
 
-The case study replays the **2026 World Cup Final: Spain versus Argentina** at **New York New Jersey Stadium**, focused on the corridor:
+## Release status
+
+Implemented now:
+
+- four Streamlit pages: Overview, Store-Visit Explorer, Scenario Explorer, and
+  Ask FinalFlow;
+- compact `derived` summary tables and reproducible `synthetic` scenarios;
+- grounded answers with validated evidence, data labels, limitations, and plots;
+- deterministic prepared-data operation when OpenAI is disabled or unavailable;
+- optional server-side OpenAI Responses API narration;
+- local launchers, deployment validation, unit/AppTest coverage, and GitHub CI;
+- Streamlit Community Cloud deployment instructions for the `main` branch.
+
+Not implemented:
+
+- a standalone REST/FastAPI service;
+- a TypeScript/React frontend;
+- SerpAPI or live web retrieval;
+- AWS infrastructure or automated AWS deployment.
+
+Do not design a deployment around those unimplemented components. The current
+release is one Python 3.12 Streamlit service.
+
+## Architecture
 
 ```text
-Midtown Manhattan -> New York Penn Station -> Secaucus Junction -> Meadowlands Station -> Stadium
+Approved compact CSVs
+        |
+        v
+data_service.py -- validates schema and data labels
+        |
+        v
+analytics.py -- deterministic retrieval, evidence, and local answer
+        |
+        +-------------------------------+
+        |                               |
+        v                               v
+prepared-data response          optional OpenAI narration
+        |                        (server-side, grounded)
+        +---------------+---------------+
+                        |
+                        v
+               four Streamlit pages
 ```
 
-## Tech Stack
+OpenAI can improve wording, but the local analytics layer controls the selected
+entity, values, units, ranking direction, evidence, data type, limitations, and
+related plot.
 
-Current and planned tools are shown separately so contributors can see what exists now and what will be added later.
+## Requirements
 
-**Current**
+- Python 3.12
+- Git
+- Windows PowerShell for the included one-command launcher, or any shell for the
+  direct Streamlit command
+- optional OpenAI project key for AI narration
 
-![Python](https://img.shields.io/badge/Python-3.x-3776AB?logo=python&logoColor=white)
-![Streamlit](https://img.shields.io/badge/Streamlit-Prototype-FF4B4B?logo=streamlit&logoColor=white)
-![JSON](https://img.shields.io/badge/JSON-Reports-000000?logo=json&logoColor=white)
-![Git](https://img.shields.io/badge/Git-Version_Control-F05032?logo=git&logoColor=white)
+The root `requirements.txt` is the single source of runtime dependencies.
+`requirements-dev.txt` contains CI/development-only tools.
 
-**Planned**
+## Quick start
 
-![Pandas](https://img.shields.io/badge/Pandas-Data_Analysis-150458?logo=pandas&logoColor=white)
-![Jupyter](https://img.shields.io/badge/Jupyter-Notebooks-F37626?logo=jupyter&logoColor=white)
-![FastAPI](https://img.shields.io/badge/FastAPI-Backend-009688?logo=fastapi&logoColor=white)
-![React](https://img.shields.io/badge/React-Frontend-61DAFB?logo=react&logoColor=black)
-![OpenAI](https://img.shields.io/badge/OpenAI-Future_Assistant-412991?logo=openai&logoColor=white)
-![AWS](https://img.shields.io/badge/AWS-Future_Deployment-232F3E?logo=amazonwebservices&logoColor=white)
+### Windows: prepared-data mode
 
-## Project Mission
+From the repository root:
 
-FinalFlow helps the team evaluate:
-
-- pre-match, in-match, and post-match crowd movement;
-- rail, road, shuttle, parking, and pedestrian flow;
-- first- and last-mile accessibility;
-- congestion, queues, disruptions, and resilience strategies;
-- weather and urban heat impacts;
-- visitor spending, brand activity, and vendor placement;
-- static and interactive visualizations;
-- future AI assistant responses grounded in prepared project data.
-
-## Current State
-
-This repository currently contains:
-
-- project documentation and team workstream guides;
-- data and notebook folder conventions;
-- Python script scaffolds;
-- a working dependency-free data audit utility;
-- a four-page, prepared-data Streamlit store-visit prototype in `paddydash/`;
-- a reproducible synthetic scenario generator and clearly labeled scenario data.
-
-It does **not** yet contain the standalone backend API, TypeScript frontend, restricted raw Rice datasets, or AWS deployment.
-
-## Workflow Diagram
-
-```mermaid
-flowchart LR
-    A[Local Rice datasets] --> B[Audit scripts]
-    B --> C[Cleaning notebooks and scripts]
-    C --> D[Derived tables]
-    D --> E[Power BI exports]
-    D --> F[Streamlit prototype]
-    D --> G[Future backend API]
-    G --> H[Future AI assistant]
-    G --> I[Future frontend]
-
-    J[Weather and web sources] --> G
-    K[Reports and figures] --> E
-    K --> F
+```powershell
+py -3.12 -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
+.\run_finalflow_local.cmd -PreparedDataOnly
 ```
 
-<p align="center">
-  <img src="asset/finalflow.jpeg" alt="FinalFlow concept image" width="85%">
-</p>
+Open `http://localhost:8501` if the browser does not open automatically. This
+mode is complete and makes no OpenAI request.
 
-## Repository Map
+### Windows: optional OpenAI mode
+
+```powershell
+Copy-Item .env.example .env
+```
+
+Edit `.env`, add a project key after `OPENAI_API_KEY=`, then validate and run:
+
+```powershell
+.\.venv\Scripts\python.exe scripts\validation\check_local_env.py .env
+.\run_finalflow_local.cmd
+```
+
+The launcher reads the ignored `.env` file and never accepts or prints the key.
+
+### macOS or Linux
+
+```bash
+python3.12 -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements.txt
+FINALFLOW_DISABLE_OPENAI=true python -m streamlit run paddydash/app.py
+```
+
+For optional OpenAI mode, copy `.env.example` to `.env`, add the server-side
+key, and run the same Streamlit command without `FINALFLOW_DISABLE_OPENAI=true`.
+
+## Environment variables
+
+| Variable | Required | Default | Purpose |
+| --- | --- | --- | --- |
+| `OPENAI_API_KEY` | No | unset | Enables server-side OpenAI narration. Without it, the app uses prepared-data mode. |
+| `OPENAI_MODEL` | No | `gpt-5.6-luna` | Model used by the OpenAI Responses API. |
+| `FINALFLOW_MAX_AI_REQUESTS_PER_SESSION` | No | `10` | Best-effort per-browser-session allowance, clamped to 1-100. |
+| `FINALFLOW_DISABLE_OPENAI` | No | false | `true`, `1`, `yes`, or `on` forces prepared-data mode. CI sets this to `true`. |
+
+`SERPAPI_API_KEY` is not supported because SerpAPI integration does not exist.
+For local development, store values in the ignored `.env` file. For hosted
+deployment, store them only in Streamlit Community Cloud Secrets.
+
+## Validate the release
+
+Run the same quality gates used by CI:
+
+```powershell
+.\.venv\Scripts\python.exe -m pip check
+.\.venv\Scripts\python.exe -m ruff check paddydash scripts tests
+.\.venv\Scripts\python.exe -m compileall -q paddydash scripts tests
+$env:FINALFLOW_DISABLE_OPENAI = "true"
+.\.venv\Scripts\python.exe scripts\validation\check_streamlit_deployment.py --require-tracked
+.\.venv\Scripts\python.exe -m unittest discover -s tests -v
+```
+
+Normal CI deliberately does not receive an OpenAI key and does not make paid,
+nondeterministic live requests. The committed live-test evidence is under
+`reports/testing/`.
+
+## Deploy
+
+The supported release target is Streamlit Community Cloud:
+
+```text
+Repository: Bop95/RiceHack
+Branch: main
+Entrypoint: paddydash/app.py
+Python: 3.12
+Dependency file: requirements.txt (repository root)
+Configuration: .streamlit/config.toml
+```
+
+Protect `main`, require the **Python 3.12 quality gate**, and deploy only merged
+commits. Add optional OpenAI values in Streamlit Secrets, never GitHub Actions.
+See the [hosted deployment guide](paddydash/DEPLOYMENT_GUIDE.md) for the complete
+procedure and smoke checklist.
+
+## Application API boundary
+
+The current application has an in-process Python service API; it does not expose
+HTTP routes. Streamlit imports `data_service.py`, `analytics.py`, and
+`ai_service.py` directly. The callable signatures, response schema, errors, and
+future backend boundary are documented in
+[Application API](docs/api/application-api.md).
+
+## Repository structure
 
 ```text
 .
-├── asset/                  # README images and visual assets.
-├── data/                   # Local data workspace and data policy.
-├── docs/                   # Project, data, and handoff documentation.
-├── notebooks/              # Contributor notebook workspaces.
-├── paddydash/              # Existing Streamlit dashboard prototype.
-├── reports/                # Figures, interactive outputs, and summaries.
-├── scripts/                # Data, validation, visualization, and synthetic utilities.
-└── tests/                  # Standard-library tests for implemented utilities.
+|-- .github/workflows/       GitHub Actions quality gate
+|-- .streamlit/              tracked, non-secret Streamlit configuration
+|-- asset/                   README and project images
+|-- data/summaries/          compact approved derived runtime data
+|-- data/synthetic/          reproducible, clearly labeled scenario data
+|-- docs/api/                current service/API contract
+|-- docs/engineering/        CI/CD setup and beginner guide
+|-- docs/handoff/            deployment-owner handoff notes
+|-- paddydash/               Streamlit pages, components, and services
+|-- reports/                 figures, screenshots, and test evidence
+|-- scripts/                 data preparation, validation, and launch utilities
+|-- tests/                   unit, service, release, and Streamlit AppTest checks
+|-- requirements.txt         runtime dependency source of truth
+`-- requirements-dev.txt     local CI/development tools
 ```
 
-## Quick Start
+## Data and security boundary
 
-Run the existing Streamlit prototype:
+Never commit:
 
-```bash
-python3 -m pip install -r paddydash/requirements.txt
-streamlit run paddydash/app.py
-```
+- `.env`, `.streamlit/secrets.toml`, or credentials;
+- restricted raw/external/processed data;
+- Parquet files or the large clean dataset;
+- virtual environments, caches, bytecode, or generated interactive HTML.
 
-Run the data audit utility on a local CSV:
+Runtime data uses these labels:
 
-```bash
-python3 scripts/data/audit_data.py \
-  --input /local/path/to/dataset.csv \
-  --name store-visits-rice \
-  --output reports/summaries/store_visits_audit.json
-```
+- `derived`: approved transformed summary data;
+- `synthetic`: reproducible scenario assumptions, never observed attendance;
+- `provided` and `web`: reserved shared project labels, not runtime inputs to the
+  current dashboard.
 
-Run the lightweight test suite:
-
-```bash
-python3 -m unittest discover -s tests -v
-```
+Store visits are a historical commercial-activity proxy. They are not World Cup
+attendance, pedestrian flow, transit ridership, or a causal forecast.
 
 ## Documentation
 
-- [Project overview](docs/project/project-overview.md)
-- [Team workstreams](docs/project/team-workstreams.md)
+- [Beginner build and run guide](paddydash/BUILD_GUIDE.md)
+- [Hosted deployment guide](paddydash/DEPLOYMENT_GUIDE.md)
+- [Application API](docs/api/application-api.md)
+- [Minh Tue deployment handoff](docs/handoff/minh-tue-deployment-handoff.md)
+- [CI/CD beginner guide](docs/engineering/ci-cd-beginner-guide.md)
+- [CI/CD maintainer guide](docs/engineering/ci-cd-guide.md)
 - [Data contracts](docs/project/data-contracts.md)
-- [Dataset layout](docs/data/dataset-layout.md)
-- [Scripts guide](scripts/README.md)
-- [Streamlit prototype guide](paddydash/README.md)
-- [AWS handoff template](docs/handoff/minh-tue-aws-handoff.md)
+- [Final validation report](reports/testing/final_handoff_validation_report.md)
 
-## Data Policy
+## Ownership and handoff
 
-Raw Rice datasets stay local unless the team explicitly approves a small public sample. Do not commit:
-
-- `.env` files or secrets;
-- OpenAI, SerpAPI, or AWS credentials;
-- raw restricted datasets;
-- large generated files;
-- virtual environments, caches, or notebook checkpoints.
-
-Use these standard data labels across reports, exports, notebooks, and future AI responses:
-
-- `provided`
-- `derived`
-- `synthetic`
-- `web`
-
-## Team Flow
-
-- **Phuong Anh** leads business analysis, Power BI, brand revenue, spending, and vendor-zone recommendations.
-- **Duc Anh** leads Python auditing, cleaning, feature tables, modest synthetic scenarios, and exports.
-- **Hai Nam** leads `store-visits-rice`, Streamlit prototype support, visualization, and future assistant UI work.
-- **Tan Dat** leads `daily-weather-rice`, weather-risk indicators, future SerpAPI integration, and source-display testing.
-- **Que Anh** leads `spend-patterns-rice`, `core-poi-geometry-rice`, `urban-heat-index-rice`, and spatial recommendation exports.
-- **Minh Tue** receives the deployment handoff later when the app and services are ready for AWS planning.
-
-## Branch Policy
-
-Current shared setup work is on `stephen-develop`.
-
-Do not create new branches, push raw data, or add deployment resources unless the team lead explicitly asks for that work.
+Minh Tue receives the tested repository, setup/environment/API documentation,
+deployment checklist, and known limitations. No AWS resources should be created
+from this release without a separate architecture decision. The immediate
+handoff target is the protected `main` branch and Streamlit Community Cloud.

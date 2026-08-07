@@ -1,12 +1,17 @@
-# Streamlit Services
+# FinalFlow application services
 
-Use this folder for non-UI helpers that support the Streamlit prototype.
+This folder contains the implemented, in-process service layer used by the
+Streamlit application:
 
-Future examples:
+- `data_service.py` validates and loads the compact derived and synthetic CSVs;
+- `analytics.py` provides deterministic retrieval, evidence, plot metadata, and
+  response contracts; and
+- `ai_service.py` optionally uses the server-side OpenAI Responses API to
+  narrate a deterministic answer without changing its facts.
 
-- cleaned dataset loaders;
-- export table readers;
-- backend API adapters;
-- AI/search service wrappers after the backend design is ready.
+There is currently no HTTP or REST server. Streamlit imports these Python
+functions directly. See `docs/api/application-api.md` for callable signatures,
+response shapes, failure behavior, and the boundary for a future backend.
 
-Do not put API keys in this folder. Do not add OpenAI or SerpAPI calls until that integration task begins.
+Never place credentials in this folder. Local values belong in the ignored
+`.env` file; hosted values belong in the deployment platform's secret store.

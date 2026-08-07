@@ -26,7 +26,7 @@ The project helps the team study mobility conditions before, during, and after t
 - Final whistle
 - Post-match departure
 
-## Future analysis scope
+## Analysis scope
 
 FinalFlow is expected to support:
 
@@ -45,7 +45,16 @@ FinalFlow is expected to support:
 
 ## Current repository state
 
-The repository currently contains a Streamlit dashboard prototype in `paddydash/`. The app uses mock analytics and is preserved as an early prototype area. Production data pipelines, backend services, TypeScript frontend work, AI assistant behavior, and AWS deployment are not implemented yet.
+The repository contains a tested four-page Streamlit application in
+`paddydash/`, compact derived summaries, reproducible synthetic scenarios,
+deterministic analytics, and optional server-side OpenAI narration. The app can
+run completely in prepared-data mode and does not load restricted raw data at
+runtime.
+
+The current deployment target is Streamlit Community Cloud from the protected
+`main` branch. A standalone HTTP API, TypeScript frontend, SerpAPI integration,
+and AWS infrastructure are not implemented and must not be assumed by a
+deployment owner.
 
 ## Contributor principles
 

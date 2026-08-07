@@ -67,7 +67,6 @@ Implemented:
 - `scripts/data/clean_store_visits.py`: streams the complete store-visit CSV/CSV.GZ dataset through DuckDB, writes a cleaned Parquet file, checks data quality, and produces summary tables.
 - `scripts/data/build_streamlit_summaries.py`: creates compact monthly brand/category tables for the deployed explorer without making the app scan the full Parquet file.
 - `scripts/visualization/create_store_visit_charts.py`: builds four static PNG charts, two self-contained interactive Plotly charts, and synchronized interpretation notes from the cleaned store-visit outputs.
-- `scripts/visualization/create_market_hotspot_map.py`: builds an interactive broad-market geographic hotspot map from the cleaned store-visit data and sourced Census place centroids.
 - `scripts/synthetic/generate_store_visit_scenarios.py`: reproducibly creates 5,000-20,000 clearly labeled scenario records plus a data dictionary.
 
 Example complete store-visit run:
@@ -123,17 +122,6 @@ relationship table, scanning the full clean Parquet during preparation only.
 The scenario generator defaults to 12,000 rows, seed `2026`, six documented
 scenarios, normalized zone effects, observed brand-category pairings,
 non-negative values, and the required `synthetic` label.
-
-Example geographic hotspot-map run:
-
-```bash
-python scripts/visualization/create_market_hotspot_map.py
-```
-
-The first full run creates the reusable local cache
-`data/summaries/visits_by_market_year.csv`; later runs reuse it unless the clean
-Parquet file is newer. The generated HTML needs internet access for its CARTO dark
-basemap. Its hotspots are broad market proxies, not store or street locations.
 
 Placeholders:
 

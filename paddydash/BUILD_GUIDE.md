@@ -9,7 +9,7 @@ each part does and why the project is organized this way.
 Open PowerShell and move to the repository root:
 
 ```powershell
-cd C:\Users\1\Documents\Rice_hack\RiceHack
+cd C:\path\to\RiceHack
 ```
 
 Install the dependencies if this is the first run or requirements changed:
@@ -414,10 +414,10 @@ $env:STREAMLIT_BROWSER_GATHER_USAGE_STATS = "false"
 
 ### The app says a prepared file is missing
 
-Confirm that you are on the `HaiNam` branch and running from the repository
-root. The compact CSV files are included with this work. If you intentionally
-removed them, recreate the Step-2 outputs and then run both preparation commands
-from Sections 4 and 5.
+Confirm that you are on `main` or a feature branch created from it and are
+running from the repository root. The compact CSV files are included with this
+work. If you intentionally removed them, recreate the Step-2 outputs and then
+run both preparation commands from Sections 4 and 5.
 
 ### PowerShell reports that a module is missing
 
@@ -441,9 +441,9 @@ Then open `http://localhost:8502`.
 
 For Streamlit Community Cloud:
 
-1. Push the approved work to the `HaiNam` GitHub branch.
+1. Merge the approved pull request into the protected `main` branch.
 2. Create a Streamlit Community Cloud app from the repository.
-3. Select branch `HaiNam`.
+3. Select branch `main`.
 4. Set the entry point to `paddydash/app.py`.
 5. Add `OPENAI_API_KEY`, `OPENAI_MODEL`, and
    `FINALFLOW_MAX_AI_REQUESTS_PER_SESSION` in Advanced settings under Secrets.

@@ -8,7 +8,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import os
 import subprocess
 import sys
 from pathlib import Path
@@ -156,7 +155,7 @@ def run_checks(
     return {
         "status": "failed" if errors else ("ready_with_warnings" if warnings else "ready"),
         "entrypoint": "paddydash/app.py",
-        "branch": "HaiNam",
+        "branch": "main",
         "bundle_size_mb": round(bundle_size / 1_000_000, 2),
         "prepared_row_counts": row_counts,
         "openai_configured": openai_configured,

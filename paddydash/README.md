@@ -50,7 +50,7 @@ Derived summary rows are labeled `derived`. Scenario rows are labeled
 Run from the repository root:
 
 ```powershell
-.\.venv\Scripts\python.exe -m pip install -r paddydash\requirements.txt
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
 .\run_finalflow_local.cmd
 ```
 
@@ -101,6 +101,10 @@ OPENAI_MODEL=gpt-5.6-luna
 FINALFLOW_MAX_AI_REQUESTS_PER_SESSION=10
 ```
 
+`FINALFLOW_DISABLE_OPENAI=true` forces prepared-data mode for CI or an emergency
+cost-control fallback. See the root README and `.env.example` for the complete
+environment contract.
+
 Do not commit `.env`. When no key is configured, the same chat interface returns
 deterministic prepared-data answers and explains the mode to the user.
 
@@ -115,7 +119,7 @@ generation, evidence-based fallback responses, and all four Streamlit pages.
 
 ## Hosted Streamlit Community Cloud deployment
 
-Create an app from the GitHub repository, select branch `HaiNam`, and use:
+Create an app from the GitHub repository, select branch `main`, and use:
 
 ```text
 paddydash/app.py

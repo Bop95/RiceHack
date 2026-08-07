@@ -1,6 +1,8 @@
 # Data Contracts
 
-This document defines early shared labels and fields for FinalFlow data products and future AI responses. It is documentation only and does not implement schemas.
+This document defines shared labels and fields for FinalFlow data products and
+the implemented assistant response contract. Runtime CSV schemas are enforced
+in `paddydash/services/data_service.py`.
 
 ## Data type labels
 
@@ -36,18 +38,18 @@ Use these fields where they fit the table:
 - Use ISO date format where dates appear in filenames or data fields.
 - Keep `provided`, `derived`, `synthetic`, and `web` labels exact.
 
-## Future AI response contract
+## Implemented assistant response contract
 
-Future assistant responses should return structured data similar to this shape:
+`ChatResponse.to_dict()` returns this shape:
 
 ```json
 {
   "answer": "...",
   "evidence": [],
   "relatedPlotId": null,
-  "dataType": "provided",
-  "webSources": [],
-  "limitations": []
+  "dataType": "derived",
+  "limitations": [],
+  "mode": "prepared-data"
 }
 ```
 
@@ -57,8 +59,12 @@ Field meanings:
 - `evidence`: project data rows, snippets, metrics, or references used to support the answer.
 - `relatedPlotId`: optional plot identifier for a related visualization.
 - `dataType`: highest-risk or primary source type used in the answer.
-- `webSources`: structured search sources when `web` data is used.
 - `limitations`: known caveats, missing data, assumptions, or uncertainty.
+- `mode`: `prepared-data` or `openai`.
+
+Each evidence item contains `label`, `value`, and `source`. The current
+application does not retrieve web results and therefore has no `webSources`
+field.
 
 ## Source discipline
 
