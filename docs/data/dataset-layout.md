@@ -94,7 +94,7 @@ Do not commit:
 - raw restricted datasets;
 - `.env` files;
 - `.streamlit/secrets.toml`;
-- OpenAI, SerpAPI, or AWS credentials;
+- OpenAI or AWS credentials;
 - local virtual environments;
 - notebook checkpoints;
 - Python cache files;

@@ -9,7 +9,7 @@ each part does and why the project is organized this way.
 Open PowerShell and move to the repository root:
 
 ```powershell
-cd C:\Users\1\Documents\Rice_hack\RiceHack
+cd C:\path\to\RiceHack
 ```
 
 Install the dependencies if this is the first run or requirements changed:

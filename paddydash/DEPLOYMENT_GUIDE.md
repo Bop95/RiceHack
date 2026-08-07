@@ -15,7 +15,7 @@ The repository includes:
 - evidence, data-type labels, limitations, and related plots;
 - deterministic prepared-data answers when OpenAI is unavailable;
 - a 500-character question limit and configurable per-session AI allowance;
-- pinned application dependencies; and
+- a single root runtime dependency manifest;
 - a deployment readiness checker.
 
 ## 2. Accounts and credentials you provide
@@ -56,7 +56,7 @@ and require that check. See `docs/engineering/ci-cd-guide.md` for the exact
 GitHub settings and the relationship between CI and Streamlit auto-deployment.
 
 Commit changes to a feature branch, open a pull request into `main`, and merge
-only after review and the required CI check pass. Streamlit cannot deploy local
+only after review and the required CI check passes. Streamlit cannot deploy local
 uncommitted files; every required application file and compact CSV must exist on
 GitHub's `main` branch.
 
@@ -82,6 +82,11 @@ file list before committing.
 7. Deploy once without an OpenAI key if you want to verify the visual pages
    first. Ask FinalFlow will clearly operate in prepared-data mode.
 
+The repository intentionally has one runtime dependency file at root:
+`requirements.txt`. Do not add another requirements file beside
+`paddydash/app.py`; Streamlit gives an entrypoint-directory file precedence over
+the complete root manifest.
+
 The result is a hosted URL that other people can open. It is not tied to your
 local PowerShell window or computer.
 
@@ -99,6 +104,8 @@ FINALFLOW_MAX_AI_REQUESTS_PER_SESSION = "10"
 The tracked `.env.example` file documents the same variable names for local
 development. Never edit that example to contain a real value. For Community
 Cloud, paste the equivalent TOML values only into the deployment's Secrets box.
+`FINALFLOW_DISABLE_OPENAI` is also supported as a process/CI safety switch but
+does not need to be added to hosted Secrets during normal operation.
 
 Streamlit exposes root-level secret entries to the server process as environment
 variables. The OpenAI Python SDK reads `OPENAI_API_KEY` there. The application
@@ -166,3 +173,11 @@ installs it from the repository during deployment.
 
 Run the readiness checker with `--require-tracked`. A local file that was never
 committed is invisible to Streamlit Community Cloud.
+
+## 11. Handoff references
+
+- `README.md`: supported release, setup, environment, and repository map;
+- `docs/api/application-api.md`: implemented in-process service contract;
+- `docs/handoff/minh-tue-deployment-handoff.md`: ownership, acceptance,
+  deployment, smoke, rollback, and completion checklist; and
+- `reports/testing/final_handoff_validation_report.md`: final local evidence.

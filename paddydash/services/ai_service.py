@@ -78,8 +78,8 @@ def answer_with_openai(
         from pydantic import BaseModel, Field
     except ImportError as error:  # pragma: no cover - deployment dependency issue.
         raise AIServiceError(
-            "The OpenAI backend dependency is not installed. Run the documented "
-            "paddydash requirements installation."
+            "The OpenAI backend dependency is not installed. Install the root "
+            "requirements.txt file as documented."
         ) from error
 
     class GroundedNarrative(BaseModel):

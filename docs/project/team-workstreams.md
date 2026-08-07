@@ -174,5 +174,5 @@ Expected outputs:
 Collaboration points:
 
 - Receives finalized app and service instructions from Hai Nam and Tan Dat.
-- Uses the handoff template in `docs/handoff/minh-tue-aws-handoff.md`.
+- Uses the release handoff in `docs/handoff/minh-tue-deployment-handoff.md`.
 - Does not create AWS resources until the project is ready for deployment.

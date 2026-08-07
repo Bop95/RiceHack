@@ -155,7 +155,7 @@ def run_checks(
     return {
         "status": "failed" if errors else ("ready_with_warnings" if warnings else "ready"),
         "entrypoint": "paddydash/app.py",
-        "branch": "HaiNam",
+        "branch": "main",
         "bundle_size_mb": round(bundle_size / 1_000_000, 2),
         "prepared_row_counts": row_counts,
         "openai_configured": openai_configured,
