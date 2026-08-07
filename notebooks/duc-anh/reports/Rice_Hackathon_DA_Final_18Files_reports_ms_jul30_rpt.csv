@@ -1,2 +1,0 @@
-Dataset,Rows_Original,Rows_Cleaned,Cleaning_Rule_Applied,Status
-core-poi-geometry-rice,325000,324912,Dropped Null Coords,PASSED
