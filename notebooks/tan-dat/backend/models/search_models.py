@@ -14,4 +14,5 @@ class SearchResponse(BaseModel):
   query: str
   results: List[SearchResult]
   search_used: bool
+  ai_summary: Optional[str] = None  # New field for OpenAI response
   error: Optional[str] = None

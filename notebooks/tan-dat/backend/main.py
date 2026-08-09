@@ -22,3 +22,8 @@ app.include_router(search.router)
 @app.get("/")
 def root():
   return {"message": "FinalFlow Backend Search Service Active"}
+
+
+
+
+
