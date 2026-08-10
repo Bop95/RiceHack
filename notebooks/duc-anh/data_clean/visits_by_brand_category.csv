@@ -1,3 +1,5037 @@
-BRAND_NAME,CATEGORY,TOTAL_VISITS,MARKET
-Brand_A,Restaurant,15420,New York/New Jersey
-Brand_B,Retail,8930,New York/New Jersey
+BRAND,TOTAL_VISITS
+1-800 Got Junk,399851
+1-800-Flowers,512688
+10 Spot/MadRag,10082078
+100 Montaditos,4650246
+1000 Degrees Neapolitan Pizzeria,2438490
+110 Grill,3790667
+16 Handles,4350619
+168 Market,13269867
+1st Franklin Financial,3106439
+1st Security Bank of Washington,860512
+24 Hour Fitness,50571673
+24/7 Travel Stores,1081176
+2nd Ave,192447
+2nd Wind Exercise Equipment,4260755
+2nd and Charles,4915312
+30 Burgers,1838407
+365 Data Centers,2165126
+4 Rivers Smokehouse,5846033
+4 Wheel Parts,2311349
+5 Star Nutrition,586837
+5.11 Tactical,1079932
+54th Street,11042087
+7 For All Mankind,706453
+7 Leaves Cafe,1758117
+7-Eleven,699775975
+7-Eleven Fuel,1002870178
+76,91499354
+800 Degrees,241082
+800 Degrees Woodfired Kitchen,2992457
+84 Lumber,5705312
+85 Degrees C Bakery Cafe,25356830
+99 Cents Only Stores,59450634
+99 Ranch Market,58388935
+99 Restaurants,2310784
+9Round,7861890
+A American Self Storage,509188
+A Pea in the Pod,90118
+A Storage Place,164116
+A Suite Salon,151054
+A&A Beauty Supply,482089
+A&W Restaurants,14374118
+A-1 Self Storage,1417966
+A-MAX Auto Insurance,1129700
+A.N. Deringer Inc.,56192
+A.P.C. Store,196982
+AAA / CAA,25527978
+AAA Approved Auto Repair,225761
+AAMCO Transmissions,1774849
+ABC Auto Parts,1974226
+ABC Fine Wine & Spirits,22755018
+ABC Stores,32244
+ABC Supply,3030625
+ABF Freight System,95988
+AC Hotel,22639594
+ACE Cash Express,3580533
+ACME Sav-on Pharmacy,3213152
+AEG Vision,1231641
+AG Jeans,322073
+AGCO Manufacturing & Distribution,131745
+AIM Mail Centers,238476
+AIS Insurance,36278
+AL Prime Energy,3757047
+ALDI,1373123688
+ALDO,72198359
+ALOHA Mind Math,480009
+ALON,20147418
+AMBEST,16836829
+AMC Entertainment,148142225
+AMES,1622541
+AMF,661543
+APA Hotels & Resorts,665133
+ARC Document Solutions,443869
+ARCO,900772081
+ASICS,1450444
+AT&T,82961517
+ATD Distribution Centers,1367198
+AUDEMARS PIGUET,64991
+Aaron's,3022589
+Abbey Carpet and Floor,856050
+Abbott's Frozen Custard,2647500
+Abel's Qwik Stop,111148
+Abercrombie,35777233
+Aboff's Paints,715618
+Abuelo's,5042414
+Academy Bank,996601
+Academy Sports + Outdoors,93599454
+Acai Republic,2006079
+Acapulco Restaurants,1118595
+Accenture,474394
+Acceptance Insurance,1869471
+Ace Hardware,331340503
+Ace Rent A Car,1605359
+Acme Markets,176689527
+Acne Studios,473999
+Acorn Markets,1510167
+Action Karate,1310933
+Acura,4431244
+Adam and Eve,3718044
+Adecco,244032
+Adidas,38483554
+Adirondack Trust Company,494229
+AdoreMe,813883
+Adult Mart,782943
+Advance America,8323096
+Advance Auto Parts,169785610
+Advantage Storage,220650
+Adventure Dental And Vision,75345
+Adventure Landing,604864
+Aerotek,138580
+Aesop,745864
+Affinity Federal Credit Union,573879
+Affordable Dental Care,20104
+Affordable Dentures,1031168
+Affordable Home Furnishings,32350
+Affordable Insurance Agency,49359
+Afters Ice Cream,3262075
+Against All Odds,2106750
+Agri Supply,303636
+Agricultural Bank of China,142238
+Agway,3417877
+Ahern Rentals,59880
+"Air Products and Chemicals, Inc.",1878636
+Aire Serv,256383
+Airgas,1087955
+Aisha's Salon & Spa,766897
+Aisle 1,2561949
+Akin's Natural Food Market,737464
+Akira,2084706
+Akris,800864
+Al and Ed's Autosound,789613
+Al's Formal Wear,669278
+Alabama Farmers Cooperative,148142
+Aladdin's Eatery,3840976
+Alamo Drafthouse Cinema,10612560
+Alamo Rent A Car,674932
+Albertsons,254544434
+Albertsons Distribution,567016
+Albertson’s Pharmacy,45152184
+Aldi Distribution,199508
+"Alex Brown, a Division of Raymond James",140124
+Alex and Ani,243904
+Alexander McQueen,608340
+Alfa Romeo,21756
+Alfred,884619
+Alice and Olivia,638323
+Alila Hotels,387885
+All In Adventures Escape Rooms,244058
+All Star Glass,51419
+All Uniform Wear,6016953
+AllModern,355677
+AllSaints,952779
+Allbirds,2448870
+Allegra Network,300965
+Allegro,405788
+Allen Edmonds,2773618
+Allen Tire Co.,1114024
+Alliant Insurance Services,265114
+Alloy Personal Training,882108
+Allstate Insurance,34811164
+Allsup's,20744257
+Alltown,1323339
+Alltown Fresh,328417
+Alo Yoga,2237741
+Aloft Hotels,44215197
+Aloha Poke,22087
+Alondra's,49924
+Alphagraphics,255664
+Alpine Shop,864785
+Alta Convenience,95876
+Altar'd State,8578099
+Alternative Therapies Group,1278274
+Altierus,1365474
+Altitude Trampoline Parks,1918024
+Alton Lane,56129
+Amarillo National Bank,741571
+Amato's,9857668
+Amazing Intimate Essentials,346153
+Amazing Lash Studio,10856665
+Amazon 4-Star,346287
+Amazon Books,413123
+Amazon Distribution,4506202
+Amazon Fresh,9136226
+Amazon Go,2007446
+Amcor PLC,876920
+Ameci Pizza and Pasta,4367146
+Amegy Bank,4657823
+Amerant Bank,1235434
+AmeriCash Loans,94621
+AmericInn,507133
+America's Best Contacts & Eyeglasses,8913838
+America's Best Inn,253646
+America's Food Basket,6547481
+America's Mattress,1747590
+America's Tire,3532767
+American Bodyworks,898324
+American Car Center,88303
+American Deli,22395445
+American Eagle Outfitters,104164580
+American Fireworks,396817
+American First National Bank,383049
+American Flatbread,440171
+American Freight,8584633
+American Furniture Warehouse (AFW),478185
+American Girl,1680475
+American Job Centers,1692087
+American Lubefast (ALF),645128
+American Mattress,164417
+American Momentum Bank,629643
+American Signature Furniture,2745640
+American Tire Depot,2812216
+American Tire Distributors (ATD),1692768
+Americas Best Value Inn,14473133
+Americold Logistics,196031
+Ameris Bank,4331237
+Ami,804870
+Amici's East Coast Pizzeria,4523992
+Amorino Gelato,1106043
+Ample Hills Creamery,684611
+Amscot,1188635
+Amstar,10672744
+Amtrak,2368123
+Amware Fulfillment,88026
+Amway,562784
+Andale Mexican Family Kitchen,90291
+Andaz,4838121
+Anderson's Frozen Custard,2377558
+Andronico's,20845169
+Andy's Frozen Custard,44397854
+Angelika Film Center,1668543
+Angelina,47230
+Angry Crab Shack,456267
+Anheuser-Busch Brewery,693620
+Anheuser-Busch Warehouse,60438
+Anine Bing,900112
+Anixter,530208
+Ann Taylor,19960097
+Anna's Taqueria,4831482
+Anne Fontaine,513662
+Annie Sez,998199
+Another Broken Egg Cafe,16527299
+Anthony Vince Nail Spa,1416241
+Anthony's Coal Fired Pizza,35551462
+Anthony's Restaurants,1362582
+Anthropologie,16304679
+Anytime Fitness,54327026
+Apex Supply Company,469517
+Apoyo Financiero,732288
+Apple Retail Store,69744600
+AppleOne Employment Services,192616
+Applebee's,395806651
+Applegreen,55963279
+Appliance Direct,79491
+Applied Industrial Technologies,3961841
+Applied Materials,235965
+Apricot Lane,2485802
+Aqua Living Factory Outlets,106355
+Aqua Tots,3543468
+Arabian Oud,60703
+Aramark Uniform & Career Apparel,517903
+Arby's,591442753
+Arc'teryx,3715755
+ArcBest,307889
+Arden's Garden,7860915
+Ardene,1069575
+Argo Tea,464919
+Arhaus,3259317
+Ariat,67576
+Aritaum,510696
+Aritzia,1382638
+Arizona Tile,232677
+Arlan's Market,18232301
+Armadillo Willy's,604722
+Armani Exchange (A/X),3211715
+Armani/Casa,566664
+Armstrong Garden Centers,1210226
+Armstrong McCall,3000670
+Aroma Espresso Bar,293446
+Aroma Joe's,1081544
+Arona Co,3219309
+Arooga's,4169183
+Around the Clock Fitness,91593
+Arrow Bank,1347858
+Arrow Truck Sales,84515
+Arteagas Food Center,2150433
+Arthur Murray Dance Centers,1268392
+Artichoke Pizza,75800
+Artist & Craftsman Supply,309553
+Arvest Bank,1675295
+Ascend Resort Collection,4417653
+Ashland Global Holdings Inc,1045754
+Ashley Furniture,12165263
+Ashley Stewart,3410654
+Asian Chao,7465729
+Asian Food Markets,1658138
+Aspen Dental,3634225
+Associated Bank,12664
+Associated Credit Union,1004441
+Associated Supermarkets,11094863
+Assurant,31313
+Aston Martin,63835
+Astro,294462
+At Home,25378124
+At The Beach,97156
+Athleta,25712674
+Atlanta Bonded Warehouse,83984
+Atlanta Bread,6878356
+Atlantic Wireless,159021
+Atlantis Fresh Market,858994
+Atomic Wings,1168140
+Atria's Restaurant and Tavern,1992660
+Attic Salt,2292551
+Atwoods Ranch & Home,394093
+Au Bon Pain,47106596
+Aubuchon Hardware,18235403
+Audi,2600080
+Audi On Demand,335408
+Audibel,925664
+Auntie Anne's,113356638
+Aurelio's Pizza,510838
+Austin's Couch Potatoes,298140
+Auto Glass Fitters,1050961
+Auto Glass Now,4564056
+Auto Value,47007781
+AutoNation,135422
+AutoNation Collision Center,2369971
+AutoZone,362638893
+Autobell Car Wash,34847
+Autograph Collection Hotels,6546602
+Autopart International,1705820
+Aveda,1481221
+Avery Dennison Corporate,23079
+Avery Dennison Distribution,1120209
+Avient Corporation,1300020
+Avis Rent A Car,6693144
+Avita Pharmacy,1355387
+Away,585157
+Axiom Bank,149794
+Ayerco,1775929
+Azteca Mexican Restaurants,1830186
+Aéropostale,62791415
+B&B Theatres,2534670
+B.GOOD,1759680
+BAIRD / Hilliard Lyons,199655
+BB&T (Branch Banking and Trust),12559928
+BBVA,3709783
+BECU,1321315
+BFS Foods,19753319
+BHLDN,371340
+BI-LO,817824
+BJ's Optical,1627804
+BJ's Restaurants,106843505
+BJ's Wholesale Club,188440515
+BJ's Wholesale Club Gas,4575035
+BK Pilates,97691
+BMC (Building Materials and Construction Services),176073
+BMO Bank,3311833
+BMW,5735208
+BMW Motorrad,4115971
+BNB Bank,263326
+BNY Mellon,1023011
+BOK Financial,266899
+BP,333696571
+Babes Chicken,175616
+Bach To Rock,474302
+Bad Ass Coffee,13483387
+Bad Axe Throwing,469567
+Bad Daddy's Burger Bar,1999275
+Badcock Furniture,17528932
+Baer's Furniture,1747863
+Bagels-4-U,4418756
+Bagnbaggage,260091
+Bahama Breeze,30617681
+Bahama Buck's,11284526
+Bailey's Health & Fitness,480776
+Bain & Company,583194
+Baja Fish Tacos,2438423
+Baja Fresh,13950034
+Baked by Melissa,132018
+Baker Distributing,691066
+Baker Furniture,45786
+Baker's Drive Thru,1895325
+Baker's Ribs,561955
+Bakersfield,2761974
+Baldinos Giant Jersey Subs,881869
+Balduccis,15763440
+Balenciaga,770996
+Ball Corporation,1801909
+Ballard Designs,237664
+Ballston Spa National Bank (BSNB),81087
+Bally boutiques,996309
+Bamboo Sushi,413572
+Bambu,5531683
+Banana Republic,46716517
+Banc of California,592084
+BancorpSouth,1977383
+Bandanas BBQ,799296
+Bandier,85416
+Banfield Pet Hospital,14682107
+Bang & Olufsen,5522968
+Bank OZK,3793970
+Bank of America,138272581
+Bank of Marin,743338
+Bank of Texas,530860
+Bank of the Sierra,2158824
+Bank of the West,4484603
+BankFive,130761
+BankUnited,1650531
+Banner Bank,2685886
+Banque Nationale,92494
+Banter by Piercing Pagoda,26277817
+Bar Louie,9504514
+Barbeques Galore,466046
+Barberitos,4226625
+Barcade,432243
+Barcelona Wine Bar & Restaurant,666783
+BareBurger,4334445
+Bargain Hunt,3138034
+Bargain Town,1104678
+Barking Hound Village,146507
+Barnes and Noble,114450430
+Barnes and Noble College,162368664
+Barons Market,3865833
+Barre Bohemian,96233
+Barre Soul,93403
+Barrio Tacos,1722807
+Barry's Bootcamp,3551294
+Bartell Drugs,23373364
+Bartlett Tree Experts,403168
+Basecamp Fitness,433594
+Baskin Robbins,95800577
+Bass Pro Shops,2625295
+Bassett Furniture,4006854
+Bath & Body Works,249532219
+Bath Fitter,118529
+Bath Planet,2132368
+Batteries Plus Bulbs,23485593
+Battery Source,1492020
+BayCoast Bank,1044766
+Baya Bar,2623329
+Baymont Inn & Suites,17366203
+Beach Bum Tanning & Airbrush Salon,716655
+Beach Hut Deli,2512086
+Beacon Roofing Supply,4079069
+Bealls Florida,15119068
+Bealls Outlet,158934394
+Beard Papas,346238
+Beatnic,142251
+Beauty Brands,240892
+Beauty Exchange,1587959
+Beavertails,34041
+Becks Prime,3932035
+Bed Bath & Beyond,57235206
+Bed Pros Mattress,831197
+Bedrosians Tile & Stone,1064494
+Bedzzz Express,375747
+Beef 'O' Brady's,32839548
+Beef Jerky Outlet,751387
+Bekins Van Lines,449351
+Bel Furniture,2166949
+Bel-Air,29543321
+Belk,26114971
+Bell Bank,465116
+Bella Bridesmaids,964402
+Bellacino's,927275
+Bellacures,245668
+Bellagio Furniture,364686
+Bellingham Cold Storage,24849
+Belmond,1195336
+Beltone,5465588
+Ben & Jerry's,30040159
+Ben Bridge Jeweler,744300
+Ben's Soft Pretzels,4190811
+Benefit Cosmetics,383275
+Benihana,19291857
+Bensi Ristorante,135399
+Bentley Motors,5634
+Bento Cafe,984801
+Bento Sushi,1355686
+Bergman luggage,498711
+Berkshire Bank,3337175
+Berluti,278117
+Bernie & Phyl's Furniture,1036536
+"Berry Global Group, Inc.",4903218
+Bertucci's,1480673
+Best Brains,962944
+Best Buy,228538983
+Best Friends Pet Care,97518
+Best Market,1148950
+Best One Tire & Service,166994
+Best Value Pharmacies,458762
+Best Western,120068480
+Best Wireless,1400197
+Best-One Commercial,598229
+Bestway Rental,6998
+BevMo,17349585
+Bi-Mart,11630236
+Big 10 Tires,335124
+Big 5 Sporting Goods,106866742
+Big Air Trampoline Parks,454664
+Big Apple Bagels,1471047
+Big Apple Pizza & Pasta,2601668
+Big Dan's Car Wash,121187
+Big Frog Custom T-Shirts & More,214973
+Big Lots Stores,118687111
+Big M Supermarkets,10254511
+Big Mama's & Papa's Pizzeria,956486
+Big O Tires,5391929
+Big Sandy Superstore,229839
+Big Saver Foods,7366006
+Big Y Foods,79302998
+BigFoot Java,5212875
+Biggby Coffee,306727
+Bike Barn,233720
+Bill Gray's,880543
+Bill Miller Bar-B-Q,4017254
+Bill's Bar & Burger,375470
+Billabong,1739174
+Billy Reid,51452
+Bimbo Bakeries,6002652
+Binson's,8678
+Binswanger Glass,347690
+Bird Rock Coffee,2200783
+Birkenstock,326140
+Biscuits & Bath,392070
+Bishops Cuts Color,97777
+Black Angus Steakhouse,8342915
+Black Bear Diner,8219745
+Black Optix Tint,575688
+Black Rifle Coffee,639657
+Black Rock Bar & Grill,1283207
+Black Rock Coffee,24358311
+Black Rock Coffee Bar,2665641
+Black Walnut Cafe,5768157
+Blackstone Steakhouse,410666
+Blake's Lotaburger,2084628
+Blancpain,507615
+Blank Street Coffee,3110252
+Blaze Pizza,106116966
+Blenders Eyewear,392093
+Blenders in the Grass,2397052
+Blick Art Materials,6319465
+Blimpie,9199875
+Blinds To Go,317351
+Blink Fitness,18138240
+Blo Blow Dry Bar,1009592
+Bloomingdale's,19901082
+Blue Beacon Truck Wash,303571
+Blue Bottle Coffee,33639030
+Blue Bowl Superfoods,518780
+Blue Haven Pools & Spas,293169
+Blue Lion Salon Studios,728943
+Blue Martini Lounge,277711
+Blue Nile,394212
+BluePearl Veterinary Partners,216362
+BlueWave Express Car Wash,1103614
+Bluemercury,10919803
+Bluestone Lane,3323091
+BoConcept,2511693
+BoRics Hair Care,18317
+Board & Brew,3192412
+Boarders Inn and Suites,206307
+Boardroom Styling Lounge,1382344
+Bob Evans,53057202
+Bob's Big Boy,1779562
+Bob's Discount Furniture,6868103
+Bob's Steak & Chop,1850367
+Bob's Stores,4111530
+Boba Guys,606542
+Boba Loca,510451
+Bobbi Brown Professional Cosmetics,60086
+Bobby's Cheesburger,2400330
+Bobcat,199846
+Bobs Glass Shop,615341
+Body & Brain Yoga Tai Chi,3254706
+Body Street,310278
+Body Xchange,1068024
+BodyBrite,338929
+Bodyplex,707993
+Boeing Distribution,162945
+Boiling Point,2000499
+Bojangles',80546375
+Bolla Market,13172093
+Bollore Logistics,75405
+Bollywood Bites,38293
+Bomgaars,8229853
+BonWorth,471544
+Bonanza & Ponderosa Steakhouse,1149465
+Bonchon,10667333
+Bond No. 9,60198
+Bond Vet,1131107
+Bonefish Grill,44382249
+Bono's Pit Bar-B-Q,4018668
+Bonobos,661781
+Bonulu,87601
+Books-A-Million,14667147
+Boomerjack's Grill,973801
+Boomers! Parks,613084
+Boost Mobile,38791413
+Boot Barn,17226554
+Border Tire,376515
+Bosch Service,2950832
+Boscov's,62076011
+Boscov's Optical,535903
+Bosselman Boss Shop,64823
+Boston Consulting Group,129096
+Boston Market,83063336
+Boston Sports Clubs,1203114
+Boston's Restaurant & Sports Bar,1239875
+Bottega Veneta,1083914
+Bottle King,1500183
+Bottled Blonde,793595
+Boudin Bakery,2311221
+Boulevard Tire Center,603876
+Bounce Trampoline Sports,185306
+BounceU,306233
+Bow Tie Cinemas,112496
+Bowlero,1729398
+Bowlers Mart,1441353
+Bowlmor Lanes,70923
+BoxLunch,16116939
+Boyd Gaming,3951582
+Boyer's Food Markets,17887772
+Brain Balance Centers,522310
+Brake Check,4498913
+Brake Masters,2817880
+Brakes Plus,2441438
+Brandon's Diner,1100632
+BrandsMart USA,3113937
+Brandy Melville,5430153
+Bras 'n Things,295752
+Braum's Ice Cream and Dairy Stores,80970570
+Bravo Supermarkets,35547617
+Bravo! Cucina Italiana,4306872
+Bread Winners Cafe,3064455
+Breadsmith,151081
+Break Time,47879935
+Breitling,2533301
+Bricktown Brewery,1902596
+Brident,792901
+Bright Now Dental,1404053
+BrightView,531571
+Brinkmann Hardware,5114269
+Brio Tuscan Grille,10953101
+Bristol County Savings Bank,578961
+Bristol Farms,28996621
+Bristol Seafood Grill,3553300
+British Beer Company,102634
+Brook Furniture Rental,10914
+Brookline Bank,1130676
+Brooklyn Water Bagels,964329
+Brooks Brothers,6714327
+Brookshire Brothers,54815071
+Brookshire's Grocery Company,119611998
+Brow Studio 7,97822
+Brown Bear Car Wash,1356803
+Brown's Shoe Fit Co.,1167798
+Bruchi's CheeseSteaks & Subs,973631
+Bruegger's,48742038
+Brunello Cucinelli,524412
+Bruster's Ice Cream,43262129
+Bruxie Fried Chicken,2811474
+Btone Fitness,204778
+Bubba Gump Shrimp,8958025
+Bubba's 33,28998439
+Bubbakoo's Burritos,26020873
+Buc-ee's,18826033
+Buca di Beppo,7974670
+Buchheit,538123
+Buck Mason,1208554
+Buckhorn Grill,1368372
+Buckle,44742562
+Bucky's Convenience Stores,160551
+Buddy's,2429523
+Budget Host,2014648
+Budget Inn,412080
+Budget Rent A Car,5511339
+Budget Suites,112376
+Budget Truck Rental,5936396
+Budgetel Inn,1298108
+Buds Chicken & Seafood,8089301
+Buff City Soap,4304896
+Buffalo Exchange,6788210
+Buffalo Wild Wings,303701419
+Buffalo Wings & Rings,1916248
+Buffalo's Cafe,5460252
+Buffalo's Express,18218457
+Buford Oil,81116
+Buick,35901
+Build A Bear Workshop,15268574
+Builders FirstSource,4509010
+Bulgari (Bvlgari),96631
+Bull Chicks,154392
+Bulla Gastropub,3779670
+Bullritos,1698112
+Bumper To Bumper Auto Parts,2806672
+Burberry,407668
+Burgatory,2871602
+Burger 21,2883409
+Burger King,2333294461
+Burger Lounge,7276634
+Burger Monger,866454
+Burger Street,3382233
+Burger Village,109447
+BurgerFi,35914237
+Burgerim,5550945
+Burgerville,5989703
+Burke Williams Spa,88972
+Burkes Outlet,27939613
+Burlington,207127888
+Burn Boot Camp,9086272
+Burrito Bandito,706655
+Burtons Grill & Bar,386106
+Bury The Hatchet,499207
+Busey,589142
+Bush's Chicken,38306702
+Busy Beaver,12982745
+Busy Body Houston,350625
+Buttermilk Sky Pie,39513
+Buy Buy Baby,4879710
+Buy Rite Liquor,2305106
+ByWhoops,100067
+Byredo,89432
+Byrne Dairy,7228678
+C Town Supermarkets,43708491
+C and O,661538
+C and R Market,8821122
+C&S Wholesale Grocers Distribution,526423
+C.H. MARTIN,2033753
+C2 Pilates,894618
+CARQUEST Auto Parts,12224402
+CARSTAR Auto Body Repair Experts,6074466
+CAVA,45204794
+CB2,2297949
+CEFCO,125817271
+CEVA Logistics,206851
+CH by Carolina Herrera,616378
+CHEF'STORE,26313489
+CIBC,12189
+CITGO,190561755
+CKO Kickboxing,3591725
+CMG Financial,3033988
+CMX Cinemas,590450
+COIT,90327
+CORT,266049
+COS,1766144
+CPR Cell Phone Repair,6759754
+CRU Food & Wine Bar,738476
+CSN Collision & Glass,1019132
+CSN Corrossier ProColor,12502
+CTBC Bank,71983
+CVS,1524442394
+CVS Optical,94023
+CVS Pharmacy,273350583
+CWI Logistics,84261
+Cabela's,2979415
+Cabinets To-Go,3667601
+Cabot Corporation,600633
+Cactus Restaurants,3493035
+Cactus Salon,541681
+Cadence Bank,3365012
+Cadillac,2681408
+Cafe Express,341205
+Cafe Gratitude,449810
+Cafe Landwer,1633051
+Cafe Metro,375725
+Cafe Rio,7013173
+Caffè Nero,2080135
+Café Brazil,3178177
+Café D'Avignon,832264
+Calexico,4656233
+CaliBurger,520858
+Caliber Auto Care,211832
+Caliber Car Wash,425091
+Caliber Collision,39245697
+Calico Corners,42868
+California Bank Trust,3183770
+California Cash Advance,52633
+California Check Cashing Stores,693453
+California Closets,264384
+California Family Fitness,1051028
+California Fish Grill,1785374
+California Parking,1524673
+California Pizza Kitchen,40692533
+California Sun,97348
+California Tortilla,6241188
+Calvert's Express Auto Service & Tire,254599
+Calvin Klein,16808312
+Calzedonia,1332669
+Cambria Suites,8033759
+Cambridge Savings Bank,426802
+Cambridge Trust Company,309628
+Camilla,25038
+Camille's Sidewalk Café,154094
+Camp Bow Wow,2352520
+Camp Run-A-Mutt,234862
+Camper,600217
+Camping World,31220066
+Campisi's Restaurants,2817667
+Canada Goose,1291023
+Canandaigua National Bank & Trust,712055
+Candlewood Suites,26293453
+Canopy By Hilton,2288383
+Cantina Laredo,7349370
+Cao Bakery & Cafe,241872
+Capital Bank Texas,413076
+Capital City Bank Group,1420533
+Capital One,6039127
+Capital One Cafe,3883974
+Capitol Federal,1043577
+Capitol Materials,254334
+Capriotti's Sandwich Shop,5426907
+Captain D's Seafood Restaurant,71322917
+Car Mart,256959
+Car Spa,357719
+Car Toys,4328849
+Car Wash USA Express,88991
+CarMax,4614893
+CarX Auto Service,465421
+Cardenas Markets,21159873
+Cardsmart,3047285
+Carefree Boat Club,154579
+Carhartt,1134725
+Caribou Coffee,3527244
+Cariloha,2291920
+Carl's Jr.,409241301
+Carlton Hair,69717
+Carlton-Bates (CBC),165839
+Carnitas Michoacan Mexican Restaurant,698071
+Carolina Ale House,5527874
+Carpet Mart,84613
+Carpet One Floor & Home,2782090
+CarpetsPlus Color Tile,39456
+Carr Hardware,2468426
+Carrabba's Italian Grill,54032308
+Carrier Enterprise,380570
+Carroll Independent Fuel,120471
+Carrot Express,7021122
+Carrows,224992
+Carter Lumber,1293297
+Carter's,28608976
+Cartier,120199
+Cartridge World,4165991
+Carvana Logistics Hub,445405
+Carvana Vending Machine,85025
+Carvel,36699990
+Casa Ole,13444032
+Case IH,6848467
+Casey's General Stores,107193370
+Cash America,6884253
+Cash Saver Cost Plus Food Store,1822136
+Cash1,155461
+Cashmax Title & Loan,672805
+Casper,3559940
+Caspers Hot Dogs,177312
+Cassava Roots,600778
+Cassina,557641
+Castle Dental,236843
+Castrol Premium Lube Express,801671
+Casual Male XL,563298
+Catbird,546949
+Catch Air,1358539
+Caterpillar,1157244
+Cathay Bank,2006665
+Catherines,572996
+Cato Fashions,22004277
+Cauldron Ice Cream,714914
+Cavender's,23939444
+Cecil Whittaker's Pizza,1654674
+Celanese Corporation,1023441
+Celine,2514201
+CellOnly,477764
+Cellairis,5715160
+Cellaxs,1127288
+Cellular Plus,575239
+Cellular Sales,3720216
+Centennial BANK,146667
+CenterState Bank,1892498
+Centinela Feed & Pet Supplies,4743461
+Central Bank,2767619
+Central Bark,273155
+Central Florida Educators Credit Union,2499117
+Central Market,23092780
+Central Rock Gym,3592783
+Century 21 Department Stores,481355
+Century 21 Real Estate,7488200
+Century Bank and Trust Company,239644
+Century Theatres,18710832
+CertiFit,615397
+Cha Cha Matcha,77440
+Chadwell Supply,3748160
+Chamberlin's Natural Food Market,4377482
+Champion,1557553
+Champs Chicken,7692914
+Champs Sports,109979463
+Chanel,716503
+Chanel Fragrance and Beaute Boutique,1566689
+Chao Cajun,6500759
+Chapter Aesthetic Studio,137081
+Charles Schwab,801087
+Charles Tyrwhitt,225873
+Charley's,233393885
+Charlotte Russe,27764040
+Charlotte Tilbury,10070103
+Chart House,213853
+Chase,162182579
+Chatime,6346
+Chaumet,269866
+Chavez Supermarket,5239186
+Cheba Hut,2138042
+Check 'n Go,2163511
+Check Cashing USA,122688
+Check Into Cash,3496321
+Checkers Drive-In Restaurants,257286913
+Checkmate,219646
+Checkout Food Stores,4325507
+Cheddar's Scratch Kitchen,61047385
+Cheeburger Cheeburger,2621302
+Chemours Company,4856074
+Chemung Canal Trust Company,222323
+Cherry Blow Dry Bar,664626
+Chevrolet,22377909
+Chevron,3064245527
+Chevron Extra Mile,238164581
+Chewy Vet Care,91092
+Chick'nCone,1578285
+Chick-fil-A,1021266840
+Chicken Express,72966313
+Chicken Kitchen,3361303
+Chicken N Pickle,2101233
+Chicken Now,5301980
+Chicken Salad Chick,47087697
+Chickie's & Pete's,1123646
+Chico's,9185979
+Chico's Off The Rack,1916437
+Children's Orchard,448058
+Chili's Grill & Bar,371776049
+China Buffet,956026
+China House,3509984
+China King,2121578
+China Kitchen,1339341
+Chipotle Mexican Grill,1330449864
+Chloé,367505
+Choice Pet,1135609
+Chop Stop,1341969
+Chopt Creative Salad,12148343
+Christian Brothers Automotive,4188885
+Christian Louboutin,788392
+Christie Dental,71395
+Christmas Tree Shops,11960706
+Christopher & Banks,592205
+Chrome Hearts,354179
+Chronic Tacos,2621897
+Chrysler,8748
+Chu's,2947278
+Chubbies,544117
+Chuck E. Cheese's,72321665
+Church's Chicken,125769747
+Churreria Porfirio,1440427
+Chuy's,33221688
+Chuze Fitness,10362799
+Cicis,82923261
+Cigna Health,834583
+CineArts,22264
+Cinebarre,1755003
+Cinemark Theatres,53224521
+Cinnabon,90542275
+Cinnaholic,460797
+Cintas,546333
+Cinépolis,1089483
+Circle K,536743998
+Circle K Gas,97829143
+Cisco,28136
+Citi Trends,62601937
+Citibank,12059931
+Citizens Bank,32902335
+Citizens Bank & Trust,318358
+Citizens National Bank of Texas,351423
+Citizens Trust Bank,139616
+City Bank Texas,859816
+City Barbeque,4032246
+City Blue,7103808
+City Convenience,1748742
+City Electric Supply,2817838
+City Furniture,8448676
+City Gear,14349144
+City Mattress,6056415
+City National Bank,1903609
+City Sports Club,2415269
+City Tire,710229
+City Works Eatery and Pourhouse,806610
+CityVet,93932
+Claim Jumper Restaurants,8190563
+Claire's,45695306
+Clare V.,100758
+Clarion,9736129
+Clark Pest Control,43728
+Clarks,8175286
+Clarkson Eyecare,1722778
+Claro's,105601
+Classic Collision Inc,3984822
+Clean Eatz,5766789
+Clean Energy,5552729
+Clean Freak Car Wash,9987
+Clean Juice,8241330
+Clear Choice,102959
+ClearWater Express Car Wash,260829
+Clicks Billiards,819384
+Cliff's Local Market,21973587
+Cliffs Check Cashing,321261
+Clipper Petroleum,970388
+Clive Daniel,484875
+Clothes Mentor,5748161
+Clover Food Lab,1151463
+Club Carwash,592285
+Club Champion,3230691
+Club Fitness,3437710
+Club Metro USA,1417972
+Club Monaco,638932
+Club Pilates,25375290
+Club4Fitness,2225149
+Cluck-U Chicken,237659
+CoCo Fresh Tea & Juice,1973123
+Coach,33021806
+Coast Dental,1082968
+Coast Hotel,132233
+Coastal Farm and Ranch,11005135
+Cobb Theatres,2034307
+Cobblestone Inn & Suites,1177035
+Coca-Cola UNITED,419570
+Coco's Bakery Restaurants,1094019
+Coconut Kennys,663670
+Code Ninjas,397929
+Code Wiz,12356
+Cody's Original Roadhouse,389198
+Coen,2396104
+Coffee Beanery,228262
+Cohen’s Fashion Optical,1299534
+Cohn Restaurant Group,940287
+Cold Stone Creamery,192926557
+Coldwater Creek,27970
+Coldwell Banker,2573588
+Cole Haan,5035063
+Collision Works,86958
+Color Me Mine,1133168
+Colton's Steakhouse,5960735
+Columbia Bank,2749703
+Columbia Bank New Jersey,3140576
+Columbia Sportswear,17791595
+Comerica Bank,12395818
+Comet Cleaners,791837
+Comfort Dental,308460
+Comfort Inn,18000697
+Comfort Suites,76325846
+Commerce Bank,5814839
+Commercial Tire,165539
+Commercial Warehousing,84254
+Community Bank,5248386
+Community Choice Financial,468281
+Community Financial Services Center (CFSC),4852443
+Community First Credit Union of Florida,271126
+Community National Bank & Trust,925044
+CommunityAmerica,1153894
+Compare Foods Supermarkets,2548676
+Compass,4518335
+Complete Cash,325657
+Complete Nutrition,25832
+Computer Renaissance,61652
+Concord Pet Foods and Supplies,2088350
+Condado Tacos,8670260
+Conn's,8872277
+Connect Hearing,1624012
+Connect Now,3439062
+ConocoPhillips,122727326
+Consumer Cellular,131192877
+Continental Battery Systems,804872
+Continental Credit,131586
+Converse,21150148
+Cook Out,35444845
+Cookie Cutters Haircuts for Kids,2447631
+Cookie's Kids,221763
+Cookies by Design,442560
+Cool Cuts 4 Kids,462556
+Coolgreens,1268140
+Cooper's Hawk Winery and Restaurants,16733697
+Copart,1611373
+Copeland's,128327
+Copenhagen Furniture,754708
+Core & Main,939844
+CoreLife Eatery,24575375
+CorePower Yoga,5741114
+CoreSite,323788
+Corky's Kitchen & Bakery,5011982
+Corner Bakery Cafe,46419525
+Corning Inc,168431
+Cos Bar,221880
+Cosi,5956951
+CosmoProf,12214697
+Cost Cutters,6228986
+Cost Less Foods,5367797
+Cost U-Less Insurance Center,617364
+Costa Coffee,23814529
+Costa Vida,14168000
+Costco,352173413
+Costco Gasoline,116780289
+Costco Optical,4468131
+Costco Pharmacy,100193676
+Cottman Transmission and Total Auto Care,122828
+Cotton On,8915556
+Cotton Patch Cafe,3076536
+Country Fair,30747539
+Country Financial,1118788
+Country Hearth Inn,427731
+Country Inn & Suites By Radisson,11495258
+Country Inn & Suites by Radisson Americas,16072020
+Country Mart,2014617
+Country Store,107734
+Country Waffles,220501
+CountryMax Stores,4693288
+County Market,5080950
+County Mart Grocery,1697635
+County National Bank,678714
+Courtyard by Marriott,252266218
+Covington Credit,1262253
+Cowboy Chicken,7718193
+Cox Communications,2633912
+Coyote Ugly Saloon,1529557
+Cracker Barrel,158225516
+Crane Worldwide Logistics,174988
+Crash Champions,2485508
+Crate and Barrel,12665413
+Crate and Barrel Warehouse & Distribution,95852
+Crawford & Company,518125
+Crayolia Experience,1602216
+Crazy Bowls & Wraps,6148145
+Crazy Mocha,1068562
+Crazy Shirts,412307
+Cream,650220
+Creamistry,1185784
+Credit Suisse,1339298
+Credo Beauty,425020
+Crema Gourmet Espresso Bar,1196033
+Crepe Delicious,2205529
+Crescent Electric Supply,115048
+Cricket Wireless,65852793
+Cristina's Fine Mexican Restaurant,237380
+Crocs,16336691
+Cronies,12560
+Crosby Markets,5325314
+Crosby's,4151940
+CrossFit,128916983
+Crossroads Trading,8758935
+Crown Trophy,1791694
+Crown Wine & Spirits,177215
+Crowne Plaza Hotels and Resorts,24853004
+Cruisin Coffee,6957936
+Crumbl Cookies,20479201
+Crunch,35712181
+Crye-Leike,151291
+Crystal Tractor,289735
+Cubavera,109928
+CubeSmart,31865875
+Culebra Meat Market,195392
+Culichi Town,788605
+Culver's,126378823
+Cumberland Farms,268323571
+Cups Frozen Yogurt,1117125
+Curacao,1988259
+Curio Collection,757662
+Currito,2822423
+Curry Up Now,860980
+Curtis Lumber Co,749507
+Curves,3613239
+Custom Comfort Mattress,756064
+Custom Ink,194722
+Cutter Point Coffee,2321168
+Cuyana,335762
+Cycle Gear,13980668
+CycleBar,5462059
+D'Agostino,4706144
+D'Angelo Sandwich Shops,6394754
+D1 Sports Training,850518
+DAISO,61293639
+DB Schenker,1404546
+DCH Auto Group,963214
+DDS Dentures + Implant Solutions,230194
+DEFY Trampoline Park,1756237
+DHL Distribution,2142570
+DHL Express,853773
+DHL Global Forwarding Office,81358
+DIESEL,2282409
+DIY Home Center,2510556
+DK,4406192
+DKNY,3091298
+DOT Foods,67805
+DSV,266623
+DSW (Designer Shoe Warehouse),50395786
+DTLR,5996746
+DVF (Diane von Furstenberg),15063
+DXP Enterprises,5988171
+DaBella,95716
+Daily Grill,540276
+Daily's,3191893
+Dairy Queen,1240889102
+Dakota Watch Company,1295711
+Dallas BBQ,1089762
+Daltile,453482
+DanDan,2029734
+Danaher Manufacturing,362962
+Dandy Mini Marts,9314487
+Daniel's Boiler,398087
+Daniel's Jewelers,1897447
+Danner Boots,789
+Danny's Restaurant,2926812
+Daphne's California Greek,459236
+Dara's Corner Market,1021594
+Dashing Diva,44662
+Dave & Buster's,37748851
+Dave’s Hot Chicken,53066185
+Davi Nails,5676565
+David Yurman,2923602
+David's Bridal,3675863
+Davio's Northern Italian Steakhouse,1613215
+Daylight Donuts,5013845
+Days Inn,58320403
+De Beers Jewelry,102025
+DeCicco and Sons,2621894
+DeVons Jewelers,948766
+DeVore & Johnson,121325
+Dead River Company,105995
+Define Body & Mind,250589
+Deka Lash,1754417
+Del Frisco's Double Eagle Steakhouse,3048162
+Del Frisco's Grille,740745
+Del Taco,194528819
+Del Toro Insurance,409571
+Del's Lemonade,804297
+DelSol,1380346
+Deli Delicious,4914191
+Delia's Specializing in Tamales,3543886
+Deloitte,616943
+Delta Hotels,6864533
+Delta Sonic,801965
+Dennis Uniform,914550
+Denny's,341752127
+Dental Dreams,316425
+Dental365,1079949
+DentalWorks,642798
+Dentistry For Children,103169
+Denver Mattress,3235985
+Derrel's Mini Storage Inc,1240012
+Deseret Industries (D.I.),2016610
+Desert Sun Tanning Salons,1223609
+Design Hotels,331273
+Design Within Reach (DWR),3160446
+Desigual,10152
+Destination XL,5569344
+Destination by Hyatt,5750873
+Detail Garage,5952856
+Deutsche Bank,578651
+Dewey's Pizza,2657743
+Di Bruno Bros,1786281
+DiBella's Subs,13575168
+Diamonds Direct,195569
+Diced,307220
+Dick's Drive-in,232889
+"Dick's Homecare, Inc.",14558
+Dick's Sporting Goods,276707374
+Dickey's Barbecue Pit,25080656
+Dicks Wings and Grill,1056280
+Dierbergs Markets,30197977
+Dig Inn,3386852
+Digital Realty,2072959
+Dill Dinker Pickleball,4541
+Dillard's,167378945
+Dillons Supermarkets,38158043
+Dim Sum House by Jane G's,1990778
+Dime Community Bank,2838095
+Din Tai Fung,3601792
+Dior,1987863
+Dippin' Dots,4603961
+Diptyque Paris,383731
+Direct General,895866
+Direct Tools Factory Outlet,2710695
+Dirt Cheap,8564388
+Dirt Dog,497838
+Discount Car & Truck Rentals,3878766
+Discount Tire,25193630
+Discount Tire Centers,235504
+Discover Vision,146259
+Disney Store,4135803
+Dissh,653798
+District Taco,66311
+Ditch Witch,61508
+Ditka's,208442
+Divine's Convenience & Auto Repair Shops,321639
+Dmart Express,6126652
+Do It Best,257201211
+Dobbs Tire & Auto Centers,358238
+Doc B's Restaurant + Bar,12394861
+Doc Popcorn,4604283
+Dockers,2139003
+Dodge's Southern Style,131516
+Dog Haus,4524205
+Doggie Style,6006310
+Dogtopia,675113
+DolEx,1958072
+Dolce & Gabbana,637951
+Dollar Bank,1025425
+Dollar General,1354542100
+Dollar General Distribution,546573
+Dollar Rent A Car,3046620
+Dollar Tree,703402610
+Dollar Tree Distribution,96799
+Dolphin Carpet & Tile,53275
+Domestic Uniform,113203
+Domino's Pizza,2197904505
+Domoishi,595224
+Don Cuco,2964467
+Don Juan Mex Grill,1508402
+Don Roberto Jewelers,1987639
+Don's and Ben's,814263
+Donatos Pizza,3754399
+Donelan's Supermarkets,69037
+Doner Kebab,625326
+Dooney and Bourke,586962
+Dos Toros Taqueria,27321
+DoubleDave's Pizzaworks,8127766
+DoubleTree by Hilton,75303441
+Dough Zone Dumpling House,823769
+Dover Saddlery,990382
+Dr G's Weight Loss,165698
+Dr Pilates,201112
+Dr. Dental,248125
+Dr. Mark Lynn & Associates,119310
+Dr. Martens,4277738
+Draeger Supermarkets,64964
+Draper James,79245
+DriveTime,610175
+Driver's Edge,1911984
+Drnk Coffee + Tea,1836734
+Drug Emporium and Vitamins Plus,49615
+Drummond Community Bank,917372
+Drury Hotels,2466634
+Dry Goods,145653
+Drybar,6735881
+Dsquared2,2910959
+"DuPont de Nemours, Inc.",1266339
+Duane Reade by Walgreens,31435457
+Duck Donuts,3464062
+Duffy's Sports Grill,1307261
+Duke's,200450
+Duke's Chowder House,803405
+Duluth Trading,2763062
+Dunham's Sports,19335869
+Dunkin',3453273039
+Dunn Edwards,3164014
+Dunn Lumber,853296
+Dunn Tire,2534300
+Dustin's Bar-B-Q,2059239
+Dutch Bros Coffee,136992266
+Duty Free Americas,1496681
+Dylan's Candy Bar,9179379
+Dynamic Fitness,1610933
+Dynamite,391000
+Dyson,85659
+E-Z Mart,9139499
+ECCO,4563225
+EESCO,17950
+EMC Seafood and Raw Bar,151025
+EP Fitness,958059
+EQ3,181637
+ERA Real Estate,985162
+ESCADA,117917
+ETRO,108875
+EVEN Hotels,592014
+EXOS,1089975
+EY,186237
+EZPAWN,21915449
+Eagle Stop,1864908
+Eagle Transmission,240426
+EagleRider,903339
+Earl of Sandwich,3644638
+Earls Restaurants,1489723
+Earth Fare,15664771
+Earth Origins Market,862990
+EarthWise Pet Supply,3193274
+Earthbar,396038
+Earthbound Trading Co.,5892542
+East Boston Savings Bank,3938516
+East Coast Metal Distributors,28495
+East Coast Salon Services,3153
+East Coast Warehouse & Distribution,25194
+East of Chicago,1018471
+EastWest Bank,3066471
+Eastern Bank,4439866
+Eastern Dental,219212
+Eastern Mountain Sports,642448
+Eastman Chemical Company,1149859
+Easy Breezy,1274044
+Eat the Frog Fitness,514995
+Eat'n Park,51165162
+EatZi's Market & Bakery,1673458
+Eataly,4366733
+Eaton Apothecary,258457
+Eblens,905241
+Ecolab Inc.,4404241
+Econo Lodge,22251811
+Econo Lube N' Tune,767739
+Eddie Bauer,5685367
+Eddie V's Prime Seafood,7692283
+Edible Arrangements,14907442
+Edition Hotels,5205849
+Edward Jones,19902905
+Edwards Theatres,8799812
+Egg Harbor Cafe,5355497
+Eggs 'n' Things,249908
+Eggs Up Grill,6516142
+Ehrlich Pest Control,75534
+Eighteen Eight Fine Mens Salons,406442
+Eileen Fisher,1022987
+Eileen's Cookies,23017
+Einstein Brothers,118233043
+El Borrego De Oro,229350
+El Chico,3383712
+El Compadre,2659059
+El Dorado Furniture,761496
+El Fenix,3562453
+El Gallogiro,2139689
+El Gringo,141015
+El Pato Fresh Mexican Food,835312
+El Pescador,1378214
+El Pollo Inka,1232759
+El Pollo Loco,220121566
+El Pollo Regio,9971251
+El Rancho Supermercado,11368998
+El Río Grande,8558160
+El Super,30341464
+El Tiempo Cantina,6169009
+El Torito,4291656
+Elegant Beauty Supplies,1143033
+Element Solutions Inc,393473
+Element by Westin,3366303
+Elements Therapeutic Massage,503491
+Elephant Car Wash,522485
+Elevation Burger,9614765
+Elie Tahari,80212
+Elizabeth Grady,267818
+Ellianos Coffee,2816178
+Elmer's Restaurants,168937
+Emack & Bolio's Ice Cream,1230471
+Embassy Suites Hotels,60113054
+Emerald City Smoothie,6503887
+Empire Eatery,1304523
+Empire Wine,899852
+Emporio Armani,3311632
+Enmarket,69215925
+Enterprise Bank & Trust,1256838
+Enterprise Bank and Trust Company,62636
+Enterprise Car Sales,678039
+Enterprise Rent-A-Car,21606665
+Enterprise Truck Rental,2475886
+EoS Fitness,8292966
+Epic Wings N' Things,2165970
+Epicierie Boulud,3264860
+Equinix,3041309
+Equinox Fitness Clubs,12971746
+Equipment Share,164976
+Erewhon Natural Foods,8027629
+Erie Insurance,195717
+Erik's DeliCafé,2885074
+Ermenegildo Zegna,1384256
+Escape Outdoors,402797
+Eskimo Hut,745571
+Esporta Fitness,1881945
+Ethan Allen,8297971
+Ethel M Chocolate,4544773
+Eureka!,3904034
+Euronet Worldwide,184981
+Europcar,112923
+European Wax Center (EWC),42453191
+Ever Bowl,1983213
+Evereve,2535990
+Everlane,4145842
+Everything but Water,828277
+Evo,78103
+Ewing,2889446
+Exhale,250973
+Expeditors International of Washington,354955
+Experis,76629
+Express,67661796
+Express Employment Professionals,362437
+Express Factory Outlet,7382564
+Express Mart Store,576867
+Express Oil Change,9437111
+Express Parking,7122055
+Express Pipe & Supply,526045
+Express Stores,1399977
+Expressions Home Gallery,70448
+Expressions Shoes,632199
+Extended Stay America,54066219
+Extra Space Storage,69105880
+Extreme Pizza,1216456
+Exxon Mobil,790206648
+Exxpress Mart,822708
+Eye Care Associates of Kentucky,107672
+Eye Care for Animals,120810
+Eye Level,5031057
+Eyeglass World,1875448
+Eyemart Express,1429635
+Ezells Famous Chicken,2376736
+F.L. Roberts,525380
+F.W. Webb Company,353786
+F45 Training,32198994
+FFO Home,134305
+FIT20,118671
+FMC Corporation,30729
+FRAME,187936
+FW Logistics,56280
+FYE,55158359
+Fabiana Filippi,38770
+Fabletics,2883472
+Facelogic Spa,114389
+Factory Connection,2152887
+Factory Donuts,670225
+Factory Mattress Sales,3310190
+Factory Motor Parts,2666554
+Fademasters,143765
+Faherty Brand,1857555
+Fairfield Inn & Suites by Marriott,166145227
+Fairmont Hotels & Resorts,6855896
+Fairway Market,4006772
+Fajita Pete's,788226
+Falconeri,399518
+Fallas,6262793
+Familia Dental,144983
+Family Dollar Stores,669727667
+Family Farm & Home,543720
+Family Food Stores,1783328
+Family Orthodontics,453767
+Family Thrift Center,4744232
+Family Video,267422
+Famous Dave's,6050144
+Famous Footwear,148828322
+Famous Hair,505453
+Famous Wok,1822040
+Famsa Furniture,4236188
+Fannie May,7420
+Fantastic Sams,13287951
+Farm & Home Supply,213985
+Farm Bureau Insurance,693639
+Farm Stores,15801567
+Farm Supply Company,217716
+Farmer Boys,26862817
+Farmers & Merchants Bank,729287
+Farmers Bank & Trust Company,269981
+Farmers Home Furniture,5915477
+Farmers Insurance Group,34533485
+Farmers and Merchants Trust Company of Chambersburg,287858
+Farrell’s eXtreme Bodyshaping,109707
+Fast Auto and Payday Loans,363348
+Fast Eddie's Billiards,952575
+Fast Market,597999
+Fast-Fix,843631
+Fast5xpress Car Wash,649213
+FastFrame,2277328
+FastLane,2686980
+FastLane Car Wash,63047
+Fastenal,71340307
+Fastrac,2876690
+Fastrip,12370506
+Fat Tuesday,465562
+FatFace,690500
+Fatburger,7504414
+Fazoli's,27089896
+FedEx,23080284
+FedEx Freight,893046
+FedEx Logistics,371633
+Feel Rite Fresh Market,124775
+Fendi,1445931
+Ferguson,4065334
+Ferragamo,1279485
+Ferrellgas,1505810
+Fidelity,403900
+Fiesta Foods,13070766
+Fiesta Insurance,1173131
+Fiesta Mart,30958992
+Fifth Third Bank,9173201
+Fig and Olive,27559
+FiiZ Drinks,1372037
+Filson,291860
+Finance of America Mortgage,896533
+Fine Fare Supermarkets,13511637
+Fine Wine and Good Spirits,15182252
+Finish Line,95239885
+FinishMaster,8232069
+Finley's Barber Shop,1543071
+Firebirds Wood Fired Grill,2676560
+Firehouse Subs,350103153
+Firestone Complete Auto Care,44369887
+First American Financial,1069749
+First Bank,1736986
+First Bank NJ,458875
+First Cash Pawn,3551479
+First Citizens Bancshares,4408851
+First Commercial Bank USA,260339
+First Commonwealth Bank,4109864
+First Convenience Bank (FCB),5986694
+First Financial,8505
+First Foundation Bank,796288
+First Horizon Bank,3247559
+First Interstate Bank,431577
+First National Bank (FNB),4743275
+First National Bank of Griffin,69238
+First Onsite,560994
+First Republic Bank,2303332
+First United Bank,1922830
+First United Bank West Texas,650769
+First Volunteer Bank,231114
+First Watch Restaurants,156936986
+FirstLight,666570
+FirstTrust Bank,187206
+Fish City Grill,8601577
+Fish Grill,92554
+Fisher Auto Parts,1755406
+Fit Body Boot Camp,6475028
+Fit Republic,575574
+Fit Republic USA,358963
+Fitness 19,5648943
+Fitness Connection,2648665
+Fitness Factory Health Club,1820266
+Fitness Together,3237914
+Fitness Unlimited,92814
+Fitwize 4 Kids,297174
+Five Below,259272017
+Five Guys,497735312
+Fix Auto Worldwide,3719257
+Fjall Raven,221109
+Flagship Premium Cinemas,859159
+Flagstar Bank,4101927
+Flanigan's,14941688
+Flash Car Wash,3500
+Flash Foods,11720665
+Flash Market,357004
+Fleet Feet Sports,13951975
+FleetPride,5490178
+Fleming’s Prime Steakhouse and Wine Bar,2371060
+Flexform,344822
+Flight Adventure Park,39806
+Flip Flop Shops,3922012
+Flipper's Pizzeria,1323335
+Flippin Pizza,1509916
+Flix Brewhouse,4297588
+Floor and Decor,2677652
+Flooring America,1188540
+Floors To Go,493960
+Florida Pest Control,92850
+Florida Tile,152366
+Flower Child,3859921
+Floyd's 99 Barbershop,1565526
+Fly High Adventure Parks,210805
+Flyers Energy,1606238
+Flying Biscuit Cafe,1899382
+Flynn's Tire,757117
+Flywheel,111382
+Fogo de Chão,3864972
+Food 4 Less,223757280
+Food Bazaar Supermarket,22861507
+Food City,4859937
+Food Depot,51485841
+Food Dynasty,5967231
+Food Fair,3262273
+Food Giant,1539302
+Food King Cost Plus Food,3423574
+Food Lion,51428115
+Food Town,16121731
+Food Universe Marketplace,19334721
+Food World,3720586
+FoodMaxx Supermarkets,32256980
+Foodarama,6309745
+Foodland,4044937
+Foods Co.,11928975
+Foodtown,84491821
+Foot Locker,92271113
+Foot Solutions,2182509
+Footaction,8984532
+For Eyes Optical,705258
+Ford Motor Company,18649470
+Ford's Garage,19019040
+Forever 21,103341314
+Forman Mills,3381959
+Formula Fig,207657
+Fortline Waterworks,447944
+Fortunoff Backyard Store,831857
+Fossil,5554017
+Fosters Freeze,3491556
+Foundation Building Materials (FBM),1673812
+Four Brothers Pizza Inn,2007993
+Four Points By Sheraton,23657024
+Four Seasons Hotels and Resorts,5822658
+Four n 20,118640
+Fox & Hound,1860949
+Fox Pest Control,24002
+Fox Rent A Car,589479
+Fox's Pizza Den,5511483
+Foxworth-Galbraith Lumber Company,101970
+Fragrance Outlet,3842191
+Frances Valentine,421247
+Francesca's,28507548
+Frank Pepe Pizzeria,1770487
+Franz Bakery,236703
+Fred Astaire Dance Studios,5535108
+Fred Meyer,51217184
+Fred Meyer Fuel,1892509
+Fred Meyer Jewelers,1290926
+Fred Meyer Pharmacy,1268570
+Freddy's Frozen Custard,148225450
+Free People,15578759
+Freebird,497368
+Freebirds World Burrito,2296144
+Freedom Boat Club,1183139
+Freedom Fitness,1177604
+Freedom Oil,592095
+Freehand,2135214
+Freeway Insurance Services,5338393
+Freightliner Trucks,3505966
+Fremont Bank,427983
+Frenchys Chicken,842565
+Fresco y Más,49042893
+Fresh,683220
+Fresh Brothers Pizza,4880361
+Fresh Healthy Cafe,38399
+Fresh Thyme,15988619
+Fresh to Order,1272657
+Fresh&co.,465761
+FreshPoint,292505
+Freshii,2844660
+Freshpet,167405
+Friar Tux Shop,445152
+Frida Mexican Cuisine,737973
+Fridays,67849178
+Friendly Express,3617590
+Friendly's,27373881
+Frost Bank,4637396
+Frost Gelato,2096453
+Frutta Bowls,2118804
+Frye,10938
+Fuddruckers,13121555
+Fuego,806491
+Fuku,340458
+Fully Promoted,603202
+Fulton Bank,4035625
+Furla,394510
+Furniture Distribution Center,329567
+Furniture Row,4415661
+Furniture World,224026
+Furniture with a Solu.,1081820
+Fusion Fitness,770843
+Fuzzy's Taco,46945577
+G By GUESS,4305325
+G&M,1999797
+G&W Foods,6084637
+G-Star RAW,753551
+G.H. Bass and Co,1306823
+GALLS,230135
+GARAGE,7196673
+GATE,46323734
+GCR Tire Centers,197049
+GIANT Food Stores,198521366
+GIANT Pharmacy,23755465
+GIVENCHY,717694
+GMC (General Motors Company),150840
+GNC (General Nutrition Centers),48371415
+GO Car Wash,4272084
+GTS Interior Supply,59801
+GUESS,2558223
+GUESS Factory,12072506
+Gabe's,11101909
+Gabriel's Liquor,199917
+Gadget MD,471905
+Gala Fresh Farms,5849523
+Galaxy Theatres,4677094
+Galvanize,110259
+Gambino's Pizza,1951210
+Game X Change,1241341
+GameStop,156395919
+Games Workshop,777173
+Gander Outdoors,811460
+Ganni,1637926
+Gap,78826161
+Garbanzo Fresh Mediterranean,207392
+Garia,1652242
+Gas & Shop,710524
+Gas N Go,1744155
+Gators Dockside,6262071
+Gatti's Pizza,3534064
+Gearhead Outfitters,1349268
+Gebrüder Weiss,26065
+Geico,2235492
+Gelson's Markets,7662364
+Gemaire,808703
+Gen Korean BBQ House,6161321
+Gene Juarez Salons & Spas,460390
+Gene's Heartland Foods,2748156
+Genesis Auto,276787
+Genesis Health Clubs,4177885
+Genghis Grill,15767841
+Gentle Dental,615311
+Gentle Dental of New England,898428
+Geodis,1931628
+George's Greek Cafe,440711
+Georgia Farm Bureau Auto Insurance,521216
+Georgia Theatre Company,1188175
+Gerber Collision,2681300
+Gerbes Super Markets,7215052
+Gerrity's Supermarket,29079074
+Gertrude Hawk Chocolates,3646894
+Get Air,5719302
+Get in Shape for Women,838475
+GetGo,30556623
+Getaway House,53165
+Ghirardelli Chocolate,411978
+Giant Eagle,79651906
+Giant Fitness,2219489
+Giant Food Pharmacy,653125
+Giardino Gourmet Salads,2284461
+Gigi's Cupcakes,1550298
+Gino's East,236453
+Giordano's,1017099
+Giorgio Armani,1374302
+Giunta's Meat Farms,14953555
+Glass America,4704288
+Glass Doctor,417311
+Glens Falls National Bank and Trust,501323
+Glik's,473397
+Glo Sun Spa,333489
+Global Credit Union,249935
+Global Self Storage,259718
+Gloria Jean's Gourmet Coffees,3786872
+Gloria's Latin Cuisine,1373840
+Glossier,1529797
+Glowbar,228917
+Go Loco Street Tacos & Burritos,8648947
+Go Minis,677435
+Go Store It,1374948
+Go! Calendars Toys & Games,11225289
+Go! Go! Curry!,1219816
+GoWireless,7268414
+Godfather's Pizza,9935706
+Godiva,976250
+Goin Postal,742631
+"Going, Going, Gone!",7552731
+Gold's Gym,41185595
+Golden 1 Credit Union,1138685
+Golden Chick,64254291
+Golden China,4206129
+Golden Corral,127025562
+Golden Goose,3946640
+Golden Krust Caribbean Bakery and Grill,13666150
+Golden Nozzle Car Wash,567450
+Golden Pantry,627961
+Golden Star Theaters,231767
+Goldfish Swim School,845895
+Goldilocks,277809
+Goldman Sachs,196442
+Golf Galaxy,276872
+GolfTec,6165496
+Golfers' Warehouse,367550
+Golfland,1091333
+Gondolier Italian Restaurant & Pizza,1047860
+Gong Cha,11667650
+Goo-Goo Express Wash,777911
+Good Neighbor Pharmacy,100640182
+Good Vibes,1749677
+GoodVets,213542
+Goodcents Deli Fresh Subs,10655725
+Goodrich Quality Theaters,296296
+Goodwill Industries,358145166
+Goody Goody Liquor,2911410
+Goodyear Auto Service Centers,15782710
+Goodyear Commercial Tire & Service Center,1382144
+Goop,395423
+Goorin Bros.,882388
+Goosehead Insurance,1779726
+Gordmans,1530811
+Gordon Biersch Restaurant & Brewery,2259426
+Gordon Food Service Distribution,220051
+Gordon Food Service Store,27559467
+Grabbagreen,292765
+Gracie Barra,9907390
+Graduate Hotels,166348
+Grady's BBQ,274498
+Graeter's Ice Cream,1744966
+Grain and Berry,13013352
+Grand Hyatt,175772
+Grand Lux Cafe,1039792
+Grand Union,4061953
+Grandys,2926651
+Granite City Electric,91030
+Granite Transformations,797267
+Graphic Packaging Holding Company,2179024
+Grater Grilled Cheese,521297
+Graybar,617884
+Graze Craze,676999
+Graziano's Restaurants,982772
+Grease Monkey Auto,5776803
+Great American Cookies,16224927
+Great Clips,137088318
+Great Expressions,3165157
+Great Harvest Bread Co.,1175076
+Great Khans Mongolian Grill,5116771
+Great Maple,303214
+Great Plains National Bank,34989
+Great Southern Bank,1537763
+Great Valu Markets,1348001
+Great Western Bank,88292
+Great Wolf Lodge,2482634
+Great Wraps Grill,7016365
+Greatwall Supermarket (GW),5950548
+Green Burrito,16409467
+Green Cactus Grill,1363405
+Green Leaf's & Bananas,934496
+Green's Natural Foods,2248289
+Greenberg Dental & Orthodontic,936405
+Greenwise Market,2221270
+Greer's,7772790
+Gregory's Coffee,1465365
+Gretchen Scott,224720
+Greyhound,2691840
+Grill City,582020
+Grillsmith,710219
+Grimaldi's,9158532
+Gringo's Mexican Kitchen,5423873
+Gristedes,15040061
+Grocery Outlet,129424120
+Grocery Outlet Distribution,467893
+Grotto Pizza,57139
+Grotto Ristorante,153765
+Grub,3591372
+Guaranty Bank,485214
+Gucci,9879307
+Gudrun Sjödén,640134
+Guisados Tacos,642428
+Guiseppe Zanotti Design,7154
+Guitar Center,8474853
+Gulf Oil,133486892
+Gumby's Pizza & Wings,3294409
+Gus's Fried Chicken,8644667
+Guthrie’s,5594206
+Gym Source,92398
+Gyu-Kaku,8285473
+H Mart,94081751
+H&E Equipment Services,86856
+H&M,115009377
+H&R Block,32627295
+H&S Energy,35334174
+H-E-B,431370178
+H-E-B Pharmacy,10974511
+H.B. Fuller Company,660316
+HD Supply,13292605
+HNT Chicken,732966
+HOUNDS TOWN,325818
+HSBC Bank,714244
+HSN Outlet,4203766
+HTeaO,40962285
+HUB International,1638521
+Haagen Dazs,50587013
+Habitat for Humanity,11279079
+Habitat for Humanity ReStore,27394470
+Haffner's Oil,1542197
+Haggar,305989
+Haggen,14044630
+Haggen Pharmacy,4291377
+Hair Cuttery,14050877
+Hairmasters,2442294
+Half Price Books,13540764
+Hallmark Cards,77068739
+Hammer & Nails,1244106
+Hampton,224061828
+Hancock Whitney Bank,1084215
+Hancock and Whitney Bank,1182704
+Hand and Stone,14199228
+Handel's Home Made Ice Cream,4432255
+Handle With Care Packaging Store,10782
+Handy Food Stores,15241111
+Handy Pantry,2015529
+Hanesbrands,3425466
+Hanger Prosthetics & Orthotics,426667
+Hanmi Bank,1124778
+Hanna Andersson,93589
+Hannaford Pharmacy,1825047
+Hannaford Supermarkets,97854431
+Hannoush Jewelers,1079978
+Happy Feet,247190
+Happy Lemon,5826781
+Happy Nails & Spa,485130
+Happy State Bank,1503405
+Harbor Freight Tools,351979263
+HarborOne Bank,1473320
+Hard Rock Cafe,8232058
+Hard Rock Hotel,22498652
+Hardee's,219533587
+Harkins Theatres,4991278
+Harley Davidson,14999699
+Harmon Face Values,5443286
+Harold's Chicken,2442862
+Harps Food Store,12670649
+Harris Teeter Pharmacy,644555
+Harry Winston,169274
+Hartz Chicken Buffet,2609411
+Harvest Foods,5998359
+Harvest Seasonal Grill & Wine Bar,2146230
+Harvey's Supermarket Pharmacy,3248105
+Harveys Supermarket,13907669
+Hastens,328066
+Hat Club,257596
+Hat Creek Burger Company,22015975
+Hattie B's Hot Chicken,64888
+Havaianas,372613
+Havertys,12525770
+Hawaiian Bros Island Grill,10562661
+Hawthorn Suites by Wyndham,4886504
+Hays Store,3074585
+Health Mart,210988368
+Healthfirst,150060
+Healthtrax Fitness & Wellness,129803
+Healthworks Fitness,81332
+Hearing Life,2707978
+Heartland Bank Ohio,10124
+Heffernan Insurance,14844
+Heights Finance,142234
+Hellmann Worldwide Logistics,239130
+Hello Bistro,6268962
+Helly Hansen,196503
+Helzberg Diamonds,4362091
+Hen House,3721440
+Hendrick Service Center,3491625
+Herc Rentals,25831
+Hereford House,226825
+Heritage Bank of Commerce,110286
+Heritage's Dairy Stores,2650036
+Hermès,126517
+Hershey Co Manufacturing,28179
+Hertz,10763005
+Hertz Car Sales,308117
+Hey Dude,4885046
+Heyday,2141819
+Hibachi-San,5501719
+Hibbett Sports,36117560
+Hide Away Storage,192428
+Hiep Thai Food Store,1714861
+High's,2868925
+Hillstone Restaurant Group,1291804
+Hilton Garden Inn,109764036
+Hilton Grand Vacations,1220305
+Hilton International,69117287
+Hinoya Curry,1282558
+HipCityVeg,2035143
+Hitachi Transport System,126384
+Hitchcock's Market,1690729
+Hobbs,395898
+Hobby Lobby Stores,61937707
+HobbyTown USA,1797483
+Hobee's Restaurant,915571
+Hoka One One,815421
+Hokkaido Ramen Santouka,1344638
+Hokulia,11410912
+Holiday Hair,8982955
+Holiday Inn,113642725
+Holiday Inn Club Vacations,797476
+Holiday Inn Express,33846071
+Holiday Inn Resort,2370433
+Holiday Market,18048229
+Holiday Quality Foods,19205272
+Holiday Station,3524646
+Holler & Dash Biscuit House,40174
+Hollister,76428362
+Hollywood Feed,13011829
+Home Centric,2580010
+Home Depot Warehouse & Distribution Centers,1853739
+Home Outlet,8558872
+Home Zone Furniture,4334715
+Home2 Suites,34944932
+HomeGoods,168830775
+HomeSense,4897408
+HomeSmart,487575
+HomeTeam Pest Defense,30696
+HomeTown Buffet,1342964
+HomeTowne Studios,1191716
+Homegrown Sustainable Sandwiches,2711396
+Homewood Suites by Hilton,53906920
+Honda,25337381
+HoneStreet Bank,932800
+Honest 1 Auto Care,168261
+Honey Birdette US Inc,370894
+Honey Dew Donuts,1009140
+Honey Farms,339411
+Honeymee,1228300
+Hoods Discount Home Center,2126681
+Hooters,55057138
+Hopdoddy Burger Bar,8237806
+Hops 'n Drops,4960564
+Horizon Distributors,1065335
+Hoss's Steak and Sea,5590625
+Hostelling International,424502
+Hot 'n Juicy Crawfish,379678
+Hot Dog on a Stick,4903017
+Hot Head Burritos,3814625
+Hot Topic,43686495
+Hotel Indigo,11549784
+Hotel RL,107631
+Hotshots Sports Bar & Grill,1853733
+Houlihan's Restaurants,8653221
+House of Blues,1152243
+House of Jerky,554898
+Houston's,2774280
+Howard Johnson (HoJo),5055480
+Howards Appliances,860422
+HuHot Mongolian Grill,1058858
+Hucks,726562
+Huddle House,16119054
+Hudson News,22113962
+Hudson's Furniture,5462876
+Huey Magoo's Chicken Tenders,3179117
+Hugo Boss,11691777
+Hui Lau Shan,757310
+Hull's Environmental Services,25870
+Human Bean,19200053
+Hungry Howie's Pizza & Subs,102509786
+Hunt Brothers Pizza,268027809
+Huntington Learning Centers,4977178
+Huntington National Bank ATM,145111
+Hurley,855303
+Hurricane Grill & Wings,6106924
+Hurts Donut,5021898
+Husqvarna Motorcycles,3226511
+Hustler Hollywood,1798709
+Hy-Vee,43895419
+Hy-Vee Fast & Fresh,8128699
+Hy-Vee Gas Station,1954355
+Hy-Vee Pharmacy,2105097
+Hyatt Centric,533322
+Hyatt Hotels & Resorts,2413159
+Hyatt House,17747613
+Hyatt Place,9158267
+Hyatt Regency,1345905
+Hyatt Residence Club,1205191
+Hyundai Motor,5346338
+I Love Juice Bar,1960412
+I Love Pilates,192353
+IAA,1524197
+IBC Bank,7159691
+IBERIA BANK,966154
+ICBC,657243
+IGA,100514931
+IHOP,523815603
+IKEA,29074803
+IL Fornaio,2328109
+IM=X Pilates,1006299
+IRO,1140343
+IV Nutrition,130128
+IWC Schaffhausen,154657
+IZOD,1003862
+Iberostar Hotels,51571
+IceBerg Drive Inn,11053959
+Icing,5322219
+Idaho Central Credit Union,259136
+Ideal Image,755790
+IdentoGO,4523430
+Ike's Love & Sandwiches,4874582
+Illustrated Properties,102756
+Image Studios 360,697600
+Imo's Pizza,12776854
+Impark,187450027
+In-N-Out Burger,227554309
+In-Shape Family Fitness,10425894
+InMotion,26316333
+InTown Suites,5052186
+Inchin's Bamboo Garden,567897
+Independent Bank Texas,1128103
+India Bazaar,3408648
+Indian Motorcycle,2037626
+Indique Virgin Hair Extensions,178550
+Indochino,956495
+Industrial Shoe,2182917
+Industrious Office,3085478
+Infineon,33541
+Infiniti,2411388
+Ingles Markets,48664869
+Ingles Pharmacy,1375114
+Inglot,1254388
+Insomnia Cookies,2907392
+Institution for Saving,644023
+Insty-Prints,5711
+Insure One Insurance Agency,250163
+Intelligentsia Coffee,795680
+InterContinental Hotels & Resorts,10023488
+Interceramic,51804
+Interlink Supply,314749
+International Flavors & Fragrances,2201824
+International Paper Company,443548
+International Trucks,5497249
+Interstate Batteries,2207358
+Intimissimi,868416
+Investors Bank,2257550
+Invicta Store,267297
+Ippudo,277900
+Iron Hill Brewery and Restaurant,6004081
+Iron Mountain,10185697
+Irontribe Fitness,239747
+Irving Oil,1632128
+Isaacs Restauants,572252
+Isabel Marant,32349
+Island Fin Poke,995703
+Island Pacific Seafood Market,2656467
+Island Wing Company,3335028
+Islands Restaurants,6199374
+Isuzu,597449
+It's Boba Time,8303941
+It's Fashion,3815442
+It's Just Wings,55611619
+It'sugar,10392628
+Italian Village Pizza,5321555
+Itan Sun Spray Spa,630215
+Ivan Smith Furniture,489346
+Ivar's Seafood Restaurants,1002448
+J Mclaughlin,5902615
+J. Alexander's,6942233
+J. B. Hunt Distribution,133403
+J. Christopher's,2146071
+J. Gilberts,1732278
+J.Crew,19700449
+J.D. Byrider,164815
+J.Jill,6104928
+JCPenney,167886274
+JCPenney Optical,1752186
+JD Sports,9398582
+JEI Learning Center,1597114
+JJ Fish & Chicken,1314600
+JONS International Marketplace,11299355
+JR Crickets,631528
+JW Marriott,28155
+JW Tumbles,90423
+Jabz Boxing,27201
+Jacadi,486432
+Jack Stack,221827
+Jack in the Box,1065808061
+Jack's Convenience Stores,1250120
+Jack's Family Restaurants,8829418
+Jack's Urban Eats,3789516
+Jackson Hewitt Tax Service,29651950
+Jacksons Food Stores,922571
+Jaeger Lumber,1613704
+Jaeger-LeCoultre,261194
+Jaguar,79545
+Jake's Fireworks,432274
+Jakes Uptown,182731
+Jalapeno Tree,3332251
+Jamba,160205916
+James Avery Craftsman,8008427
+James Coney Island,4070072
+James Perse,1485900
+Jameson Inn,456562
+Janie and Jack,2725475
+Jared Jewelers,6692754
+Jasmine Thai Cuisine,224293
+Jason's Deli,112781721
+JdV by Hyatt,5818441
+Jeep,301729
+Jefferson Bank Texas,578784
+Jefferson Dental Clinics (JDC),424252
+Jefferson Wells,67162
+Jefferson's,1902022
+Jellystone Park Camp Resorts,242573
+Jeni's Splendid Ice Creams,24363474
+Jenni Kayne,1621622
+Jennifer Convertibles,596587
+Jenny Craig,6602491
+Jenny Yoo,50472
+Jeremiah's Italian Ice,20689680
+Jerome's Furniture,1982348
+Jerry's Artarama,925916
+Jersey Mike's,781547170
+Jersey Shore State Bank,772620
+Jersey Strong,2669215
+Jet Food Store,20108348
+Jet's Pizza,18859057
+Jetro Cash & Carry,787366
+Jewel-Osco Pharmacy,608215
+Jiffy Lube,71878563
+Jiffy Stop Food Mart,276000
+Jim N Nick's,120289
+Jim's Restaurants,432298
+Jimbo's,47124
+Jimboy's Tacos,1986938
+Jimmy Changas,3021181
+Jimmy Choo,675618
+Jimmy Jazz,4916018
+Jimmy John's,566427363
+Jimmy's Egg,1825265
+Jinky's,1031984
+Jinya Ramen Bar,12256876
+Jittery Joes,5402406
+Jo Malone London,660241
+Jo-Ann Fabric and Craft Stores,1936599
+Jockey,6927379
+Joe & The Juice,3569789
+Joe Coffee,76385
+Joe Hudson's Collision Center,1838951
+Joe V's Smart Shop,6895000
+Joe's Crab Shack,9665979
+Joe's Kwik Mart,30063798
+Joey Restaurants,693564
+John Deere,13604571
+John Varvatos,551753
+Johnnie’s New York Pizzeria,269230
+Johnny Carino's,5974052
+Johnny Rockets,9934599
+Johnny Was,1457994
+Johnny's Pizza New York Style,4194706
+Johnson Controls,1080149
+Johnson Fitness & Wellness,9580059
+Johnston & Murphy,2500682
+Johnstone Supply,1466467
+Jolley Stores,540008
+Jollibee,21595953
+Jon Smith Subs,2208646
+Jonathan Adler,1338967
+Jones Road,193980
+Jos. A. Bank Clothiers,1526401
+Jose Peppers,2400120
+Journeys,79754433
+Joy Teriyaki,4193839
+Joyalukkas,119882
+Jreck Subs,16066400
+Juan Pollo,5297942
+Juan Valdez Café,2149035
+Juice Crafters,1494670
+Juice Generation,1495250
+Juice It Up!,8019097
+Juice Press,4071310
+JuiceLand,7979923
+Jules Thin Crust,3009459
+Jumping World,614744
+Jumpstreet,575245
+Juniors Supermarket,13801253
+Just Cuts,225079
+Just Fitness 4 U,45707
+Just Love Coffee Cafe,9543148
+Just Salad,4154664
+Just Tires,1263464
+Just-A-Buck,1195844
+Just-a-Cut,709537
+K & G Fashion Superstore,4586249
+K Bob's,365806
+K&M Tire,1687495
+K1 Speed,1556322
+KEEN,81568
+KFC,1184305814
+KIKO Milano,373323
+KITH,764860
+KOA (Kampgrounds of America),1637451
+KPMG,703379
+Kabuki Japanese Restaurant,452607
+Kahoots Pet Products,1004960
+Kaia FIT,695062
+Kaldis Coffee,3120968
+Kale Me Crazy,2145408
+Kane Is Able Inc.,112598
+Kane's Furniture,7137511
+Kangaroo Express,1382269
+Kaplan Test Prep,25194488
+Karate America,660112
+Karns Quality Foods,3791369
+Kate Spade,28139783
+Katie's Korner,587932
+Katoen Natie,14651
+Katsuya Restaurant,160292
+Kawasaki Motors,10545299
+Kay Jewelers,28201882
+KeHe Distribution,594686
+Keevado,4517294
+Keke's,3521584
+Keller Logistics Group,224719
+Keller Williams,5509758
+Kelly Services,133854
+Kelly-Moore Paints,4314596
+Kellys Roast Beef,1018454
+Kendra Scott,6457151
+Kent Kwik,2100797
+Kenzo,76394
+Kerbey Lane Cafe,2077067
+Kevin Jewelers,2010559
+Key Food,167527137
+Key West Inn,239694
+KeyBank,10270090
+Keyes Real Estate,118589
+Keystone Automotive,2474996
+Kia Motors,11628573
+Kid City,288596
+Kid to Kid,5587779
+Kids Empire,938310
+Kids Foot Locker,27390156
+Kids and Company,107359
+Kiehl's,3759988
+Kilian,63179
+Killer Burger,661320
+Killiney Kopitiam,1324836
+Kilwins,7444269
+Kim's Convenience Stores,804373
+Kimbrell's Furniture,57449
+Kimpton Hotels & Restaurants,5768898
+Kincaid Furniture,7550865
+Kinder's,4432237
+King Cash Saver,2299581
+King Food Saver,4696063
+King Kullen Grocery Co.,27907517
+King Taco Restaurants,8548646
+King's BierHaus,448824
+King's Fish House,1255897
+Kings Dining & Entertainment,23034
+Kings Family Restaurant,1768599
+Kings Food Markets,24906854
+Kinney Drugs,23090443
+Kipling,3284929
+Kirkland's,18886555
+Kitchen United,1739162
+Klingensmith's,2381773
+Kloss Furniture,264287
+Kmart,7437454
+Kneaders Bakery & Cafe,1665674
+Knight-Swift,7117332
+Knights Inn,5326007
+Knockouts,460821
+Kobe Steakhosue,658388
+Kohl's,597263196
+Kohler Signature Store,185073
+Kolache Factory,7335937
+Komatsu,428123
+Kona Grill,8012558
+Kontane Logistics,162100
+Kreation Organic,3333947
+Krewe,250817
+Kriser's,712503
+Krispy Kreme Doughnuts,93585880
+Krispy Krunchy Chicken,111545063
+Kroger,637640957
+Kroger Fuel Center,229032101
+Kroger Pharmacy,20072003
+Kroger Specialty Pharmacy,473218
+Krystal,56714734
+Kuehne + Nagel,664762
+Kuhn's Quality Food,9297826
+Kum & Go,50374961
+Kumon Institute of Education,1394445
+Kung Fu Tea,25791535
+Kura Sushi,5011313
+Kwench Juice Cafe,1027829
+Kwik Chek now TXB,6596256
+Kwik Fill,175646896
+Kwik Kar,5646358
+Kwik Kopy,51646
+Kwik Shop,15779070
+L&L Hawaiian Barbecue,13420902
+L&W Supply,333500
+L'Occitane,2489181
+L.L.Bean,5947835
+LA Fitness,52324203
+LA Mattress,459272
+LANVIN,659927
+LASIK MD,138591
+LAUSD Adult and Career Education,282604
+LBBW,139661
+LBM Advantage,133829909
+LEDO Pizza,3182376
+LEE's Famous Recipes,4338696
+LEGO,3499777
+LEMONADE LA,4477645
+LGI Homes,1207446
+LIDS,54865617
+LKQ,587744
+LKQ Pick Your Part,4950161
+LL Flooring,2538482
+LOFT,19875539
+LOFT Outlet,13246743
+LOLË,102934
+LONGINES,22458
+LOTTE Hotels & Resorts,1440692
+LUKOIL,117931636
+LUSH,14110458
+LUV Car Wash,611574
+LXR Hotels & Resorts,22473
+La Bou Bakery and Cafe,1343603
+La Carreta,2871669
+La Colombe,2817153
+La Familia Pawn and Jewelry,400893
+La Fiesta Supermarket,5312714
+La Granja,8557043
+La Madeleine,3470151
+La Michoacana Meat Market,66744753
+La Parrilla,10621189
+La Perla,127251
+La Quinta Inns & Suites,142628922
+La Rosa Chicken & Grill,677034
+La Salsa,650484
+La Senza,60714
+La Superior Supermercados,3993985
+La-Z-Boy,3570932
+LaMar's Donuts,2760099
+LaVida Massage,348849
+Label Shopper,7289095
+Labor Finders,161107
+Labor Ready,456478
+Lacoste,4795966
+Lacrosse Unlimited,2806136
+Laderach,4188416
+Ladle & Leaf,217787
+Ladurée Paris,250594
+Lady Foot Locker,538832
+Lady Jane's Haircuts For Men,472413
+Lake Michigan Credit Union,489939
+Lakeshore Learning Materials,2851443
+Lamppost Pizza,2495147
+Lamps Plus,2282512
+Land Rover,8211
+Land's End,3250094
+Landmark Furniture,560578
+Landmark Theaters,1981062
+Landry's Seafood,389530
+Lane Bryant,18857264
+Lanier Parking,15021480
+Lapels Dry Cleaning,264005
+Larry's Giant Subs,4761718
+Laser Quest,61114
+LaserAway,653326
+LaserShip,1255647
+Lasikplus,271489
+Lassens Natural Foods and Vitamins,6450349
+Launch Trampoline Park,857352
+Lavelier's,772878
+Lawrence Brothers Supermarkets,5776276
+Lazy Acres Natural Market,6350707
+Lazy Dog Restaurant & Bar,15121866
+Le Boulanger,1166706
+Le Creuset,3562058
+Le Labo,272174
+Le Macaron,307314
+Le Meridien,4112219
+Le Pain Quotidien,17842644
+Le Peep,563125
+Learning Express Toys,2920845
+LearningRX,521601
+Lee Myles Transmission & AutoCare,17847
+Lee Wrangler Clearance Centers & Outlets,718361
+Lee's Hoagie House,2869922
+Lee's Sandwiches,4598107
+Legal Sea Foods,5008655
+Leizler Oil Company,5213276
+Lemon Shark Poke,166628
+Lemon Tree Family Salons,1317939
+Lemos Feed & Pet Supply,919983
+LendNation,1145430
+Lennar Homes,11526634
+Lenny's Sub Shop,2238545
+LensCrafters,15763314
+Lenwich,717378
+Leonard,263308
+Leonidas,2071142
+Les Schwab,16511529
+Leslie's Swimming Pool Supplies,14290756
+Levain Bakery,234074
+Levels Barber Shop,290167
+Levi Strauss & Co.,30188680
+Lexus,6816977
+Liberty Bank,31071
+Liberty Mutual Insurance,934445
+Liberty Tax Service,7946110
+Lidl,59857984
+Life Storage,240665
+Lifetime Fitness,12948584
+Lilly Pulitzer,5197935
+Lime Fresh Mexican Grill,5408762
+Lincoln,2111651
+Linde AMT,266760
+Linde Engineering,620456
+Linde Gas & Equipment,391719
+Lindora Clinic,384532
+Lindt,2099733
+Lineage Logistics,1733178
+Lion's Choice,14185013
+Lion's Den,1265969
+Lions Market,4756328
+Lipton Mart Stores,823891
+Liquivida Lounge,174504
+Liquor Depot USA,969462
+Lithia Auto Stores,58512
+Little Caesars,361053924
+Little Greek Fresh Grill,3128215
+Little Sheep,2002535
+Little Woodrow's,5213272
+Living Spaces,9550041
+Lizard Thicket,1021270
+LoanMax,898116
+Locale,191403
+Locali,37174
+Loco Pez,1013310
+Loewe,203420
+Loews Hotels,5883844
+Logan's Roadhouse,7191374
+Lola's Mexican Cuisine,202171
+Lolli and Pops,3199451
+Lone Star Food Stores,7687638
+Lone Star National Bank,1049339
+Lone Star Title Loans,5794446
+Long John Silver's,77528657
+LongHorn Steakhouse,169054277
+Longchamp,763946
+Look Cinemas,511861
+LookAfter Hair Company,301790
+Loop Neighborhood Market,13417914
+Lord and Taylor,578560
+Lorna Jane,104104
+Loro Piana,127299
+Los Cucos Mexican Cafe,10070201
+Lost Pizza Co.,1321639
+Lotus Dealers,7963
+Lou & Grey,1029782
+Louis Vuitton International,22644746
+Louisiana Fried Chicken,2583971
+Louisiana-Pacific Corporation,555913
+Love's Travel Stops and Country Stores,229049925
+Lovers,753734
+Lovesac,1774397
+Loving Hut Vegan Cuisine,1461977
+Lovisa,9089458
+Lowe's,653129583
+Lowe's Distribution Centers,393944
+Lowe's Market,28410253
+Loya Insurance Group,2574351
+Loyal Companion,267215
+Lube N' Go,7397
+Luby's,17785651
+Lucchese Boot,1197991
+Lucille's Smokehouse Bar-B-Que,1178427
+Lucky Boy Burger's,357334
+Lucky Brand,6084150
+Lucky Strike Entertainment,175821
+Lucky Supermarkets,60103862
+Luke's Lobster,1151599
+Luke's Locker,2705929
+Lukfook Jewellery,351999
+Lumberjacks Restaurant,306098
+Luna Grill,11233218
+Lunardi's Markets,24787091
+Lunchbox Wax,802936
+Lupe Tortilla,17042193
+Luxe Hotels,179848
+LyondellBasell Industries N.V.,178999
+M&T Bank,21807683
+MAACO,8225473
+MAC Cosmetics,5195106
+MAX&Co.,47609
+MBT,8491293
+MCM Worldwide,541813
+MDV SpartanNash Distribution,52145
+MEDCO,22717
+MFA Oil,2379686
+MGM Resorts,1580024
+MINI,464827
+MIllennium Hotels & Resorts,693601
+MK Battery Distribution Center,512593
+MOD Pizza,140066870
+MOOYAH,19439263
+MORSCO HVAC Supply,1407759
+MOSCOT,409632
+MVP Athletic Clubs,1328063
+Macaroni Grill,6026685
+Mack Trucks,128865
+Mackenzie River,1087442
+Macy's,272483415
+Macy's Backstage,56689334
+Mad Greens,1755535
+Mad Mex,6537848
+Madewell,15767800
+Madison Reed,886755
+Maersk,13988
+Maggiano's Little Italy,12522783
+Magnolia Bakery,15748
+Magnuson Independent,1183911
+Mahindra Dealer,5352591
+Maid Rite,383811
+Mail Boxes Etc,1159443
+Main Event Entertainment,20928168
+MainStay Suites,3977686
+Mainstream Boutique,527100
+Maison Kayser,1647765
+Maison Kayser Boulangerie,920198
+Maki of Japan,3644121
+Malbec Argentinan Cuisine,253818
+Malibu Eatery,245596
+Malin & Goetz,111886
+Mallory Alexander International Logistics,63148
+Malone's Cost Plus,3342258
+Mama Fu's Asian House,301801
+Mambo Seafood,1326170
+Mamoun's Falafel,8995265
+ManCave for Men,182762
+Manchu Wok,66945
+Mancini's Sleepworld,1854239
+Mandee,6192315
+Mango,1505957
+Mango Tours,123249
+Manhattan Bagel,39241051
+Manpower,821381
+Manufacturers Bank,219321
+Mapco,5339436
+Maple Street Biscuit Company,20731731
+Maplefields,3051151
+Marathon,709979481
+Marazzi,119026
+Marble Slab Creamery,24537440
+Marc Jacobs,2084773
+Marciano by Guess,313049
+Marco's Pizza,224439159
+Marcus Theatres,736976
+Mardel,791427
+Marella,606108
+Margaritas Mexican Restaurant,466468
+Maria's Italian Kitchen,640808
+Marie Blachère,2158291
+Marie Callender's,2831637
+Marimekko,284692
+Marine Layer,3057658
+MarineMax,142358
+Mariner Finance,1805313
+Mariscos El Paisa,1405678
+Mark's Pizzeria,18550602
+Market Basket,61351412
+Market Basket Foods,23347311
+Market District,7703119
+Market Fresh,1758594
+Market Square Supermarkets,1771578
+Market Street,31992084
+Market Street Pharmacy,12638707
+Marlow's Tavern,1330201
+Marmi,866941
+Marriott Hotels,88381750
+Marshalls,485719317
+"Martin Marietta Materials, Inc.",4569950
+Martin's Foods,6342124
+Martinizing Dry Cleaners,515439
+Marugame Udon,743329
+Mary Browns Chicken and Taters,1807546
+Mary's Mountain Cookies,271989
+Mary's Pizza Shack,2331431
+Maryland Fried Chicken,5191673
+Marylou's Coffe,6854494
+Maserati,51008
+Mason's Lobster,1689423
+MassMututal,13028388
+Massage Envy,28453987
+Massage Green,145477
+Massage Heights,1443045
+MasterCuts,807719
+Mastro's Restaurants,1876610
+Matador Men's Grooming,870495
+Matchbox PIzza,33635
+Mathis Home,80438
+Mathnasium,14996568
+Mattison Avenue Salon Suites & Spa,839350
+Mattress Depot USA,3591615
+Mattress Firm,10393240
+Mattress Land,538844
+Mattress One,204996
+Mattress Warehouse,6238202
+Mattress by Appointment,12307487
+Maui Wowi,998238
+Maverick Finance,25786
+Maverik,189196
+Mavis Discount Tire,50782598
+Max & Erma's,5636947
+Max Brenner,2230362
+Max Mara,702314
+Max Muscle,803715
+Max Studio,26898
+Max's Mexican Cuisine,198250
+Max's Restaurant,996100
+Maxor Pharmacy,1255764
+Maxway,3282906
+Mayors,449027
+Mayweather Boxing + Fitness,2061392
+Mazda,3731925
+Mazzio's Italian Eatery,196874
+McAlister's Deli,137678860
+McCaffrey's Food Markets,5085718
+McCall Service,12489
+McCarthy Tire,113194
+McConnell's Fine Ice Cream,999145
+McCormick & Schmick's,27572
+McCoy's Building Supply,20533737
+McCraw Oil,133725
+McDonald's,4539683382
+McKinnons Market,1485090
+McKinsey & Company,389995
+"McLane Company, Inc Distribution",338190
+McLendon Hardware,2620170
+McMenamins,603275
+Me-N-Ed's Pizzeria,4294810
+Mechanics Bank,3901606
+Medi Weightloss,2155244
+Medicap Pharmacy,2413508
+Mediterranean Grill,1716800
+Meeks,3316030
+Meet Fresh,2959319
+Mega Furniture,1518459
+Mega International Commercial Bank,201949
+Meineke Car Care Centers,10809683
+Mejuri,1220655
+Mellow Mushroom,61267926
+Melrose Family Fashions,22478825
+Melt Shop,4752231
+Members 1st Federal Credit Union,1719462
+Menard's,11332986
+Menchie's,40157815
+Mendocino Farms,41033788
+Mercedes Benz,6432948
+Merck KGAA,501305
+Mercurys Coffee,8553831
+Merle Norman Cosmetics,4246545
+Merrell,1162846
+Merrill Lynch,3010139
+Merry Maids,656702
+Met Foodmarkets,7102144
+Metabolic Research Center,1583713
+Metal Supermarkets,909401
+Metro City Bank,293462
+Metro Diner,9547635
+Metro Mattress,3888782
+Metro by T-Mobile,41866322
+Metropolitan Market,22109506
+Mexican Inn Cafe,231167
+Mexican Villa,497889
+Mexico Lindo,200768
+Mezeh Mediterranean Grill,397700
+Mi Cocina,20844028
+Miami Subs,17216832
+Michael Kors,16956901
+Michaels Stores,106667030
+Micro Center,2152813
+Microsoft Store,712451
+Microtel Inn and Suites,12784999
+Mid Penn Bank,1187962
+MidFirst Bank,22312
+Midas,19062969
+Middlesex Savings Bank,884402
+MidiCi Neopolitan Pizza,737353
+Midland State Bank,196723
+Midwest Dental,81834
+Midwest Petroleum,1523844
+Mighty Auto Parts,1186490
+"Mighty Fine Burgers, Fries & Shakes",205695
+Mighty Pilates,97599
+Mighty Quinns BBQ,714641
+Mighty Taco,21601725
+Mighty Wash,522742
+Miguel's Jr,8610337
+Miguels California Mexicna Cocina,192838
+Milan Laser,714391
+Milk + Honey,362508
+Milk Bar,546227
+Miller Paint,412317
+Miller's Ale House,45683724
+MillerHome Furniture & Mattress,243037
+Mimi's Cafe,6946799
+Mini Mart,1657091
+Mini U Storage,733756
+MiniLuxe,466272
+Miniso,12527039
+Minit Mart,1831284
+Minsky's Pizza,2462137
+Minuteman Press,1136878
+Mirabito Energy Products,784286
+Miracle Eyebrows,43796
+Miracle-Ear,8503196
+Miraval Resorts,86772
+Miss A,750516
+Mission BBQ,23518338
+Missouri Furniture,527853
+Mister Car Wash,8312875
+Mitchell Gold + Bob Williams,452020
+Mitsubishi Motors,3105762
+Mitsuwa Market Place,29718477
+Miu Miu,408939
+Mixt,3218164
+Mizuho Bank,490349
+Mo' Bettahs,1010642
+Mobil,72264196
+Mobile Kangaroo,257895
+Mobile Mini,2163282
+Mobily,364332
+ModWash,691758
+Modani Furniture,912858
+Modell's Sporting Goods,5158449
+Modern Animal,306343
+Modern Market,9150082
+Modo Yoga,797637
+Moe's Original Bar B Que,439274
+Moe's Southwest Grill,197171531
+Moleskine,9382
+Mollie Stone's Market,7088550
+Molly Moon's,445264
+Molson Coors Brewery,660946
+Monarch Dental,615658
+Moncler,1544603
+Money Mart,444884
+Moneytree,217936
+Monkey Joe's,1553261
+Monro,13907341
+Monster Mini Golf,678421
+Monster Self Storage,122546
+Montage,548915
+Montblanc,294628
+Monterrey Mexican Restaurant,1121349
+Moon Valley Nurseries,646719
+Moove In Self Storage,610780
+Mor Furniture for Less,2726637
+Morgan Stanley,6589187
+Morgan Truck Body,467430
+Morgenthal Frederics,137428
+Moroso,1151380
+Morphe,1075617
+Morrison Supply,750931
+Morton Building,100890
+Morton Williams Supermarkets,915518
+Morton's The Steakhouse,2873836
+Moser's,3512516
+Motel 6,84474619
+Mother's Market,2242654
+Mother's Nutritional Centers,20571758
+Motion Industries,8908797
+Moto Guzzi,104227
+MotoMart,2365818
+Mountain Mike's Pizza,18651387
+Mountain View Tire & Auto Service,1157521
+Movado Company Store,215307
+Move It Self Storage,536637
+Movement Climbing,914592
+Movie Tavern by Marcus,718624
+Moxie's,3937146
+Moxy Hotels,1311443
+Mr Chow,183464
+Mr Handyman,327187
+Mr Jim's Pizza,5144629
+Mr. Appliance,273263
+Mr. Clean Car Wash,72700
+Mr. Pickle's Sandwich Shop,3514063
+Mr. Smoothie,4090348
+Mr. Tire,7059001
+Mr. Transmission,42445
+MrBeast Burger,46901823
+Mrs. Fields,5818169
+Muchas Gracias Mexican Food,2690293
+Mud Bay,13238321
+Muji,549947
+Mulberry,155605
+Murco Wall,692754
+Murdoch's Ranch & Home Supply,51515
+Murmaid Mattress,67413
+Murphy USA,476177885
+Murphy's Deli,2247789
+Muscle Maker Grill,5660198
+Music & Arts,1039187
+Music Go Round,198174
+Mutual of Omaha,348522
+Muvfitness,1207088
+My Favorite Muffin,1626495
+My Gym Children's Fitness Centers,9775388
+My Pie,2071723
+My Place Hotels,2286761
+My Salon Suite,2165080
+MyEyeDr.,2118662
+MyEyeLab,1668330
+MyFitnessStore.com,475509
+Möge Tee,4190862
+NAPA Auto Parts,74606881
+NBT Bank,2716225
+NCG Cinemas,4794548
+NCR Corporation,706880
+NORMS,2528869
+NOVUS Glass,433313
+NYCB,6234695
+NYPD Pizza,2259812
+Na Hoku,172582
+Naf Naf Middle Eastern Grill,520634
+Nail Garden,203783
+Nails Plus,165440
+Nancy's Pizza,1203880
+Nathan's Famous,5450161
+Nation's Giant Hamburgers,7144597
+National Car Rental,1315966
+National Pool Tile,90893
+National TV Sales & Rental,77116
+National Tire & Battery (NTB),8695033
+National Tire Wholesale,2680317
+Native Shoes,1275593
+Natural Body,535290
+Natural Grocers,27653452
+Naturalizer,1729296
+Natuzzi,2499896
+Nautica,4539044
+Nautical Bowls.,4184399
+Navarro Discount Pharmacy,5379347
+Navigate Wireless,84122
+Navis Pack & Ship,252564
+Navy Exchange,52747806
+Navy Federal Credit Union,2848247
+Nebraska Furniture Mart,2194445
+Nefco,1926427
+Neiman Marcus,20067374
+Nespresso,2464028
+Nest Bedding,542370
+Nestlé Café,416181
+Net Cost Market,20446535
+Neuhaus,2461583
+New Balance,13847072
+New Seasons Market,464986
+New York & Company,3162382
+New York Life Insurance,3398374
+New York Pilates,369446
+New York Sports Club,3919632
+NewMarket Corporation,344435
+Newbury Comics,2739790
+Newk's Eatery,24943679
+Newport Creamery,452680
+Newport Dental,105053
+Nexair,163756
+Next Generation Wireless,18886
+Next Level Burgers,1032691
+Nic+Zoe,421243
+Nick's Restaurants,148597
+Nifty after Fifty by Encore Wellness,401730
+Nike,120173775
+Nikita Hair,294320
+Nissan,22937075
+Nittany MinitMart,853395
+Niyjia Market,8923251
+Noah's New York Bagels,23350606
+Nob Hill Foods,35654856
+Nobu,1229221
+Noodles & Company,23251698
+Norco,48118
+Nordstrom,97178567
+Nordstrom Local,377586
+Nordstrom Rack,74303871
+Nori Japan,2541050
+North American Van Lines Agent,2613565
+North Cascades Bank,303853
+North Easton Savings Bank,2196073
+North Italia Restaurant,1329889
+North Shore Bank,540018
+North Shore Farms,14400169
+Northern Bank,120704
+Northern Lights Pizza Company,144572
+Northern Tool + Equipment,39322006
+Northgate González Markets,8501421
+Northwest Bank,4844847
+Northwest Exterminating,82803
+Northwest Self Storage,1221030
+Northwestern Mutual,2505650
+Not Your Average Joe's,942335
+Nothing Bundt Cakes,9001444
+Nouria Energy Corporation,26004534
+Novotel,556573
+NrGize Lifestyle Cafe,7245064
+NuCO2,1221487
+Nugget Market,22420307
+Numero Uno Markets,4782372
+NutriMost,343225
+Nutrien Ltd,525554
+Nutrishop,1581904
+Nutrition Smart,2186367
+Nékter Juice Bar,38075805
+O'Charley's,11826870
+O'Reilly Auto Parts,280045060
+"O-I Glass, Inc.",1489089
+ODW Logistics,127803
+OXXO Care Cleaners,53428
+OYO,4136183
+Oak + Fort,300708
+Oak Valley Community Bank,277441
+Oakley,6664907
+Obicá,158331
+Obsessed Boutique,588310
+Ocean Dental,41309
+Ocean Prime,2381684
+Ocean State Job Lot,56413527
+OceanFirst Bank,2262714
+Octapharma,501956
+October's Very Own,99680
+OddFellows Ice Cream Co,908507
+Off Broadway Shoe Warehouse,6182992
+Office Depot,54849620
+OfficeMax,13081848
+Oggi's,356897
+Oil & Vinegar,153294
+Oil Changer,7100069
+Oilstop,317895
+Ojo de Agua,953627
+Ojos Locos,7048070
+Old Chicago Pizza and Taproom,8157298
+Old Country Buffet,106375
+Old Dominion Freight Line,166286
+Old Navy,226680361
+Old Time Pottery,7461401
+Olive Garden,244098339
+Oliver Peoples,273805
+Ollie's Bargain Outlet,188929592
+Olympia Sports,5206074
+Omaha Steaks,636527
+Omega Watches,33431
+Omni Hotels & Resorts,15699051
+On Running,2890711
+On The Border,20609113
+On The Run Convenience,5915299
+OnPoint Community Credit Union,457081
+OnTrac,239103
+OnTrac Dropbox,892235
+Once Upon a Child,27582992
+One Hour Heating & Air Conditioning,278342
+OneMain Financial,1666032
+OneWest Bank,1231207
+Onelife Fitness,1706157
+Ono Hawaiian BBQ,51782670
+Oportun,1031438
+Oppenheimer,819773
+Optica USA,253144
+Optical Outlets,1930371
+Optimum,1587357
+Orange County Mattress,661488
+Orange Julius,25291395
+Orange Leaf Frozen Yogurt,5347519
+Orangetheory Fitness,136201378
+Oreck,404524
+Original ChopShop,2231396
+Original Roadhouse Grill,1914249
+Original Tommy's,1004296
+Origins,257823
+Oritani Bank,25153
+Orkin,55252
+Orrstown Bank,639321
+Ortho Mattress,2523047
+Orvis,1092194
+OshKosh B'gosh,18982955
+Ostioneria Michoacan Seafood & Oyster Bar,11141125
+Out of the Closet,3333083
+Outback Steakhouse,159276953
+Outdoor Voices,589671
+Owens Healthcare,2686255
+Oxford Learning,881018
+Oxygen Yoga And Fitness,11583
+P. Terrys,9721263
+P.C. Richard & Son,19381870
+P.F. Chang's China Bistro,88905523
+PACCAR Parts Distribution,446472
+PACK-RAT,363571
+PCC Natural Markets,5973796
+PDQ,10327339
+PEMEX,1239941
+PETE'S,1947201
+PFSweb,121257
+PGA TOUR Superstore,19258489
+PIP Printing and Marketing,143227
+PJ Whelihan's Pub & Restaurant,3586177
+PJ's Coffee,1213497
+PLAYlive Nation,324463
+PLNT Burger,493718
+PLS Financial Services,506005
+PMZ Real Estate,95707
+PNC Financial Services,26752580
+PODS,3623106
+"PPG Industries, Inc.",2123045
+PPG Pittsburgh Paints,2748143
+PUMA,12068562
+PacSun,26368925
+Pacific Catch,3394005
+Pacific Power Batteries,89694
+Pacific Sales,146191
+Pacific Western National Bank,953009
+Pacifica Pizza,214042
+Paciugo Gelato Caffe,2360427
+Packaging Corporation of America,4847631
+Pagliacci,903731
+Paige,676543
+Painted Tree,1660957
+Painting with a Twist,1759093
+Pak N Save,9786278
+PakMail,638236
+Pallio's Pizza Cafe,5355371
+Palm Angels,624951
+Palm Beach Tan,6447316
+Palmetto Moon,2271705
+Pan Pacific,121360
+PanIQ Escape Room,179058
+Pancheros,2794709
+Panda Express,988549734
+Panda Inn,224071
+Pandora,17762440
+Panera Bread,608881572
+Panini Kabob Grill,1215071
+Papa Gino's,7137134
+Papa John's,785814169
+Papa Murphy's,53765188
+Papa Razzi,169569
+Papa's Pizza To-Go,1028240
+Paper Source,7054927
+Pappadeaux Seafood Kitchen,12300815
+Pappas Bar-B-Q,24182051
+Pappas Restaurants,1504122
+Pappasito's Cantina,938192
+Par Mar Stores,2264702
+Parachute,2748177
+Paradise Bakery & Cafe,1221979
+Paragon Theaters,4347328
+Parcel Plus,130571
+Paris Baguette,50637101
+Park Avenue BBQ Grill,330381
+Park Hyatt,2397902
+Park Inn by Radisson,1796903
+Parker Hannifin,7719873
+Parker's,321932
+Parker's Corp,1243895
+Parry's Pizzeria & Bar,29866
+Parts Authority,4372811
+Parts Plus,243380
+Party City,63456202
+Pasion Del Cielo Coffee,2190689
+Pastosa Ravioli,278062
+Patagonia,1197682
+Patel Brothers,24036850
+Patio Enclosures,489461
+Pats Select Pizza & Grill,2738536
+Paul Davis Restoration,46759
+Paul Martin's American Grill,165502
+Paul Smith,398216
+Paul Stuart,127944
+Paul&Shark,234244
+Paula Deen's Family Kitchen,2174555
+Pavilions,38766841
+Pawn 1,1491012
+Pay-O-Matic,716173
+Payless Car Rental,513926
+Peace Love and Little Donuts,301240
+Peach's Restaurant,833780
+Peachwave Yogurt,1920633
+Peapack-Gladstone Bank,1264858
+Pear Tree Inn,2618524
+Pearle Vision,2122571
+Peerless Tires 4 Less,155942
+Peet's Coffee and Tea,51818740
+Pei Wei Asian Diner,28832517
+Pelican's SnoBalls,684324
+Pelicana,928490
+Pella,590367
+Peloton,637512
+Pendleton,741498
+Pendry,1328391
+Penguin,647353
+Penhaligon's,115978
+Penn Entertainment,2563179
+Penn Station,17276646
+Pennzoil,333043
+Penseys,858086
+Penske Truck Rental,34282587
+People's United Bank,2105194
+Peoples Bank and Trust Kansas,160559
+Peoples National Bank,99055
+Peoples Services,28345
+PeoplesBank,659022
+"PeoplesBank, A Codorus Valley Company",2288929
+Pep Boys,58498342
+Pepper Lunch,415745
+Pepper Palace,552059
+Pepperjax Grill,20093
+Perfect Look Salon,623487
+Performance Foodservice,1184888
+Perfumania,3261004
+Perfumes 4 U,755356
+Perkins Restaurant & Bakery,11425615
+Perko's Cafe Grill,449008
+Perry Ellis,3173856
+Perry's Steakhouse & Grille,3554530
+Perspire Sauna Studio,1173622
+Pet Club Food and Supplies,2590585
+Pet Depot,985954
+Pet Food Express,17311339
+Pet Paradise Resort and Day Spa,682186
+Pet Pros,2019245
+Pet Supermarket,62394076
+Pet Supplies Plus,77652908
+Pet's Barn,4005520
+PetPeople,15725
+PetSmart,168992777
+PetSuites,2990783
+PetVet,11549082
+Petco,224885992
+Pete and Mac's,38424
+Peter Millar,412268
+Peter Piper Pizza,21728227
+Peterbilt,1229975
+Petfolk,706938
+Petland,9699272
+Petro Home Services,85541
+Petro-Mart,9205210
+Petros Restarants,526803
+Pets Warehouse,1651132
+Petsense,12105390
+Phantom Fireworks,592317
+Pharmaca,2686267
+Phenix Salon Suites,4592260
+Phil's BBQ,2056132
+Phillips 66,100190569
+Phillips Seafood,1567611
+Philly Connection,1246519
+Philly Pretzel Factory,5812428
+Philz Coffee,25235699
+Pho Hoa,3064325
+Phoenix,986981
+Physique57,311039
+Piada Italian Street Food,828256
+Piara Pizza,2457707
+Pic-N-Pac,951462
+Picadeli,39149294
+Piccadilly Restaurants,959120
+Pick Up Stix,2256661
+Pick n Pull,707904
+Pickleman's,150740
+Picture People,59316
+Pie Five Pizza Co,4641085
+Pie Zoni's,161632
+Pieology Pizzeria,21973308
+Pier 1 Imports,10591014
+Piggly Wiggly,38112923
+Pigtails & Crewcuts,1741490
+Pilates Proworks,40832
+Pilot Flying J,271550652
+Pilot Freight Services,323939
+Pinch A Penny,22652829
+Pinchers,1307201
+Pincho Factory,2663524
+Pine Environmental Services LLC (Pine),7103
+Pink Barre,18676
+Pink Taco,3502666
+Pinkberry,10435280
+Pinnacle 365,10578759
+Pinnacle Financial Partners,2693
+Pinot's Palette,1775706
+Pinstripes,189833
+Pioneer Bank,547380
+Pioneer Bank Texas,99350
+Pioneer Supermarkets,10834188
+Pit Stop,1375452
+Pita Mediterranean Street Food,3816001
+Pita Pit,8145655
+Pitfire Pizza,1931718
+Pizza Cucinova,16906
+Pizza Factory,8150875
+Pizza Fusion,590669
+Pizza Guys,8785556
+Pizza Hut,644341692
+Pizza Inn,3915837
+Pizza Joe's,7217228
+Pizza Loca,62409
+Pizza My Heart,2700520
+Pizza Patrón,6693358
+Pizza Pro,3285761
+Pizza Ranch,955275
+Pizza Shoppe,598637
+Pizza Studio,488831
+Pizza Twist,2291262
+Pizza World,2669851
+PizzaExpress,968017
+PizzaRev,770991
+PlainsCapital Bank,3463553
+Planet Beach,220971
+Planet Beauty,419006
+Planet Blue,351798
+Planet Fitness,321278620
+Planet Smoothie,51795644
+Planet Sub,1070681
+Planet Wings,1434397
+Plato's Closet,39881212
+Platt Electric Supply,695162
+Play It Again Sports,26894658
+Playa Bowls,34088302
+Plaza Azteca Restaurants,7018167
+Plaza Tire Service,950753
+Plow & Hearth,335933
+Pluckers Wing Bar,20028398
+Point S Tire & Auto Service,179985
+Poke Bar,5030688
+Poke Bros,2299517
+Poke House,401534
+Poke Works,11217981
+Pokeatery,1718889
+Pokemoto,1221000
+Polaris,1772618
+Pollo Campero,12745015
+Pollo Tropical,87152116
+Polly's Pies,3872152
+Pomp's Tire Service,36510
+Pontillo's Pizzeria,600576
+PoolCorp,2141327
+Poolwerx,454674
+Popbar,1420517
+Popeyes Louisiana Kitchen,1148472041
+Poppin,561353
+Popular Community Bank,1674628
+Porcelanosa,1899634
+Porsche,167760
+Porsche Design,362145
+Port of Subs,7916208
+Porters,1454940
+Porters Thriftway,4014092
+Portillo's Restaurants,4065724
+Ports Via Restaurants,610431
+PostNet,1089380
+Postal Connections,152644
+PostalAnnex+,2326632
+Postino,1014370
+Potato Corner,4912584
+Potbelly Sandwich Works,83568064
+Pottery Barn,12786652
+Pottery Barn Kids,2566367
+Pour Boy Oil,153100
+Power Finance Texas,270403
+Power Market,10249681
+Powerhouse Gym,11783912
+Prada,753123
+Praxair,52318
+Precision Door Service,133957
+Precision Tune Auto Care,2385130
+Preferred Hotels & Resorts,30276259
+Premier Cinemas,4879182
+Premier Rental Purchase & Home Furnishing,256217
+Premier Truck Group,77176
+Premier Wireless,68830
+Prenger Foods,2915755
+Presidente Supermarkets,17306413
+Pressed Juicery,7415304
+Presto-X,19535
+Pret A Manger,42784402
+Pretty Kitty,138283
+Pretzelmaker,5214077
+Price Busters Discount Furniture,187458
+Price Chopper,22544282
+Price Chopper Supermarket,108391555
+Price Cutter,14194101
+PriceRite,27948028
+Pride,236562
+Pride Cleaners,438201
+Pride Staff,77911
+Primanti Bros.,15259527
+Primark,5083108
+Prime IV Hydration and Wellness,215636
+Prime Lending,4694713
+Prime Storage,1884049
+Primerica,4152501
+PrimoHoagies,14036675
+Primos,1488574
+Pro Cuts,576884
+Pro Image Sports,15307916
+ProCare Automotive and Collision,474440
+ProSource Wholesale Flooring,654863
+Procter & Gamble Plant,2862053
+ProfessioNAIL,3196404
+Progressive,158804422
+Project Juice,186466
+Pronto Insurance,3596995
+Propel Fuels,7576142
+Proper Food,580113
+Proper Hotel,266321
+Provino's Italian Restaurant,3140140
+Psycho Bunny,1774097
+Public Lands,1649101
+Public School Restaurant and Bar,32858
+Public Storage,95884682
+Publix Distribution,265094
+Publix Liquor Stores,16552236
+Publix Pharmacy,48380862
+Publix Super Markets,834748198
+Pull A Part,527962
+Pump It Up,780795
+Punch Bowl Social,396408
+Purcell Tire & Rubber,84033
+Pure Barre,17334907
+Pure Hockey,2723538
+Pure Pilates,204624
+Purple,2418989
+Purrfect Auto Service,360106
+PwC,656225
+QC Supply,164571
+QFC (Quality Food Centers),70967078
+QFC Pharmacy,601048
+QTS Realty Trust,190203
+QVC Outlet,182339
+Qdoba Mexican Grill,146293781
+Quaker Chemical Corporation,112471
+Quaker Steak & Lube,6321570
+Quality Foods,785277
+Quality Inn,86739896
+Quantix,619803
+Quarles Fleet Fueling,1310416
+Quick Fuel,7605492
+Quick Lane,20250452
+Quick N Clean Car Wash,103164
+Quick Quack Car Wash,1261469
+Quick Weight Loss Center,14532
+QuickChek,91953727
+Quicklee’s,4258147
+Quickly,3074841
+Quik Stop,10650707
+QuikTrip,515075422
+Quiksilver,1963576
+Quiznos,8823875
+Qwench Juice,925789
+R Bank,207438
+R Wireless,2917324
+R+D Kitchen,2050061
+R.E. Michel,1302850
+RBC Capital Markets,95755
+RC Willey Home Furnishings,1101329
+RDO Equipment Co,214640
+REI,36181813
+REISS,595233
+REMAX,12306181
+REO Processing,26032
+RES IPSA,1044780
+RNR Tire Express,559132
+RP Lumber,3477915
+RPM International Inc.,546711
+Ra Sushi,1987221
+Rabo AgriFinance,463034
+Race Brothers Farm and Home Supply,79792
+RaceTrac,396459123
+RaceWay,68467034
+Raceway Car Wash,182163
+Rack Room Shoes,57222560
+Rad Power Bikes,2633762
+Radial,34293
+Radiant Logistics,20962
+Radiant Waxing,491399
+Radiator,1210968
+RadioShack Express @ HobbyTown,5109996
+Radisson Americas,11349867
+Radley,351978
+Rag & Bone,1944141
+Rainbow Shops,122295870
+Rainforest Cafe,1046939
+Raising Cane's,208964833
+Rajbhog Food,241736
+Raley's,81038611
+Raley's Distribution,74939
+Rally,1482197
+Rally House,14461118
+Rally Niagara BadMinton & Pickleball,181647
+Rally's Drive-In Restaurants,25646255
+Ralph Lauren,12282580
+Ralph's Italian ices & Ice Cream,4340224
+Ralphs,213646770
+Ralphs Distribution,238544
+Ram,362601
+Ram Restaurant and Brewery,445092
+Ram Tool & Supply,2562710
+Ramada,25269487
+Ramen Yamadaya,756916
+Ramona Tire & Service Center,171718
+Ramunito's Brick Oven Pizza,183486
+Ranch One,1394714
+Rancho San Miguel Markets,243475
+Randall's Food Markets,41711464
+Randolph-Brooks Federal Credit Union (RBFCU),569561
+Randstad,187923
+Rapid Roberts,1966725
+Ray's Food Place,6479396
+Ray-Ban,427934
+Raymond James Financial,2880831
+Raymour and Flanigan Furniture,34727479
+Razer,646517
+Razoo's Cajun Cafe,14028245
+Re-Bath,4763611
+Real Deals,218026
+Real Fruit Bubble Tea,14455747
+Rebag,761286
+Rebecca Taylor,38659
+Rebel Convenience Store,32430413
+Recology,164960
+Red Dot Storage,483018
+Red Hot and Blue Restaurants,541778
+Red Lion Hotels,5234730
+Red Lobster,129560891
+Red Mango,3170398
+Red Ribbon Bakeshop,320713
+Red Robin Gourmet Burgers,136263272
+Red Roof Inn,22140684
+Red Roof PLUS+,12065858
+Red Star Vapor,27780
+Red Wing Shoes,23756768
+Reddy Ice,557097
+Redlands Grill,1176740
+Redner's Markets,149572247
+Redstone,777366
+Reebok,7829627
+Reeds Jewelers,660973
+Reformation,1291035
+Refuel Market,15754685
+Regal Entertainment Group,20804912
+Regal Nails Salon & Spa,7049726
+Regatta,792662
+Regency Theatres,1379760
+Regina Pizzeria,499697
+Regional Finance,2827108
+Regions Bank,10359876
+Regis Salons,506955
+Regus,30084989
+Regymen Fitness,315441
+Rejuvenation,606902
+Relais & Chateaux,3754929
+Relax The Back,2597046
+Relax and Wax,1290448
+Renaissance Hotels,18088145
+Renasant Bank,951406
+Renewal By Anderson,295280
+Rent A Wheel,3741044
+Rent A Wreck,231457
+Rent King,219806
+Rent One,91212
+Rent-A-Center,12875157
+Repligen,34996
+Republic Services,978929
+Residence Inn by Marriott,96229915
+Restaurant Depot,19083671
+Restoration Hardware,470968
+Restore Hyper Wellness,1640192
+Retro Fitness,21477864
+Rexel,380795
+Rey Del Pollo,910894
+Rhodes 101,5433183
+Rhone,252089
+Ria Money Transfer,914459
+Rib City,1932345
+RibCrib,1365688
+Riddle's Jewelry,376064
+Ridgewood Savings Bank,1281224
+Riggins,4759072
+RightSpace Storage,1988896
+Rimowa,124011
+Ring Power,1240529
+Rio Grande Mexican Restaurant,149756
+Rio Ranch Market,2457869
+Rip Curl,1696709
+Ripley's Entertainment Inc,5976823
+Ris Roofing & Insulation Supply,152678
+Rising Roll Gourmet Cafe,367234
+Rita's Italian Ice,252912970
+Rite Aid,484527899
+Rite Aid Pharmacy,94485578
+RiteCheck,189952
+Ritter's Frozen Custard,2969853
+Rituals Cosmetics,151614
+Rivian Service Center,957371
+Road Ranger,15347652
+Road Runner Sports,3269021
+Roadrunner Transportation Systems,188151
+Roady's,1040081
+Robeks,9122208
+Robert Graham,503098
+Robert Wayne Footwear,2256740
+Roberto Cavalli,56646
+Roberto's Taco Shop,6495350
+Robinson's Taekwondo,23285
+Roche Brothers Supermarket,5228812
+Rock & Brews,16567041
+Rock N' Roll Sushi,7257153
+Rock and Reilly's,235217
+Rock n Joe Coffee Bar,440056
+Rock's Discount Vitamins,1449213
+Rocket,65568690
+Rocket Car Wash,310480
+Rocket Fizz,4737239
+Rockfish Seafood & Grill,440489
+Rockin' Jump,1769760
+Rockland Trust,5549820
+Rockler,928725
+Rocky Mountain Chocolate,6580127
+Rodd & Gunn,178054
+Rodda Paint,699682
+Rodeway Inn,19036835
+Rodizio Grill,2693823
+Roger Dunn Golf Shops,1840295
+Rogers & Hollands,738232
+Rolex,705215
+Roll ‘Em Up,275618
+Roly Poly,647734
+Romantix,780603
+Romeo's Pizza,1462963
+Romp & Roll,354208
+Ron John Surf Shop,5326892
+Roofline Supply & Delivery,136956
+Room & Board,3500020
+Rooms To Go,9634893
+Rooms To Go: Kids,8470260
+Roosters,923663
+Rosa Mexicano,1571721
+Rosa's Cafe,2850784
+Rosati's,3412975
+Rosati's Chicago Pizza,204953
+Rosauers,24664697
+Roses,32376704
+Roses Express,14441466
+Rosetta Bakery,19373
+Rosewood Hotels and Resorts,8027875
+Ross Stores,414233057
+Rothy's,2679229
+Roti Mediterranean Grill,220098
+Rotolo's Pizzeria,76529
+Rotten Robbie,13978586
+Round One Entertainment,442932
+Round Table Pizza,30313419
+Row House,3569088
+Rowan,1784813
+Roy Rogers,17503504
+Royal Beauty Supply,281817
+Royal Blue Grocery,1310113
+Royal Business Bank,961699
+Royal Farms,15374615
+Rubio's Restaurants,17145898
+Ruby Tequila's,303520
+Ruby Thai Kitchen,14063390
+Ruby Tuesday,4164147
+Ruby's Diner,3534579
+Rudy's Barbershop,478214
+Rudy’s Country Store and Bar B Q,21327044
+Ruffit,307671
+Rumble,1569224
+Runnings,2730473
+Rush Bowls,2804283
+Rush Truck Centers,42777
+Russell Cellular,7440710
+Russell Stover,674206
+Russo’s New York Pizzeria,1726183
+Rusty Taco,4177561
+Ruth's Chris Steak House,14194144
+Rutter's Farm Stores,71475675
+Ryan's,102315
+Ryder,6119071
+S&S Food Stores,1330288
+S&T Bank,2803795
+SAS San Antonio Shoemakers,2613640
+SCANIA,2512115
+SCP Distributors,1079392
+SEVA Beauty,442266
+SHOP 'n SAVE Supermarkets,23897315
+SIGNAL Food Stores,10814015
+SLS,134508
+SLT,626286
+SMBC,272567
+SNAP Custom Pizza,6790280
+SNIPES,11527609
+SNS SneakersnStuff,441604
+SOI Brow Threading,1141549
+SOMISOMI Soft Serve & Taiyaki,3972719
+SPENGA,2306844
+SRS Building Products,91980
+STANCE,744403
+SVB Silicon Valley Bank,799916
+SVS Vision,82934
+SYGMA,131731
+Sabine State Bank and Trust Company,40938
+Sabor Tropical,5370780
+Saddle Creek Logistics Services,61885
+Safeguard Self Storage,1382825
+Safelite,7352361
+Safeway,639684612
+Safeway Fuel Station,77946429
+Safeway Pharmacy,12176586
+Sage,487733
+Sage Dental,1093236
+Sahara Pizza,1543471
+Saia LTL Freight,3614109
+Saint Laurent,3583850
+Saje,17551
+Sajj Mediterranean,917605
+Saks Fifth Avenue,19130021
+Saks Off Fifth,23020245
+Sal's Italian Ristorante,1948426
+Salad and Go,43341707
+Saladworks,37092889
+Salata,19115476
+Salem Five Cents Savings Bank,736439
+Salisbury Construction & Industrial Supply,916609
+Sally Beauty Supply,50361455
+Salo-Salo Grill,327088
+Salon Lofts,1284144
+Salon Republic,975027
+SalonCentric,6482485
+Saloniki Greek,274854
+Salons by JC,1471564
+Salsa Fresca Mexican Grill,560104
+Salsarita's Fresh Cantina,1421854
+Salt & Straw,16035695
+Salt Creek Grille,163330
+Saltgrass Steak House,35280899
+Salvatore's,10806970
+Sam & Louie's New York Pizzeria,486738
+Sam Ash Music,1159974
+Sam Auto Glass,771873
+Sam Edelman,88900
+Sam Moon,215845
+Sam's Club,951304628
+Sam's Club Distribution,406278
+Sam's Club Fuel Center,17653167
+Sam's Southern Eatery,850403
+Sammy's Woodfired Pizza and Grill,385661
+Samsonite,3991715
+Samsung Experience Stores,4340365
+San Diego Style Sombrero Mexican Food,5508851
+Sandella's Flatbread Café,288879
+Sandri,130207
+Sandro,844723
+Santander Bank,8485078
+Saravana Bhavan,3804428
+Sarku Japan,40156251
+Sarpino's Pizzeria,1057463
+Sauce Pizza & Wine,522486
+SavMor Foods,1120137
+SavOn,1533205
+Save Mart Distribution,191665
+Save Mart Supermarkets,83085779
+Save-A-Lot,98869547
+Savers Thrift Stores,2455242
+Savi Formal Wear,429161
+Savills,151374
+Savory Spice Shop,2074944
+Savvy Discount Furniture,590187
+Saxbys Coffee,18320731
+Sbarro,65601454
+Scan Design,2051560
+Scandinavian Designs,147854
+Scenthound,638507
+Scheels,1744424
+Schlotzsky's,98826586
+Schneider National Facility,43119
+Schnippers,12600
+Schnucks,47166960
+School of Rock,1380238
+Schuykill Valley Sports,260018
+Scissors & Scotch,536702
+Scooter’s Coffee and Yogurt,97817666
+Scotch and Soda,1071240
+Scramblers,830710
+ScrubaDub Auto Wash Centers,280474
+Scrubs & Beyond,13411203
+Sea Bags,536429
+Sea Island Shrimp House,360560
+Seabra Food,2860768
+Seacoast National Bank,1536479
+Seafood City,16268518
+Seal Master,219935
+Sealed Air Corporation,2867036
+Seaonus,129228
+Sears,4094469
+Sears Auto,859536
+Sears Home Services,158987209
+Sears Hometown Store,13168706
+Sears Outlet Store,551885
+Seaside Bank and Trust,140238
+Seasons 52,13254583
+Seasons Pizza,1893772
+Seattle Sun Tan,409003
+SecurCare Self Storage,2801979
+Securitas,487912
+Security Finance,5593606
+Security Public Storage,430205
+Security Self Storage,35711
+Sedano's Supermarkets,20529658
+Sedona Taphouse,870774
+See,242386
+See's Candies,13739869
+Seko Logistics,417410
+Seldens,352780
+Self Made Training Facility,2142512
+Sellers Bros.,7811571
+Semper Laser,86433
+Seoul Taco,3818784
+Sephora,96267053
+Serena & Lily,3798925
+Serendipity Labs,1415681
+Servcorp,586190
+Service King,1655267
+ServiceMaster,299787
+ServiceMaster Restoration Services,1519818
+ServisFirst Bank,114227
+Sesame Place,6456947
+Settebello,767828
+Shake Shack,105382863
+Shakey's,8761672
+Shane Co,722401
+Shane's Rib Shack,12873316
+Shanghai Commercial Bank,92326
+Sharetea,25351260
+Shari's,1407847
+Sharkey's Cuts for Kids,4321111
+Sharky's Woodfired Mexican Grill,10094818
+Sharp Shopper,9955960
+Shaw's,55653150
+Sheetz,191598005
+Shell Oil,874668441
+Shelter Insurance,2791229
+Sheraton Hotels & Resorts,33726310
+Sherwin-Williams,44127601
+Sherwin-Williams Industrial Wood,106847
+Shiekh Shoes,4327533
+Shield Healthcare,431056
+Shihlin Taiwan Street Snacks,550835
+Shinhan Bank,816081
+Shinola,351210
+Shipley Donuts,17483131
+Shoe Carnival,18853062
+Shoe City,1775374
+Shoe Dept Encore,87381894
+Shoe Palace,7798897
+Shoe Sensation,11348975
+Shoe Show Mega,16011870
+Shoe Station,1706278
+Shogun,2260733
+Shoney's,2768856
+Shoot Point Blank,1145874
+ShopRite,461454743
+ShopRite Pharmacy,33749455
+ShopRite Wine & Spirits,8297633
+Shopko,207185
+Shoppers World,1613640
+ShowBiz Cinemas,254774
+ShowPlace Icon Theatres,2200033
+Showcase Cinemas,6228979
+Shred-it,465564
+Shred415,196733
+Shrimp Basket,519231
+Shubh Beauty,3024214
+Shula Burger,292020
+Shula's Bar & Grill,196103
+Shun Fat Supermarket,2094142
+Sierra,6999746
+Sierra Móveis,414791
+Sigel's Beverages,930105
+Signature Bank,687964
+Signature Inn,337843
+Silgan Containers,898978
+Silver Diner,3844257
+Silverspot Cinema,2104789
+Simmons Bank,3646906
+Simon Pearce,49284
+Simple Simon’s Pizza,5067192
+SimpleFLOORS,60867
+Simply Mac,600713
+Simply Self Storage,406763
+Sincerely Yogurt,4549942
+Sinclair Oil,24149742
+Singas Famous Pizza,560888
+Sir Speedy,445210
+Sirloin Stockade,3642850
+Sit 'n Sleep,3635844
+Site for Sore Eyes,592444
+SiteOne Landscape Supply,6736131
+Six Flags,21671761
+Sixt Rent-A-Car,648593
+Sixty,285124
+Sizzler,7698284
+Skagit Farmers Supply,45399
+Skechers,27533834
+Skims,3423853
+Skippers,8305968
+Skoah,232103
+Skrimp Shack,635245
+Sky Zone,10465985
+Slack's Hoagie Shack,79082
+Slapfish,7469473
+Slaters 5050,330451
+Sleep Experts,4728977
+Sleep Inn,32577580
+Sleep Number,29751086
+Sleep Outfitters,48333
+Slim Chickens,36886090
+Slim4Life,316728
+Slumberland Furniture,351915
+Small Door Vet,231894
+Small Luxury Hotels of the World (SLH),690649
+Smallcakes,1398568
+Smart & Final,158420362
+Smart Foodservice,1098387
+Smart Start,1163504
+Smart Stop Self Storage,473128
+SmartStyle Family Hair Salons,30108358
+Smashburger,38213003
+Smile Design Dentistry,440472
+Smile Direct Club,210433
+Smile Doctors,1749319
+Smith & Wollensky,953660
+Smoker Friendly,1190951
+Smokers Choice,3462935
+Smokey Bones,2805759
+Smoothie Factory + Kitchen,1642435
+Smoothie King,308754438
+Smurfit Westrock,14355558
+Snap Fitness,13725077
+Snapbox Self Storage,188269
+Snappy Salads,6998904
+Snappy's,2700548
+Snarf's Sandwiches,832754
+Snip-its,807469
+Snooze Eatery,7287327
+Snuffer's Restaurant & Bar,5823365
+SoBol Acai Bowls & Beyond,5432897
+Soapy Joe's Automatic Car Wash,668493
+Soccer Post,1979498
+Sofitel,1383080
+Soft Surroundings,2303921
+Sola Salon Studios,5241299
+Solstice Sunglasses,519480
+Soma Intimates,3793662
+Somerset Trust Company,1673358
+Sonesta Hotels & Resorts,18926635
+Sonic,1104698567
+Sonic Automotive,129803
+Sonny’s Real Pit Bar-B-Q,25374075
+Sonoco Products Company,1936874
+Sotheby’s International Realty,2770162
+SoulCycle,3081520
+Soulman's Barbque,6626131
+Soup Shack,684011
+Souper Salad,212019
+Souplantation,661126
+Source for Sports,4775391
+South Beach Tanning Company,318727
+South Moon Under,549895
+South Shore Bank,395419
+South State Bank,6124409
+Southern Finance,45113
+Southern Self Storage,19933
+Southern Tire Mart (STM),2059796
+Southern Tire Mart at Pilot Flying J,886442
+SouthernCarlson,935141
+Souvla,622594
+Space NK,60629
+Spaces,3807930
+Spangles,3307903
+Spark by Hilton,936520
+Sparkle,2486914
+Sparkling Image Car Wash,496130
+SpartanNash Distribution,294804
+Spavia,379102
+"Spec's Wine, Spirits & Finer Foods",31536906
+Specialty's Cafe and Bakery,1309306
+Spectrum,26643586
+SpeeDee Oil Change & Auto Service,2155731
+Speedway,674998139
+Speedy Cafe,2053032
+Speedy Cash,986430
+Speedy Glass,277703
+Speedy Stop,8985773
+Spencer's,37342830
+Sperry Top-Sider,2341650
+Spherion Staffing Services,147201
+Spin! Neapolitan Pizza,9125798
+Spirits Unlimited,5210839
+Spitz,218116
+Splash Car Wash,485889
+Splendid,875171
+Sport Clips,30823709
+Sports Basement,1368192
+Sports Fever,3681686
+Sportsman's Warehouse,24618185
+Spread Bagelry,703640
+Spring Creek Barbeque,1145804
+Spring Market,7594410
+SpringHill Suites by Marriott,115386115
+Sprinkles,7110715
+Sprint,4584301
+Sprint Food Store,22749621
+Sprouts,384829758
+Sprouts Distribution,467940
+Squeeze In Breakfast & Lunch,912223
+St. Regis,3432111
+Staffmark,178865
+Stage Stores,1175419
+Standard Bank Pennsylvania,195227
+Stanton Optical,3757149
+Staples,107695512
+Staples Studio,1299365
+Staples Warehouse,531957
+Star Furniture,123973
+Star Market,33601051
+Starbucks,3103714207
+Starcycle,2049664
+Starlight Cinemas,119666
+Starr Western Wear,5826939
+State Farm,69480922
+State RDA,1285567
+Stater Bros. Markets,262590277
+StaxUP Storage,468815
+Staybridge Suites,22799333
+Steak 'n Shake,111165959
+Steak-Out,1102937
+Stein Mart,3503276
+Stellar Bank,1948805
+Sterling National Bank,1539090
+Sterling Optical,1080438
+Steve Madden,27863116
+Stevi B's Pizza Buffet,2142907
+Stew Leonard's,5486608
+Stewart's Shops,68063415
+Stickley Audi Furniture,514267
+Stir Fry 88,9239500
+Stone Brewing,350426
+Stone Fire Grill,3349144
+Stone Island,31416
+Stoneside Blinds & Shades,149869
+Stonewood Grill & Tavern,1095829
+Stop & Shop,408303280
+Stop & Shop Pharmacy,5228506
+Stor America Self Storage,205013
+StorQuest,2949673
+Storage Court,463752
+Storage King USA,2128683
+Storage Mart,628503
+Storage Outlet,385609
+Storage Pros,1858744
+Storage Rentals of America (SROA),871180
+Storage West,142183
+Store Space Self Storage,521307
+Straw Hat Pizza,2196854
+Strayer University,6140501
+Street Corner,2540592
+StretchLab,6885716
+Stride Rite,1401472
+Stripes Convenience Stores,12011336
+Stuart Weitzman,88766
+Stuckey's,901891
+Studio 6,6461798
+Studio Barr,982724
+Studio Movie Grill,813299
+Studio Three,1097299
+Sturdy Savings Bank,961290
+Style America,71718
+Style Encore,3508982
+Style Houston Salons,21206
+Sub Zero Ice Cream & Yogurt,957854
+Subaru,8713146
+Submarina California Subs,512562
+Suburban Extended Stay,2585970
+Suburban Propane,651629
+Subway,4002985150
+Suddenlink,962687
+Sugarfina,592017
+Sugarfish,1251399
+SuitSupply,1005812
+Sullivan Tire Truck Center,345369
+Sullivan Tire and Auto Service,873506
+"Summit Materials, Inc.",3198689
+Sun & Ski Sports,7978741
+Sun Country Cleaners,573502
+Sun Fresh,741066
+Sun Loan,4500798
+Sun Outdoors,1447698
+Sun Stop,11550617
+Sun Tan City,1311519
+SunTrust Banks,4772105
+Sunbelt Credit,240085
+Sunbelt Rentals,1578970
+Suncoast Credit Union,2630457
+Suncoast Roofers Supply,43060
+Sundiego,1841219
+Sunflower Bank,1582710
+Sunflower Shoppe,592416
+Sunglass Hut,32516293
+Sunglass World,225606
+Sunnin,259920
+Sunoco,1690392060
+Sunrise Dental,297380
+Sunstone Yoga,690781
+Super 1 Foods & Discount Pharmacy,10921155
+Super 1 Pharmacy,1032846
+Super 8,38586134
+Super A Foods,4098169
+Super Chix,166996
+Super Clean Car Wash,85320
+Super Dollar,1302602
+Super Duper Burgers,3766784
+Super King Markets,17714796
+Super Mex,282524
+Super Shoes,3682916
+Super Star Car Wash,156775
+Super Wash,66880
+Superba Food and Bread,947658
+Supercuts,91555197
+Superdry,3038651
+Superfresh,13510172
+Superior Grocers,12230919
+Supplement Superstores,1349680
+Supreme Detailing Superstore,23579
+Supremo Food Markets,19839611
+Sur La Table,2281539
+Surcheros,16988879
+Surf City Squeeze,5032003
+Surf Taco,3110183
+Surf Thru Express Car Wash,233151
+Sushi Garden,672888
+Sushi Roku,2119369
+SusieCakes,889834
+Suspiros Pastelerias,257331
+Sutherland Lumber,5001726
+Suzuki,11271260
+Swami's Cafe,992171
+Swarovski,11507327
+Sweaty Betty,820411
+Sweet & Sassy,684148
+Sweet Factory,674810
+Sweet Frog,34903984
+Sweet Paris Creperie & Cafe,7015473
+Sweet Pea's,1143436
+Sweet Tomatoes,1435441
+Sweetfin Poke,195405
+Swerve Fitness,162004
+Swig,2234054
+Swiss Farms,20930799
+Sylvan Learning,9887692
+Syncreon Holdings,348523
+Synovus,4469780
+Sysco Distribution,361282
+T-Mobile,135072190
+T.J. Maxx,682651402
+T2 Tea,123537
+TACO DEL MAR,8751875
+TCBY,9929968
+TCC,4546212
+TD Ameritrade,433019
+TD Bank,44884260
+TForce Freight,2813756
+THE MAX Challenge,1842139
+THRIVE Affordable Vet Care,307469
+TITLE Boxing Club,4120183
+TKK Fried Chicken,659774
+TOBU,8953233
+TOM FORD,43117
+TOM N TOMS Coffee,206332
+TP TEA,1439337
+TRC Staffing,13995
+TRYP by Wyndham,408823
+TSO - Texas State Optical,907215
+TVC Communications,369442
+TaMolly's Mexican Kitchen,166442
+Taco Bell,2399718213
+Taco Bueno,35195513
+Taco Cabana,85846826
+Taco Casa,47919427
+Taco John's,12858071
+Taco Mac,2388391
+Taco Mayo,518442
+Taco Palenque,2514494
+Taco Shack,1115396
+Taco Time Northwest,45575556
+Taco Villa,2675889
+TacoTime,7316779
+Tacodeli,984668
+Tacolicious,945017
+Tacos 4 Life,578470
+Tacos Chukis,336658
+Tag Heuer,86542
+Tahoe Joe's Famous Steakhouse,718553
+Take 5 Car Wash,1055460
+Take 5 Oil Change,6163582
+Talbots,14386254
+TalkTime,1107525
+Talpa Super Mercados,9615324
+Tan Republic,466892
+Tandy Leather Factory,4625955
+Tapestry Collection by Hilton,11777554
+Tapioca Express,3784461
+Tapout Fitness,1151127
+Taqueria del Sol,987899
+Taquerias Arandas,4568835
+Target,1279009385
+Target Distribution,431986
+Target Optical,10701773
+Tarka Indian Kitchen,3344546
+Tasco Auto Color,114321
+Taste,161440
+Taste Buds Kitchen,220735
+Tasti DLite,296215
+Tatte Bakery,9079446
+Taunton Federal Credit Union,103126
+Taziki's,511242
+Techy,474716
+Tecovas,3984807
+Ted Baker,3140026
+Ted's Montana Grill,4929350
+Telstra Global Offices,286966
+Temple Coffee,6601464
+Tempur,4719317
+Ten Thousand Villages,1246400
+TenRen's Tea,1719061
+Tender Greens,10456133
+Teriyaki Madness,5754330
+Terminix,45852
+Terrain's Greenhouse Cafe,5967740
+Terrible Herbst,143584
+Terry's Supermarket,5937352
+Tervis,806908
+Tesla Motors,7258154
+Tesla Service Center,6042734
+Tex's Chicken and Burgers,5395185
+Texaco,326592254
+Texadelphia,3228183
+Texan Credit Corporation,237925
+Texas Car Title & Payday Loan Services,972094
+Texas Family Fitness,1551645
+Texas Farm Bureau Insurance,749271
+Texas Roadhouse,168190593
+Texas Tool Traders,1432274
+Texas de Brazil,8211639
+Thai BBQ,423708
+Thai Express,1811139
+The Ainsworth,182825
+The Art of Shaving,120623
+The Athlete's Foot,2441995
+The Baked Bear,1622919
+The Bank of Castile,1677379
+The Bank of Princeton,344033
+The Bank of Tampa,1090060
+The Bar Method,3206748
+The Barbers,374493
+The Barre Code,480521
+The Bay Club,2927549
+The Big Biscuit,6649184
+The Black Dog,1667569
+The Blazing Onion,1314778
+The Body Shop,2577997
+The Boiling Crab,5890671
+The Book Rack,1133791
+The Brass Tap,2641433
+The Broken Yolk Cafe,6294403
+The Bryn Mawr Trust Company,224156
+The Buffalo Spot,441530
+The Burger Bar by Wegmans,950973
+The Burger Den,55609744
+The Burger Joint,993581
+The Camp Transformation Center,3236916
+The Cannabist Company,1460087
+The Cape Cod Five Cents Savings Bank,667099
+The Capital Grille,7942887
+The Cash Store,1744212
+The Cat Rental Store,940340
+The Center for Medical Weight Loss,516863
+The Check Cashing Store,2276425
+The Cheesecake Factory,73405646
+The Children's Place,34103299
+The City National Bank,652051
+The Cleaning Authority,355985
+The Coffee Bean & Tea Leaf,16802948
+The Container Store,12934584
+The Counter,228798
+The Crab Station,298777
+The DRIPBaR,338084
+The Dailey Method,493490
+The Dog Stop,258274
+The Dump,34997
+The Edge Fitness Clubs,2212349
+The Ephrata National Bank,188475
+The Exchange,7099311
+The Exercise Coach,2698130
+The EyeDoctors Optometrists,104731
+The Family Center Superstores,360170
+The Farmers National Bank,297757
+The Fidelity Deposit and Discount Bank,392917
+The Flame Broiler,20743660
+The Floor Trader Outlet,71247
+The Food Emporium,3544256
+The Fresh Grocer,4837029
+The Fresh Market,80440831
+The Fresh Works,1428841
+The Frullati Cafe and Bakery,110302
+The Furniture Mall,767614
+The Futon Shop,754504
+The Gents Place,621893
+The Golf Mart,2268923
+The Good Feet Store,10480035
+The Great American Bagel,4749262
+The Great Greek Grill,32283901
+The Green Turtle,466742
+The Habit Burger Grill,134451061
+The Halal Guys,31634731
+The Home Depot,1104809390
+The Home Depot Rental,4824030
+The Honey Baked Ham Co.,32162932
+The Hummus & Pita Co,1342711
+The Hummus Factory,204935
+The Huntington National Bank,931341
+The Jewelry Exchange,860636
+The Juicy Crab,854914
+The Kebab Shop,4454476
+The Keg Steakhouse & Bar,1953130
+The Kooples,114806
+The Lash Lounge,5762781
+The Little Beet,1208115
+The Little Gym,6142035
+The Loop Pizza Grill,1796943
+The Lost Cajun,295926
+The Luxury Collection,129990
+The Massage Place,532026
+The Mattress Factory,776375
+The Meadows,6249599
+The Medicine Shoppe,10721434
+The Melt,836540
+The Meltdown,491980232
+The Melting Pot Restaurant,20095713
+The Men's Wearhouse,15208777
+The Mosaic Company,586726
+The Natural Cafe,1675453
+The North Face,21711534
+The Northern Trust Company,934935
+The Oceanaire Seafood Room,436031
+The Office Tavern Grill,548811
+The Old Spaghetti Factory,6443126
+The Original Mattress Factory,2098290
+The Original Mel's Diner,1686655
+The Original Pancake House,7389039
+The Other Place,3615820
+The Palm Restaurant,320805
+The Paper Store,9796591
+The Parking Spot,27546914
+The Perfect Workout,3082624
+The Pie Hole,371590
+The Pizza Press,1842547
+The Pod Hotel,351740
+The Princeton Review,402003
+The RealReal,2773646
+The Ritz-Carlton,11278986
+The Rock Wood Fired Pizza,680617
+The Salty Donut,1055626
+The Salvation Army,78318244
+The Sandwich Spot,2005267
+The Scotts Miracle-Gro Company,3044603
+The Shade Store,11871783
+The Shippers Group,423018
+The Simple Greek,1291675
+The Six,592912
+The Spice & Tea Exchange,18864670
+The Spot Barbershop,672053
+The Taco Stand,6700652
+The Teahouse Tapioca & Tea,1764041
+The Texan,2217905
+The Tile Shop,233549
+The Tire Choice & Total Car Care,8820961
+The Tutoring Center,1238300
+The UPS Store,87554117
+The Unbound Collection by Hyatt,231551
+The Uniform Outlet,3748649
+The Union Kitchen,222508
+The Varsity,1023598
+The Vitamin Shoppe,16023395
+The Wash Tub,229464
+The Wing Experience,2008346
+The Woodhouse Day Spa,349523
+The Yard,3019929
+The Zoo Health Club,3934143
+Thee Dollar Cafe,1887372
+Theory,1456524
+Thermo Fisher Manufacturing,363122
+Things Remembered,2623000
+Third Love,1862098
+Thirsty Lion Gastro Pub,4567163
+Thompson Hotels,4780134
+Thorntons,9490968
+Thousand Trails,1435986
+Three Dog Bakery,3177224
+Thrifty Car Rental International,8157067
+Thrifyway Pharmacy,964381
+Thrivent,1959521
+ThunderCloud Subs,9209506
+Tidal Wave Auto Spa,2350917
+Tide Dry Cleaners,1669709
+Tiff's Treats,460512
+Tiffany & Co.,919854
+Tiger Rock Martial Arts,1707138
+Tiger Schilmann's Martial Arts,513492
+Tiger Sugar,8785505
+Tijuana Flats,59443252
+Tilly's,43987007
+Tilted Kilt,1299105
+Tim Ho Wan,647236
+Tim Hortons,38696627
+Timberland,4682139
+Timewise Food Store,101229567
+Timex,302369
+Timken Manufacturing,38384
+Tin Drum Asian Kitchen,6401448
+Tin Fish Restaurants,2596538
+Tinseltown,2365609
+Tint World,5662744
+Tio's Mexican Food,577941
+Tioga State Bank,1067767
+Tire Discounters,320134
+Tire Factory,270891
+Tire Kingdom,8432697
+Tire-Rama,461107
+Tires Plus,28298001
+Tissot,621326
+Titan Machinery,27473
+Title Cash,33921
+Title Nine,409012
+TitleMax,4901001
+Toadal Fitness,613208
+Tocaya,1775942
+Tod's,294202
+Todd Synder,246675
+ToddPilates and Barre,51175
+Togo's Eateries,21955677
+Tom James,1108655
+Tom Thumb,48229424
+Tom Thumb Food & Pharmacy,89316712
+Tom Thumb Food Stores,4460265
+Tom Thumb Pharmacy,20780567
+Tom and Chee,673402
+Tom's Famous Family Restaurant,4728797
+Tommy Bahama,9654811
+Tommy Bahama Restaurants and Marlin Bars,3459910
+Tommy Hilfiger,18714729
+Tommy John,312889
+Tommy's Express Car Wash,641469
+Toni & Guy,437906
+Tony Roma's,608798
+Tonya's Treasures Inc,347213
+TooJay's,3576304
+Toot'n Totum,1013719
+Top Fitnes,1121221
+Top Pot Doughnuts,5394964
+Top Round Roast Beef,1175571
+Top Star Express,6214627
+Topgolf,4425593
+Topman,248473
+Toppers Pizza,259345
+Tops Friendly Markets,228036504
+Tops Pharmacy,2768889
+Torchy's Tacos,17488228
+Tori Richard,58810
+Torrid,12125456
+Tory Burch,2128575
+Tossed,4280991
+Total Wine & More,48282918
+Tourneau,277428
+Tous,800185
+Tous Les Jours,2078535
+Town & Country Supermarket,16433694
+Town Fair Tire,1822515
+Town Star,6060529
+Towncare Dental,313961
+TownePlace Suites by Marriott,60650619
+Toyota,25404963
+Tractor Supply Co.,207389362
+Trade Fair Supermarket,15824278
+Tradehome Shoes,7499982
+Trademark Hotels,3278477
+Trader Joe's,496442471
+Trader Joe's Distribution,257399
+TransGroup Global Logistics,135738
+Transplace Inc.,111307
+TravelCenters of America,5786077
+Travelodge,12322526
+Travis Mathew,2341978
+Trejo's Tacos,560799
+Trexcon,11567232
+Tri Counties Bank,1726570
+Tribute Portfolio,1624476
+Trina Turk,63989
+Trinity Logistics,5838
+Triumph Motorcycles,1466591
+Tropical Smoothie Café,246007584
+Tropical Supermarket,3973000
+Tru Fit Athletic Clubs,13454739
+TruGreen,489634
+Trucchi's Supermarkets,343531
+True Food Kitchen,4324891
+True REST Float Spa,601450
+True Religion Apparel,1535656
+True Value Company,230296141
+Trufusion,3738735
+Truist,36010334
+Trulieve,3436165
+Trunk Club,3109
+Trust Mark,1106084
+Trustco Bank,6458816
+Tuesday Morning,24961930
+Tuff Shed,604581
+Tuffy Auto Service Centers,737200
+Tumi,6615920
+Tune Up - The Manly Salon,1823872
+Tupelo Honey,1290526
+Turkey Hill,51586138
+Turner Furniture,972921
+Turner's Budget Furniture,738632
+Turner's Outdoorsman,10016524
+Tutoring Club,1131267
+Tutta Bella,782554
+Tutti Frutti,9155316
+Tuxedo Junction,343865
+Tuxedo by Sarno,4839370
+Twin Liquors,8683132
+Twin Peaks Restaurant,21568813
+Twisted Root Burger,11603292
+Twisted Sugar,490921
+Twitch Fitness,183774
+Two Men And A Truck,638760
+Tyler's,1352398
+Typo,1247935
+U-Haul,37909234
+U-Save-It Pharmacy,2166971
+U-Swirl Frozen Yogurt,503972
+U.S. AutoForce,1598606
+U.S. Bank,42756355
+U.S. Cellular,1222319
+U.S. Polo Assn.,1372057
+U.S. Xpress Terminal,46670
+UBS Group,5574470
+UCBI,1066822
+UFC Gym,4527110
+UGG,6112920
+ULTA Beauty,110585994
+UMB Bank,1835206
+UNFI (United Natural Foods),4008797
+UPS Customer Center,4830361
+UPS Fulfillment Center,458920
+US Foods,2358193
+US Foods Distribution,167656
+US Storage Centers,671186
+USA Storage Centers,322474
+USAA,30739
+Ulysse Nardin,5888578
+Umami Burger,306320
+Umpqua Bank,5400859
+Uncle Giuseppe's,9792645
+Uncle Julio's,9065611
+Uncle Louie G,544312
+Uncle Tetsu Cheesecakes,14433549
+Uncommon James,263852
+Under Armour,7089951
+Uni K Wax,889829
+Uni Mart,3666235
+UniBank,180200
+UniBank Massachusetts,263040
+UniVista Insurance,1005790
+Unico Bank,934698
+Unifirst,932833
+Uniform Destination,1815267
+Union Bank,4100376
+Uniqlo,13400735
+United Check Cashing,718030
+United Express,25889009
+United Facilities,37988
+United Grocery Outlet,1264882
+United Pacific,25124980
+United Pharmacy,1594802
+United Propane Gas,460132
+United Refrigeration,3292464
+United Rentals,1145062
+United States Cold Storage,33132
+United States Postal Service (USPS),242889785
+United Supermarkets,38720901
+United Taekwondo Center,993275
+United Tire & Service,1422287
+United Way,6204973
+University of Phoenix,7295558
+Unleashed by Petco,11548564
+Uno Chicago Grill,4667796
+Uno de 50,95759
+Untuck It,2799391
+Uptown Cheapskate,10053946
+Urban Air Trampoline Park,8870334
+Urban Bricks Pizza Co.,793810
+Urban Outfitters,37054821
+Urban Plates,6910960
+Urban Zen,151373
+Urbane Cafe,10715597
+Urth Caffe,2505138
+V's Barber Shop,449223
+VCA Animal Hospitals,2994058
+VF Outlet,282422
+VIM,5722362
+VIO Med Spa,2221881
+VIP Petcare,15716265
+VIP Tires & Service,136804
+VP Racing Fuels,6476097
+Vacheron Constantin,1827219
+Vaco,27405
+Vail Resorts,4288522
+Valentino,686049
+Valero Energy,341209911
+Vallarta Supermarkets,29380224
+Valley Bank,10539751
+Valley First Credit Union,405288
+Valsan,710727
+Valu Home Centers,22513848
+Value City Furniture,8128739
+Value Pawn and Jewelry,13768724
+Value Village Thrift Stores,2554211
+Valvoline,89530503
+Valvoline Express Care,9960422
+Van Cleef & Arpels,62438
+Van Heusen,457049
+Van Leeuwen Artisan Ice Cream,4369814
+Vanderbilt's,315162
+Vanilla Sky,127562
+Vans,103097373
+Vapor Maven,2840111
+VaporFi,311461
+Veggie Grill,7036946
+Velox Insurance,412520
+Velvet Taco,13049239
+Venus Et Fleur,2769940
+Vera Bradley,4693917
+Veritex Community Bank,778585
+Verizon Wireless,43851412
+Verlo,476764
+Vermeer,1143539
+Veronica's Insurance,527970
+Versace,977875
+Versona,15747072
+Verve Coffee Roasters,770223
+VetIQ Petcare,78376
+Veterinary Emergency Group,2020767
+Victoria's Secret,257957081
+Victory Martial Arts,701165
+Victra,75191632
+Vilebrequin,268078
+Villa Italian Kitchen,2542742
+Village Inn,10158208
+Vince.,1766927
+Vino 100,374264
+Vino Volo,386809
+Vionic,933482
+Visionworks,12771785
+Vista Paint,183826
+Visual Comfort,606507
+Vitality Bowls,7004848
+Vitamin World,269405
+Vivi Bubble Tea,7494884
+Vocelli Pizza,8977180
+Voco Hotels,1379528
+Volcom,2311571
+Volkswagen,6752053
+Volvo,2484034
+Volvo Trucks,595887
+Von Maur,9715702
+Vons,269604108
+Vons Pharmacy,3611759
+VooDoo BBQ & Grill,640263
+Vulcan Materials Company,9623903
+Vuori,2317228
+Vyve Broadband,555423
+W Hotels,2216953
+W. W. Grainger,3702386
+W. W. Grainger Distribution,49948
+WB Liquors & Wine,2705390
+WEL Cos.,83630
+WESCO Distribution,1698012
+WORLDPAC,1323844
+WOW Cafe,612377
+WSFS Bank,1831209
+WSS,22438392
+WaBa Grill,15876819
+Waffle House,419385650
+Wag N' Wash Natural Food & Bakery,108733
+Wag-A-bag,360153
+Wagamama,236097
+Wagner Logistics,35226
+Wahlburgers,4225709
+Wahoo's Fish Taco,7537634
+Walden Savings Bank,424009
+Waldorf Astoria Hotels & Resorts,211203
+Walgreens,1331510431
+Walgreens Pharmacy,168994864
+Walk-On's Bistreaux & Bar,4003386
+Walmart,5347685565
+Walnut Grill,720331
+Walters Wholesale Electric,4316402
+Warby Parker,2337721
+Warhammer,3713570
+Warren James,233647
+Wasabi,708679
+Washington Federal,2534198
+Washington State Employees Credit Union,264784
+Washington Trust,202430
+Washington Trust Bank,1039339
+Watch Station,1227442
+Watches of Switzerland,268347
+Watco Supply Chain Services,345947
+Water Grill,1060212
+Watermill Express,9900402
+Watershed Car Wash,190495
+Waterway Carwash,451689
+Waterworks,93999
+Wawa,189720042
+Waxing The City,544982
+Wayback Burgers,19321774
+Wayfield,6639535
+We Florida Financial,54115
+WeWork,9280633
+Weber Logistics,403301
+Webster Bank,2400504
+Webster University,14060776
+Webuyanycar,265124
+Wegmans Distribution,174817
+Wegmans Food Markets,109401880
+Wegmans Pharmacy,19737398
+Weight Watchers,6200393
+Weis Markets,171935964
+Weis Pharmacy,37334777
+Weldon Barber,371844
+Wells Fargo,135931518
+Wendy's,2003743450
+WesBanco,940921
+West America,1580669
+West Coast Dental,262106
+West Elm,5714508
+West Fraser Timber Co. Ltd.,6988531
+West Marine,2500516
+Western Beef,22965651
+Western Dental,1847228
+Western Exterminator,29760
+Westfield Bank,639445
+Westgate Resorts,1228652
+Westin Hotels & Resorts,34382490
+Westlake Chemical Corporation,4613995
+Westshore Pizza,1370068
+Westside Pizza,9370617
+Westville,36337
+Wetzel's Pretzels,53621900
+Whataburger,623212504
+Wheel Works,132861
+Which Wich,28925294
+Whiplash,1004858
+Whiskey Cake,5067092
+Whit's Frozen Custard,589412
+White Cap,11616110
+White Castle,72620971
+White House Black Market,10376106
+White Oak Station,701241
+Whole Foods Market,557625194
+Whole Hog Cafe,1242643
+Wichcraft,53073
+Wienerschnitzel,83851146
+Wilco Farm Stores,994589
+Wild Bean Cafe,5119911
+Wild Birds Unlimited,11233198
+Wild Fork,6246438
+Wild Willy's Burgers,553809
+Wild Wing Cafe,15033493
+Wild by Nature,2987767
+WillScot,911843
+Willamette Dental Group,282015
+Williams Chicken,3837015
+Williams-Sonoma,13954029
+Willie Jewel's Old School Bar-B-Q,378225
+Willy's Mexicana Grill,2865328
+Wilson Sporting Goods,714500
+Wilsons,410662
+WinCo Foods,146652745
+WinCo Foods Distribution,394763
+WinWholesale,21137868
+Winchell's Donut House,6044692
+Windermere Real Estate,2650548
+Window World,370784
+Windsor,22550306
+Wing Lung Bank,113257
+Wing Zone,2669942
+Wing it On!,161156
+WingHouse Bar & Grill,351751
+Wingate by Wyndham,13564161
+Wings Over,815975
+Wings To Go,658780
+Wingstop,478501652
+Winn Dixie,513237607
+Winn Dixie Pharmacy,4106947
+Winn-Dixie Distribution,316471
+Winnebago Dealer,995862
+Winstead's,2603034
+Wintrust Community Banks,100647
+Wireless M,2081039
+Wireless Plus,988388
+Wireless Zone,10263733
+Wokcano,1570519
+Wolf Furniture,54678
+Wolfgang Puck,1101693
+Wolford,421796
+Wonder,6444361
+Wood Ranch,2344983
+WoodSpring Hotels,4133662
+Woodcraft,3137305
+Woodforest National Bank,14749933
+Woods,3849798
+Woodstock Furniture & Mattress Outlet,1961660
+Woody's Bar-B-Q,691515
+Woody's Diner,2600357
+Woof Gang Bakery & Grooming,12694905
+Woolrich,124626
+Work 'N Gear,4880953
+Work Boot Warehouse,1374342
+Work Out World,372430
+Work World,2762388
+Workout Anytime,4489368
+World Finance,4609197
+World Gym,2729842
+"World Kitchen - Corningware, Corelle and More",1353839
+World Market,20533867
+World Wrapps,524641
+World of Beer,7615312
+Worldmark by Wyndham,1709840
+Wow Bao,157922767
+Wundabar Pilates,1409106
+Wyndham,7754273
+Wyndham Garden,1012490
+XFINITY by Comcast,23671697
+XPO,2187812
+XSport Fitness,1502785
+Xi'an Famous Foods,756314
+Xing Fu Tang,1075303
+XpresSpa,315821
+Xtend Barre,294697
+Xtramart,1358743
+YETI,1553439
+YWCA,4762024
+Yabo's Tacos,111737
+Yalla Mediterranean,437244
+Yankee Candle,19143018
+Yankee Spirits,500211
+Yard House,32474140
+Yesway Convenience,13949133
+Yifang Taiwan Fruit Tea,4158288
+Yoga Six,1935896
+YogaWorks,644210
+Yogen Früz,1559724
+Yogli Mogli,1778188
+Yogurt Mountain,2072063
+Yogurtini,1244937
+Yogurtland,35039280
+Yoke's Fresh Mart,3725905
+Yokes Pharmacy,464635
+Yolanda's Mexican Cafe,202631
+Yolk,540848
+Yoshinoya,9400562
+Youfit Health Clubs,3235117
+Young Chefs Academy,214689
+Your Pie,11072053
+Your Wireless,7826204
+Yum Yum Donuts,14140920
+Yusen Logistics,526897
+Yves Delorme,79660
+Z Gallerie,1384692
+Z Tejas,247338
+Z Ultimate Self Defense Studios,7822375
+ZAGG,11369266
+ZIPS Car Wash,2087309
+Zadig & Voltaire,1921722
+Zalat Pizza,3106277
+Zales,28812209
+Zankou Chicken,1766093
+Zara,35315848
+Zaxby's,257511609
+Zazu Salon,305576
+Zen Massage,18412
+Zero Degrees,1191018
+Zerorez,87210
+Ziebart,2736224
+Ziggi's Coffee,487421
+Zio's Italian Kitchen,451483
+Zion Market,781626
+Zions Bank,283442
+Zip's Drive In,3128039
+Zoup!,1992214
+Zoës Kitchen,22618251
+Zumiez,99230577
+Zurich Cinemas,470031
+Zwilling,4009944
+Zx,18027327
+[solidcore],3944915
+ahipoki bowl,1499016
+aka.,5638733
+ampm,27333290
+avid hotels,501210
+bareMinerals,479126
+barre3,4130052
+beem Light Sauna,105922
+bellagreen,3170143
+brick house TAVERN + TAP,856755
+dd's DISCOUNTS,65062124
+fab'rik,933700
+gorjana,5225652
+honeygrow,9503539
+i Fratelli Pizza,2468609
+iCRYO,298552
+iFixandRepair,2148734
+iFly Indoor Skydiving,893116
+iFresh Market,5184784
+iLoveKickboxing,4692733
+iPic Entertainment,1109568
+iSoldIt,50421
+iStorage,1357348
+ideal dental,706406
+illy Caffè,147456
+lululemon athletica,41520852
+maurices,24616810
+mobile destination,2906692
+nayuki,1422056
+nomnom,18710553
+pOpshelf,44707499
+rue21,49326297
+scotty browns,628698
+solita Tacos,1749484
+superfresh,11170602
+sweetgreen,10453382
+tavern in the square,6151924
+tops! at SPAR,1200712
+total by Verizon,33605404
+tru by Hilton,6337169
+uBreakiFix,8288312
+vineyard vines,12373569
+zpizza,727474
+Überrito,653147

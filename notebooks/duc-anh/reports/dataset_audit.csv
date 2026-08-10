@@ -1,0 +1,7 @@
+Dataset,Schema_Validated,Partitions_Found,Total_Rows,Columns,Missing_Values,Status
+core-poi-geometry-rice,True,32,511934,35,3366335,PASSED
+daily-spend-brand-and-state-rice,True,32,17253860,8,0,PASSED
+daily-weather-rice,True,31,732627,13,0,PASSED
+spend-patterns-rice,True,32,1026618,48,2147462,PASSED
+store-visits-rice,True,32,223342163,13,218383805,PASSED
+urban-heat-index-rice,True,32,1229291,5,0,PASSED
