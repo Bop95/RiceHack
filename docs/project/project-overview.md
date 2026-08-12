@@ -45,11 +45,11 @@ FinalFlow is expected to support:
 
 ## Current repository state
 
-The repository contains a tested four-page Streamlit application in
-`paddydash/`, compact derived summaries, reproducible synthetic scenarios,
-deterministic analytics, and optional server-side OpenAI narration. The app can
-run completely in prepared-data mode and does not load restricted raw data at
-runtime.
+The repository contains a tested five-page Streamlit application in
+`paddydash/`, compact derived store-visit, spatial/heat, and historical-weather
+summaries, reproducible synthetic scenarios, deterministic analytics, and
+optional server-side OpenAI narration. The app can run completely in
+prepared-data mode and does not load restricted raw data at runtime.
 
 The current deployment target is Streamlit Community Cloud from the protected
 `main` branch. A standalone HTTP API, TypeScript frontend, SerpAPI integration,

@@ -65,7 +65,7 @@ The project currently works with Python 3.12 and Streamlit 1.60.
 
 ## 2. What the app contains
 
-The prototype has four pages:
+The prototype has five pages:
 
 1. **Overview** presents the project scope, summary cards, historical monthly
    activity, leading categories, markets, and limitations.
@@ -74,7 +74,11 @@ The prototype has four pages:
    percentiles, and the report-ready static plots.
 3. **Scenario Explorer** compares six clearly labeled synthetic scenarios using
    scenario, zone, and category filters.
-4. **Ask FinalFlow** answers questions from approved prepared data, attaches
+4. **Spatial & Heat Map** displays the bounded derived NY/NJ location table with
+   combined filters, heat-evidence states, commercial tiers, and a table
+   fallback.
+5. **Ask FinalFlow** answers questions from approved prepared data, including
+   historical-weather evidence, attaches
    evidence and a related chart, and shows the relevant limitations.
 
 ## 3. Overall architecture
@@ -94,7 +98,7 @@ Compact derived and synthetic CSV files
 Validated data service -> analytics and chart functions
                 |
                 v
-Four Streamlit pages -> paddydash/app.py
+Five Streamlit pages -> paddydash/app.py
 ```
 
 This separation matters because the cleaned Parquet is approximately 5.2 GB.
@@ -222,7 +226,7 @@ It performs four jobs:
 
 1. Sets the page title, icon, wide layout, and expanded sidebar.
 2. Validates that all prepared dashboard data can be loaded.
-3. Registers the four page-rendering functions with `st.Page` and
+3. Registers the five page-rendering functions with `st.Page` and
    `st.navigation`.
 4. Displays a permanent sidebar reminder that store visits are a proxy and that
    synthetic scenarios are illustrative.
@@ -365,10 +369,12 @@ The tests verify:
 - scenario multiplier accuracy;
 - valid brand-category pairs;
 - named-scenario chatbot comparisons;
+- spatial/weather builder validation, geofencing, and missing-evidence handling;
+- historical-weather routing, exact station-date units, and forecast refusal;
 - out-of-scope handling;
 - the mocked OpenAI request and safe fallback;
 - reviewed Plotly encodings; and
-- successful rendering of all four Streamlit pages.
+- successful rendering of all five Streamlit pages.
 
 ## 12. Common changes you may want to make
 

@@ -7,6 +7,8 @@ request or printing secret values.
 from __future__ import annotations
 
 import argparse
+import csv
+import hashlib
 import json
 import subprocess
 import sys
@@ -18,7 +20,7 @@ if str(REPOSITORY_ROOT) not in sys.path:
     sys.path.insert(0, str(REPOSITORY_ROOT))
 
 from paddydash.services.ai_service import api_is_configured, get_model_name
-from paddydash.services.data_service import load_dashboard_data
+from paddydash.services.data_service import load_dashboard_data, load_spatial_heat_data
 
 
 DEPLOYABLE_FILES = (
@@ -28,6 +30,7 @@ DEPLOYABLE_FILES = (
     "paddydash/pages/overview.py",
     "paddydash/pages/store_visit_explorer.py",
     "paddydash/pages/scenario_explorer.py",
+    "paddydash/pages/spatial_heat_map.py",
     "paddydash/pages/ask_finalflow.py",
     "paddydash/services/ai_service.py",
     "paddydash/services/analytics.py",
@@ -45,6 +48,10 @@ DEPLOYABLE_FILES = (
     "data/summaries/monthly_trends.csv",
     "data/summaries/brand_monthly_trends.csv",
     "data/summaries/category_monthly_trends.csv",
+    "data/summaries/spatial_heat_locations.csv",
+    "data/summaries/spatial_heat_locations.metadata.json",
+    "data/summaries/weather_risk_summary.csv",
+    "data/summaries/weather_risk_summary.metadata.json",
     "data/synthetic/store_visit_scenarios.csv",
     "data/synthetic/store_visit_scenarios_dictionary.md",
     "reports/figures/store_visits_distribution.png",
@@ -52,6 +59,52 @@ DEPLOYABLE_FILES = (
     "reports/figures/store_visits_top_categories.png",
     "reports/figures/store_visits_weekday_pattern.png",
 )
+MAX_DEPLOYABLE_FILE_BYTES = 10_000_000
+MAX_DEPLOYABLE_BUNDLE_BYTES = 20_000_000
+ARTIFACT_MANIFESTS = {
+    "data/summaries/spatial_heat_locations.csv": (
+        "data/summaries/spatial_heat_locations.metadata.json"
+    ),
+    "data/summaries/weather_risk_summary.csv": (
+        "data/summaries/weather_risk_summary.metadata.json"
+    ),
+}
+
+
+def _sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+def validate_artifact_manifest(
+    root: Path,
+    artifact: str,
+    manifest: str,
+) -> list[str]:
+    errors: list[str] = []
+    artifact_path = root / artifact
+    manifest_path = root / manifest
+    try:
+        metadata = json.loads(manifest_path.read_text(encoding="utf-8"))
+    except (OSError, UnicodeError, json.JSONDecodeError) as error:
+        return [f"Artifact manifest is invalid ({manifest}): {error}"]
+    if str(metadata.get("artifact", "")).replace("\\", "/") != artifact:
+        errors.append(f"Artifact manifest path does not match {artifact}.")
+    expected_hash = str(metadata.get("artifact_sha256", "")).casefold()
+    if not expected_hash or expected_hash != _sha256(artifact_path).casefold():
+        errors.append(f"Artifact SHA-256 does not match {artifact}.")
+    try:
+        with artifact_path.open("r", encoding="utf-8-sig", newline="") as stream:
+            row_count = sum(1 for _ in csv.DictReader(stream))
+    except (OSError, UnicodeError, csv.Error) as error:
+        errors.append(f"Artifact rows could not be counted ({artifact}): {error}")
+    else:
+        if metadata.get("accepted_rows") != row_count:
+            errors.append(f"Artifact row count does not match {manifest}.")
+    return errors
 
 
 def _tracked_files(root: Path) -> set[str] | None:
@@ -87,11 +140,29 @@ def run_checks(
         for item in DEPLOYABLE_FILES
         if (root / item).is_file()
     )
+    oversized_files = [
+        item
+        for item in DEPLOYABLE_FILES
+        if (root / item).is_file()
+        and (root / item).stat().st_size > MAX_DEPLOYABLE_FILE_BYTES
+    ]
+    if oversized_files:
+        errors.append(
+            "Deployable files exceed the 10 MB per-file limit: "
+            + ", ".join(oversized_files)
+        )
+    if bundle_size > MAX_DEPLOYABLE_BUNDLE_BYTES:
+        errors.append("Deployable bundle exceeds the 20 MB release limit.")
+
+    if not missing:
+        for artifact, manifest in ARTIFACT_MANIFESTS.items():
+            errors.extend(validate_artifact_manifest(root, artifact, manifest))
 
     if not missing:
         try:
             load_dashboard_data.cache_clear()
             data = load_dashboard_data(str(root))
+            spatial = load_spatial_heat_data(str(root))
         except (FileNotFoundError, KeyError, TypeError, ValueError) as error:
             errors.append(f"Prepared dashboard data failed validation: {error}")
         else:
@@ -101,6 +172,8 @@ def run_checks(
                 "markets": len(data.markets),
                 "monthly": len(data.monthly),
                 "scenarios": len(data.scenarios),
+                "weather_metrics": len(data.weather),
+                "spatial_locations": len(spatial),
             }
     else:
         row_counts = {}
@@ -157,6 +230,7 @@ def run_checks(
         "entrypoint": "paddydash/app.py",
         "branch": "main",
         "bundle_size_mb": round(bundle_size / 1_000_000, 2),
+        "bundle_limit_mb": MAX_DEPLOYABLE_BUNDLE_BYTES / 1_000_000,
         "prepared_row_counts": row_counts,
         "openai_configured": openai_configured,
         "openai_model": get_model_name(),

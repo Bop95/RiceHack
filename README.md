@@ -10,17 +10,22 @@ The case study follows the Midtown Manhattan to New York New Jersey Stadium
 corridor for a hypothetical Spain versus Argentina final.
 
 The application combines compact approved store-visit summaries, clearly
-labeled synthetic scenarios, interactive charts, deterministic analytics, and
-optional server-side OpenAI narration. It never loads the restricted raw Rice
-datasets or the multi-gigabyte clean Parquet file at runtime.
+labeled synthetic scenarios, a derived spatial/urban-heat explorer, reviewed
+historical weather evidence, deterministic analytics, and optional server-side
+OpenAI narration. It never loads the restricted raw Rice datasets or the
+multi-gigabyte clean Parquet file at runtime.
 
 ## Release status
 
 Implemented now:
 
-- four Streamlit pages: Overview, Store-Visit Explorer, Scenario Explorer, and
-  Ask FinalFlow;
+- five Streamlit pages: Overview, Store-Visit Explorer, Scenario Explorer,
+  Spatial & Heat Map, and Ask FinalFlow;
 - compact `derived` summary tables and reproducible `synthetic` scenarios;
+- a 9,889-location NY/NJ exploratory map with commercial tiers, nearest UHI
+  evidence, an accessible table, and explicit missing-evidence handling;
+- eight deterministic historical-weather metrics for grounded chatbot answers,
+  with station-date units and forecast refusal;
 - grounded answers with validated evidence, data labels, limitations, and plots;
 - deterministic prepared-data operation when OpenAI is disabled or unavailable;
 - optional server-side OpenAI Responses API narration;
@@ -56,7 +61,7 @@ prepared-data response          optional OpenAI narration
         +---------------+---------------+
                         |
                         v
-               four Streamlit pages
+               five Streamlit pages
 ```
 
 OpenAI can improve wording, but the local analytics layer controls the selected
@@ -210,6 +215,11 @@ Runtime data uses these labels:
 
 Store visits are a historical commercial-activity proxy. They are not World Cup
 attendance, pedestrian flow, transit ridership, or a causal forecast.
+Weather percentages count station-date observations in the reviewed
+multi-station table; they are not calendar-day probabilities or live forecasts.
+Map heat labels and recommended actions are FinalFlow heuristics. The current
+rectangular NY/NJ extent is exploratory and must not be described as a verified
+venue boundary.
 
 ## Documentation
 
@@ -220,6 +230,7 @@ attendance, pedestrian flow, transit ridership, or a causal forecast.
 - [CI/CD beginner guide](docs/engineering/ci-cd-beginner-guide.md)
 - [CI/CD maintainer guide](docs/engineering/ci-cd-guide.md)
 - [Data contracts](docs/project/data-contracts.md)
+- [Spatial and weather integration design](docs/engineering/spatial-weather-streamlit-integration-design.md)
 - [Final validation report](reports/testing/final_handoff_validation_report.md)
 
 ## Ownership and handoff

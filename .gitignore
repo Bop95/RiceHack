@@ -46,6 +46,10 @@ data/summaries/*
 !data/summaries/brand_monthly_trends.csv
 !data/summaries/category_monthly_trends.csv
 !data/summaries/brand_category_mix.csv
+!data/summaries/spatial_heat_locations.csv
+!data/summaries/spatial_heat_locations.metadata.json
+!data/summaries/weather_risk_summary.csv
+!data/summaries/weather_risk_summary.metadata.json
 data/.store_visits_work/
 data/duckdb_tmp/
 data/synthetic/*

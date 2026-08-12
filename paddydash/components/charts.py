@@ -5,6 +5,7 @@ from __future__ import annotations
 import math
 from collections import defaultdict
 from datetime import datetime
+from html import escape
 from typing import Any
 
 import plotly.graph_objects as go
@@ -401,6 +402,95 @@ def scenario_risk_figure(rows: list[dict[str, Any]]) -> go.Figure:
     )
 
 
+def spatial_heat_map_figure(rows: list[dict[str, Any]]) -> go.Figure:
+    """Render validated spatial rows without exposing raw spend/customer data."""
+    figure = go.Figure()
+    color_map = {
+        "High": (WEEKEND_ORANGE, "High heat concern"),
+        "Low/Moderate": (MID_BLUE, "Low/moderate heat concern"),
+        "Insufficient evidence": ("#8A8A8A", "Insufficient UHI evidence"),
+    }
+    for heat_concern, (color, name) in color_map.items():
+        selected = [row for row in rows if row["heat_concern"] == heat_concern]
+        if not selected:
+            continue
+        figure.add_trace(
+            go.Scattermap(
+                lat=[row["latitude"] for row in selected],
+                lon=[row["longitude"] for row in selected],
+                mode="markers",
+                name=name,
+                text=[escape(row["location_name"]) for row in selected],
+                customdata=[
+                    [
+                        escape(row["city"]),
+                        escape(row["top_category"]),
+                        escape(row["spending_level"]),
+                        row["nearby_uhi"] if row["nearby_uhi"] is not None else "Unknown",
+                        escape(row["recommendation"]),
+                        escape(row["evidence_status"]),
+                    ]
+                    for row in selected
+                ],
+                marker={"size": 8, "color": color, "opacity": 0.72},
+                hovertemplate=(
+                    "<b>%{text}</b><br>City: %{customdata[0]}"
+                    "<br>Category: %{customdata[1]}"
+                    "<br>Commercial tier: %{customdata[2]}"
+                    "<br>Nearby UHI: %{customdata[3]}"
+                    "<br>Recommendation: %{customdata[4]}"
+                    "<br>Evidence: %{customdata[5]}<extra></extra>"
+                ),
+            )
+        )
+    figure.update_layout(
+        map={
+            "style": "open-street-map",
+            "center": {"lat": 40.75, "lon": -74.0},
+            "zoom": 8.5,
+        },
+        height=650,
+        margin={"l": 0, "r": 0, "t": 60, "b": 0},
+        title={
+            "text": (
+                "NY/NJ spatial heat explorer"
+                "<br><sup>Validated derived records; map tiles require network access.</sup>"
+            ),
+            "x": 0.01,
+        },
+        legend={"orientation": "h", "y": 1.02, "x": 0},
+    )
+    return figure
+
+
+def weather_risk_summary_figure(rows: list[dict[str, Any]]) -> go.Figure:
+    """Chart approved historical weather percentages and their exact units."""
+    summer = [row for row in rows if row["month_window"] == "June-July"]
+    figure = go.Figure(
+        go.Bar(
+            x=[row["metric_label"] for row in summer],
+            y=[row["percentage"] for row in summer],
+            marker_color=[WEEKEND_ORANGE, MID_BLUE, RICE_BLUE, RICE_GOLD, TEAL],
+            customdata=[
+                [row["numerator"], row["denominator"], row["threshold"]]
+                for row in summer
+            ],
+            hovertemplate=(
+                "<b>%{x}</b><br>Share: %{y:.2f}%"
+                "<br>Observations: %{customdata[0]:,.0f} / %{customdata[1]:,.0f}"
+                "<br>Rule: %{customdata[2]}<extra></extra>"
+            ),
+        )
+    )
+    return common_layout(
+        figure,
+        "Historical June-July weather evidence",
+        "Percent of validated station-date observations; not a match-day forecast.",
+        "Station-date observations (%)",
+        480,
+    )
+
+
 def related_plot(plot_id: str, data: DashboardData) -> go.Figure:
     if plot_id == "brand_ranking":
         return ranking_figure(data.brands, "brand", "total_visits", 10, "Top brands")
@@ -414,6 +504,8 @@ def related_plot(plot_id: str, data: DashboardData) -> go.Figure:
         return market_figure(data.markets)
     if plot_id == "scenario_comparison":
         return scenario_comparison_figure(data)
+    if plot_id == "weather_risk_summary":
+        return weather_risk_summary_figure(data.weather)
     if plot_id == "visit_distribution":
         return percentile_figure(data.percentiles)
     return overall_monthly_figure(data.monthly)

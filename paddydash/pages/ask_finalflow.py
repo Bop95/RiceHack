@@ -26,6 +26,7 @@ SUGGESTIONS = [
     "Which category has the highest average daily intensity?",
     "How do weekday store-visit patterns differ?",
     "Which market has the highest average activity?",
+    "How common was rain in the historical June-July observations?",
     "Compare the synthetic rainy post-match and ordinary-day scenarios.",
 ]
 
@@ -79,9 +80,9 @@ def render_ask_finalflow() -> None:
     data = load_dashboard_data()
     page_intro(
         "Ask FinalFlow",
-        "Ask questions about approved store-visit summaries and synthetic scenario "
-        "summaries. Answers include evidence, a data label, a related chart, and "
-        "limitations.",
+        "Ask questions about approved store-visit summaries, historical weather "
+        "evidence, and synthetic scenario summaries. Answers include evidence, a "
+        "data label, a related chart, and limitations.",
         "derived",
     )
 
@@ -118,8 +119,9 @@ def render_ask_finalflow() -> None:
     st.markdown("### Ask your own question")
     st.caption(
         "Type a question about brands, categories, dates, weekdays, markets, "
-        "visit distributions, or the synthetic scenarios. The examples below "
-        "are optional shortcuts."
+        "visit distributions, reviewed historical weather, or the synthetic "
+        "scenarios. Live match-day forecasts are not available. The examples "
+        "below are optional shortcuts."
     )
     with st.form("finalflow_question_form", clear_on_submit=True):
         typed_question = st.text_area(

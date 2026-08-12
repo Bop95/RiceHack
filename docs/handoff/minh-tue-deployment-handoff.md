@@ -20,8 +20,10 @@ Streamlit configuration: .streamlit/config.toml
 
 ## What is being handed over
 
-- tested four-page Streamlit application;
+- tested five-page Streamlit application;
 - compact approved runtime CSVs and four static figures;
+- a bounded spatial/heat map artifact and historical-weather evidence artifact,
+  each with build provenance and rejection counts;
 - deterministic analytics and prepared-data fallback;
 - optional grounded OpenAI narration from the Streamlit server;
 - secret-free environment template;
@@ -29,9 +31,9 @@ Streamlit configuration: .streamlit/config.toml
 - GitHub Actions quality gate;
 - API/service contract, deployment guide, screenshots, and test evidence.
 
-The deployable application bundle is approximately 3.56 MB. The repository also
-contains notebooks and historical test evidence, but the hosted app does not
-load them.
+The deployment validator reports the current deployable bundle size and row
+counts. The repository also contains notebooks and historical test evidence,
+but the hosted app does not load them.
 
 ## Acceptance evidence
 
@@ -118,7 +120,12 @@ troubleshooting procedure.
 - [ ] Overview loads metrics, monthly trend, categories, and markets.
 - [ ] Store-Visit Explorer filters and every tab render.
 - [ ] Scenario Explorer labels every scenario as synthetic or illustrative.
+- [ ] Spatial & Heat Map loads all approved records and combined filters work.
+- [ ] Missing UHI rows are gray and labeled `Insufficient evidence`.
+- [ ] The accessible spatial table remains usable if map tiles fail.
 - [ ] Ask FinalFlow returns a prepared-data answer without a key.
+- [ ] A historical rain question cites station-date observations and an approved
+  threshold; a future match-weather question is declined as unavailable.
 - [ ] Suggested questions show evidence, data type, limitation, and related plot.
 - [ ] An unrelated or prompt-override question is refused.
 - [ ] Optional OpenAI mode displays the model name but never the key.
@@ -155,8 +162,9 @@ Run this before every release:
 ```
 
 It validates required files, schemas, data labels, dependency declarations,
-unsafe tracked data, Git tracking, bundle size, and OpenAI mode without calling
-OpenAI or printing a credential.
+unsafe tracked data, Git tracking, artifact hashes and row counts, the 10 MB
+per-file and 20 MB bundle limits, and OpenAI mode without calling OpenAI or
+printing a credential.
 
 ## API boundary
 
@@ -173,6 +181,15 @@ real network API is implemented and documented.
 - Set an OpenAI project budget and provider rate limits before public sharing.
 - Store visits are a historical commercial-activity proxy, not attendance.
 - Synthetic scenarios are interface-testing assumptions, not forecasts.
+- The spatial scope is an exploratory NY/NJ rectangle, not a verified venue
+  polygon. Business commercial tiers are aggregated; raw spend/customer values
+  are not deployed.
+- Missing UHI means insufficient evidence. Map heat thresholds and actions are
+  FinalFlow heuristics.
+- Weather metrics count historical station-date observations across a reviewed
+  multi-station dataset. They are not calendar-day probabilities, a live
+  forecast, or venue-specific measurements; weather thresholds/actions are
+  FinalFlow heuristics.
 - Streamlit Community Cloud resource behavior and secret injection require a
   hosted smoke test; local CI cannot prove them.
 

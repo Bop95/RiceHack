@@ -17,6 +17,30 @@ SYNTHETIC_LIMITATION = (
     "Synthetic scenarios are interface-testing assumptions, not measured World "
     "Cup activity or exact future demand."
 )
+WEATHER_LIMITATION = (
+    "Weather evidence is historical and multi-station; it is not a live forecast "
+    "or a venue-specific measurement."
+)
+WEATHER_HEURISTIC_LIMITATION = (
+    "Weather thresholds, risk bands, and actions are FinalFlow project heuristics, "
+    "not scientific standards."
+)
+WEATHER_TERMS = (
+    "weather",
+    "conditions",
+    "rain",
+    "precipitation",
+    "heat",
+    "hot",
+    "temperature",
+    "humidity",
+    "wind",
+    "visibility",
+    "fog",
+    "snow",
+    "umbrella",
+    "risk",
+)
 
 
 @dataclass(frozen=True)
@@ -87,6 +111,11 @@ PLOT_CATALOG = {
         "title": "Synthetic scenario comparison",
         "source": "store_visit_scenarios.csv",
         "data_type": "synthetic",
+    },
+    "weather_risk_summary": {
+        "title": "Historical weather-risk evidence",
+        "source": "weather_risk_summary.csv",
+        "data_type": "derived",
     },
 }
 
@@ -258,6 +287,163 @@ def format_number(value: int | float) -> str:
     return f"{value:,.2f}" if isinstance(value, float) else f"{value:,}"
 
 
+def get_weather_risk_summary(
+    data: DashboardData, metric_ids: set[str] | None = None
+) -> list[dict[str, Any]]:
+    """Return approved weather metrics in their stable source order."""
+    if metric_ids is None:
+        return list(data.weather)
+    return [row for row in data.weather if row["metric_id"] in metric_ids]
+
+
+def forecast_not_available_result() -> RetrievalResult:
+    return RetrievalResult(
+        context="FinalFlow has no approved live or future weather forecast source.",
+        evidence=[],
+        related_plot_id=None,
+        data_type="derived",
+        limitations=[WEATHER_LIMITATION],
+        local_answer=(
+            "FinalFlow does not currently have an approved live forecast for the "
+            "World Cup final. It can describe reviewed historical weather evidence, "
+            "but that evidence cannot predict match-day conditions."
+        ),
+    )
+
+
+def weather_clarification_result() -> RetrievalResult:
+    return RetrievalResult(
+        context="The question could refer to historical weather or a synthetic scenario.",
+        evidence=[],
+        related_plot_id=None,
+        data_type="derived",
+        limitations=[WEATHER_LIMITATION, SYNTHETIC_LIMITATION],
+        local_answer=(
+            "Please clarify whether you mean the historical weather observations "
+            "or a named synthetic scenario such as Rainy Post Match."
+        ),
+    )
+
+
+def unsupported_weather_metric_result(metric: str) -> RetrievalResult:
+    return RetrievalResult(
+        context=f"The approved historical weather summary has no {metric} metric.",
+        evidence=[],
+        related_plot_id=None,
+        data_type="derived",
+        limitations=[WEATHER_LIMITATION],
+        local_answer=(
+            f"FinalFlow's approved historical weather summary does not include "
+            f"{metric}. It cannot provide a grounded {metric} result from the "
+            "current prepared data."
+        ),
+    )
+
+
+def retrieve_weather_question(question: str, data: DashboardData) -> RetrievalResult:
+    normalized = question.casefold()
+    metric_ids: set[str]
+    if "humidity" in normalized:
+        return unsupported_weather_metric_result("humidity")
+    if "snow" in normalized:
+        return unsupported_weather_metric_result("snow")
+    if "heavy rain" in normalized:
+        metric_ids = {"summer_heavy_rain_observation_share"}
+    elif any(term in normalized for term in ("visibility", "fog")):
+        metric_ids = {"summer_low_visibility_observation_share"}
+    elif any(term in normalized for term in ("wind", "windy")):
+        metric_ids = {"summer_windy_observation_share"}
+    elif any(term in normalized for term in ("rain", "rainy", "precipitation")):
+        metric_ids = {"summer_rainy_observation_share"}
+    elif any(term in normalized for term in ("heat", "hot", "temperature")):
+        metric_ids = {"summer_hot_observation_share"}
+    elif "risk" in normalized:
+        named_levels = {
+            level
+            for level in ("low", "medium", "high")
+            if re.search(rf"\b{level}\b", normalized)
+        }
+        metric_ids = (
+            {f"all_period_{level}_risk_observation_share" for level in named_levels}
+            if named_levels
+            else {
+                "all_period_low_risk_observation_share",
+                "all_period_medium_risk_observation_share",
+                "all_period_high_risk_observation_share",
+            }
+        )
+    else:
+        metric_ids = {
+            "summer_hot_observation_share",
+            "summer_rainy_observation_share",
+            "summer_heavy_rain_observation_share",
+            "summer_windy_observation_share",
+            "summer_low_visibility_observation_share",
+        }
+    rows = get_weather_risk_summary(data, metric_ids)
+    if not rows:
+        return refusal_result()
+
+    evidence: list[EvidenceItem] = []
+    descriptions: list[str] = []
+    for row in rows:
+        evidence.extend(
+            [
+                EvidenceItem(
+                    row["metric_label"],
+                    f"{row['percentage']:.2f}%",
+                    "weather_risk_summary.csv",
+                ),
+                EvidenceItem(
+                    (
+                        row["metric_label"]
+                        if row["metric_label"].casefold().endswith("observations")
+                        else f"{row['metric_label']} observations"
+                    ),
+                    f"{row['numerator']:,} / {row['denominator']:,} station-date observations",
+                    "weather_risk_summary.csv",
+                ),
+                EvidenceItem(
+                    f"{row['metric_label']} rule",
+                    row["threshold"],
+                    "weather_risk_summary.csv",
+                ),
+            ]
+        )
+        descriptions.append(
+            f"{row['metric_label']} account for {row['numerator']:,} of "
+            f"{row['denominator']:,} station-date observations "
+            f"({row['percentage']:.2f}%)"
+        )
+    context = "\n".join(
+        f"{row['metric_id']}: scope={row['scope_name']}; period="
+        f"{row['period_start']} to {row['period_end']}; window={row['month_window']}; "
+        f"unit={row['observation_unit']}; numerator={row['numerator']}; "
+        f"denominator={row['denominator']}; percentage={row['percentage']}; "
+        f"threshold={row['threshold']}; action={row['recommended_action']}"
+        for row in rows
+    )
+    action_text = (
+        f" FinalFlow's rule-based operational action is: "
+        f"{rows[0]['recommended_action']}."
+        if len(rows) == 1
+        else ""
+    )
+    return RetrievalResult(
+        context=context,
+        evidence=evidence,
+        related_plot_id="weather_risk_summary",
+        data_type="derived",
+        limitations=[WEATHER_LIMITATION, WEATHER_HEURISTIC_LIMITATION],
+        local_answer=(
+            "In the reviewed historical multi-station data, "
+            + "; ".join(descriptions)
+            + "."
+            + action_text
+        ),
+    )
+
+
 def retrieve_for_question(question: str, data: DashboardData) -> RetrievalResult:
     normalized = question.casefold()
     wants_mean = any(
@@ -276,6 +462,40 @@ def retrieve_for_question(question: str, data: DashboardData) -> RetrievalResult
     )
     if any(term in normalized for term in unsafe_terms):
         return refusal_result()
+
+    forecast_terms = (
+        "forecast",
+        "going to rain",
+        "weather during the final",
+        "weather for the final",
+        "match-day weather",
+        "match day weather",
+        "weather tomorrow",
+        "weather next week",
+    )
+    weather_intent = any(term in normalized for term in WEATHER_TERMS)
+    mentioned_years = {int(value) for value in re.findall(r"\b(?:19|20)\d{2}\b", normalized)}
+    future_weather_question = weather_intent and (
+        bool(re.search(r"\bwill\b", normalized))
+        or bool(
+            re.search(
+                r"\b(?:likely|likelihood|probabilit(?:y|ies)|chance of|expect(?:ed)?|"
+                r"predict(?:ion|ed|s)?|going to be|should i bring)\b",
+                normalized,
+            )
+        )
+        or bool(
+            re.search(
+                r"\bnext\s+(?:sunday|monday|tuesday|wednesday|thursday|friday|"
+                r"saturday|week|weekend|month)\b",
+                normalized,
+            )
+        )
+        or bool(re.search(r"\b(?:tomorrow|match day|match-day)\b", normalized))
+        or any(year > 2024 for year in mentioned_years)
+    )
+    if any(term in normalized for term in forecast_terms) or future_weather_question:
+        return forecast_not_available_result()
 
     named_brands = named_entities(
         question, [row["brand"] for row in data.brands]
@@ -303,9 +523,15 @@ def retrieve_for_question(question: str, data: DashboardData) -> RetrievalResult
         question, [row["weekday"] for row in data.weekdays]
     )
 
-    if any(word in normalized for word in ("scenario", "match", "rain", "transit")):
+    requested_scenarios = named_scenarios(question, data)
+    explicit_scenario = any(
+        term in normalized
+        for term in ("scenario", "post-match", "post match", "ordinary day")
+    )
+
+    if requested_scenarios or explicit_scenario:
         rows = get_scenario_summary(data)
-        requested = named_scenarios(question, data)
+        requested = requested_scenarios
         if requested:
             rows_by_id = {row["scenario_id"]: row for row in rows}
             rows = [rows_by_id[item] for item in requested if item in rows_by_id]
@@ -382,6 +608,11 @@ def retrieve_for_question(question: str, data: DashboardData) -> RetrievalResult
                 f"{evidence[2].value} change from its synthetic baseline."
             ),
         )
+
+    if any(term in normalized for term in WEATHER_TERMS):
+        if "match" in normalized and "historical" not in normalized:
+            return weather_clarification_result()
+        return retrieve_weather_question(question, data)
 
     if "brand" in normalized or named_brands:
         rows = (

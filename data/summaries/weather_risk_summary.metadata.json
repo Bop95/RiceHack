@@ -1,0 +1,32 @@
+{
+  "artifact": "data/summaries/weather_risk_summary.csv",
+  "source_branch": "tan-dat-final",
+  "source_commit": "43160ef",
+  "source_files": {
+    "daily_weather_clean.csv": "602b7e957c20187903dedb4fb9f3ec74ab4e30f874e4b82962a8048a671d33eb"
+  },
+  "generated_at": "2026-08-12T00:00:00Z",
+  "risk_rule_version": "weather_risk_rules_v1",
+  "observation_unit": "station_date_observation",
+  "scope": "reviewed multi-station dataset; no venue mapping approved",
+  "input_rows": 45814,
+  "accepted_observation_rows": 45704,
+  "rejected_observation_rows": 110,
+  "rejected_by_reason": {
+    "invalid_temperature_order": 110
+  },
+  "accepted_rows": 8,
+  "summer_observations": 7672,
+  "unique_dates": 1827,
+  "unique_stations": 401,
+  "risk_level_counts": {
+    "Low": 22337,
+    "Medium": 20505,
+    "High": 2862
+  },
+  "limitations": [
+    "Historical multi-station evidence; not a live forecast or a venue-specific claim.",
+    "Risk thresholds, weights, levels, and actions are FinalFlow project heuristics."
+  ],
+  "artifact_sha256": "d0bae58e59e281798d42f97e06d9d06d63cec6f820efdd786e1cb06f302ab22f"
+}
