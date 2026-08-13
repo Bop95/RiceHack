@@ -1,4 +1,4 @@
-"""Smoke tests for the four guide-defined Streamlit pages."""
+"""Smoke tests for the FinalFlow Streamlit pages."""
 
 from __future__ import annotations
 
@@ -25,6 +25,7 @@ class StreamlitAppTests(unittest.TestCase):
             ("paddydash.pages.overview", "render_overview"),
             ("paddydash.pages.store_visit_explorer", "render_store_visit_explorer"),
             ("paddydash.pages.scenario_explorer", "render_scenario_explorer"),
+            ("paddydash.pages.spatial_heat_map", "render_spatial_heat_map"),
             ("paddydash.pages.ask_finalflow", "render_ask_finalflow"),
         )
         with patch.dict(

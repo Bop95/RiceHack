@@ -39,18 +39,27 @@ Module: `paddydash.services.data_service`
 ### `load_dashboard_data(repository_root=None) -> DashboardData`
 
 Loads, converts, labels, and caches the approved runtime CSV files. It validates
-required columns, integer/float fields, non-empty tables, `derived` labels for
-summary rows, and `synthetic` plus `is_synthetic=true` for scenario rows.
+required columns, integer/float fields, optional values, non-empty tables,
+`derived` labels for summary/weather rows, and `synthetic` plus
+`is_synthetic=true` for scenario rows.
 
 `DashboardData` fields:
 
 ```text
 summary, percentiles, brands, categories, markets, weekdays,
-monthly, brand_monthly, category_monthly, scenarios
+monthly, brand_monthly, category_monthly, scenarios, weather
 ```
 
 Raises `FileNotFoundError`, `KeyError`, `TypeError`, or `ValueError` for missing
 or invalid prepared data. Deployment validation catches these before release.
+
+### `load_spatial_heat_data(repository_root=None) -> list[dict]`
+
+Separately loads and caches `spatial_heat_locations.csv`, so non-map pages do not
+need the larger table. It validates the spatial schema, optional UHI fields,
+`derived`/non-synthetic labels, the fixed 40.4-41.1 latitude and
+-74.5--73.5 longitude bounds, and the rule that a missing UHI value must be
+`Insufficient evidence`.
 
 ### `read_validated_csv(path) -> list[dict]`
 
@@ -75,12 +84,20 @@ Module: `paddydash.services.analytics`
 | `get_weekday_pattern(data, category=None)` | Overall Monday-Sunday rows; category-specific weekday data is intentionally unsupported. |
 | `get_market_summary(data, market=None)` | All markets or a case-insensitive exact market match. |
 | `get_scenario_summary(data, scenario_id=None)` | Synthetic totals, uplift, record counts, and high-risk record share. |
+| `get_weather_risk_summary(data, metric_ids=None)` | Approved historical weather metrics in stable source order. |
 | `get_plot_metadata(plot_id)` | Validated title, source, and data type for a known plot ID. |
 | `retrieve_for_question(question, data)` | Routes an untrusted question to an approved dataset and returns a grounded `RetrievalResult`. |
 
 Unsupported metrics, unknown plot IDs, and unsupported category weekday queries
 raise `ValueError`. Out-of-scope or prompt-injection-style questions are returned
-as controlled refusals rather than exceptions.
+as controlled refusals rather than exceptions. Future-weather questions return
+a no-forecast result; ambiguous match/weather questions ask for clarification;
+and unavailable humidity or snow fields do not return unrelated metrics.
+
+Historical-weather results preserve the supplied `station_date_observation`
+unit, numerator, denominator, percentage, threshold direction, multi-station
+scope, `derived` label, and heuristic limitations. They must not be interpreted
+as forecasts or venue-specific measurements.
 
 ## Response contracts
 
@@ -149,8 +166,17 @@ Uses the server-side OpenAI Responses API with:
 
 The prompt contains only the validated local answer and approved, question-
 specific context. It explicitly forbids changing entities, values, rankings,
-units, scope, or data labels. The key is read by the server-side SDK and is never
-placed in a response.
+units, scope, or data labels. For weather, it also preserves the observation
+unit, threshold direction, numerator, denominator, percentage, historical
+scope, heuristic status, and `derived`/`synthetic` distinction. The key is read
+by the server-side SDK and is never placed in a response.
+
+For weather responses, the service also validates the optional narrative after
+parsing. It falls back to the deterministic prepared-data answer if the model
+introduces unapproved numbers, forecast/probability framing, venue narrowing,
+incorrect observation entities, synthetic wording, or an unapproved threshold
+comparison. Evidence, data labels, limitations, and plots remain local in all
+cases.
 
 Returns prepared-data mode when OpenAI is not configured. Raises the sanitized
 `AIServiceError` when a configured request cannot complete safely.

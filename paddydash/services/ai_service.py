@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import os
+import re
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -65,6 +66,69 @@ def prepared_data_response(retrieval: RetrievalResult) -> ChatResponse:
     )
 
 
+def _normalized_numbers(value: str) -> set[str]:
+    return {
+        token.replace(",", "")
+        for token in re.findall(r"(?<![\w.])[-+]?\d[\d,]*(?:\.\d+)?%?", value)
+    }
+
+
+def weather_narrative_is_grounded(
+    answer: str,
+    limitations: list[str],
+    retrieval: RetrievalResult,
+) -> bool:
+    """Fail closed when an optional weather narrative changes local facts or scope."""
+    is_weather = (
+        retrieval.related_plot_id == "weather_risk_summary"
+        or "weather" in retrieval.context.casefold()
+        or any("weather" in item.source.casefold() for item in retrieval.evidence)
+    )
+    if not is_weather:
+        return True
+
+    combined = " ".join([answer, *limitations]).casefold()
+    forbidden = (
+        r"\b(?:forecast|probabilit(?:y|ies)|chance|predict(?:ion|ed|s)?|will be|"
+        r"going to be)\b",
+        r"\b(?:stadium|venue|metlife|corridor|new york|new jersey)\b",
+        r"\b(?:days?|people|persons?|events?|locations?)\b",
+        r"\bsynthetic\b",
+    )
+    if any(re.search(pattern, combined) for pattern in forbidden):
+        return False
+
+    approved_text = " ".join(
+        [
+            retrieval.local_answer,
+            retrieval.context,
+            *(str(item.value) for item in retrieval.evidence),
+        ]
+    )
+    if not _normalized_numbers(combined) <= _normalized_numbers(approved_text):
+        return False
+
+    if _normalized_numbers(combined) and "station-date observation" not in combined:
+        return False
+
+    thresholds = [
+        str(item.value).casefold()
+        for item in retrieval.evidence
+        if item.label.casefold().endswith("rule")
+    ]
+    text_without_approved_thresholds = combined
+    for threshold in thresholds:
+        text_without_approved_thresholds = text_without_approved_thresholds.replace(
+            threshold, ""
+        )
+    unapproved_comparison = re.search(
+        r"(?:>=|<=|>|<|\bgreater than\b|\bless than\b|\babove\b|\bbelow\b|"
+        r"\bat least\b|\bat most\b)",
+        text_without_approved_thresholds,
+    )
+    return unapproved_comparison is None
+
+
 def answer_with_openai(
     question: str,
     retrieval: RetrievalResult,
@@ -108,6 +172,18 @@ Interpret the approved fields exactly:
   explicitly limits the question to Monday through Friday.
 - scenario `high-risk share` is the share of synthetic scenario records labeled
   high risk, not a share of visits, people, attendance, or locations.
+- weather percentages use the supplied `observation_unit`. A
+  `station_date_observation` must be described as a station-date observation,
+  never as a day, person, event, location, or probability of future weather.
+- historical weather evidence is not a live forecast. Never claim that rain,
+  heat, wind, or visibility will occur during the World Cup final.
+- weather thresholds, risk bands, and actions are FinalFlow project heuristics,
+  not scientific standards.
+- preserve the supplied geographic scope. Never narrow multi-station evidence to
+  New York, New Jersey, a stadium, venue, or corridor unless the approved context
+  explicitly supplies that scope.
+- never alter a weather unit, threshold direction, numerator, denominator,
+  percentage, risk rule version, or `derived`/`synthetic` data distinction.
 Verify comparison direction against the supplied numbers before stating that one
 item is higher or lower than another. Every scenario answer must explicitly use
 the word `synthetic` or `illustrative`.
@@ -157,6 +233,10 @@ Return only the answer narrative and applicable limitations.
         ) from error
 
     limitations = list(dict.fromkeys([*parsed.limitations, *retrieval.limitations]))
+    if not weather_narrative_is_grounded(
+        parsed.answer, parsed.limitations, retrieval
+    ):
+        return prepared_data_response(retrieval)
     return ChatResponse(
         answer=parsed.answer,
         evidence=retrieval.evidence,

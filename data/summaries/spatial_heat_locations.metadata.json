@@ -1,0 +1,52 @@
+{
+  "artifact": "data/summaries/spatial_heat_locations.csv",
+  "source_branch": "que-anh",
+  "source_commit": "8b54df4",
+  "source_files": {
+    "poi_uhi_summary.zip": "768f565eb42ed80184422eea6ac320d324644e5c23c94e12ebfb21dc289034e7",
+    "spending_summary.zip": "013641ef4c1ffa81b1b15eb8d7efab5f19db59f77ad3ee87ee4f92d00e6b8fd6"
+  },
+  "generated_at": "2026-08-12T00:00:00Z",
+  "risk_rule_version": "spatial_heat_rules_v1",
+  "geographic_scope": {
+    "name": "New York/New Jersey exploratory corridor",
+    "bounds": {
+      "min_latitude": 40.4,
+      "max_latitude": 41.1,
+      "min_longitude": -74.5,
+      "max_longitude": -73.5
+    },
+    "status": "implementation default approved by team lead; replace with polygon when supplied"
+  },
+  "uhi_match": {
+    "method": "nearest_haversine_wgs84_within_limit",
+    "maximum_distance_m": 250.0,
+    "duplicate_coordinates": "mean UHI before matching",
+    "tie_break": "distance, latitude, longitude, UHI ascending"
+  },
+  "spending_aggregation": "sum all provided rows per PLACEKEY, then derive deterministic rank-based terciles with PLACEKEY tie-breaking",
+  "public_fields": "raw spend and raw customer values omitted",
+  "input_counts": {
+    "poi_input_rows": 511934,
+    "rejected_outside_bounds": 380454,
+    "rejected_unknown_synthetic_status": 6410,
+    "rejected_synthetic": 686,
+    "candidate_pois": 124384,
+    "spending_input_rows": 1026614,
+    "accepted_spending_rows": 208796,
+    "places_with_spending": 9889,
+    "uhi_input_rows": 1229291,
+    "uhi_points_in_expanded_bounds": 135247,
+    "uhi_duplicate_rows_collapsed": 0
+  },
+  "accepted_rows": 9889,
+  "rejected_rows": 502045,
+  "rejected_by_reason": {
+    "rejected_outside_bounds": 380454,
+    "rejected_unknown_synthetic_status": 6410,
+    "rejected_synthetic": 686,
+    "candidate_pois_without_spending": 114495
+  },
+  "missing_uhi_rows": 222,
+  "artifact_sha256": "49927ddf46616f7b6f81eb018660aeb1280760920f8b94c71ec5d95ba785bd56"
+}

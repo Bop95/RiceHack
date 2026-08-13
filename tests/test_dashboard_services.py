@@ -3,11 +3,18 @@
 from __future__ import annotations
 
 import os
+import csv
+import tempfile
 import unittest
+from pathlib import Path
 from types import SimpleNamespace
 from unittest.mock import patch
 
-from paddydash.components.charts import category_scatter_figure, percentile_figure
+from paddydash.components.charts import (
+    category_scatter_figure,
+    percentile_figure,
+    spatial_heat_map_figure,
+)
 from paddydash.services.ai_service import (
     answer_with_fallback,
     answer_with_openai,
@@ -19,9 +26,16 @@ from paddydash.services.analytics import (
     get_scenario_summary,
     get_top_brands,
     get_top_categories,
+    get_weather_risk_summary,
     retrieve_for_question,
 )
-from paddydash.services.data_service import load_dashboard_data
+from paddydash.services.data_service import (
+    REPOSITORY_ROOT,
+    load_dashboard_data,
+    load_spatial_heat_data,
+    read_validated_csv,
+    validate_weather_rows,
+)
 
 
 class DashboardServiceTests(unittest.TestCase):
@@ -39,10 +53,64 @@ class DashboardServiceTests(unittest.TestCase):
         self.assertEqual(len(self.data.weekdays), 7)
         self.assertEqual(len(self.data.monthly), 60)
         self.assertEqual(len(self.data.scenarios), 12000)
+        self.assertEqual(len(self.data.weather), 8)
         self.assertEqual({row["data_type"] for row in self.data.brands}, {"derived"})
         self.assertEqual(
             {row["data_type"] for row in self.data.scenarios}, {"synthetic"}
         )
+        self.assertEqual({row["data_type"] for row in self.data.weather}, {"derived"})
+
+    def test_spatial_bundle_is_bounded_and_preserves_missing_evidence(self) -> None:
+        load_spatial_heat_data.cache_clear()
+        rows = load_spatial_heat_data()
+        self.assertEqual(len(rows), 9889)
+        self.assertTrue(all(40.4 <= row["latitude"] <= 41.1 for row in rows))
+        self.assertTrue(all(-74.5 <= row["longitude"] <= -73.5 for row in rows))
+        self.assertTrue(all(row["is_synthetic"] is False for row in rows))
+        missing = [row for row in rows if row["nearby_uhi"] is None]
+        self.assertEqual(len(missing), 222)
+        self.assertEqual({row["heat_concern"] for row in missing}, {"Insufficient evidence"})
+
+    def test_spatial_hover_escapes_untrusted_source_labels(self) -> None:
+        row = dict(load_spatial_heat_data()[0])
+        row.update(
+            {
+                "location_name": "<script>alert(1)</script>",
+                "city": "<b>City</b>",
+                "top_category": "A & B",
+            }
+        )
+        figure = spatial_heat_map_figure([row])
+        self.assertEqual(figure.data[0].text[0], "&lt;script&gt;alert(1)&lt;/script&gt;")
+        self.assertEqual(figure.data[0].customdata[0][0], "&lt;b&gt;City&lt;/b&gt;")
+        self.assertEqual(figure.data[0].customdata[0][1], "A &amp; B")
+
+    def test_spatial_loader_rejects_unapproved_fields_and_boolean_values(self) -> None:
+        source = REPOSITORY_ROOT / "data" / "summaries" / "spatial_heat_locations.csv"
+        with source.open("r", encoding="utf-8-sig", newline="") as stream:
+            reader = csv.DictReader(stream)
+            fieldnames = list(reader.fieldnames or [])
+            row = next(reader)
+        cases = (
+            ("raw field", fieldnames + ["raw_total_spend"], row | {"raw_total_spend": "1"}),
+            ("invalid boolean", fieldnames, row | {"includes_parking": "yes"}),
+        )
+        with tempfile.TemporaryDirectory() as temp:
+            for label, fields, test_row in cases:
+                with self.subTest(label=label):
+                    path = Path(temp) / "spatial_heat_locations.csv"
+                    with path.open("w", encoding="utf-8", newline="") as stream:
+                        writer = csv.DictWriter(stream, fieldnames=fields)
+                        writer.writeheader()
+                        writer.writerow(test_row)
+                    with self.assertRaises(ValueError):
+                        read_validated_csv(path)
+
+    def test_weather_validation_reconciles_exact_percentages(self) -> None:
+        rows = [dict(row) for row in self.data.weather]
+        rows[0]["percentage"] += 0.01
+        with self.assertRaisesRegex(ValueError, "percentage"):
+            validate_weather_rows(rows)
 
     def test_controlled_functions_return_expected_leaders(self) -> None:
         self.assertEqual(get_top_brands(self.data, "total_visits", 1)[0]["brand"], "Walmart")
@@ -64,6 +132,68 @@ class DashboardServiceTests(unittest.TestCase):
         scenario = retrieve_for_question("Compare rainy post-match scenarios", self.data)
         self.assertEqual(scenario.data_type, "synthetic")
         self.assertEqual(scenario.related_plot_id, "scenario_comparison")
+
+    def test_weather_retrieval_uses_historical_station_observation_units(self) -> None:
+        rain = retrieve_for_question(
+            "How common was rain in historical June-July observations?", self.data
+        )
+        self.assertEqual(rain.related_plot_id, "weather_risk_summary")
+        self.assertEqual(rain.data_type, "derived")
+        self.assertIn("2,911 of 7,672 station-date observations", rain.local_answer)
+        self.assertTrue(all(item.source == "weather_risk_summary.csv" for item in rain.evidence))
+        self.assertTrue(any("not a live forecast" in item for item in rain.limitations))
+
+        hot = retrieve_for_question("What is FinalFlow's heat threshold?", self.data)
+        self.assertIn("maximum temperature >= 30 C", [item.value for item in hot.evidence])
+        self.assertIn("project heuristics", " ".join(hot.limitations))
+
+        high_risk = get_weather_risk_summary(
+            self.data, {"all_period_high_risk_observation_share"}
+        )
+        self.assertEqual(high_risk[0]["numerator"], 2862)
+        self.assertEqual(high_risk[0]["denominator"], 45704)
+
+    def test_forecasts_are_not_answered_from_synthetic_scenarios(self) -> None:
+        for question in (
+            "Will it rain during the World Cup final?",
+            "Will it be hot during the final?",
+            "Will conditions be windy tomorrow?",
+            "Forecast weather for the match.",
+            "Give me the probability of rain.",
+            "How rainy will the stadium be?",
+            "Is there likely to be fog?",
+            "Tell me the temperature on July 19, 2026.",
+            "What conditions should we expect next Sunday?",
+            "Should I bring an umbrella to the final?",
+            "Use the historical data to predict match-day rain.",
+        ):
+            with self.subTest(question=question):
+                result = retrieve_for_question(question, self.data)
+                self.assertIsNone(result.related_plot_id)
+                self.assertEqual(result.data_type, "derived")
+                self.assertEqual(result.evidence, [])
+                self.assertIn("does not currently have", result.local_answer)
+
+        ambiguous = retrieve_for_question("What happened on rainy match days?", self.data)
+        self.assertIsNone(ambiguous.related_plot_id)
+        self.assertIn("clarify", ambiguous.local_answer.lower())
+
+    def test_risk_metrics_are_reachable_without_the_word_weather(self) -> None:
+        result = retrieve_for_question("What share was medium risk?", self.data)
+        self.assertEqual(result.related_plot_id, "weather_risk_summary")
+        self.assertEqual(result.data_type, "derived")
+        self.assertEqual(result.evidence[0].value, "44.86%")
+        self.assertIn("20,505 of 45,704 station-date observations", result.local_answer)
+
+    def test_unavailable_weather_fields_do_not_return_unrelated_metrics(self) -> None:
+        for metric in ("humidity", "snow"):
+            with self.subTest(metric=metric):
+                result = retrieve_for_question(
+                    f"What was the historical {metric}?", self.data
+                )
+                self.assertIsNone(result.related_plot_id)
+                self.assertEqual(result.evidence, [])
+                self.assertIn("does not include", result.local_answer)
 
     def test_named_scenario_comparison_answers_the_requested_pair(self) -> None:
         result = retrieve_for_question(
@@ -159,6 +289,47 @@ class DashboardServiceTests(unittest.TestCase):
         self.assertEqual(response.mode, "openai")
         self.assertEqual(response.evidence, retrieval.evidence)
 
+    def test_openai_weather_narrative_fails_closed_on_changed_facts_or_scope(self) -> None:
+        retrieval = retrieve_for_question(
+            "How common was historical rain?", self.data
+        )
+        parsed = SimpleNamespace(
+            answer=(
+                "There is a 99% chance of rain at MetLife Stadium on 45 of 60 days."
+            ),
+            limitations=[],
+        )
+        with patch.dict(os.environ, {"OPENAI_API_KEY": "test-key"}, clear=True):
+            with patch("openai.OpenAI") as mock_openai:
+                mock_openai.return_value.responses.parse.return_value = SimpleNamespace(
+                    output_parsed=parsed
+                )
+                response = answer_with_openai("How common was historical rain?", retrieval)
+        self.assertEqual(response.mode, "prepared-data")
+        self.assertEqual(response.answer, retrieval.local_answer)
+        self.assertEqual(response.evidence, retrieval.evidence)
+
+    def test_openai_weather_narrative_accepts_exact_grounded_facts(self) -> None:
+        retrieval = retrieve_for_question(
+            "How common was historical rain?", self.data
+        )
+        parsed = SimpleNamespace(
+            answer=(
+                "Rain appeared in 2,911 of 7,672 station-date observations "
+                "(37.94%)."
+            ),
+            limitations=[],
+        )
+        with patch.dict(os.environ, {"OPENAI_API_KEY": "test-key"}, clear=True):
+            with patch("openai.OpenAI") as mock_openai:
+                mock_openai.return_value.responses.parse.return_value = SimpleNamespace(
+                    output_parsed=parsed
+                )
+                response = answer_with_openai("How common was historical rain?", retrieval)
+        self.assertEqual(response.mode, "openai")
+        self.assertEqual(response.answer, parsed.answer)
+        self.assertEqual(response.evidence, retrieval.evidence)
+
     def test_openai_failure_uses_safe_prepared_fallback(self) -> None:
         retrieval = retrieve_for_question("Which brand leads?", self.data)
         from paddydash.services.ai_service import AIServiceError
@@ -206,6 +377,7 @@ class DashboardServiceTests(unittest.TestCase):
                 "weekday_pattern",
                 "market_comparison",
                 "scenario_comparison",
+                "weather_risk_summary",
             },
         )
 

@@ -64,6 +64,26 @@ data/raw/rice/
 - Power BI or app exports that are explicitly intended for team review.
 - Schemas, dictionaries, and documentation.
 
+## Current deployed integration artifacts
+
+The Streamlit release includes these additional compact, derived artifacts:
+
+| File | Grain and purpose |
+| --- | --- |
+| `summaries/spatial_heat_locations.csv` | One approved non-synthetic POI with aggregated commercial tiers and nearest-UHI evidence per row; 9,889 rows in the exploratory NY/NJ rectangle. |
+| `summaries/spatial_heat_locations.metadata.json` | Source and runtime-artifact SHA-256 hashes, source revision, geofence, UHI match rule, aggregation rule, accepted/rejected counts, and missing-evidence count. |
+| `summaries/weather_risk_summary.csv` | Eight historical multi-station metrics; every percentage uses station-date observations as its numerator/denominator unit. |
+| `summaries/weather_risk_summary.metadata.json` | Source and runtime-artifact hashes, revision, validation counts, station/date coverage, rule version, and limitations. |
+
+The spatial browser artifact intentionally excludes raw spend and raw customer
+values. Synthetic and unknown-status POIs are excluded. A missing UHI match is
+kept as `Insufficient evidence`, never converted to low heat.
+
+The weather table is historical evidence, not a forecast. Its thresholds, risk
+bands, and operational actions are FinalFlow project heuristics. The source has
+no approved venue mapping, so the app preserves its reviewed multi-station
+scope.
+
 ## Should remain local
 
 - Raw Rice datasets.

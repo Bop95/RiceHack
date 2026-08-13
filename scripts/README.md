@@ -66,6 +66,8 @@ Implemented:
 - `scripts/data/audit_data.py`: audits a local CSV, JSON Lines file, or supported Parquet file and optionally writes a JSON summary.
 - `scripts/data/clean_store_visits.py`: streams the complete store-visit CSV/CSV.GZ dataset through DuckDB, writes a cleaned Parquet file, checks data quality, and produces summary tables.
 - `scripts/data/build_streamlit_summaries.py`: creates compact monthly brand/category tables for the deployed explorer without making the app scan the full Parquet file.
+- `scripts/data/build_spatial_heat_locations.py`: streams the spatial POI/UHI and spending ZIP exports, validates and geofences records, aggregates spend/customer rows by `PLACEKEY`, derives tiers, performs bounded nearest-UHI matching, and writes a privacy-reduced map table plus metadata.
+- `scripts/data/build_weather_chat_summaries.py`: validates the cleaned station-date weather table, rejects impossible temperature ordering, computes eight historical risk metrics, and writes the chatbot table plus metadata.
 - `scripts/visualization/create_store_visit_charts.py`: builds four static PNG charts, two self-contained interactive Plotly charts, and synchronized interpretation notes from the cleaned store-visit outputs.
 - `scripts/synthetic/generate_store_visit_scenarios.py`: reproducibly creates 5,000-20,000 clearly labeled scenario records plus a data dictionary.
 
@@ -123,12 +125,37 @@ The scenario generator defaults to 12,000 rows, seed `2026`, six documented
 scenarios, normalized zone effects, observed brand-category pairings,
 non-negative values, and the required `synthetic` label.
 
+Build the two collaboration artifacts with explicit local source paths and an
+auditable UTC timestamp:
+
+```powershell
+.\.venv\Scripts\python.exe scripts\data\build_spatial_heat_locations.py `
+  --poi-uhi-zip <path-to-poi_uhi_summary.zip> `
+  --spending-zip <path-to-spending_summary.zip> `
+  --output data\summaries\spatial_heat_locations.csv `
+  --metadata data\summaries\spatial_heat_locations.metadata.json `
+  --generated-at 2026-08-12T00:00:00Z
+
+.\.venv\Scripts\python.exe scripts\data\build_weather_chat_summaries.py `
+  --input <path-to-daily_weather_clean.csv> `
+  --output data\summaries\weather_risk_summary.csv `
+  --metadata data\summaries\weather_risk_summary.metadata.json `
+  --generated-at 2026-08-12T00:00:00Z
+```
+
+The inputs remain local. Each command writes only its compact runtime CSV and
+metadata JSON under `data/summaries/`. Review the recorded source hashes and
+rejection counts whenever an upstream export changes.
+If `--metadata` is omitted, it is derived beside the selected `--output`, so a
+redirected test build remains isolated from repository manifests.
+
 Placeholders:
 
 - `scripts/data/clean_weather.py`
 - `scripts/data/summarize_weather.py`
 - `scripts/data/build_business_features.py`
-- `scripts/data/build_weather_features.py`
+- `scripts/data/build_weather_features.py` (a future observation-level feature
+  pipeline; it is distinct from the implemented compact weather summary builder)
 - `scripts/validation/validate_exports.py`
 
 ## Adding new scripts

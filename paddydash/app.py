@@ -15,6 +15,7 @@ if str(REPOSITORY_ROOT) not in sys.path:
 from paddydash.pages.ask_finalflow import render_ask_finalflow
 from paddydash.pages.overview import render_overview
 from paddydash.pages.scenario_explorer import render_scenario_explorer
+from paddydash.pages.spatial_heat_map import render_spatial_heat_map
 from paddydash.pages.store_visit_explorer import render_store_visit_explorer
 from paddydash.services.data_service import load_dashboard_data
 
@@ -51,6 +52,11 @@ def main() -> None:
                 render_scenario_explorer,
                 title="Scenario Explorer",
                 icon="🧪",
+            ),
+            st.Page(
+                render_spatial_heat_map,
+                title="Spatial & Heat Map",
+                icon="🗺️",
             ),
             st.Page(render_ask_finalflow, title="Ask FinalFlow", icon="💬"),
         ]

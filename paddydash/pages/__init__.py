@@ -1,1 +1,1 @@
-"""Future Streamlit pages for the FinalFlow prototype."""
+"""Streamlit page renderers for the FinalFlow prototype."""

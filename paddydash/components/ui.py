@@ -12,7 +12,7 @@ from paddydash.services.analytics import EvidenceItem
 def data_type_label(data_type: str) -> None:
     descriptions = {
         "provided": "Original project source data",
-        "derived": "Calculated from the cleaned store-visit dataset",
+        "derived": "Calculated from reviewed prepared project data",
         "synthetic": "Generated for interface testing and scenario exploration",
         "web": "Retrieved from an external online source",
     }

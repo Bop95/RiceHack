@@ -8,9 +8,11 @@ from Streamlit's Python server process. Visitors never receive the API key.
 
 The repository includes:
 
-- the four-page Streamlit application at `paddydash/app.py`;
+- the five-page Streamlit application at `paddydash/app.py`;
 - compact derived summary CSVs instead of the 5.2 GB cleaned dataset;
 - a clearly labeled synthetic scenario CSV;
+- a bounded 9,889-row spatial/heat table and an eight-row historical-weather
+  summary with build metadata;
 - server-side prepared-data retrieval and an OpenAI Responses API connection;
 - evidence, data-type labels, limitations, and related plots;
 - deterministic prepared-data answers when OpenAI is unavailable;
@@ -47,6 +49,8 @@ Before deployment, run the stricter tracking check:
 
 The checker never calls OpenAI and never prints a secret. Without a key it
 reports a warning because prepared-data mode is still deployable.
+It also reconciles the spatial/weather artifact hashes and row counts against
+their manifests and enforces a 10 MB per-file and 20 MB total deployment limit.
 
 ## 4. Push the approved application
 
@@ -138,12 +142,16 @@ Open the hosted URL in a private/incognito browser window and check:
 1. Overview loads metrics and charts.
 2. Store-Visit Explorer filters and Plotly interactions work.
 3. Scenario Explorer always identifies its records as synthetic.
-4. Each suggested Ask FinalFlow question returns an answer, evidence, data label,
+4. Spatial & Heat Map loads, combines filters, distinguishes `High`,
+   `Low/Moderate`, and `Insufficient evidence`, and retains its table fallback.
+5. A historical rain question returns station-date evidence and the weather
+   summary chart; a match-day forecast question is declined.
+6. Each suggested Ask FinalFlow question returns an answer, evidence, data label,
    limitation, and related chart.
-5. An unrelated question is declined.
-6. The page never displays the API key or a detailed backend exception.
-7. After the configured AI allowance, prepared-data answers continue working.
-8. A phone-sized browser view remains readable.
+7. An unrelated question is declined.
+8. The page never displays the API key or a detailed backend exception.
+9. After the configured AI allowance, prepared-data answers continue working.
+10. A phone-sized browser view remains readable.
 
 ## 9. Updating the live app
 
