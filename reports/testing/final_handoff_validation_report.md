@@ -25,8 +25,8 @@ data-owner verification and licensing/publication approval remain release gates.
 | `python -m ruff check paddydash scripts tests` | Passed |
 | `python -m compileall -q paddydash scripts tests` | Passed |
 | Deployment validator with `--require-tracked` | `ready_with_warnings`; zero errors and zero untracked required files in a disposable tracking index |
-| Ordinary pre-commit unit/AppTest suite | **82/83 passed**; only the intentional untracked-deployable check failed |
-| Simulated post-commit unit/AppTest suite | **83/83 passed** using a disposable Git index; the real index was untouched |
+| Current tracked-artifact unit/AppTest suite | **84/84 passed**, including deterministic cross-platform CSV byte checks |
+| GitHub-compatible artifact verification | Both CSV hashes match their LF-normalized repository bytes and manifests |
 | Spatial/weather artifact rebuild | Byte-for-byte identical to both runtime CSVs |
 | Headless Streamlit process | Started successfully in prepared-data mode |
 | `/_stcore/health` | HTTP 200, body `ok` |
@@ -45,7 +45,7 @@ Validated bundle facts:
 ```text
 Entrypoint: paddydash/app.py
 Deployment branch: main
-Bundle size: 7.56 MB
+Bundle size: 7.55 MB
 Prepared brands: 5,036
 Prepared categories: 132
 Prepared markets: 9
@@ -207,11 +207,10 @@ The temporary process was stopped after both HTTP checks passed.
 Local technical acceptance: complete. Data-owner and licensing/publication
 acceptance: pending team record.
 
-The ordinary suite is expected to show one failure until the five new
-deployable files are committed, because the release test deliberately invokes
-the validator with `--require-tracked`. A disposable-index simulation of that
-post-commit state passed all 83 tests without modifying the developer's staging
-area.
+The five deployable files are tracked. The release test invokes the validator
+with `--require-tracked`, and the current tracked-artifact state passes all 84
+tests. The generated CSVs use deterministic LF bytes so their manifest hashes
+remain identical after Windows and Ubuntu Git checkouts.
 
 External acceptance remains complete only when:
 
