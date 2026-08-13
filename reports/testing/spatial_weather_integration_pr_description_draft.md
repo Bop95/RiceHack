@@ -89,12 +89,12 @@ Results:
 - dependency compatibility: passed;
 - Ruff: passed;
 - compilation: passed;
-- deployment validator: zero errors, 7.56 MB bundle, 9,889 spatial rows, eight
+- deployment validator: zero errors, 7.55 MB bundle, 9,889 spatial rows, eight
   weather metrics;
-- ordinary pre-commit suite: **82/83 passed**; the sole expected failure requires
-  the five new deployable files to be tracked;
-- simulated post-commit suite: **83/83 passed** with a disposable Git index and
-  no modification to the real staging area;
+- current tracked-artifact suite: **84/84 passed**, including deterministic
+  cross-platform CSV byte checks;
+- both artifact SHA-256 values match their LF-normalized repository bytes and
+  manifests on Windows and Ubuntu;
 - deployment validation enforces artifact SHA-256/row counts, a 10 MB per-file
   limit, and a 20 MB bundle limit;
 - both runtime CSVs rebuilt byte-for-byte identically;

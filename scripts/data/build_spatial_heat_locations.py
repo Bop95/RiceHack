@@ -65,6 +65,19 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def write_csv(path: Path, rows: list[dict[str, object]]) -> None:
+    """Write deployment CSVs with deterministic bytes on every platform."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8", newline="") as stream:
+        writer = csv.DictWriter(
+            stream,
+            fieldnames=output_fields(),
+            lineterminator="\n",
+        )
+        writer.writeheader()
+        writer.writerows(rows)
+
+
 def zip_csv_rows(
     zip_path: Path,
     member: str,
@@ -452,11 +465,7 @@ def main() -> int:
     rows, metadata = build(args)
     if not rows:
         raise SystemExit("No spatial rows passed the approved filters.")
-    args.output.parent.mkdir(parents=True, exist_ok=True)
-    with args.output.open("w", encoding="utf-8", newline="") as stream:
-        writer = csv.DictWriter(stream, fieldnames=output_fields())
-        writer.writeheader()
-        writer.writerows(rows)
+    write_csv(args.output, rows)
     metadata["artifact_sha256"] = sha256(args.output)
     args.metadata.parent.mkdir(parents=True, exist_ok=True)
     args.metadata.write_text(

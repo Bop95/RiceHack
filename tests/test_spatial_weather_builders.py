@@ -18,13 +18,16 @@ from scripts.data.build_spatial_heat_locations import (
     build as build_spatial,
     grid_key,
     nearest_uhi,
+    output_fields as spatial_output_fields,
     parse_args as parse_spatial_args,
+    write_csv as write_spatial_csv,
 )
 from scripts.data.build_weather_chat_summaries import (
     build as build_weather,
     parse_args as parse_weather_args,
     risk_flags,
     risk_level,
+    write_csv as write_weather_csv,
 )
 
 
@@ -44,6 +47,21 @@ def write_zip_csv(
 
 
 class SpatialWeatherBuilderTests(unittest.TestCase):
+    def test_deployment_csv_bytes_use_lf_on_every_platform(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            spatial_path = root / "spatial.csv"
+            weather_path = root / "weather.csv"
+            spatial_row = {field: "fixture" for field in spatial_output_fields()}
+            write_spatial_csv(spatial_path, [spatial_row])
+            write_weather_csv(weather_path, [{"metric_id": "fixture", "value": 1}])
+
+            for path in (spatial_path, weather_path):
+                with self.subTest(path=path.name):
+                    payload = path.read_bytes()
+                    self.assertIn(b"\n", payload)
+                    self.assertNotIn(b"\r\n", payload)
+
     def test_metadata_defaults_beside_redirected_output(self) -> None:
         cases = (
             (

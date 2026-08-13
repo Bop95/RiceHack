@@ -46,6 +46,19 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def write_csv(path: Path, rows: list[dict[str, object]]) -> None:
+    """Write deployment CSVs with deterministic bytes on every platform."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", encoding="utf-8", newline="") as stream:
+        writer = csv.DictWriter(
+            stream,
+            fieldnames=list(rows[0]),
+            lineterminator="\n",
+        )
+        writer.writeheader()
+        writer.writerows(rows)
+
+
 def parse_float(row: dict[str, str], field: str) -> float:
     result = float(row[field])
     if not math.isfinite(result):
@@ -310,11 +323,7 @@ def build(args: argparse.Namespace) -> tuple[list[dict[str, Any]], dict[str, Any
 def main() -> int:
     args = parse_args()
     rows, metadata = build(args)
-    args.output.parent.mkdir(parents=True, exist_ok=True)
-    with args.output.open("w", encoding="utf-8", newline="") as stream:
-        writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
-        writer.writeheader()
-        writer.writerows(rows)
+    write_csv(args.output, rows)
     metadata["artifact_sha256"] = sha256(args.output)
     args.metadata.parent.mkdir(parents=True, exist_ok=True)
     args.metadata.write_text(
