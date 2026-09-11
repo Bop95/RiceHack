@@ -34,20 +34,20 @@ def get_selected_match_state():
     return phase_id, scenario_id, phases[phase_id], scenarios[scenario_id]
 
 
-def render_match_controls() -> None:
+def render_match_controls(compact: bool = False) -> None:
     config = default_mobility_config()
     phases = {p.phase_id.value: p for p in config.phases}
     scenarios = {s.scenario_id.value: s for s in config.scenarios}
     get_selected_match_state()
     with st.container():
-        left, right = st.columns([3, 2])
+        left, right = (st, st) if compact else st.columns([3, 2])
         left.selectbox(
-            'Match phase', options=list(phases), key='finalflow_phase_id',
+            'Match Phase', options=list(phases), key='finalflow_phase_id',
             format_func=lambda value: phases[value].display_label,
             help='Match markers use the shared replay clock. Extra time is included in this scenario.',
         )
         right.selectbox(
-            'Mobility scenario', options=list(scenarios), key='finalflow_scenario_id',
+            'Scenario', options=list(scenarios), key='finalflow_scenario_id',
             format_func=lambda value: scenarios[value].display_label,
             help='Scenario / modeled. Changes transport assumptions, not historical business or weather data.',
         )

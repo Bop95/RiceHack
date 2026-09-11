@@ -52,12 +52,7 @@ class StreamlitAppTests(unittest.TestCase):
         ):
             app = AppTest.from_string(source, default_timeout=30).run()
             self.assertFalse(app.exception)
-            self.assertEqual(app.text_area[0].label, "Your question")
-            app.text_area[0].input("Which brand has the highest total visits?")
-            submit_button = next(
-                button for button in app.button if button.label == "Ask FinalFlow"
-            )
-            app = submit_button.click().run()
+            app = app.chat_input[0].set_value("Which brand has the highest total visits?").run()
 
         self.assertFalse(app.exception)
         page_text = " ".join(item.value for item in app.markdown)
@@ -65,7 +60,7 @@ class StreamlitAppTests(unittest.TestCase):
         self.assertIn("Walmart", page_text)
         self.assertIn("verified prepared-data response", caption_text)
         clear_button = next(
-            button for button in app.button if button.label == "Clear chat"
+            button for button in app.button if button.label == "Clear conversation"
         )
         self.assertFalse(clear_button.disabled)
 
@@ -78,10 +73,7 @@ class StreamlitAppTests(unittest.TestCase):
             os.environ, {"FINALFLOW_DISABLE_OPENAI": "true"}, clear=False
         ):
             app = AppTest.from_string(source, default_timeout=30).run()
-            submit_button = next(
-                button for button in app.button if button.label == "Ask FinalFlow"
-            )
-            app = submit_button.click().run()
+            app = app.chat_input[0].set_value("   ").run()
         self.assertFalse(app.exception)
         self.assertTrue(
             any("enter a question" in warning.value.lower() for warning in app.warning)
@@ -99,11 +91,7 @@ class StreamlitAppTests(unittest.TestCase):
             initial_data_type_captions = sum(
                 "Data type:" in caption.value for caption in app.caption
             )
-            app.text_area[0].input("Who won the last Super Bowl?")
-            submit_button = next(
-                button for button in app.button if button.label == "Ask FinalFlow"
-            )
-            app = submit_button.click().run()
+            app = app.chat_input[0].set_value("Who won the last Super Bowl?").run()
 
         self.assertFalse(app.exception)
         self.assertEqual(len(app.dataframe), 0)

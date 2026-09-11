@@ -13,7 +13,7 @@ import plotly.graph_objects as go
 from paddydash.services.data_service import DashboardData
 
 
-RICE_BLUE = "#00205B"
+RICE_BLUE = "#69B3D0"
 MID_BLUE = "#4C78A8"
 LIGHT_BLUE = "#8FB9D9"
 RICE_GOLD = "#C69214"
@@ -43,8 +43,9 @@ def common_layout(
     height: int = 470,
 ) -> go.Figure:
     figure.update_layout(
-        title={"text": f"{title}<br><sup>{subtitle}</sup>", "x": 0.01},
-        margin={"l": 30, "r": 25, "t": 90, "b": 45},
+        title={"text": title, "x": 0.01, "font": {"size": 15}},
+        meta={"caption": subtitle},
+        margin={"l": 30, "r": 25, "t": 70, "b": 45},
         height=height,
         hovermode="closest",
         legend={"orientation": "h", "y": 1.02, "x": 0},
@@ -90,13 +91,16 @@ def ranking_figure(
         )
     )
     metric_title, axis_title = METRICS[metric]
-    return common_layout(
+    figure = common_layout(
         figure,
         title,
         f"Ranked by {metric_title.lower()}; hover for scale and intensity evidence.",
         axis_title,
-        height=max(430, 54 * limit),
+        height=max(380, 34 * limit),
     )
+    figure.update_xaxes(title_text=axis_title)
+    figure.update_yaxes(title_text=label_column.replace('_', ' ').title())
+    return figure
 
 
 def overall_monthly_figure(
@@ -212,7 +216,7 @@ def category_scatter_figure(rows: list[dict[str, Any]], limit: int = 35) -> go.F
             ),
         )
     )
-    figure.update_xaxes(title="Unique stores", type="log")
+    figure.update_xaxes(title="Unique stores", type="log", dtick=1)
     return common_layout(
         figure,
         "Category footprint versus daily intensity",
@@ -253,9 +257,8 @@ def market_figure(rows: list[dict[str, Any]]) -> go.Figure:
         go.Scatter(
             x=[row["total_visits"] for row in rows],
             y=[row["mean_daily_visits"] for row in rows],
-            mode="markers+text",
+            mode="markers",
             text=[row["market"] for row in rows],
-            textposition="top center",
             customdata=[[row["unique_stores"], row["record_count"]] for row in rows],
             marker={
                 "size": [max(15, math.sqrt(row["unique_stores"]) / 5) for row in rows],
@@ -304,7 +307,7 @@ def percentile_figure(percentiles: dict[str, Any]) -> go.Figure:
         "Daily transformed visits",
         430,
     )
-    result.update_yaxes(type="log")
+    result.update_yaxes(type="log", dtick=1)
     return result
 
 

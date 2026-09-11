@@ -13,7 +13,7 @@ if str(REPOSITORY_ROOT) not in sys.path:
     sys.path.insert(0, str(REPOSITORY_ROOT))
 
 from paddydash.pages.ask_finalflow import render_ask_finalflow
-from paddydash.components.finalflow_shell import render_header
+from paddydash.components.finalflow_shell import render_header, render_methodology
 from paddydash.pages.matchday_timeline import render_matchday_timeline
 from paddydash.pages.mobility import render_mobility
 from paddydash.pages.project_evidence import render_project_evidence
@@ -45,12 +45,14 @@ def main() -> None:
         ]
     }
     navigation = st.navigation(pages)
-    st.sidebar.markdown("---")
-    st.sidebar.caption(
-        "Synthetic mobility is a scenario assumption. Historical commercial and "
-        "weather context is not a match-day measurement."
-    )
     navigation.run()
+    journey = ['Executive Overview', 'Matchday Timeline', 'Mobility & Access',
+               'Scenario Lab', 'Weather & Heat', 'Commercial & POI Intelligence', 'Ask FinalFlow']
+    next_title = journey[(journey.index(navigation.title) + 1) % len(journey)]
+    next_page = next(page for page in pages['FinalFlow'] if page.title == next_title)
+    st.divider()
+    st.page_link(next_page, label=f'Next: {next_title}', icon=':material/arrow_forward:')
+    render_methodology()
 
 
 def _safe_page(renderer):
@@ -58,9 +60,8 @@ def _safe_page(renderer):
     def wrapped() -> None:
         try:
             renderer()
-        except (OSError, KeyError, TypeError, ValueError) as error:
-            st.warning("This view has unavailable prepared data. Other FinalFlow views remain available.")
-            st.caption(str(error))
+        except (OSError, KeyError, TypeError, ValueError, IndexError, ZeroDivisionError):
+            st.warning("This section could not finish loading. Try reloading the page; other views remain available.")
     return wrapped
 
 

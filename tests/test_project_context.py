@@ -57,7 +57,6 @@ class ProjectContextTests(unittest.TestCase):
             app = AppTest.from_string(f'from paddydash.pages.{module} import {function}\n{function}()', default_timeout=30).run()
             self.assertFalse(app.exception)
             if module == 'ask_finalflow':
-                app.text_area[0].set_value('why did the recommendation change?')
-                app.button[0].click().run()
+                app.chat_input[0].set_value('why did the recommendation change?').run()
                 self.assertFalse(app.exception)
                 self.assertIn('Modeled bottleneck', app.session_state['chat_history'][-1]['response']['answer'])

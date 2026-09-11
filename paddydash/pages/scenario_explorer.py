@@ -6,7 +6,7 @@ import streamlit as st
 
 from paddydash.components.analytical_views import COMPARISON_METRICS, comparison, plot, prepared_table
 from paddydash.components.charts import scenario_comparison_rows_figure, scenario_risk_figure
-from paddydash.components.ui import interpretation
+from paddydash.components.ui import interpretation, stretch_width
 from paddydash.services.analytics import SYNTHETIC_LIMITATION
 from paddydash.services.data_service import load_dashboard_data
 from paddydash.services.finalflow_data import change_text
@@ -32,12 +32,18 @@ def render_scenario_explorer() -> None:
         else:
             frame = pd.DataFrame(filtered)
             frame['Scenario'] = frame.scenario_id.map(lambda v: names.get(v, v))
-            for index, (metric, label, unit) in enumerate(COMPARISON_METRICS):
-                st.markdown(f'**{label}**')
-                fig = px.bar(frame, y='Scenario', x=metric, color='Scenario', orientation='h',
-                    labels={metric: unit}, color_discrete_sequence=['#65747c', '#bd3950', '#087e8b', '#477fbd', '#927233'])
-                fig.update_layout(height=260, showlegend=False)
-                plot(fig, f'lab_metric_{index}')
+            labels = {label: (metric, unit) for metric, label, unit in COMPARISON_METRICS}
+            label = st.selectbox('Comparison metric', list(labels), key='lab_comparison_metric')
+            metric, unit = labels[label]
+            colors = {row['Scenario']: '#39B99A' if row['scenario_id'] == context['scenario_id']
+                      else '#8b969e' if row['scenario_id'] == 'baseline' else '#547d99'
+                      for row in frame.to_dict('records')}
+            fig = px.bar(frame, y='Scenario', x=metric, color='Scenario', orientation='h',
+                         labels={metric: unit}, color_discrete_map=colors)
+            fig.update_layout(height=320, showlegend=False)
+            fig.update_xaxes(tickformat='.0%' if metric == 'peak_utilization' else ',.0f')
+            plot(fig, 'lab_selected_metric')
+            st.caption('Green identifies the selected scenario when included. Queue relief, clearance and delay are different objectives; there is no single best intervention across all objectives.')
         st.subheader('What changes under this scenario?')
         base, selected = context['baseline']['summary'], context['summary']
         if base and selected:
@@ -53,9 +59,10 @@ def render_scenario_explorer() -> None:
         modeled = [r for r in interventions if r['evaluation_status'] == 'modeled']
         pending = [r for r in interventions if r['evaluation_status'] != 'modeled']
         if modeled:
-            st.dataframe(modeled, hide_index=True, width='stretch')
+            with st.expander('Evaluated scenario effects and provenance'):
+                st.dataframe(modeled, hide_index=True, **stretch_width(st.dataframe))
         with st.expander('Catalog-only interventions: effects not evaluated'):
-            st.dataframe([{k: r[k] for k in ('name', 'evaluation_status', 'assumption_note')} for r in pending], hide_index=True, width='stretch')
+            st.dataframe([{k: r[k] for k in ('name', 'evaluation_status', 'assumption_note')} for r in pending], hide_index=True, **stretch_width(st.dataframe))
         st.caption('Derived comparison of synthetic scenarios. Missing effects remain unavailable; no estimated savings are assigned to catalog-only entries.')
 
 
@@ -107,18 +114,8 @@ def render_commercial_scenarios() -> None:
         f"of {len(data.scenarios):,} synthetic records."
     )
 
-    st.plotly_chart(
-        scenario_comparison_rows_figure(filtered),
-        width="stretch",
-        theme="streamlit",
-        config={"displaylogo": False},
-    )
-    st.plotly_chart(
-        scenario_risk_figure(filtered),
-        width="stretch",
-        theme="streamlit",
-        config={"displaylogo": False},
-    )
+    plot(scenario_comparison_rows_figure(filtered), 'commercial_scenario_visits')
+    plot(scenario_risk_figure(filtered), 'commercial_scenario_risk')
     interpretation(
         "The filters expose how documented scenario and zone multipliers change synthetic demand and risk labels.",
         "These records let the team test filters, evidence cards, charts, and backend responses before event data exists.",

@@ -240,6 +240,92 @@ under Secrets. The prepared-data fallback works without an API key. See
 `paddydash/DEPLOYMENT_GUIDE.md` for the complete account, security, deployment,
 and verification sequence.
 
+## Ask FinalFlow
+
+The seventh view uses `services/project_context.py` to retrieve compact prepared
+facts and `services/ai_service.py` for the optional official OpenAI SDK Responses
+API (`responses.parse`, Pydantic narrative schema). No CSV is sent in full.
+Selected phase/scenario/replay time scope each answer. Explicit final-whistle,
+rain, disruption, or staggered-departure questions resolve their own scope without
+changing the dashboard selection. Saved answers retain their original scope.
+
+The application response includes `answer`, `key_findings`, `recommendations`,
+`evidence` (`label`, `value`, `source`, `data_type`), `limitations`, and
+`related_plot_id`. Evidence, findings, actions and plot IDs are attached locally,
+not entrusted to model generation. The factual guard accepts only the prepared
+narrative (whitespace changes allowed); other wording falls back to the local
+answer. This intentionally limits free-form AI interpretation until semantic
+validation is available. Missing or malformed provider responses are safe fallbacks.
+
+Sources are node/edge time series, scenario summaries, recommendation rules,
+commercial/weather summaries, and the AI context/executive baseline references
+for provenance questions. Historical context is not a venue forecast; mobility
+results are derived from synthetic inputs. Current web requests remain separate.
+Historical chart questions use the retained deterministic analytics handlers.
+
+Requests allow 500 question characters, at most 18,000 combined project/web context/answer
+characters, and 500 output tokens. Oversized context uses the local answer without
+calling OpenAI. Only the current question/context is sent, not conversation history.
+The browser retains the last 20 exchanges. Clear conversation preserves the global
+replay selection and request allowance. Keys and model configuration remain server-only.
+
+For a manual provider test, configure `OPENAI_API_KEY` in the ignored root `.env`,
+optionally set `OPENAI_MODEL` to an account-supported structured-output model,
+and set `FINALFLOW_DISABLE_OPENAI=false`. Leave search disabled unless testing it:
+
+```bash
+FINALFLOW_DISABLE_SEARCH=true .venv/bin/python -m streamlit run paddydash/app.py
+```
+
+Select Ask FinalFlow, ask about the final-whistle bottleneck, switch scenario,
+and compare a new answer with the retained earlier scope. With no key or with
+`FINALFLOW_DISABLE_OPENAI=true`, the same deterministic facts remain available.
+Provider access/model availability have not been verified through live calls.
+
+### Current public information
+
+`services/search_service.py` is shared with Tan Dat's backend compatibility import;
+there is no second search client. `should_search()` requires an explicit recency
+term (current/latest/today/live/recent/new/now) and a transit, weather, or venue-access
+topic. Project terms (scenario, queue, bottleneck, chart, modeled/prepared data,
+staggered departure) and explicit no-search instructions take precedence. Split
+mixed project/current-public questions into separate messages to request both.
+
+Up to five SerpAPI organic results are normalized to `title`, `link`, `source`,
+`snippet`, and nullable `date`. Missing source names use the URL hostname. Source
+fields are bounded; malformed, oversized, or credential-bearing responses fail
+closed. Search uses a five-second timeout and the existing ten-request session cap.
+The legacy `summarize=True` option and summary helper are compatibility no-ops:
+they never launch a separate unguarded OpenAI request.
+
+Normalized results accompany the current question and project context in the
+single guarded Responses request. They are marked as untrusted web evidence.
+The structured application response retains `web_sources`, `search_used`, and
+`web_status` (`available`, `no_results`, or `unavailable`), including on AI failure.
+Project Evidence and Web Sources render separately; clickable source titles,
+source/domain, excerpts, and supplied dates remain visible without OpenAI.
+The factual guard does not permit free-form web synthesis to rewrite project facts.
+Snippets are excerpts, not independently verified live alerts; dates may be missing,
+sources may disagree, and no-results does not mean there are no disruptions.
+
+For a manual live-provider test, configure both `OPENAI_API_KEY` and
+`SERPAPI_API_KEY` in the ignored root `.env` (backend-only; never browser code),
+then run:
+
+```bash
+FINALFLOW_DISABLE_OPENAI=false FINALFLOW_DISABLE_SEARCH=false \
+  .venv/bin/python -m streamlit run paddydash/app.py
+```
+
+1. Ask about the rail-disruption bottleneck: no Web Sources section is added.
+2. Ask "Are there current NJ Transit disruptions?": check the Web search used
+   badge and separate source cards. Follow the issuing authority's notice to verify.
+3. Ask for the latest weather alert or new venue access announcements.
+4. Restart with search disabled: current questions show Live web search unavailable
+   while project answers continue. Disable OpenAI alone to check source cards still work.
+
+These commands enable live, potentially billable calls. Automated tests mock all providers.
+
 ## Known limitations
 
 - Store visits are a commercial-activity proxy, not attendance or pedestrian flow.

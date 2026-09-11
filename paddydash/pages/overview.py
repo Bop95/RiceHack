@@ -1,6 +1,7 @@
 """Executive readiness from prepared mobility and contextual evidence."""
 
 import streamlit as st
+from paddydash.components.ui import stretch_width
 
 from paddydash.components.analytical_views import current_metrics, plot, prepared_table, pressure_figure, recommendations
 from paddydash.services.project_context import selected_context
@@ -12,6 +13,7 @@ def render_overview() -> None:
     st.caption(context['scope'])
     current_metrics(context)
     recommendations(context)
+    st.markdown('**Decision insight:** queue relief and departure clearance are different objectives. A staggered release can reduce pressure while extending the departure window.')
     st.subheader('Corridor pressure')
     rows = prepared_table('mobility_node_timeseries.csv')
     if rows:
@@ -33,5 +35,5 @@ def render_overview() -> None:
     with st.expander('Prepared baseline references and source coverage'):
         kpis = prepared_table('executive_kpis.csv')
         if kpis:
-            st.dataframe(kpis, hide_index=True, width='stretch')
+            st.dataframe(kpis, hide_index=True, **stretch_width(st.dataframe))
         st.caption('Baseline reference values do not change with the selected scenario. Historical evidence remains exploratory.')

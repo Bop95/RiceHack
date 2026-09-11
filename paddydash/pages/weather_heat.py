@@ -3,6 +3,7 @@
 import pandas as pd
 import plotly.express as px
 import streamlit as st
+from paddydash.components.ui import stretch_width
 
 from paddydash.components.analytical_views import plot, prepared_table, spatial_explorer
 from paddydash.services.finalflow_data import change_text, current_mobility, evaluate_rules
@@ -61,7 +62,7 @@ def render_weather_heat() -> None:
             if row['edge_id'] in base_edges:
                 comparison.append({'Edge': row['edge_id'], 'Baseline throughput': base_edges[row['edge_id']]['throughput'],
                                    'Rain throughput': row['throughput'], 'Baseline capacity': base_edges[row['edge_id']]['capacity'], 'Rain capacity': row['capacity']})
-        st.dataframe(comparison, hide_index=True, width='stretch')
+        st.dataframe(comparison, hide_index=True, **stretch_width(st.dataframe))
         st.caption('Derived | mobility_edge_timeseries.csv | People per 5-minute interval. Realized throughput can be demand-limited; lower capacity does not always reduce throughput.')
     access = prepared_table('mobility_access_summary.csv')
     rain_access = next((r for r in access if r['scenario_id'] == 'rain'), None)

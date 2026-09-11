@@ -4,6 +4,7 @@ from pathlib import Path
 
 import pandas as pd
 import streamlit as st
+from paddydash.components.ui import stretch_width
 
 from paddydash.components.analytical_views import prepared_table, recommendations, spatial_explorer
 from paddydash.pages.store_visit_explorer import render_store_visit_explorer
@@ -20,11 +21,11 @@ def render_project_evidence() -> None:
     rows = prepared_table('commercial_context.csv')
     with st.expander('Commercial context and source coverage'):
         if rows:
-            st.dataframe(rows, hide_index=True, width='stretch')
+            st.dataframe(rows, hide_index=True, **stretch_width(st.dataframe))
     tab = st.radio('Commercial evidence', ['Store visits', 'POI & heat', 'Synthetic placement'], horizontal=True, key='commercial_view')
     if tab == 'Store visits':
         try:
-            render_store_visit_explorer()
+            render_store_visit_explorer(embedded=True)
         except (OSError, ValueError, KeyError, TypeError):
             st.warning('Prepared store-visit summaries are unavailable. Other commercial evidence remains accessible.')
     elif tab == 'POI & heat':
@@ -40,11 +41,12 @@ def render_project_evidence() -> None:
                 raise ValueError('Unreviewed provenance')
             if frame[required].isna().any().any():
                 raise ValueError('Incomplete synthetic evidence')
-            st.dataframe(frame[required], hide_index=True, width='stretch')
+            st.dataframe(frame[required], hide_index=True, **stretch_width(st.dataframe))
             rules = prepared_table('recommendation_catalog.csv')
-            for row in frame[frame.placement_class.eq('Avoided')].to_dict('records'):
-                actions = evaluate_rules(rules, {'placement_class': {'value': row['placement_class'], 'source_file': path.name,
-                     'scope': f"Synthetic zone {row['zone_name']} / scenario {row['scenario_id']}"}})
+            avoided = frame[frame.placement_class.eq('Avoided')]
+            if not avoided.empty:
+                actions = evaluate_rules(rules, {'placement_class': {'value': 'Avoided', 'source_file': path.name,
+                     'scope': f"{len(avoided):,} synthetic zone records marked Avoided; zone/scenario details are listed above"}})
                 for action in actions:
                     st.write(action['recommendation'])
                     st.caption(f"Synthetic | {action['scope']} | {action['source_file']} | placement_class={action['trigger_value']}")

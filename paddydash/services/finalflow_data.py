@@ -44,7 +44,7 @@ def load_csv_safe(category: str, filename: str) -> tuple[list[dict[str, str]], s
         return [], f"{filename} could not be read."
 
 
-@st.cache_data(show_spinner=False)
+@st.cache_data(show_spinner=False, ttl=60)
 def load_json_safe(category: str, filename: str) -> tuple[dict[str, Any] | None, str | None]:
     """Return compact JSON content or a concise unavailable message."""
     path = repository_file(category, filename)

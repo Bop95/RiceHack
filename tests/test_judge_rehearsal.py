@@ -33,8 +33,7 @@ class JudgeRehearsalTests(unittest.TestCase):
         self.addCleanup(environment.stop)
 
     def ask(self, app, question):
-        app.text_area[0].set_value(question)
-        next(b for b in app.button if b.label == 'Ask FinalFlow').click().run()
+        app.chat_input[0].set_value(question).run()
         self.assertFalse(app.exception)
         return app.session_state['chat_history'][-1]
 
@@ -96,7 +95,7 @@ class JudgeRehearsalTests(unittest.TestCase):
             answer = self.ask(app, 'current transit alert')
             provider.assert_not_called()
         self.assertFalse(answer['web']['search_used'])
-        self.assertTrue(any('Search is unavailable' in i.value for i in app.info))
+        self.assertTrue(any('Live web search unavailable' in i.value for i in app.info))
 
 
 if __name__ == '__main__':

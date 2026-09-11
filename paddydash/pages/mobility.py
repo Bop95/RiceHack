@@ -4,6 +4,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
+from paddydash.components.ui import stretch_width
 
 from paddydash.components.analytical_views import comparison, current_metrics, edge_chart, plot, prepared_table, value_text
 from paddydash.services.mobility_config import default_mobility_config
@@ -37,7 +38,7 @@ def render_mobility() -> None:
                          'Flow toward': active, 'Status': 'Bottleneck' if node['node_id'] == context['bottleneck_id'] else 'Clear' if node['queue_passengers'] == 0 else 'Waiting'})
         frame = pd.DataFrame(rows)
         styled = frame.style.apply(lambda row: ['background-color: #fff0cc; color: #312b20' if row['Status'] == 'Bottleneck' else '' for _ in row], axis=1)
-        st.dataframe(styled, hide_index=True, width='stretch')
+        st.dataframe(styled, hide_index=True, **stretch_width(st.dataframe))
         st.caption(f"Total residual corridor queue: {context['pressure']:,} people. Stadium holding is excluded. Utilization reflects service throughput, not unconstrained demand.")
         if reference:
             ordered = sorted(reference, key=lambda r: r['order'])
@@ -58,8 +59,9 @@ def render_mobility() -> None:
         if frame.empty:
             st.info('No nodes selected.')
         else:
-            fig = px.area(frame.sort_values('time_minutes'), x='time_minutes', y='queue_passengers', color='node_id',
-                          labels={'time_minutes': 'Minutes from kickoff', 'queue_passengers': 'Queued people', 'node_id': 'Node'})
+            frame['Location'] = frame.node_id.map(names)
+            fig = px.area(frame.sort_values('time_minutes'), x='time_minutes', y='queue_passengers', color='Location',
+                          labels={'time_minutes': 'Minutes from kickoff', 'queue_passengers': 'Queued people'})
             fig.add_vline(x=context['time_minutes'], line_color='#bd3950')
             plot(fig, 'node_queues')
     edge_chart(context, 'mobility_edge')

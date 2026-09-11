@@ -4,6 +4,7 @@ import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
 import streamlit as st
+from paddydash.components.ui import stretch_width
 
 from paddydash.services.finalflow_data import change_text, load_table
 from paddydash.services.mobility_config import default_mobility_config
@@ -26,9 +27,12 @@ def prepared_table(filename: str) -> list[dict]:
 
 
 def plot(figure: go.Figure, key: str) -> None:
-    figure.update_layout(margin=dict(l=10, r=10, t=35, b=30), font=dict(size=12),
-                         legend=dict(orientation='h', y=-0.25))
-    st.plotly_chart(figure, width='stretch', config={'displaylogo': False}, key=key)
+    figure.update_layout(margin=dict(l=10, r=10, t=50, b=35), font=dict(size=12),
+                         height=figure.layout.height or 340,
+                         legend=dict(orientation='h', y=1.08, x=0), separators='.,')
+    st.plotly_chart(figure, **stretch_width(st.plotly_chart), config={'displaylogo': False}, key=key)
+    if isinstance(figure.layout.meta, dict) and figure.layout.meta.get('caption'):
+        st.caption(figure.layout.meta['caption'])
 
 
 def value_text(value: float | None, suffix: str = '', percent: bool = False) -> str:
@@ -43,9 +47,9 @@ def current_metrics(context: dict) -> None:
     st.markdown(f"**{context['status']}** · Bottleneck: **{context['bottleneck']}**")
     st.caption('Heuristic readiness indicator, not a validated public-safety assessment. Derived from synthetic scenario inputs.')
     cards = st.columns(4)
-    cards[0].metric('Largest node queue', value_text(context['queue']))
-    cards[1].metric('Current utilization', value_text(context['utilization'], percent=True))
-    cards[2].metric('Estimated longest wait', value_text(context['wait'], ' min'))
+    cards[0].metric('Largest node queue', value_text(context['queue']), help='People waiting at the busiest node at this replay minute; excludes stadium holding.')
+    cards[1].metric('Current utilization', value_text(context['utilization'], percent=True), help='Maximum realized edge throughput divided by effective capacity. A low ratio does not imply low passenger demand everywhere.')
+    cards[2].metric('Estimated longest wait', value_text(context['wait'], ' min'), help='Maximum modeled node wait at this replay minute, not an observed passenger journey.')
     summary = context['summary'] or {}
     cards[3].metric('Post-match clearance', value_text(summary.get('total_clearance_minutes'), ' min'),
                    help='Whole-run elapsed time after final whistle, not remaining time from the selected moment.')
@@ -61,6 +65,7 @@ def recommendations(context: dict) -> None:
     st.caption('Curated review prompts; not optimal or safety-approved interventions.')
 
 
+@st.cache_data(show_spinner=False, ttl=60, max_entries=64)
 def pressure_figure(rows: list[dict], scenario_id: str, minute: int) -> go.Figure:
     """Sum residual node queues once per time boundary; no passenger double counting."""
     figure = go.Figure()
@@ -76,7 +81,7 @@ def pressure_figure(rows: list[dict], scenario_id: str, minute: int) -> go.Figur
         phase_at_time = subset.groupby('time_minutes', sort=True).phase_id.first().map(phase_labels)
         figure.add_scatter(x=totals.index, y=totals.values, name=scenario.replace('_', ' ').title(),
                            customdata=phase_at_time.values,
-                           mode='lines', line=dict(width=3, dash='dash' if scenario == 'baseline' and scenario_id != 'baseline' else 'solid'),
+                           mode='lines', line=dict(width=3, color='#8b969e' if scenario == 'baseline' and scenario_id != 'baseline' else '#39B99A', dash='dash' if scenario == 'baseline' and scenario_id != 'baseline' else 'solid'),
                            hovertemplate='%{customdata}<br>Kickoff %{x:+} min<br>%{y:,} people queued<extra>%{fullData.name}</extra>')
     config = default_mobility_config()
     figure.add_vline(x=minute, line_color='#bd3950', annotation_text='Selected minute')
@@ -114,7 +119,12 @@ def comparison(context: dict, key: str) -> None:
     if not baseline or not selected:
         st.info('Whole-run scenario comparison is unavailable.')
         return
-    st.dataframe(comparison_rows(baseline, selected), hide_index=True, width='stretch')
+    frame = pd.DataFrame(comparison_rows(baseline, selected))
+    utilization = frame['Metric'].str.contains('utilization', case=False)
+    frame.loc[utilization, 'Metric'] = frame.loc[utilization, 'Metric'].str.replace('(ratio)', '(%)', regex=False)
+    styled = frame.style.format({'Baseline': '{:,.0f}', 'Selected scenario': '{:,.0f}'}, na_rep='Unavailable')
+    styled = styled.format('{:.1%}', subset=(frame.index[utilization], ['Baseline', 'Selected scenario']), na_rep='Unavailable')
+    st.dataframe(styled, hide_index=True, **stretch_width(st.dataframe))
     st.write(change_text('Peak queue', baseline['peak_queue_passengers'], selected['peak_queue_passengers']))
     rows = prepared_table('mobility_node_timeseries.csv')
     if rows:
@@ -154,4 +164,4 @@ def spatial_explorer(key: str) -> None:
     plot(px.bar(opportunity, x='commercial_opportunity', y='Locations', color='heat_concern',
                 labels={'commercial_opportunity': 'Relative commercial opportunity', 'heat_concern': 'Heat concern'}), key + '_opportunity')
     with st.expander('Location evidence and review classifications'):
-        st.dataframe(frame[['location_name', 'city', 'top_category', 'spending_level', 'includes_parking', 'nearby_uhi', 'heat_concern', 'recommendation', 'reason', 'data_type']], hide_index=True, width='stretch')
+        st.dataframe(frame[['location_name', 'city', 'top_category', 'spending_level', 'includes_parking', 'nearby_uhi', 'heat_concern', 'recommendation', 'reason', 'data_type']], hide_index=True, **stretch_width(st.dataframe))

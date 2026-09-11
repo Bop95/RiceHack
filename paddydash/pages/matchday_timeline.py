@@ -24,7 +24,7 @@ def render_matchday_timeline() -> None:
         rows = sorted(timeline, key=lambda r: options.index(r['phase_id']))
         figure = go.Figure(go.Scatter(
             x=[r['time_minutes'] for r in rows], y=list(range(len(rows))),
-            mode='markers', marker=dict(size=14, color=['#bd3950' if r['phase_id'] == context['phase_id'] else '#087e8b' for r in rows]),
+            mode='markers', marker=dict(size=14, color=['#39B99A' if r['phase_id'] == context['phase_id'] else '#8b969e' for r in rows]),
             customdata=[[r['display_name'], r['direction'], r['expected_pressure_level']] for r in rows],
             hovertemplate='%{customdata[0]}<br>Kickoff %{x:+} min<br>%{customdata[1]} / assumed %{customdata[2]} pressure<extra></extra>'))
         figure.update_layout(height=390, xaxis_title='Minutes from kickoff', yaxis=dict(

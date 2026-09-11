@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import re
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, field
 from typing import Any
 
 from paddydash.services.data_service import DashboardData
@@ -48,6 +48,7 @@ class EvidenceItem:
     label: str
     value: str | int | float
     source: str
+    data_type: str = "derived"
 
 
 @dataclass(frozen=True)
@@ -58,6 +59,11 @@ class ChatResponse:
     data_type: str
     limitations: list[str]
     mode: str = "prepared-data"
+    key_findings: list[str] = field(default_factory=list)
+    recommendations: list[str] = field(default_factory=list)
+    web_sources: list[dict[str, str | None]] = field(default_factory=list)
+    search_used: bool = False
+    web_status: str | None = None
 
     def to_dict(self) -> dict[str, Any]:
         result = asdict(self)
@@ -74,6 +80,11 @@ class RetrievalResult:
     data_type: str
     limitations: list[str]
     local_answer: str
+    key_findings: list[str] = field(default_factory=list)
+    recommendations: list[str] = field(default_factory=list)
+    web_sources: list[dict[str, str | None]] = field(default_factory=list)
+    search_used: bool = False
+    web_status: str | None = None
 
 
 PLOT_CATALOG = {
