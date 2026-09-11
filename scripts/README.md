@@ -17,11 +17,11 @@ scripts/
 Install the declared dependency and run scripts from the repository root:
 
 ```bash
-python -m pip install -r requirements.txt
+python3 -m pip install -r requirements.txt
 ```
 
 ```bash
-python scripts/data/audit_data.py --help
+python3 scripts/data/audit_data.py --help
 ```
 
 Example audit command:
@@ -68,13 +68,33 @@ Implemented:
 - `scripts/data/build_streamlit_summaries.py`: creates compact monthly brand/category tables for the deployed explorer without making the app scan the full Parquet file.
 - `scripts/data/build_spatial_heat_locations.py`: streams the spatial POI/UHI and spending ZIP exports, validates and geofences records, aggregates spend/customer rows by `PLACEKEY`, derives tiers, performs bounded nearest-UHI matching, and writes a privacy-reduced map table plus metadata.
 - `scripts/data/build_weather_chat_summaries.py`: validates the cleaned station-date weather table, rejects impossible temperature ordering, computes eight historical risk metrics, and writes the chatbot table plus metadata.
+- `scripts/data/build_finalflow_dashboard_context.py`: materializes compact dashboard references, timeline/scenario summaries, contextual aggregates, deterministic recommendation rules, and an AI context file without copying raw datasets.
 - `scripts/visualization/create_store_visit_charts.py`: builds four static PNG charts, two self-contained interactive Plotly charts, and synchronized interpretation notes from the cleaned store-visit outputs.
 - `scripts/synthetic/generate_store_visit_scenarios.py`: reproducibly creates 5,000-20,000 clearly labeled scenario records plus a data dictionary.
+- `scripts/synthetic/generate_finalflow_synthetic_inputs.py`: creates the fixed-seed, scenario-input mobility/access tables. It never generates queues or other output metrics.
+- `scripts/synthetic/derive_finalflow_mobility_outputs.py`: replays the synthetic demand and capacity profiles through the shared mobility engine and writes clearly labeled derived outputs.
+
+Generate and derive the FinalFlow mobility demonstration tables:
+
+```bash
+python3 scripts/synthetic/generate_finalflow_synthetic_inputs.py \
+  --output-dir data/synthetic --overwrite
+python3 scripts/synthetic/derive_finalflow_mobility_outputs.py \
+  --input-dir data/synthetic --output-dir data/exports --overwrite
+python3 scripts/data/build_finalflow_dashboard_context.py \
+  --summary-dir data/summaries --synthetic-dir data/synthetic \
+  --mobility-export-dir data/exports --output-dir data/exports --overwrite
+```
+
+The derived run writes node and edge time series, scenario and access summaries,
+an intervention comparison, and `mobility_manifest.json`. Its outputs are
+`derived` from `synthetic` assumptions; emissions totals remain unavailable until
+documented mode-distance inputs exist.
 
 Example complete store-visit run:
 
 ```bash
-python scripts/data/clean_store_visits.py \
+python3 scripts/data/clean_store_visits.py \
   --input /local/path/to/store-visits-rice \
   --output-root data \
   --threads 4 \
@@ -104,7 +124,7 @@ versioned; restricted raw data remains ignored.
 Example store-visit visualization run:
 
 ```bash
-python scripts/visualization/create_store_visit_charts.py
+python3 scripts/visualization/create_store_visit_charts.py
 ```
 
 The visualization script reads `data/summaries/` plus the clean Parquet file and
@@ -115,8 +135,8 @@ script's existing charts and notes.
 Build the deployable monthly explorer summaries and synthetic scenarios with:
 
 ```bash
-python scripts/data/build_streamlit_summaries.py --overwrite
-python scripts/synthetic/generate_store_visit_scenarios.py --overwrite
+python3 scripts/data/build_streamlit_summaries.py --overwrite
+python3 scripts/synthetic/generate_store_visit_scenarios.py --overwrite
 ```
 
 The builder creates monthly explorer summaries and a prepared brand-category

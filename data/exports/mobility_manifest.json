@@ -1,0 +1,30 @@
+{
+  "config_id": "finalflow_corridor_v1",
+  "emissions": {
+    "reason": "Synthetic emissions factors exist, but no documented mode-distance input exists.",
+    "status": "not_derived_missing_mode_distance_inputs"
+  },
+  "generated_at": "2026-07-19T15:00:00Z",
+  "generator_version": "1.0.0",
+  "input_manifest": "data/synthetic/manifest.json",
+  "provenance": {
+    "data_type": "derived",
+    "input_data_type": "synthetic",
+    "statement": "Derived from synthetic FinalFlow scenario inputs; not observed event operations."
+  },
+  "row_counts": {
+    "intervention_comparison.csv": 13,
+    "mobility_access_summary.csv": 5,
+    "mobility_edge_timeseries.csv": 4000,
+    "mobility_node_timeseries.csv": 2500,
+    "scenario_summary.csv": 5
+  },
+  "scenario_ids": [
+    "baseline",
+    "rail_disruption",
+    "rail_capacity_boost",
+    "rain",
+    "staggered_departure"
+  ],
+  "schema_version": "1.0.0"
+}

@@ -1,0 +1,6 @@
+mode,emissions_kg_co2e_per_passenger_km,average_occupancy,source_type,data_type,confidence_type,assumption_note
+rail,0.06,1.0,synthetic_assumption,synthetic,scenario,Synthetic placeholder factor; not EPA-validated or an emissions estimate.
+walk,0.0,1.0,synthetic_assumption,synthetic,scenario,Synthetic placeholder factor; not EPA-validated or an emissions estimate.
+shuttle,0.12,20.0,synthetic_assumption,synthetic,scenario,Synthetic placeholder factor; not EPA-validated or an emissions estimate.
+rideshare,0.22,1.5,synthetic_assumption,synthetic,scenario,Synthetic placeholder factor; not EPA-validated or an emissions estimate.
+private_vehicle,0.2,2.0,synthetic_assumption,synthetic,scenario,Synthetic placeholder factor; not EPA-validated or an emissions estimate.

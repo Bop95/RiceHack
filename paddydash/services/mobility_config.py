@@ -19,7 +19,7 @@ def default_mobility_config() -> MobilityConfig:
         ('midtown', 'penn_station', 'walk', 600, 15),
         ('penn_station', 'secaucus', 'rail', 900, 15),
         ('secaucus', 'meadowlands', 'rail', 600, 15),
-        ('meadowlands', 'stadium', 'walk', 600, 10),
+        ('meadowlands', 'stadium', 'walk', 900, 10),
     )
     edges = tuple(
         CorridorEdge(edge_id=f'{origin}_to_{destination}', from_node=origin,

@@ -1,0 +1,6 @@
+scenario_id,peak_queue_passengers,peak_post_final_whistle_queue_passengers,bottleneck_node,peak_utilization,total_clearance_minutes,passenger_delay_proxy_person_minutes,overloaded_intervals,total_arrivals,total_departures,direct_access_arrivals,peak_queue_improvement_vs_baseline,delay_proxy_improvement_vs_baseline,data_type,assumption_note
+baseline,128,9,stadium,1.0,110,1750,1,6000,6000,2407,0,0,derived,Derived from synthetic FinalFlow scenario inputs; not observed event operations.
+rail_disruption,705,705,meadowlands,1.0,110,32200,12,6000,6000,2407,-577,-30450,derived,Derived from synthetic FinalFlow scenario inputs; not observed event operations.
+rail_capacity_boost,128,0,stadium,0.7355555555555555,110,1705,0,6000,6000,2407,0,45,derived,Derived from synthetic FinalFlow scenario inputs; not observed event operations.
+rain,145,4,stadium,1.0,130,2035,1,6000,6000,2820,-17,-285,derived,Derived from synthetic FinalFlow scenario inputs; not observed event operations.
+staggered_departure,128,0,stadium,0.3883333333333333,170,1705,0,6000,6000,2407,0,45,derived,Derived from synthetic FinalFlow scenario inputs; not observed event operations.

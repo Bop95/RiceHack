@@ -1,0 +1,6 @@
+node_id,display_name,order,latitude,longitude,node_type,data_type,confidence_type,assumption_note
+midtown,Midtown Manhattan,0,40.7549,-73.984,origin,synthetic,scenario,Approximate synthetic map point for FinalFlow demonstration; not an official access coordinate.
+penn_station,Penn Station,1,40.7506,-73.9935,station,synthetic,scenario,Approximate synthetic map point for FinalFlow demonstration; not an official access coordinate.
+secaucus,Secaucus Junction,2,40.7614,-74.0755,station,synthetic,scenario,Approximate synthetic map point for FinalFlow demonstration; not an official access coordinate.
+meadowlands,Meadowlands Station,3,40.8135,-74.0745,station,synthetic,scenario,Approximate synthetic map point for FinalFlow demonstration; not an official access coordinate.
+stadium,Stadium,4,40.813,-74.074,venue,synthetic,scenario,Approximate synthetic map point for FinalFlow demonstration; not an official access coordinate.
