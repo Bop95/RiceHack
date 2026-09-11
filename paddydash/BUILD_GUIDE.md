@@ -4,6 +4,13 @@ This guide explains how to run the FinalFlow prototype and how its Streamlit
 site was built. It is written as a learning guide, so it describes both what
 each part does and why the project is organized this way.
 
+The current seven-view navigation and export-backed analytical data flow are
+documented in [the application README](README.md). The original explorer
+walkthroughs below describe retained teammate components: store visits and
+commercial scenarios now live inside Commercial & POI Intelligence. Scenario
+Lab compares prepared mobility outputs. Shared page/header/assistant metrics
+come from the exported profile replay, not the earlier default simulator run.
+
 ## 1. Run the app now
 
 Open PowerShell and move to the repository root:

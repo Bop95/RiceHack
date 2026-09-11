@@ -72,7 +72,7 @@ def show_response(response: ChatResponse, show_plot: bool = True) -> None:
         st.markdown("#### Related chart")
         st.plotly_chart(
             related_plot(response.related_plot_id, load_dashboard_data()),
-            use_container_width=True,
+            width="stretch",
             theme="streamlit",
             config={"displaylogo": False},
         )
@@ -137,7 +137,7 @@ def render_ask_finalflow() -> None:
             max_chars=500,
         )
         submitted = st.form_submit_button(
-            "Ask FinalFlow", type="primary", use_container_width=True
+            "Ask FinalFlow", type="primary", width="stretch"
         )
 
     suggestion_header, clear_column = st.columns([4, 1])
@@ -148,7 +148,7 @@ def render_ask_finalflow() -> None:
         if clear_slot.button(
             "Clear chat",
             key="clear_chat",
-            use_container_width=True,
+            width="stretch",
             disabled=not st.session_state.chat_history,
         ):
             st.session_state.chat_history = []
@@ -158,7 +158,7 @@ def render_ask_finalflow() -> None:
     selected_question = None
     for index, suggestion in enumerate(SUGGESTIONS):
         if button_columns[index % 2].button(
-            suggestion, key=f"suggestion_{index}", use_container_width=True
+            suggestion, key=f"suggestion_{index}", width="stretch"
         ):
             selected_question = suggestion
 

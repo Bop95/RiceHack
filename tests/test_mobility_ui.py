@@ -5,7 +5,7 @@ import unittest
 from streamlit.testing.v1 import AppTest
 
 from paddydash.services.mobility_config import default_mobility_config
-from paddydash.services.mobility_simulator import default_run
+from paddydash.services.finalflow_data import load_table
 
 
 SOURCE = '''
@@ -29,7 +29,7 @@ class MobilityUITests(unittest.TestCase):
             self.assertFalse(app.exception, scenario.scenario_id)
             snapshot = app.session_state['finalflow_mobility_snapshot']
             self.assertEqual(snapshot['scenario_id'], scenario.scenario_id.value)
-            self.assertEqual(snapshot['data_type'], 'synthetic')
+            self.assertEqual(snapshot['data_type'], 'derived')
 
     def test_comparison_and_corridor_use_simulator_values(self):
         app = AppTest.from_string(SOURCE, default_timeout=30).run()
@@ -38,13 +38,16 @@ class MobilityUITests(unittest.TestCase):
         self.assertFalse(app.exception)
         metrics = {item.label: item.value for item in app.metric}
         self.assertNotEqual(metrics['Largest node queue'], '0')
-        self.assertEqual(metrics['Modeled status'], 'Queueing')
-        self.assertEqual(metrics['Post-match clearance'], f"{default_run('rail_disruption').clearance_minutes} min")
+        summaries, _ = load_table('scenario_summary.csv')
+        summary = next(r for r in summaries if r['scenario_id'] == 'rail_disruption')
+        self.assertTrue(any('Queueing' in item.value for item in app.markdown))
+        self.assertEqual(metrics['Post-match clearance'], f"{summary['total_clearance_minutes']} min")
         comparison = app.dataframe[1].value
-        self.assertEqual(comparison.iloc[0]['Selected scenario'], default_run('rail_disruption').peak_queue)
-        app.slider(key='finalflow_time_widget').set_value(default_run('rail_disruption').snapshots[-1].time_minutes).run()
+        self.assertEqual(comparison.iloc[0]['Selected scenario'], summary['peak_queue_passengers'])
+        nodes, _ = load_table('mobility_node_timeseries.csv')
+        app.slider(key='finalflow_time_widget').set_value(max(r['time_minutes'] for r in nodes)).run()
         self.assertFalse(app.exception)
-        self.assertEqual(next(m.value for m in app.metric if m.label == 'Modeled status'), 'Cleared')
+        self.assertTrue(any('Cleared' in item.value for item in app.markdown))
 
     def test_invalid_saved_ids_are_reset_and_old_snapshot_cleared(self):
         app = AppTest.from_string(SOURCE, default_timeout=30)
@@ -63,7 +66,9 @@ class MobilityUITests(unittest.TestCase):
         app = AppTest.from_string(SOURCE, default_timeout=30).run()
         app.selectbox(key='finalflow_scenario_id').set_value('rail_capacity_boost').run()
         self.assertFalse(app.exception)
-        self.assertTrue(any('unchanged at zero' in item.value for item in app.markdown))
+        summaries, _ = load_table('scenario_summary.csv')
+        baseline = next(r for r in summaries if r['scenario_id'] == 'baseline')
+        self.assertTrue(any(f"unchanged at {baseline['peak_queue_passengers']:,}" in item.value for item in app.markdown))
 
 
 if __name__ == '__main__':

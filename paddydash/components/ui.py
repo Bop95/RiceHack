@@ -36,7 +36,7 @@ def evidence_panel(evidence: Iterable[EvidenceItem]) -> None:
     if not rows:
         return
     st.markdown("#### Supporting evidence")
-    st.dataframe(rows, use_container_width=True, hide_index=True)
+    st.dataframe(rows, width="stretch", hide_index=True)
 
 
 def page_intro(title: str, explanation: str, data_type: str) -> None:

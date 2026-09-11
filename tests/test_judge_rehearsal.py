@@ -7,6 +7,7 @@ from unittest.mock import Mock, patch
 from streamlit.testing.v1 import AppTest
 
 from paddydash.services.project_context import selected_context
+from paddydash.services.finalflow_data import load_table
 
 
 SOURCE = '''
@@ -49,16 +50,13 @@ class JudgeRehearsalTests(unittest.TestCase):
                     metrics = {m.label: m.value for m in app.metric}
                     self.assertEqual(metrics['Largest node queue'], f"{context['queue']:,}")
                     self.assertEqual(metrics['Current utilization'], f"{context['utilization']:.0%}")
-                    self.assertEqual(metrics['Post-match clearance'], f"{context['run'].clearance_minutes} min")
-                    wait = max(n.estimated_wait_minutes for n in context['snapshot'].node_states)
+                    self.assertEqual(metrics['Post-match clearance'], f"{context['summary']['total_clearance_minutes']} min")
+                    wait = max(n['estimated_wait_minutes'] for n in context['nodes'])
                     self.assertEqual(metrics['Estimated longest wait'], f'{wait:.0f} min')
-                    if not context['queue']:
-                        self.assertEqual(metrics['Bottleneck'], 'None')
-                    else:
-                        self.assertNotEqual(metrics['Bottleneck'], 'None')
+                    self.assertTrue(any(context['bottleneck'] in item.value for item in app.markdown))
                     comparison = app.dataframe[1].value
-                    self.assertEqual(comparison.iloc[0]['Selected scenario'], context['run'].peak_queue)
-                    self.assertEqual(app.session_state['finalflow_mobility_snapshot'], context['snapshot'].model_dump(mode='json'))
+                    self.assertEqual(comparison.iloc[0]['Selected scenario'], context['summary']['peak_queue_passengers'])
+                    self.assertEqual(app.session_state['finalflow_mobility_snapshot']['node_states'], context['nodes'])
 
     def test_navigation_history_and_external_sources(self):
         app = AppTest.from_string(SOURCE, default_timeout=30).run()
@@ -79,7 +77,9 @@ class JudgeRehearsalTests(unittest.TestCase):
         with patch('paddydash.services.search_service.requests.get') as provider:
             answer = self.ask(app, 'which scenario has the lowest queue?')
             provider.assert_not_called()
-        self.assertIn('tied at 0', answer['response']['answer'])
+        summaries, _ = load_table('scenario_summary.csv')
+        minimum = min(r['peak_queue_passengers'] for r in summaries)
+        self.assertIn(f'tied at {minimum:,}', answer['response']['answer'])
         response = Mock()
         response.json.return_value = {'organic_results': [
             {'title': 'Test transit notice', 'link': 'https://example.org/notice', 'snippet': 'Mock external notice.'}

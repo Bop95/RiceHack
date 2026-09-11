@@ -10,23 +10,21 @@ loads the restricted raw files or the 5.2 GB clean Parquet at runtime.
 
 ## Pages
 
-1. **Mobility readiness** (default) - shared match timeline and scenario controls,
-   modeled queues, utilization, waits, corridor bottlenecks, and baseline comparison.
-2. **Overview** - project scope, summary cards, monthly trend, leading categories,
-   market intensity, and dataset limitations.
-3. **Store-Visit Explorer** - brand/category rankings and filters, interactive
-   brand/category monthly time series, category scatter, weekdays, markets,
-   distribution percentiles, and the four report-ready static plots.
-4. **Scenario Explorer** - filters and charts for six reproducible synthetic
-   interface-testing scenarios with the required disclaimer.
-5. **Spatial & Heat Map** - an interactive NY/NJ exploratory map with city,
-   category, heat, recommendation, and parking filters; commercial tiers;
-   nearest-UHI evidence; and a table fallback.
-6. **Ask FinalFlow** - suggested questions, chat input, grounded answers,
-   supporting evidence, related charts, data-type labels, limitations, loading,
-   friendly fallback errors, and reviewed historical-weather retrieval.
-7. **Commercial & weather context** - visit trends, POI spending tiers, parking
-   flags, historical weather and heat, plus separately labeled vendor scenarios.
+1. **Executive Overview** (default): selected queue, utilization, wait, clearance,
+   bottleneck, contextual evidence and deterministic recommended actions.
+2. **Matchday Timeline**: canonical phase markers, a synchronized phase selector,
+   calculated queues over time and selected-edge throughput.
+3. **Mobility & Access**: corridor reference map, node queues and flow direction,
+   edge throughput, baseline comparison and first/last-mile indicators.
+4. **Commercial & POI Intelligence**: retained store-visit filters and charts,
+   filtered exploratory POI/heat map, and separate synthetic placement examples
+   and commercial scenario exploration.
+5. **Weather & Heat**: historical risk and monthly weather charts, heat/location
+   map, and rain-versus-baseline effects calculated from prepared mobility data.
+6. **Scenario Lab**: five mobility alternatives, signed metric comparisons,
+   evaluated interventions and a separate catalog of unevaluated suggestions.
+7. **Ask FinalFlow**: grounded explanations of the same selected export-backed
+   facts, historical context and separate web sources when explicitly requested.
 
 ## Shared match state
 
@@ -38,22 +36,31 @@ They are not silently filtered or reinterpreted as match-day measurements.
 Session keys available to future integrations:
 
 - `finalflow_phase_id`, `finalflow_scenario_id`: current canonical selection.
-- `finalflow_time_minutes`: selected elapsed replay minute, when mobility is rendered.
-- `finalflow_mobility_snapshot`: JSON-compatible validated synthetic snapshot.
+- `selected_phase_id`, `selected_scenario_id`: synchronized aliases.
+- `finalflow_time_minutes`: elapsed replay minute shared across every page.
+- `finalflow_mobility_snapshot`: derived exported node/edge snapshot, set by Mobility.
 
-Changing the controls invalidates the old snapshot/time until the mobility page
-renders the new selection. Consumers must handle their absence, not reuse stale
-results. The replay slider moves within intervals; event markers use their exact
+Phase changes reset the replay minute; scenario changes preserve valid times.
+Shared facts are read from exports, never from a saved snapshot. The replay
+slider moves within intervals; event markers use their exact
 times. The pre-match preview starts during arrivals; the post-match preview is
 30 minutes after final whistle. Markers at the same timestamp intentionally share
 the same passenger state.
 
-The small deterministic engine in `services/mobility_simulator.py` uses no raw
-files or provider calls. It assumes one linear round-trip cohort and independent
-directed capacities, and caches five immutable default runs. All readiness
-metrics are **Scenario / modeled**, never observed real-time values. The
-capacity-boost scenario may show no benefit when baseline demand is already
-below capacity. Staggering may lengthen clearance while reducing release pressure.
+The existing engine in `services/mobility_simulator.py` produces the prepared
+profile exports offline. The dashboard does not invoke the older default replay
+as a fallback. Current node/edge values come from the selected scenario and
+five-minute timestamp; whole-run metrics come from `scenario_summary.csv`.
+All are **derived from synthetic scenario inputs**, never real-time observations.
+Queue means residual waiting people, excluding stadium holding. Utilization is
+service throughput/capacity, not unconstrained demand. Clearance is the whole-run
+duration after final whistle, not time remaining. Mode totals count inbound and
+outbound passenger movements, not unique spectators.
+
+Rules in `recommendation_catalog.csv` produce scoped review prompts, not optimal
+or safety-approved actions. Missing evidence never triggers a rule. Missing
+exports disable dependent sections without synthesizing replacement numbers.
+Zero baseline percentages are unavailable; ties and unchanged results are explicit.
 
 Run locally from the repository root:
 
@@ -64,7 +71,7 @@ python3 -m unittest discover -s tests -p 'test_mobility*.py' -v
 
 ## Data boundary
 
-The app reads only these deployable files:
+The app reads compact prepared tables, including these historical sources:
 
 ```text
 data/summaries/
@@ -84,7 +91,22 @@ data/summaries/
 
 data/synthetic/
 |-- store_visit_scenarios.csv
-`-- store_visit_scenarios_dictionary.md
+|-- store_visit_scenarios_dictionary.md
+|-- corridor_reference.csv
+`-- transit_service_capacity.csv
+
+data/exports/
+|-- executive_kpis.csv
+|-- match_timeline_summary.csv
+|-- mobility_node_timeseries.csv
+|-- mobility_edge_timeseries.csv
+|-- mobility_access_summary.csv
+|-- scenario_summary.csv
+|-- scenario_comparison.csv
+|-- intervention_comparison.csv
+|-- recommendation_catalog.csv
+|-- commercial_context.csv
+`-- weather_heat_context.csv
 
 notebooks/tan-dat/data/summaries/weather_monthly.csv
 notebooks/duc-anh/data_clean/finalflow_business_integration.csv
@@ -93,6 +115,13 @@ notebooks/duc-anh/data_clean/finalflow_business_integration.csv
 Derived summary rows are labeled `derived`. Store-visit scenario rows set
 `is_synthetic=true`; vendor examples use `data_type=synthetic` and
 `data_confidence=scenario` with explicit assumptions.
+
+Historical weather is pooled multi-station context, not a venue forecast.
+Monthly precipitation is a sum across source observations. Mean visibility
+distance and shuttle utilization remain unavailable; the reviewed low-visibility
+observation share is available. Spatial tiers and nearby UHI require
+site review; synthetic corridor coordinates are approximate references.
+No new datasets or calibrated operational claims are introduced by these pages.
 
 ## Install and run
 

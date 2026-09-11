@@ -80,8 +80,8 @@ on Windows.
 
 ### Job
 
-A group of steps running on one runner. FinalFlow currently has one job called
-`quality-gate`.
+A group of steps running on one runner. FinalFlow has three PR jobs:
+`static-quality`, `mobility-data-contracts`, and `streamlit-readiness`.
 
 ### Step
 
@@ -95,8 +95,8 @@ the requested Python version.
 
 ### Quality gate
 
-A check that must be green before merge. The visible check name for this repo is
-**Python 3.12 quality gate**.
+A check that must be green before merge. FinalFlow's visible PR checks are
+**Static quality**, **Mobility data contracts**, and **Streamlit readiness**.
 
 ### Secret
 
@@ -116,7 +116,7 @@ sequenceDiagram
 
     Dev->>GH: Push commit to pull request
     GH->>CI: Start FinalFlow CI
-    CI->>CI: Install, lint, compile, validate, test
+    CI->>CI: Run static, data-contract, and Streamlit readiness checks
     alt Any command fails
         CI-->>GH: Red quality gate
         GH-->>Dev: Merge blocked

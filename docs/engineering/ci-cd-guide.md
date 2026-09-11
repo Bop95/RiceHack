@@ -68,16 +68,19 @@ The workflow runs on:
 - pushes to `main`; and
 - manual runs from GitHub's Actions tab.
 
-It uses one `ubuntu-latest` job named **Python 3.12 quality gate** and performs:
+It uses three independent `ubuntu-latest` pull-request checks. All use Python
+3.12, install the declared application and CI dependencies, and keep provider
+calls disabled:
 
-1. repository checkout without persisting credentials;
-2. Python 3.12 setup with pip caching;
-3. application and development dependency installation;
-4. `pip check` for incompatible installed packages;
-5. Ruff linting;
-6. Python bytecode compilation as a syntax/import preflight;
-7. strict tracking and Streamlit bundle validation; and
-8. the complete standard-library test suite.
+1. **Static quality**: `pip check`, Ruff, and compilation.
+2. **Mobility data contracts**: regenerates the synthetic mobility inputs,
+   derived outputs, and dashboard context in the runner's temporary directory,
+   then runs their deterministic contract tests.
+3. **Streamlit readiness**: validates the strict tracked deployment bundle and
+   runs the complete standard-library test suite.
+
+The temporary data check never rewrites tracked data files. It catches a broken
+generator/export chain before the app is reviewed.
 
 The workflow cancels an older run when a newer commit is pushed to the same PR.
 This saves Actions minutes and ensures reviewers see the newest result.
@@ -135,7 +138,8 @@ The recommended first rollout is:
    feature branch.
 3. Push the branch and open a pull request into the team-selected integration
    branch.
-4. Open the PR's **Checks** tab and inspect **Python 3.12 quality gate**.
+4. Open the PR's **Checks** tab and inspect **Static quality**, **Mobility data
+   contracts**, and **Streamlit readiness**.
 5. If a check fails, open its log, fix the cause locally, and push again. GitHub
    automatically starts a new run.
 
@@ -169,7 +173,8 @@ Recommended settings:
 - require at least one approving review if the team has enough reviewers;
 - require conversation resolution;
 - require status checks to pass;
-- select **Python 3.12 quality gate** after its first GitHub run appears;
+- select **Static quality**, **Mobility data contracts**, and **Streamlit
+  readiness** after their first GitHub runs appear;
 - require branches to be up to date before merging;
 - block force pushes and branch deletion; and
 - limit bypass permission to the smallest maintainer group.
@@ -274,7 +279,7 @@ These can become later pipeline stages when the deployment architecture exists.
 The first CI/CD rollout is complete when:
 
 - the workflow is committed and visible in GitHub's Actions tab;
-- a pull request shows **Python 3.12 quality gate** as green;
+- a pull request shows all three PR checks as green;
 - the deployment branch requires that status check;
 - Streamlit Community Cloud watches the protected branch;
 - deployment secrets exist only in Streamlit settings;
