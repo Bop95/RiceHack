@@ -1,118 +1,39 @@
-"""Overview page for the FinalFlow store-visit prototype."""
-
-from __future__ import annotations
+"""Executive readiness from prepared mobility and contextual evidence."""
 
 import streamlit as st
+from paddydash.components.ui import stretch_width
 
-from paddydash.components.charts import overall_monthly_figure, ranking_figure
-from paddydash.components.ui import interpretation, page_intro
-from paddydash.services.analytics import LIMITATION
-from paddydash.services.data_service import load_dashboard_data
-
-
-def compact_number(value: int | float) -> str:
-    if value >= 1_000_000_000:
-        return f"{value / 1_000_000_000:.2f}B"
-    if value >= 1_000_000:
-        return f"{value / 1_000_000:.1f}M"
-    return f"{value:,.0f}"
+from paddydash.components.analytical_views import current_metrics, plot, prepared_table, pressure_figure, recommendations
+from paddydash.services.project_context import selected_context
 
 
 def render_overview() -> None:
-    data = load_dashboard_data()
-    summary = data.summary
-    page_intro(
-        "FinalFlow Store-Visit Intelligence",
-        "Explore historical commercial activity, compare markets and business "
-        "groups, test modest synthetic scenarios, and ask questions grounded in "
-        "approved prepared data.",
-        "derived",
-    )
-
-    st.warning(
-        "Store visits are a commercial-activity proxy. They do not measure "
-        "stadium attendance, pedestrian counts, transit ridership, or future demand."
-    )
-
-    cards = st.columns(5)
-    cards[0].metric("Store-day records", compact_number(summary["total_rows"]))
-    cards[1].metric("Unique stores", f"{summary['unique_stores']:,}")
-    cards[2].metric(
-        "Total transformed visits", compact_number(summary["total_visits"])
-    )
-    cards[3].metric("Markets", f"{summary['unique_markets']:,}")
-    cards[4].metric(
-        "Date coverage",
-        f"{summary['earliest_date'][:4]}-{summary['latest_date'][2:4]}",
-        help=f"{summary['earliest_date']} through {summary['latest_date']}",
-    )
-
-    metric = st.segmented_control(
-        "Monthly trend metric",
-        options=["mean_daily_visits", "total_visits"],
-        format_func=lambda value: {
-            "mean_daily_visits": "Mean per store-day",
-            "total_visits": "Total transformed visits",
-        }[value],
-        default="mean_daily_visits",
-        key="overview_metric",
-    )
-    st.plotly_chart(
-        overall_monthly_figure(data.monthly, metric or "mean_daily_visits"),
-        use_container_width=True,
-        theme="streamlit",
-        config={"displaylogo": False},
-    )
-
-    highest = max(data.monthly, key=lambda row: row["mean_daily_visits"])
-    lowest = min(data.monthly, key=lambda row: row["mean_daily_visits"])
-    interpretation(
-        (
-            f"The monthly mean ranges from {lowest['mean_daily_visits']:,.2f} in "
-            f"{lowest['month'][:7]} to {highest['mean_daily_visits']:,.2f} in "
-            f"{highest['month'][:7]}."
-        ),
-        "This provides a transparent historical baseline for later scenario comparisons.",
-        "The dataset does not identify what caused any increase or decline.",
-    )
-
+    context = selected_context(st.session_state)
+    st.title('Executive Overview')
+    st.caption(context['scope'])
+    current_metrics(context)
+    recommendations(context)
+    st.markdown('**Decision insight:** queue relief and departure clearance are different objectives. A staggered release can reduce pressure while extending the departure window.')
+    st.subheader('Corridor pressure')
+    rows = prepared_table('mobility_node_timeseries.csv')
+    if rows:
+        plot(pressure_figure(rows, context['scenario_id'], context['time_minutes']), 'executive_pressure')
+    st.subheader('Context for this decision')
     left, right = st.columns(2)
     with left:
-        st.plotly_chart(
-            ranking_figure(
-                data.categories,
-                "category",
-                "total_visits",
-                7,
-                "Leading commercial categories",
-            ),
-            use_container_width=True,
-            theme="streamlit",
-            config={"displaylogo": False},
-        )
+        weather = prepared_table('weather_heat_context.csv')
+        rain = next((r for r in weather if r['context_id'] == 'summer_rainy_observation_share'), None)
+        if rain:
+            st.markdown(f"**Historical rain:** {rain['metric_value']:.2f}% of June-July station-date observations.")
+            st.caption(f"Derived | {rain['source_file']} | {rain['limitation']}")
     with right:
-        st.plotly_chart(
-            ranking_figure(
-                data.markets,
-                "market",
-                "mean_daily_visits",
-                len(data.markets),
-                "Market daily intensity",
-            ),
-            use_container_width=True,
-            theme="streamlit",
-            config={"displaylogo": False},
-        )
-
-    with st.expander("Dataset coverage and quality notes"):
-        st.markdown(
-            f"""
-- **Brands:** {summary['unique_brands']:,}
-- **Categories:** {summary['unique_categories']:,}
-- **Dates:** {summary['unique_dates']:,}
-- **Mean daily visits:** {summary['mean_daily_visits']:,.2f}
-- **Median daily visits:** {summary['median_daily_visits']:,}
-- **Zero-visit records retained:** {summary['zero_visit_rows']:,}
-- **Primary limitation:** {LIMITATION}
-"""
-        )
+        commercial = prepared_table('commercial_context.csv')
+        row = next((r for r in commercial if r['context_id'] == 'spatial_high_high'), None)
+        if row:
+            st.markdown(f"**Commercial review:** {row['metric_value']:,} locations with high opportunity and high heat concern.")
+            st.caption(f"Derived | {row['source_file']} | {row['limitation']}")
+    with st.expander('Prepared baseline references and source coverage'):
+        kpis = prepared_table('executive_kpis.csv')
+        if kpis:
+            st.dataframe(kpis, hide_index=True, **stretch_width(st.dataframe))
+        st.caption('Baseline reference values do not change with the selected scenario. Historical evidence remains exploratory.')

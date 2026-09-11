@@ -7,6 +7,7 @@ from unittest.mock import patch
 from streamlit.testing.v1 import AppTest
 from paddydash.services.project_context import selected_context, project_retrieval
 from paddydash.services.data_service import load_dashboard_data
+from paddydash.services.finalflow_data import load_table
 from paddydash.services.search_service import should_search, search_web
 from paddydash.services.search_models import SearchResult
 from paddydash.services.ai_service import prepared_data_response, answer_with_openai
@@ -16,13 +17,15 @@ class ProjectContextTests(unittest.TestCase):
     def test_stale_snapshot_ignored(self):
         context = selected_context({'finalflow_phase_id': 'post_match', 'finalflow_scenario_id': 'rail_disruption',
                                     'finalflow_time_minutes': -135, 'finalflow_time_selection': ('pre_match', 'baseline')})
-        self.assertEqual(context['snapshot'].time_minutes, 165)
+        self.assertEqual(context['time_minutes'], 165)
         self.assertGreater(context['queue'], 0)
 
     def test_current_facts_and_comparison(self):
         context = selected_context({})
         result = project_retrieval('which scenario has the lowest queue?', load_dashboard_data(), context)
-        self.assertIn('tied at 0', result.local_answer)
+        summaries, _ = load_table('scenario_summary.csv')
+        minimum = min(r['peak_queue_passengers'] for r in summaries)
+        self.assertIn(f'tied at {minimum:,}', result.local_answer)
         self.assertEqual(prepared_data_response(result).answer, result.local_answer)
 
     def test_search_routing(self):
@@ -54,7 +57,6 @@ class ProjectContextTests(unittest.TestCase):
             app = AppTest.from_string(f'from paddydash.pages.{module} import {function}\n{function}()', default_timeout=30).run()
             self.assertFalse(app.exception)
             if module == 'ask_finalflow':
-                app.text_area[0].set_value('why did the recommendation change?')
-                app.button[0].click().run()
+                app.chat_input[0].set_value('why did the recommendation change?').run()
                 self.assertFalse(app.exception)
                 self.assertIn('Modeled bottleneck', app.session_state['chat_history'][-1]['response']['answer'])

@@ -43,14 +43,23 @@ class CIConfigurationTests(unittest.TestCase):
         self.assertIn('FINALFLOW_DISABLE_OPENAI: "true"', self.workflow)
         self.assertIn("persist-credentials: false", self.workflow)
 
-    def test_workflow_uses_current_python_gate_and_required_commands(self) -> None:
+    def test_workflow_has_three_pr_quality_checks_and_required_commands(self) -> None:
         expected_fragments = (
             "actions/checkout@v7",
             "actions/setup-python@v7",
             'python-version: "3.12"',
+            "static-quality:",
+            "mobility-data-contracts:",
+            "streamlit-readiness:",
+            "name: Static quality",
+            "name: Mobility data contracts",
+            "name: Streamlit readiness",
             "python -m pip check",
             "python -m ruff check paddydash scripts tests",
             "python -m compileall -q paddydash scripts tests",
+            "generate_finalflow_synthetic_inputs.py --output-dir \"$FINALFLOW_DATA_DIR/synthetic\"",
+            "derive_finalflow_mobility_outputs.py --input-dir \"$FINALFLOW_DATA_DIR/synthetic\"",
+            "build_finalflow_dashboard_context.py --synthetic-dir \"$FINALFLOW_DATA_DIR/synthetic\"",
             "check_streamlit_deployment.py --require-tracked",
             "python -m unittest discover -s tests -v",
         )
@@ -60,7 +69,10 @@ class CIConfigurationTests(unittest.TestCase):
 
     def test_guide_documents_the_manual_cd_and_secret_boundary(self) -> None:
         self.assertIn("Streamlit Community Cloud", self.guide)
-        self.assertIn("Python 3.12 quality gate", self.guide)
+        self.assertIn("Python 3.12", self.guide)
+        self.assertIn("Static quality", self.guide)
+        self.assertIn("Mobility data contracts", self.guide)
+        self.assertIn("Streamlit readiness", self.guide)
         self.assertIn("Branch protection is what makes CI a gate", self.guide)
         self.assertIn("GitHub Actions and Streamlit secrets are separate", self.guide)
         self.assertIn("Do not run `run_live_openai_tests.py` in normal CI", self.guide)

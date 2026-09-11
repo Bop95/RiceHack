@@ -10,23 +10,21 @@ loads the restricted raw files or the 5.2 GB clean Parquet at runtime.
 
 ## Pages
 
-1. **Mobility readiness** (default) - shared match timeline and scenario controls,
-   modeled queues, utilization, waits, corridor bottlenecks, and baseline comparison.
-2. **Overview** - project scope, summary cards, monthly trend, leading categories,
-   market intensity, and dataset limitations.
-3. **Store-Visit Explorer** - brand/category rankings and filters, interactive
-   brand/category monthly time series, category scatter, weekdays, markets,
-   distribution percentiles, and the four report-ready static plots.
-4. **Scenario Explorer** - filters and charts for six reproducible synthetic
-   interface-testing scenarios with the required disclaimer.
-5. **Spatial & Heat Map** - an interactive NY/NJ exploratory map with city,
-   category, heat, recommendation, and parking filters; commercial tiers;
-   nearest-UHI evidence; and a table fallback.
-6. **Ask FinalFlow** - suggested questions, chat input, grounded answers,
-   supporting evidence, related charts, data-type labels, limitations, loading,
-   friendly fallback errors, and reviewed historical-weather retrieval.
-7. **Commercial & weather context** - visit trends, POI spending tiers, parking
-   flags, historical weather and heat, plus separately labeled vendor scenarios.
+1. **Executive Overview** (default): selected queue, utilization, wait, clearance,
+   bottleneck, contextual evidence and deterministic recommended actions.
+2. **Matchday Timeline**: canonical phase markers, a synchronized phase selector,
+   calculated queues over time and selected-edge throughput.
+3. **Mobility & Access**: corridor reference map, node queues and flow direction,
+   edge throughput, baseline comparison and first/last-mile indicators.
+4. **Commercial & POI Intelligence**: retained store-visit filters and charts,
+   filtered exploratory POI/heat map, and separate synthetic placement examples
+   and commercial scenario exploration.
+5. **Weather & Heat**: historical risk and monthly weather charts, heat/location
+   map, and rain-versus-baseline effects calculated from prepared mobility data.
+6. **Scenario Lab**: five mobility alternatives, signed metric comparisons,
+   evaluated interventions and a separate catalog of unevaluated suggestions.
+7. **Ask FinalFlow**: grounded explanations of the same selected export-backed
+   facts, historical context and separate web sources when explicitly requested.
 
 ## Shared match state
 
@@ -38,22 +36,31 @@ They are not silently filtered or reinterpreted as match-day measurements.
 Session keys available to future integrations:
 
 - `finalflow_phase_id`, `finalflow_scenario_id`: current canonical selection.
-- `finalflow_time_minutes`: selected elapsed replay minute, when mobility is rendered.
-- `finalflow_mobility_snapshot`: JSON-compatible validated synthetic snapshot.
+- `selected_phase_id`, `selected_scenario_id`: synchronized aliases.
+- `finalflow_time_minutes`: elapsed replay minute shared across every page.
+- `finalflow_mobility_snapshot`: derived exported node/edge snapshot, set by Mobility.
 
-Changing the controls invalidates the old snapshot/time until the mobility page
-renders the new selection. Consumers must handle their absence, not reuse stale
-results. The replay slider moves within intervals; event markers use their exact
+Phase changes reset the replay minute; scenario changes preserve valid times.
+Shared facts are read from exports, never from a saved snapshot. The replay
+slider moves within intervals; event markers use their exact
 times. The pre-match preview starts during arrivals; the post-match preview is
 30 minutes after final whistle. Markers at the same timestamp intentionally share
 the same passenger state.
 
-The small deterministic engine in `services/mobility_simulator.py` uses no raw
-files or provider calls. It assumes one linear round-trip cohort and independent
-directed capacities, and caches five immutable default runs. All readiness
-metrics are **Scenario / modeled**, never observed real-time values. The
-capacity-boost scenario may show no benefit when baseline demand is already
-below capacity. Staggering may lengthen clearance while reducing release pressure.
+The existing engine in `services/mobility_simulator.py` produces the prepared
+profile exports offline. The dashboard does not invoke the older default replay
+as a fallback. Current node/edge values come from the selected scenario and
+five-minute timestamp; whole-run metrics come from `scenario_summary.csv`.
+All are **derived from synthetic scenario inputs**, never real-time observations.
+Queue means residual waiting people, excluding stadium holding. Utilization is
+service throughput/capacity, not unconstrained demand. Clearance is the whole-run
+duration after final whistle, not time remaining. Mode totals count inbound and
+outbound passenger movements, not unique spectators.
+
+Rules in `recommendation_catalog.csv` produce scoped review prompts, not optimal
+or safety-approved actions. Missing evidence never triggers a rule. Missing
+exports disable dependent sections without synthesizing replacement numbers.
+Zero baseline percentages are unavailable; ties and unchanged results are explicit.
 
 Run locally from the repository root:
 
@@ -64,7 +71,7 @@ python3 -m unittest discover -s tests -p 'test_mobility*.py' -v
 
 ## Data boundary
 
-The app reads only these deployable files:
+The app reads compact prepared tables, including these historical sources:
 
 ```text
 data/summaries/
@@ -84,7 +91,22 @@ data/summaries/
 
 data/synthetic/
 |-- store_visit_scenarios.csv
-`-- store_visit_scenarios_dictionary.md
+|-- store_visit_scenarios_dictionary.md
+|-- corridor_reference.csv
+`-- transit_service_capacity.csv
+
+data/exports/
+|-- executive_kpis.csv
+|-- match_timeline_summary.csv
+|-- mobility_node_timeseries.csv
+|-- mobility_edge_timeseries.csv
+|-- mobility_access_summary.csv
+|-- scenario_summary.csv
+|-- scenario_comparison.csv
+|-- intervention_comparison.csv
+|-- recommendation_catalog.csv
+|-- commercial_context.csv
+`-- weather_heat_context.csv
 
 notebooks/tan-dat/data/summaries/weather_monthly.csv
 notebooks/duc-anh/data_clean/finalflow_business_integration.csv
@@ -93,6 +115,13 @@ notebooks/duc-anh/data_clean/finalflow_business_integration.csv
 Derived summary rows are labeled `derived`. Store-visit scenario rows set
 `is_synthetic=true`; vendor examples use `data_type=synthetic` and
 `data_confidence=scenario` with explicit assumptions.
+
+Historical weather is pooled multi-station context, not a venue forecast.
+Monthly precipitation is a sum across source observations. Mean visibility
+distance and shuttle utilization remain unavailable; the reviewed low-visibility
+observation share is available. Spatial tiers and nearby UHI require
+site review; synthetic corridor coordinates are approximate references.
+No new datasets or calibrated operational claims are introduced by these pages.
 
 ## Install and run
 
@@ -210,6 +239,92 @@ Add `OPENAI_API_KEY`, `OPENAI_MODEL`, and
 under Secrets. The prepared-data fallback works without an API key. See
 `paddydash/DEPLOYMENT_GUIDE.md` for the complete account, security, deployment,
 and verification sequence.
+
+## Ask FinalFlow
+
+The seventh view uses `services/project_context.py` to retrieve compact prepared
+facts and `services/ai_service.py` for the optional official OpenAI SDK Responses
+API (`responses.parse`, Pydantic narrative schema). No CSV is sent in full.
+Selected phase/scenario/replay time scope each answer. Explicit final-whistle,
+rain, disruption, or staggered-departure questions resolve their own scope without
+changing the dashboard selection. Saved answers retain their original scope.
+
+The application response includes `answer`, `key_findings`, `recommendations`,
+`evidence` (`label`, `value`, `source`, `data_type`), `limitations`, and
+`related_plot_id`. Evidence, findings, actions and plot IDs are attached locally,
+not entrusted to model generation. The factual guard accepts only the prepared
+narrative (whitespace changes allowed); other wording falls back to the local
+answer. This intentionally limits free-form AI interpretation until semantic
+validation is available. Missing or malformed provider responses are safe fallbacks.
+
+Sources are node/edge time series, scenario summaries, recommendation rules,
+commercial/weather summaries, and the AI context/executive baseline references
+for provenance questions. Historical context is not a venue forecast; mobility
+results are derived from synthetic inputs. Current web requests remain separate.
+Historical chart questions use the retained deterministic analytics handlers.
+
+Requests allow 500 question characters, at most 18,000 combined project/web context/answer
+characters, and 500 output tokens. Oversized context uses the local answer without
+calling OpenAI. Only the current question/context is sent, not conversation history.
+The browser retains the last 20 exchanges. Clear conversation preserves the global
+replay selection and request allowance. Keys and model configuration remain server-only.
+
+For a manual provider test, configure `OPENAI_API_KEY` in the ignored root `.env`,
+optionally set `OPENAI_MODEL` to an account-supported structured-output model,
+and set `FINALFLOW_DISABLE_OPENAI=false`. Leave search disabled unless testing it:
+
+```bash
+FINALFLOW_DISABLE_SEARCH=true .venv/bin/python -m streamlit run paddydash/app.py
+```
+
+Select Ask FinalFlow, ask about the final-whistle bottleneck, switch scenario,
+and compare a new answer with the retained earlier scope. With no key or with
+`FINALFLOW_DISABLE_OPENAI=true`, the same deterministic facts remain available.
+Provider access/model availability have not been verified through live calls.
+
+### Current public information
+
+`services/search_service.py` is shared with Tan Dat's backend compatibility import;
+there is no second search client. `should_search()` requires an explicit recency
+term (current/latest/today/live/recent/new/now) and a transit, weather, or venue-access
+topic. Project terms (scenario, queue, bottleneck, chart, modeled/prepared data,
+staggered departure) and explicit no-search instructions take precedence. Split
+mixed project/current-public questions into separate messages to request both.
+
+Up to five SerpAPI organic results are normalized to `title`, `link`, `source`,
+`snippet`, and nullable `date`. Missing source names use the URL hostname. Source
+fields are bounded; malformed, oversized, or credential-bearing responses fail
+closed. Search uses a five-second timeout and the existing ten-request session cap.
+The legacy `summarize=True` option and summary helper are compatibility no-ops:
+they never launch a separate unguarded OpenAI request.
+
+Normalized results accompany the current question and project context in the
+single guarded Responses request. They are marked as untrusted web evidence.
+The structured application response retains `web_sources`, `search_used`, and
+`web_status` (`available`, `no_results`, or `unavailable`), including on AI failure.
+Project Evidence and Web Sources render separately; clickable source titles,
+source/domain, excerpts, and supplied dates remain visible without OpenAI.
+The factual guard does not permit free-form web synthesis to rewrite project facts.
+Snippets are excerpts, not independently verified live alerts; dates may be missing,
+sources may disagree, and no-results does not mean there are no disruptions.
+
+For a manual live-provider test, configure both `OPENAI_API_KEY` and
+`SERPAPI_API_KEY` in the ignored root `.env` (backend-only; never browser code),
+then run:
+
+```bash
+FINALFLOW_DISABLE_OPENAI=false FINALFLOW_DISABLE_SEARCH=false \
+  .venv/bin/python -m streamlit run paddydash/app.py
+```
+
+1. Ask about the rail-disruption bottleneck: no Web Sources section is added.
+2. Ask "Are there current NJ Transit disruptions?": check the Web search used
+   badge and separate source cards. Follow the issuing authority's notice to verify.
+3. Ask for the latest weather alert or new venue access announcements.
+4. Restart with search disabled: current questions show Live web search unavailable
+   while project answers continue. Disable OpenAI alone to check source cards still work.
+
+These commands enable live, potentially billable calls. Automated tests mock all providers.
 
 ## Known limitations
 

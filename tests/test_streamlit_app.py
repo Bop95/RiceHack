@@ -10,15 +10,16 @@ from streamlit.testing.v1 import AppTest
 
 
 class StreamlitAppTests(unittest.TestCase):
-    def test_entrypoint_renders_mobility_without_exception(self) -> None:
+    def test_entrypoint_renders_executive_without_exception(self) -> None:
         with patch.dict(
             os.environ, {"FINALFLOW_DISABLE_OPENAI": "true"}, clear=False
         ):
             app = AppTest.from_file("paddydash/app.py", default_timeout=30).run()
         self.assertFalse(app.exception)
         self.assertIn("FinalFlow", [item.value for item in app.title])
-        self.assertIn("Mobility readiness", [item.value for item in app.subheader])
-        self.assertGreaterEqual(len(app.metric), 6)
+        self.assertIn("Executive Overview", [item.value for item in app.title])
+        self.assertIn("Recommended actions now", [item.value for item in app.subheader])
+        self.assertEqual(len(app.metric), 4)
         self.assertGreaterEqual(len(app.get("plotly_chart")), 1)
 
     def test_each_page_function_renders_without_exception(self) -> None:
@@ -51,12 +52,7 @@ class StreamlitAppTests(unittest.TestCase):
         ):
             app = AppTest.from_string(source, default_timeout=30).run()
             self.assertFalse(app.exception)
-            self.assertEqual(app.text_area[0].label, "Your question")
-            app.text_area[0].input("Which brand has the highest total visits?")
-            submit_button = next(
-                button for button in app.button if button.label == "Ask FinalFlow"
-            )
-            app = submit_button.click().run()
+            app = app.chat_input[0].set_value("Which brand has the highest total visits?").run()
 
         self.assertFalse(app.exception)
         page_text = " ".join(item.value for item in app.markdown)
@@ -64,7 +60,7 @@ class StreamlitAppTests(unittest.TestCase):
         self.assertIn("Walmart", page_text)
         self.assertIn("verified prepared-data response", caption_text)
         clear_button = next(
-            button for button in app.button if button.label == "Clear chat"
+            button for button in app.button if button.label == "Clear conversation"
         )
         self.assertFalse(clear_button.disabled)
 
@@ -77,10 +73,7 @@ class StreamlitAppTests(unittest.TestCase):
             os.environ, {"FINALFLOW_DISABLE_OPENAI": "true"}, clear=False
         ):
             app = AppTest.from_string(source, default_timeout=30).run()
-            submit_button = next(
-                button for button in app.button if button.label == "Ask FinalFlow"
-            )
-            app = submit_button.click().run()
+            app = app.chat_input[0].set_value("   ").run()
         self.assertFalse(app.exception)
         self.assertTrue(
             any("enter a question" in warning.value.lower() for warning in app.warning)
@@ -98,11 +91,7 @@ class StreamlitAppTests(unittest.TestCase):
             initial_data_type_captions = sum(
                 "Data type:" in caption.value for caption in app.caption
             )
-            app.text_area[0].input("Who won the last Super Bowl?")
-            submit_button = next(
-                button for button in app.button if button.label == "Ask FinalFlow"
-            )
-            app = submit_button.click().run()
+            app = app.chat_input[0].set_value("Who won the last Super Bowl?").run()
 
         self.assertFalse(app.exception)
         self.assertEqual(len(app.dataframe), 0)

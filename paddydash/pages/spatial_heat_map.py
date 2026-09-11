@@ -5,7 +5,7 @@ from __future__ import annotations
 import streamlit as st
 
 from paddydash.components.charts import spatial_heat_map_figure
-from paddydash.components.ui import interpretation, page_intro
+from paddydash.components.ui import interpretation, page_intro, stretch_width
 from paddydash.services.data_service import load_spatial_heat_data
 
 
@@ -82,7 +82,7 @@ def render_spatial_heat_map() -> None:
 
     st.plotly_chart(
         spatial_heat_map_figure(filtered),
-        use_container_width=True,
+        **stretch_width(st.plotly_chart),
         config={"displaylogo": False},
     )
     st.markdown("### Filtered evidence table")
@@ -100,7 +100,7 @@ def render_spatial_heat_map() -> None:
             }
             for row in filtered
         ],
-        use_container_width=True,
+        **stretch_width(st.dataframe),
         hide_index=True,
     )
     interpretation(

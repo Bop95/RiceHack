@@ -14,7 +14,7 @@ from paddydash.components.charts import (
     ranking_figure,
     weekday_figure,
 )
-from paddydash.components.ui import data_type_label, interpretation, page_intro
+from paddydash.components.ui import data_type_label, interpretation, page_intro, stretch_width
 from paddydash.services.analytics import LIMITATION
 from paddydash.services.data_service import REPOSITORY_ROOT, load_dashboard_data
 
@@ -29,20 +29,21 @@ METRIC_OPTIONS = {
 def plot(figure: object) -> None:
     st.plotly_chart(
         figure,
-        use_container_width=True,
+        **stretch_width(st.plotly_chart),
         theme="streamlit",
         config={"displaylogo": False, "scrollZoom": False},
     )
+    if isinstance(figure.layout.meta, dict) and figure.layout.meta.get('caption'):
+        st.caption(figure.layout.meta['caption'])
 
 
-def render_store_visit_explorer() -> None:
+def render_store_visit_explorer(embedded: bool = False) -> None:
     data = load_dashboard_data()
-    page_intro(
-        "Store-Visit Explorer",
-        "Filter prepared brand and category summaries, inspect temporal patterns, "
-        "compare markets, and review the skewed visit distribution.",
-        "derived",
-    )
+    if embedded:
+        st.subheader('Historical store activity')
+        st.caption('Derived | Transformed store-day visits, not event attendance or a demand forecast.')
+    else:
+        page_intro("Store-Visit Explorer", "Historical commercial activity", "derived")
 
     ranking_tab, time_tab, scatter_tab, weekday_tab, market_tab, distribution_tab = st.tabs(
         ["Rankings", "Time series", "Category scatter", "Weekdays", "Markets", "Distribution"]
@@ -186,5 +187,8 @@ def render_store_visit_explorer() -> None:
             ("Visit distribution", "store_visits_distribution.png"),
         ):
             st.markdown(f"#### {title}")
-            st.image(str(figure_dir / filename), use_container_width=True)
+            if (figure_dir / filename).is_file():
+                st.image(str(figure_dir / filename), **stretch_width(st.image))
+            else:
+                st.caption('Static export unavailable; interactive charts remain available.')
         data_type_label("derived")

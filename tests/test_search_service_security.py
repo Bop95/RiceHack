@@ -76,26 +76,32 @@ class SearchServiceSecurityTests(unittest.TestCase):
                     self.assertEqual(result.error, 'Search service unavailable')
                     self.assertNotIn(self.secret, result.model_dump_json())
 
-    def test_summary_errors_do_not_leak_or_discard_search_sources(self) -> None:
+    def test_legacy_summary_flag_never_calls_a_second_ai_provider(self) -> None:
         response = Mock()
         response.json.return_value = {'organic_results': [
             {'title': 'Weather', 'link': 'https://example.org/weather', 'snippet': 'Cloudy'}
         ]}
-        for fail_in_constructor in (True, False):
-            with self.subTest(fail_in_constructor=fail_in_constructor):
-                with patch.dict(os.environ, {'OPENAI_API_KEY': self.secret}):
-                    with self.assertNoLogs(level='DEBUG'):
-                        with patch.object(service.requests, 'get', return_value=response):
-                            with patch.object(service, 'OpenAI') as client:
-                                if fail_in_constructor:
-                                    client.side_effect = RuntimeError(self.url)
-                                else:
-                                    client.return_value.chat.completions.create.side_effect = RuntimeError(self.url)
-                                result = service.search_web('Weather')
-                self.assertTrue(result.search_used)
-                self.assertEqual(len(result.results), 1)
-                self.assertIsNone(result.ai_summary)
-                self.assertNotIn(self.secret, result.model_dump_json())
+        with patch.dict(os.environ, {'OPENAI_API_KEY': self.secret}), patch('openai.OpenAI') as client:
+            with patch.object(service.requests, 'get', return_value=response):
+                result = service.search_web('Weather', summarize=True)
+                self.assertIsNone(service.summarize_search_results('Weather', 'Excerpt'))
+        client.assert_not_called()
+        self.assertTrue(result.search_used)
+        self.assertEqual(len(result.results), 1)
+        self.assertIsNone(result.ai_summary)
+        self.assertNotIn(self.secret, result.model_dump_json())
+
+    def test_credentials_in_source_content_are_rejected(self) -> None:
+        for field, value in [('title', self.secret), ('snippet', 'api_key=unknown-secret'),
+                             ('link', 'https://example.org/?api_key='),
+                             ('link', 'https://example.org/#access_token=secret'),
+                             ('snippet', self.secret.replace('-', '%2D'))]:
+            with self.subTest(field=field, value_type='redacted'):
+                item = {'title': 'Notice', 'link': 'https://example.org', 'snippet': 'Excerpt'}
+                item[field] = value
+                response = Mock()
+                response.json.return_value = {'organic_results': [item]}
+                self.assert_safe_failure(response=response)
 
     def test_empty_search_results_are_a_valid_response(self) -> None:
         response = Mock()

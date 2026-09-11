@@ -2,11 +2,20 @@
 
 from __future__ import annotations
 
-from typing import Iterable
+from inspect import signature
+from typing import Callable, Iterable
 
 import streamlit as st
 
 from paddydash.services.analytics import EvidenceItem
+
+
+def stretch_width(element: Callable) -> dict[str, str | bool]:
+    """Use responsive sizing supported by the installed Streamlit element."""
+    width = signature(element).parameters.get('width')
+    if width is not None and isinstance(width.default, str):
+        return {'width': 'stretch'}
+    return {'use_container_width': True}
 
 
 def data_type_label(data_type: str) -> None:
@@ -36,7 +45,7 @@ def evidence_panel(evidence: Iterable[EvidenceItem]) -> None:
     if not rows:
         return
     st.markdown("#### Supporting evidence")
-    st.dataframe(rows, use_container_width=True, hide_index=True)
+    st.dataframe(rows, **stretch_width(st.dataframe), hide_index=True)
 
 
 def page_intro(title: str, explanation: str, data_type: str) -> None:

@@ -1,49 +1,27 @@
-"""Search and optional narration with safe, fixed provider failure responses."""
+"""Bounded public search with safe, fixed provider failure responses."""
 
 import os
 import json
 import re
+from html import unescape
+from urllib.parse import unquote_plus, urlsplit
 import requests
-try:
-    from openai import OpenAI
-except ImportError:
-    OpenAI = None
 from paddydash.services.search_models import SearchResponse, SearchResult
 
 
 def summarize_search_results(query: str, search_context: str) -> str | None:
-    """Uses OpenAI to generate a concise summary based on search result snippets."""
-    api_key = os.getenv('OPENAI_API_KEY')
-    if not api_key or OpenAI is None:
-        return None
+    """Compatibility hook: AI context now goes through the guarded assistant only.
 
-    prompt = f"""
-    You are an AI assistant. Based on the following live web search results for the query "{query}",
-    provide a concise, helpful synthesis for the user.
-
-    Search Results Context:
-    {search_context}
+    Retained for Tan Dat's backend imports. Avoid a second, unguarded provider call.
     """
-
-    try:
-        client = OpenAI(api_key=api_key)
-        response = client.chat.completions.create(
-            model='gpt-4o-mini',
-            messages=[{'role': 'user', 'content': prompt}],
-            temperature=0.7,
-            max_tokens=300,
-        )
-        return response.choices[0].message.content.strip()
-    except Exception:
-        # Provider exceptions can contain credentials and request URLs.
-        return None
+    return None
 
 
-def search_web(query: str, num_results: int = 5, *, summarize: bool = True) -> SearchResponse:
-    """Executes a Google Search via SerpAPI and enriches the response with an OpenAI summary."""
+def search_web(query: str, num_results: int = 5, *, summarize: bool = False) -> SearchResponse:
+    """Fetch up to five bounded public snippets; legacy summarize is a no-op."""
     serpapi_key = os.getenv('SERPAPI_API_KEY', '').strip()
 
-    disabled = os.getenv('FINALFLOW_DISABLE_SEARCH', '').lower() in ('true', '1', 'yes', 'on')
+    disabled = os.getenv('FINALFLOW_DISABLE_SEARCH', '').strip().lower() in ('true', '1', 'yes', 'on')
     if not serpapi_key or disabled:
         return SearchResponse(
             query=query,
@@ -75,11 +53,16 @@ def search_web(query: str, num_results: int = 5, *, summarize: bool = True) -> S
             raise ValueError('Invalid search results')
         raw_results = raw_results[:max(1, min(num_results, 5))]
         normalized_results = []
-        snippets_for_ai = []
 
         for item in raw_results:
+            if not isinstance(item, dict):
+                raise ValueError('Invalid source record')
             serialized = json.dumps(item)
+            for _ in range(3):
+                serialized = unescape(unquote_plus(serialized))
             if any(key and key in serialized for key in (serpapi_key, os.getenv('OPENAI_API_KEY', ''))):
+                raise ValueError('Credential-like content in search response')
+            if re.search(r'(?:api[_-]?key|access[_-]?token|serpapi_api_key|openai_api_key|aws_secret_access_key)\s*[=:]', serialized, re.I):
                 raise ValueError('Credential-like content in search response')
             title = item.get('title', 'No Title')
             snippet = item.get('snippet', '')
@@ -88,25 +71,17 @@ def search_web(query: str, num_results: int = 5, *, summarize: bool = True) -> S
                 SearchResult(
                     title=title,
                     link=item.get('link', ''),
-                    source=item.get('source', 'Web'),
+                    source=item.get('source') or urlsplit(item.get('link', '')).hostname,
                     snippet=snippet,
                     date=item.get('date', None),
                 )
             )
-            if snippet:
-                snippets_for_ai.append(f'- {title}: {snippet}')
-
-        # Step 2: Summarize the results using OpenAI
-        search_context = '\n'.join(snippets_for_ai)
-        ai_summary = None
-        if search_context and summarize:
-            ai_summary = summarize_search_results(query, search_context)
 
         return SearchResponse(
             query=query,
             results=normalized_results,
             search_used=True,
-            ai_summary=ai_summary,
+            ai_summary=None,
             error=None,
         )
 
@@ -124,8 +99,8 @@ def search_web(query: str, num_results: int = 5, *, summarize: bool = True) -> S
 def should_search(question: str) -> bool:
     """Explicit current public-information requests only; never model questions."""
     text = question.casefold()
-    if re.search(r"simulat|model|scenario|bottleneck|queue|chart|prepared|our data|don't search|do not search|without (?:web|search)", text):
+    if re.search(r"simulat|model|scenario|bottleneck|queue|chart|prepared|our data|staggered departure|don't search|do not search|without (?:web|search)", text):
         return False
-    current = re.search(r'\b(current|latest|today|live|recent|now)\b|up.to.date', text)
-    public = re.search(r'\b(transit|rail|train|weather)\b|stadium.*(?:access|notice|alert)', text)
+    current = re.search(r'\b(current|latest|today|live|recent|new|now)\b|up.to.date', text)
+    public = re.search(r'\b(transit|rail|train|weather)\b|(?:stadium|venue).*(?:access|notice|alert|announcement)', text)
     return bool(current and public)

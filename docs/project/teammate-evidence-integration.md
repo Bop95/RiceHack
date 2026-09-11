@@ -31,8 +31,13 @@ Search runs only for explicit current public transit/weather/access questions.
 Configure `SERPAPI_API_KEY` only in the server environment; set
 `FINALFLOW_DISABLE_SEARCH=1` to force offline mode. No new dependency is required.
 Search uses a five-second timeout and at most five sources, with ten attempts per
-browser session. The app disables search narration: snippets are displayed in
-separate web source cards. Missing keys/errors show a fixed safe message.
+browser session. The app passes normalized snippets to its single guarded
+Responses request as untrusted web context; it does not make a separate search
+narration call. Snippets, clickable titles, domains and dates are displayed in
+Web Sources, apart from Project Evidence. Structured answers retain web sources
+even if OpenAI fails. The factual guard keeps the prepared project narrative
+authoritative; snippets are not independently verified live alerts.
+Missing keys/errors show Live web search unavailable and preserve project answers.
 No provider exception text is surfaced. Tan Dat's backend re-exports the shared
 search service and models to avoid a second implementation.
 

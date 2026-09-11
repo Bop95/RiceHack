@@ -1,24 +1,75 @@
-"""Synthetic scenario exploration page."""
+"""Scenario comparisons and retained synthetic commercial exploration."""
 
-from __future__ import annotations
-
+import pandas as pd
+import plotly.express as px
 import streamlit as st
 
+from paddydash.components.analytical_views import COMPARISON_METRICS, comparison, plot, prepared_table
 from paddydash.components.charts import scenario_comparison_rows_figure, scenario_risk_figure
-from paddydash.components.ui import interpretation, page_intro
+from paddydash.components.ui import interpretation, stretch_width
 from paddydash.services.analytics import SYNTHETIC_LIMITATION
 from paddydash.services.data_service import load_dashboard_data
+from paddydash.services.finalflow_data import change_text
+from paddydash.services.project_context import selected_context
 from scripts.synthetic.generate_store_visit_scenarios import DISCLAIMER
 
 
 def render_scenario_explorer() -> None:
+    context = selected_context(st.session_state)
+    st.title('Scenario Lab')
+    st.caption(context['scope'] + ' | Derived from synthetic scenario inputs')
+    comparison(context, 'scenario_pressure')
+    summaries = prepared_table('scenario_summary.csv')
+    catalog = prepared_table('scenario_comparison.csv')
+    names = {r['scenario_id']: r['name'] for r in catalog}
+    if summaries:
+        st.subheader('Compare interventions across the full replay')
+        selected_ids = st.multiselect('Scenarios to compare', [r['scenario_id'] for r in summaries],
+            default=[r['scenario_id'] for r in summaries], format_func=lambda x: names.get(x, x.replace('_', ' ').title()), key='lab_scenarios')
+        filtered = [r for r in summaries if r['scenario_id'] in selected_ids]
+        if not filtered:
+            st.info('No scenarios selected.')
+        else:
+            frame = pd.DataFrame(filtered)
+            frame['Scenario'] = frame.scenario_id.map(lambda v: names.get(v, v))
+            labels = {label: (metric, unit) for metric, label, unit in COMPARISON_METRICS}
+            label = st.selectbox('Comparison metric', list(labels), key='lab_comparison_metric')
+            metric, unit = labels[label]
+            colors = {row['Scenario']: '#39B99A' if row['scenario_id'] == context['scenario_id']
+                      else '#8b969e' if row['scenario_id'] == 'baseline' else '#547d99'
+                      for row in frame.to_dict('records')}
+            fig = px.bar(frame, y='Scenario', x=metric, color='Scenario', orientation='h',
+                         labels={metric: unit}, color_discrete_map=colors)
+            fig.update_layout(height=320, showlegend=False)
+            fig.update_xaxes(tickformat='.0%' if metric == 'peak_utilization' else ',.0f')
+            plot(fig, 'lab_selected_metric')
+            st.caption('Green identifies the selected scenario when included. Queue relief, clearance and delay are different objectives; there is no single best intervention across all objectives.')
+        st.subheader('What changes under this scenario?')
+        base, selected = context['baseline']['summary'], context['summary']
+        if base and selected:
+            for field, label, _ in COMPARISON_METRICS:
+                if field == 'peak_utilization':
+                    st.write(f"Peak utilization: {base[field]:.1%} to {selected[field]:.1%}.")
+                else:
+                    st.write(change_text(label, base[field], selected[field]))
+        st.caption('These are alternative scenario runs, not additive interventions. Unchanged metrics do not imply a failed intervention.')
+    st.subheader('Intervention evidence')
+    interventions = prepared_table('intervention_comparison.csv')
+    if interventions:
+        modeled = [r for r in interventions if r['evaluation_status'] == 'modeled']
+        pending = [r for r in interventions if r['evaluation_status'] != 'modeled']
+        if modeled:
+            with st.expander('Evaluated scenario effects and provenance'):
+                st.dataframe(modeled, hide_index=True, **stretch_width(st.dataframe))
+        with st.expander('Catalog-only interventions: effects not evaluated'):
+            st.dataframe([{k: r[k] for k in ('name', 'evaluation_status', 'assumption_note')} for r in pending], hide_index=True, **stretch_width(st.dataframe))
+        st.caption('Derived comparison of synthetic scenarios. Missing effects remain unavailable; no estimated savings are assigned to catalog-only entries.')
+
+
+def render_commercial_scenarios() -> None:
+    """Preserve teammate commercial scenarios separately from mobility alternatives."""
     data = load_dashboard_data()
-    page_intro(
-        "Scenario Explorer",
-        "Compare a small set of reproducible interface-testing scenarios built "
-        "from historical commercial-activity baselines.",
-        "synthetic",
-    )
+    st.subheader('Synthetic commercial scenarios')
     st.warning(DISCLAIMER)
 
     all_scenarios = sorted({row["scenario_id"] for row in data.scenarios})
@@ -63,18 +114,8 @@ def render_scenario_explorer() -> None:
         f"of {len(data.scenarios):,} synthetic records."
     )
 
-    st.plotly_chart(
-        scenario_comparison_rows_figure(filtered),
-        use_container_width=True,
-        theme="streamlit",
-        config={"displaylogo": False},
-    )
-    st.plotly_chart(
-        scenario_risk_figure(filtered),
-        use_container_width=True,
-        theme="streamlit",
-        config={"displaylogo": False},
-    )
+    plot(scenario_comparison_rows_figure(filtered), 'commercial_scenario_visits')
+    plot(scenario_risk_figure(filtered), 'commercial_scenario_risk')
     interpretation(
         "The filters expose how documented scenario and zone multipliers change synthetic demand and risk labels.",
         "These records let the team test filters, evidence cards, charts, and backend responses before event data exists.",

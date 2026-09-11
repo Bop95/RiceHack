@@ -13,14 +13,13 @@ if str(REPOSITORY_ROOT) not in sys.path:
     sys.path.insert(0, str(REPOSITORY_ROOT))
 
 from paddydash.pages.ask_finalflow import render_ask_finalflow
-from paddydash.components.match_controls import render_match_controls
+from paddydash.components.finalflow_shell import render_header, render_methodology
+from paddydash.pages.matchday_timeline import render_matchday_timeline
 from paddydash.pages.mobility import render_mobility
 from paddydash.pages.project_evidence import render_project_evidence
 from paddydash.pages.overview import render_overview
 from paddydash.pages.scenario_explorer import render_scenario_explorer
-from paddydash.pages.spatial_heat_map import render_spatial_heat_map
-from paddydash.pages.store_visit_explorer import render_store_visit_explorer
-from paddydash.services.data_service import load_dashboard_data
+from paddydash.pages.weather_heat import render_weather_heat
 
 
 st.set_page_config(
@@ -32,51 +31,38 @@ st.set_page_config(
 
 
 def main() -> None:
-    st.image(str(REPOSITORY_ROOT / 'asset/rice_hack.png'), use_container_width=True)
-    render_match_controls()
-    try:
-        load_dashboard_data()
-    except (FileNotFoundError, ValueError) as error:
-        st.error("The prepared dashboard data could not be loaded.")
-        st.code(str(error))
-        st.info(
-            "Run the cleaning, Streamlit-summary, and synthetic-scenario scripts "
-            "described in paddydash/README.md, then restart the app."
-        )
-        st.stop()
+    render_header(REPOSITORY_ROOT)
 
     pages = {
-        "Match readiness": [
-            st.Page(render_mobility, title="Mobility readiness", icon=":material/train:", default=True),
-            st.Page(render_project_evidence, title="Commercial & weather context", icon=":material/storefront:"),
-        ],
-        "Store-Visit Intelligence": [
-            st.Page(render_overview, title="Overview", icon="📊"),
-            st.Page(
-                render_store_visit_explorer,
-                title="Store-Visit Explorer",
-                icon="🔎",
-            ),
-            st.Page(
-                render_scenario_explorer,
-                title="Scenario Explorer",
-                icon="🧪",
-            ),
-            st.Page(
-                render_spatial_heat_map,
-                title="Spatial & Heat Map",
-                icon="🗺️",
-            ),
-            st.Page(render_ask_finalflow, title="Ask FinalFlow", icon="💬"),
+        "FinalFlow": [
+            st.Page(_safe_page(render_overview), title="Executive Overview", icon=":material/dashboard:", url_path="overview", default=True),
+            st.Page(_safe_page(render_matchday_timeline), title="Matchday Timeline", icon=":material/timeline:", url_path="timeline"),
+            st.Page(_safe_page(render_mobility), title="Mobility & Access", icon=":material/train:", url_path="mobility"),
+            st.Page(_safe_page(render_project_evidence), title="Commercial & POI Intelligence", icon=":material/storefront:", url_path="commercial-poi"),
+            st.Page(_safe_page(render_weather_heat), title="Weather & Heat", icon=":material/cloud:", url_path="weather-heat"),
+            st.Page(_safe_page(render_scenario_explorer), title="Scenario Lab", icon=":material/biotech:", url_path="scenario-lab"),
+            st.Page(_safe_page(render_ask_finalflow), title="Ask FinalFlow", icon=":material/chat:", url_path="ask-finalflow"),
         ]
     }
     navigation = st.navigation(pages)
-    st.sidebar.markdown("---")
-    st.sidebar.caption(
-        "Store visits are a commercial-activity proxy. Synthetic scenarios are "
-        "illustrative and are always labeled."
-    )
     navigation.run()
+    journey = ['Executive Overview', 'Matchday Timeline', 'Mobility & Access',
+               'Scenario Lab', 'Weather & Heat', 'Commercial & POI Intelligence', 'Ask FinalFlow']
+    next_title = journey[(journey.index(navigation.title) + 1) % len(journey)]
+    next_page = next(page for page in pages['FinalFlow'] if page.title == next_title)
+    st.divider()
+    st.page_link(next_page, label=f'Next: {next_title}', icon=':material/arrow_forward:')
+    render_methodology()
+
+
+def _safe_page(renderer):
+    """Keep the app navigable when an optional prepared table is absent."""
+    def wrapped() -> None:
+        try:
+            renderer()
+        except (OSError, KeyError, TypeError, ValueError, IndexError, ZeroDivisionError):
+            st.warning("This section could not finish loading. Try reloading the page; other views remain available.")
+    return wrapped
 
 
 if __name__ == "__main__":

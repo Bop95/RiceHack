@@ -79,7 +79,11 @@ class FinalFlowSyntheticInputTests(unittest.TestCase):
         config = default_mobility_config()
         demand = generate_passenger_demand(config)
         capacity = generate_capacity(config)
-        demand_key = lambda row: (row["time_minutes"], row["origin_node"], row["destination_node"], row["mode"], row["direction"])
+        def demand_key(row):
+            return (
+                row["time_minutes"], row["origin_node"], row["destination_node"],
+                row["mode"], row["direction"],
+            )
         baseline = {demand_key(row): row for row in demand if row["scenario_id"] == "baseline"}
         disruption = {demand_key(row): row for row in demand if row["scenario_id"] == "rail_disruption"}
         self.assertEqual(
