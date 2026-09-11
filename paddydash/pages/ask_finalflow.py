@@ -17,8 +17,10 @@ from paddydash.services.ai_service import (
     get_model_name,
     prepared_data_response,
 )
-from paddydash.services.analytics import ChatResponse, EvidenceItem, retrieve_for_question
+from paddydash.services.analytics import ChatResponse, EvidenceItem
 from paddydash.services.data_service import load_dashboard_data
+from paddydash.services.project_context import selected_context, project_retrieval
+from paddydash.services.search_service import search_web, should_search
 
 
 SUGGESTIONS = [
@@ -70,7 +72,7 @@ def show_response(response: ChatResponse, show_plot: bool = True) -> None:
         st.markdown("#### Related chart")
         st.plotly_chart(
             related_plot(response.related_plot_id, load_dashboard_data()),
-            width="stretch",
+            use_container_width=True,
             theme="streamlit",
             config={"displaylogo": False},
         )
@@ -78,6 +80,8 @@ def show_response(response: ChatResponse, show_plot: bool = True) -> None:
 
 def render_ask_finalflow() -> None:
     data = load_dashboard_data()
+    context = selected_context(st.session_state)
+    st.caption(context['scope'] + ' | Scenario / modeled')
     page_intro(
         "Ask FinalFlow",
         "Ask questions about approved store-visit summaries, historical weather "
@@ -133,7 +137,7 @@ def render_ask_finalflow() -> None:
             max_chars=500,
         )
         submitted = st.form_submit_button(
-            "Ask FinalFlow", type="primary", width="stretch"
+            "Ask FinalFlow", type="primary", use_container_width=True
         )
 
     suggestion_header, clear_column = st.columns([4, 1])
@@ -144,7 +148,7 @@ def render_ask_finalflow() -> None:
         if clear_slot.button(
             "Clear chat",
             key="clear_chat",
-            width="stretch",
+            use_container_width=True,
             disabled=not st.session_state.chat_history,
         ):
             st.session_state.chat_history = []
@@ -154,7 +158,7 @@ def render_ask_finalflow() -> None:
     selected_question = None
     for index, suggestion in enumerate(SUGGESTIONS):
         if button_columns[index % 2].button(
-            suggestion, key=f"suggestion_{index}", width="stretch"
+            suggestion, key=f"suggestion_{index}", use_container_width=True
         ):
             selected_question = suggestion
 
@@ -164,7 +168,9 @@ def render_ask_finalflow() -> None:
         with st.chat_message("user"):
             st.markdown(item["question"])
         with st.chat_message("assistant"):
+            st.caption(item.get('scope', 'Earlier prepared-data answer'))
             show_response(response_from_state(item["response"]), show_plot=False)
+            show_web_sources(item.get('web'))
 
     question = typed_question if submitted else selected_question
     if not question:
@@ -184,7 +190,16 @@ def render_ask_finalflow() -> None:
 
     with st.chat_message("user"):
         st.markdown(question)
-    retrieval = retrieve_for_question(question, data)
+    external = should_search(question)
+    retrieval = project_retrieval('current simulated bottleneck' if external else question, data, context)
+    web = None
+    if external:
+        count = st.session_state.get('search_request_count', 0)
+        if count >= 10:
+            web = {'search_used': False, 'results': [], 'error': 'Search allowance reached for this session.'}
+        else:
+            st.session_state['search_request_count'] = count + 1
+            web = search_web(question, summarize=False).model_dump(mode='json')
     safety_identifier = hashlib.sha256(
         st.session_state.safety_token.encode("utf-8")
     ).hexdigest()
@@ -206,7 +221,27 @@ def render_ask_finalflow() -> None:
             if warning:
                 st.warning(warning)
         show_response(response)
+        show_web_sources(web)
     st.session_state.chat_history.append(
-        {"question": question, "response": response_to_state(response)}
+        {"question": question, "response": response_to_state(response), 'scope': context['scope'], 'web': web}
     )
     show_clear_control()
+
+
+def show_web_sources(web: dict | None) -> None:
+    """External snippets are separate from authoritative project metrics."""
+    if web is None:
+        return
+    st.subheader('Web evidence')
+    st.caption('External search results, not simulator inputs. Verify notices with the issuing authority.')
+    if not web.get('search_used'):
+        st.info('Search is unavailable. Prepared project information remains available; current alerts are not verified.')
+        return
+    if not web.get('results'):
+        st.info('No web sources returned. Current conditions remain unverified.')
+    for source in web.get('results', []):
+        with st.container(border=True):
+            st.text(source['title'])
+            st.caption(source.get('source') or 'Web')
+            st.text(source.get('snippet') or 'No snippet supplied.')
+            st.link_button('Open source', source['link'])

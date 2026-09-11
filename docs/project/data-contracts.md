@@ -107,6 +107,15 @@ Contract rules:
 - thresholds, risk bands, and actions are FinalFlow project heuristics; and
 - answers preserve the `derived` versus `synthetic` distinction.
 
+## Mobility simulation contract
+
+The [mobility contract](mobility-contract.md) defines typed corridor nodes and
+edges, canonical match phases/scenarios, demand assumptions, and simulation
+snapshots in `paddydash/services/mobility_contract.py`. The central illustrative
+configuration is `paddydash/services/mobility_config.py`; the bounded engine is
+`paddydash/services/mobility_simulator.py`. Simulation outputs remain `synthetic` even when
+reviewed inputs are `derived`; passenger counts are not observed event data.
+
 ## Source discipline
 
 AI responses should distinguish project data from web results. Web results should not overwrite project data. Synthetic scenarios should always be labeled as `synthetic` and should not be presented as observed behavior.

@@ -194,7 +194,9 @@ safe user message. Provider exception details and credentials are not returned.
 | `OPENAI_API_KEY` | Optional server credential. Absence selects prepared-data mode. |
 | `OPENAI_MODEL` | Optional model name; defaults to `gpt-5.6-luna`. |
 | `FINALFLOW_MAX_AI_REQUESTS_PER_SESSION` | Optional integer, safely clamped to 1-100. |
-| `FINALFLOW_DISABLE_OPENAI` | Optional boolean-like safety switch that disables external calls. |
+| `FINALFLOW_DISABLE_OPENAI` | Optional boolean-like safety switch that disables OpenAI calls. |
+| `SERPAPI_API_KEY` | Optional backend-only search credential; never sent to the browser. |
+| `FINALFLOW_DISABLE_SEARCH` | true/1/yes/on disables SerpAPI calls independently of OpenAI. |
 
 See `.env.example` for a secret-free local template. Streamlit Community Cloud
 values belong in its Secrets interface.

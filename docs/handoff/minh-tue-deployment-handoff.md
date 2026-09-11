@@ -20,7 +20,7 @@ Streamlit configuration: .streamlit/config.toml
 
 ## What is being handed over
 
-- tested five-page Streamlit application;
+- seven-page Streamlit application with a synthetic mobility replay;
 - compact approved runtime CSVs and four static figures;
 - a bounded spatial/heat map artifact and historical-weather evidence artifact,
   each with build provenance and rejection counts;
@@ -87,10 +87,13 @@ mode, not an error state.
 | `OPENAI_MODEL` | No | Streamlit Secrets | Defaults to `gpt-5.6-luna`. |
 | `FINALFLOW_MAX_AI_REQUESTS_PER_SESSION` | No | Streamlit Secrets | Defaults to 10; valid effective range is 1-100. |
 | `FINALFLOW_DISABLE_OPENAI` | No | CI/process environment | Forces prepared-data mode for tests or emergency cost control. |
+| `SERPAPI_API_KEY` | No | Server secrets | Enables explicit current public-information searches only. |
+| `FINALFLOW_DISABLE_SEARCH` | No | CI/process environment | true/1/yes/on forces no-search mode. |
 
 Local values may be stored in `.env`, which is ignored by Git. Copy
-`.env.example`; never edit the example with real credentials. `SERPAPI_API_KEY`
-is not used or supported by the current application.
+`.env.example`; never edit the example with real credentials. Search failures show
+a fixed safe message while project answers remain available. Web source cards
+are separate from project evidence and never modify simulator inputs.
 
 Streamlit Secrets example:
 

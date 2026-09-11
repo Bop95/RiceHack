@@ -29,7 +29,7 @@ METRIC_OPTIONS = {
 def plot(figure: object) -> None:
     st.plotly_chart(
         figure,
-        width="stretch",
+        use_container_width=True,
         theme="streamlit",
         config={"displaylogo": False, "scrollZoom": False},
     )
@@ -186,5 +186,5 @@ def render_store_visit_explorer() -> None:
             ("Visit distribution", "store_visits_distribution.png"),
         ):
             st.markdown(f"#### {title}")
-            st.image(str(figure_dir / filename), width="stretch")
+            st.image(str(figure_dir / filename), use_container_width=True)
         data_type_label("derived")

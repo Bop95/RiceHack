@@ -59,7 +59,7 @@ def render_overview() -> None:
     )
     st.plotly_chart(
         overall_monthly_figure(data.monthly, metric or "mean_daily_visits"),
-        width="stretch",
+        use_container_width=True,
         theme="streamlit",
         config={"displaylogo": False},
     )
@@ -86,7 +86,7 @@ def render_overview() -> None:
                 7,
                 "Leading commercial categories",
             ),
-            width="stretch",
+            use_container_width=True,
             theme="streamlit",
             config={"displaylogo": False},
         )
@@ -99,7 +99,7 @@ def render_overview() -> None:
                 len(data.markets),
                 "Market daily intensity",
             ),
-            width="stretch",
+            use_container_width=True,
             theme="streamlit",
             config={"displaylogo": False},
         )

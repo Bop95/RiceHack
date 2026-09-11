@@ -1,9 +1,13 @@
+"""Generate illustrative vendor zones, explicitly labeled as synthetic scenarios."""
+
 import os
+from pathlib import Path
 import numpy as np
 import pandas as pd
 
 
-def score_scenarios():
+def score_scenarios(output_dir: Path | None = None) -> None:
+  """Write scenario rows to the business folder or a configurable test directory."""
   print('Step 1: Initializing random seed state (42)...')
   np.random.seed(42)
 
@@ -30,9 +34,16 @@ def score_scenarios():
   df_scenarios['placement_class'] = np.select(
       conditions, choices, default='Controlled'
   )
+  df_scenarios['data_type'] = 'synthetic'
+  df_scenarios['data_confidence'] = 'scenario'
+  df_scenarios['scenario_id'] = 'vendor_zones_seed_42_v1'
+  df_scenarios['assumption_note'] = (
+      'Synthetic scenario: coordinates and scores are randomly generated with '
+      'seed 42; placement classes use heuristic thresholds, not observed evidence.'
+  )
 
   print('Step 4: Exporting generated scenarios to CSV...')
-  clean_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'data_clean'))
+  clean_dir = output_dir if output_dir is not None else Path(__file__).resolve().parent.parent / 'data_clean'
   os.makedirs(clean_dir, exist_ok=True)
   
   scenario_out = os.path.join(clean_dir, 'vendor_zone_scenarios.csv')

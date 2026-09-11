@@ -37,17 +37,18 @@ Not integrated into the deployed Streamlit application:
 - a standalone REST/FastAPI service (a contributor prototype now exists under
   `notebooks/tan-dat/backend/`);
 - a TypeScript/React frontend;
-- SerpAPI or live web retrieval (implemented only in that separate prototype);
 - AWS infrastructure or automated AWS deployment.
 
 Do not design a deployment around those unimplemented components. The current
 release is one Python 3.12 Streamlit service.
 
-The `stephen-develop` integration branch also includes Tan Dat's weather
-notebook, preparation scripts, reports, and experimental search backend. These
-are not started by `paddydash/app.py` or covered by the root runtime dependency
-file. See the [branch integration status](docs/project/branch-integration-status.md)
-for branch coverage, validation limits, and remaining integration work.
+The `stephen-develop` working branch integrates the synthetic mobility replay,
+prepared teammate evidence and optional server-side SerpAPI search. The future
+release target remains `main`; this work does not deploy either branch.
+Tan Dat's standalone backend prototype is not started by `paddydash/app.py`;
+it reuses the app's shared search service. See the
+[current evidence inventory](docs/project/teammate-evidence-integration.md) and
+[earlier branch integration status](docs/project/branch-integration-status.md).
 
 ## Architecture
 
@@ -122,7 +123,7 @@ The launcher reads the ignored `.env` file and never accepts or prints the key.
 python3.12 -m venv .venv
 source .venv/bin/activate
 python3 -m pip install -r requirements.txt
-FINALFLOW_DISABLE_OPENAI=true python3 -m streamlit run paddydash/app.py
+FINALFLOW_DISABLE_OPENAI=true FINALFLOW_DISABLE_SEARCH=true python3 -m streamlit run paddydash/app.py
 ```
 
 For optional OpenAI mode, copy `.env.example` to `.env`, add the server-side
@@ -136,8 +137,11 @@ key, and run the same Streamlit command without `FINALFLOW_DISABLE_OPENAI=true`.
 | `OPENAI_MODEL` | No | `gpt-5.6-luna` | Model used by the OpenAI Responses API. |
 | `FINALFLOW_MAX_AI_REQUESTS_PER_SESSION` | No | `10` | Best-effort per-browser-session allowance, clamped to 1-100. |
 | `FINALFLOW_DISABLE_OPENAI` | No | false | `true`, `1`, `yes`, or `on` forces prepared-data mode. CI sets this to `true`. |
+| `SERPAPI_API_KEY` | No | unset | Server-only search credential for explicit current public-information requests. |
+| `FINALFLOW_DISABLE_SEARCH` | No | false | `true`, `1`, `yes`, or `on` disables web search independently. |
 
-`SERPAPI_API_KEY` is not supported because SerpAPI integration does not exist.
+Project questions never require search. Safe search failures preserve project
+answers; web source cards remain separate from deterministic project evidence.
 For local development, store values in the ignored `.env` file. For hosted
 deployment, store them only in Streamlit Community Cloud Secrets.
 

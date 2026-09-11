@@ -1,10 +1,14 @@
+"""Export synthetic vendor recommendations without claiming observed confidence."""
+
 import os
+from pathlib import Path
 import pandas as pd
 
 
-def export_integration_schema():
+def export_integration_schema(data_dir: Path | None = None) -> None:
+  """Label current and legacy scenario inputs before exporting to Power BI."""
   print('Step 1: Verifying input scenario files...')
-  clean_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'data_clean'))
+  clean_dir = data_dir if data_dir is not None else Path(__file__).resolve().parent.parent / 'data_clean'
   in_path = os.path.join(clean_dir, 'vendor_zone_scenarios.csv')
   
   if os.path.exists(in_path):
@@ -15,13 +19,24 @@ def export_integration_schema():
 
     def get_reason(row):
       if row['placement_class'] == 'Recommended':
-        return 'Low risk, high traffic corridor'
+        return 'Synthetic scenario: high opportunity and low risk scores under heuristic thresholds'
       elif row['placement_class'] == 'Avoided':
-        return 'High risk stadium egress chokepoint'
+        return 'Synthetic scenario: risk score exceeds the avoidance threshold'
       else:
-        return 'Requires strict queue management'
+        return 'Synthetic scenario: scores fall in the controlled placement band'
 
-    df_final['data_confidence'] = 'High'
+    # This exporter consumes generated scenarios, including older unlabeled files.
+    df_final['data_type'] = 'synthetic'
+    df_final['data_confidence'] = 'scenario'
+    if 'scenario_id' not in df_final:
+      df_final['scenario_id'] = 'vendor_zones_seed_42_v1'
+    else:
+      df_final['scenario_id'] = df_final['scenario_id'].fillna('').astype(str).str.strip()
+      df_final.loc[df_final['scenario_id'] == '', 'scenario_id'] = 'vendor_zones_seed_42_v1'
+    df_final['assumption_note'] = (
+        'Synthetic scenario: coordinates and scores are randomly generated with '
+        'seed 42; placement classes use heuristic thresholds, not observed evidence.'
+    )
     df_final['reason'] = df_final.apply(get_reason, axis=1)
 
     print('Step 3: Exporting final integration schema...')

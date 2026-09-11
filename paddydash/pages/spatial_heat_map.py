@@ -82,7 +82,7 @@ def render_spatial_heat_map() -> None:
 
     st.plotly_chart(
         spatial_heat_map_figure(filtered),
-        width="stretch",
+        use_container_width=True,
         config={"displaylogo": False},
     )
     st.markdown("### Filtered evidence table")
@@ -100,7 +100,7 @@ def render_spatial_heat_map() -> None:
             }
             for row in filtered
         ],
-        width="stretch",
+        use_container_width=True,
         hide_index=True,
     )
     interpretation(

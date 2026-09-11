@@ -8,7 +8,7 @@ from Streamlit's Python server process. Visitors never receive the API key.
 
 The repository includes:
 
-- the five-page Streamlit application at `paddydash/app.py`;
+- the seven-page Streamlit application at `paddydash/app.py`;
 - compact derived summary CSVs instead of the 5.2 GB cleaned dataset;
 - a clearly labeled synthetic scenario CSV;
 - a bounded 9,889-row spatial/heat table and an eight-row historical-weather
@@ -108,6 +108,11 @@ FINALFLOW_MAX_AI_REQUESTS_PER_SESSION = "10"
 The tracked `.env.example` file documents the same variable names for local
 development. Never edit that example to contain a real value. For Community
 Cloud, paste the equivalent TOML values only into the deployment's Secrets box.
+Optional `SERPAPI_API_KEY` is a server-only credential for explicit current
+transit/weather/access questions. `FINALFLOW_DISABLE_SEARCH=true` disables search.
+Project questions do not search. Provider failures show a fixed safe message;
+external source cards remain separate from deterministic project evidence.
+
 `FINALFLOW_DISABLE_OPENAI` is also supported as a process/CI safety switch but
 does not need to be added to hosted Secrets during normal operation.
 

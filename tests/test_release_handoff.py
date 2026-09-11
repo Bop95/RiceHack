@@ -32,7 +32,14 @@ class ReleaseHandoffTests(unittest.TestCase):
                 self.assertTrue(path.is_file())
                 text = path.read_text(encoding="utf-8")
                 self.assertGreater(len(text), 500)
-                self.assertNotIn("stephen-develop", text)
+                self.assertIn("#", text)
+                self.assertIn("paddydash/app.py", text)
+
+    def test_working_branch_is_distinct_from_release_target(self) -> None:
+        text = (REPOSITORY_ROOT / "README.md").read_text(encoding="utf-8")
+        self.assertIn("`stephen-develop`", text)
+        self.assertIn("`main`", text)
+        self.assertIn("streamlit run paddydash/app.py", text)
 
     def test_runtime_dependencies_have_one_source_of_truth(self) -> None:
         self.assertTrue((REPOSITORY_ROOT / "requirements.txt").is_file())
@@ -47,9 +54,13 @@ class ReleaseHandoffTests(unittest.TestCase):
                 "OPENAI_MODEL",
                 "FINALFLOW_MAX_AI_REQUESTS_PER_SESSION",
                 "FINALFLOW_DISABLE_OPENAI",
+                "SERPAPI_API_KEY",
+                "FINALFLOW_DISABLE_SEARCH",
             },
         )
         self.assertFalse(values["OPENAI_API_KEY"])
+        self.assertFalse(values["SERPAPI_API_KEY"])
+        self.assertEqual(values["FINALFLOW_DISABLE_SEARCH"], "false")
         self.assertEqual(values["FINALFLOW_DISABLE_OPENAI"], "false")
 
     def test_deployment_documents_use_main_as_the_release_branch(self) -> None:
