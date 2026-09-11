@@ -32,15 +32,22 @@ Implemented now:
 - local launchers, deployment validation, unit/AppTest coverage, and GitHub CI;
 - Streamlit Community Cloud deployment instructions for the `main` branch.
 
-Not implemented:
+Not integrated into the deployed Streamlit application:
 
-- a standalone REST/FastAPI service;
+- a standalone REST/FastAPI service (a contributor prototype now exists under
+  `notebooks/tan-dat/backend/`);
 - a TypeScript/React frontend;
-- SerpAPI or live web retrieval;
+- SerpAPI or live web retrieval (implemented only in that separate prototype);
 - AWS infrastructure or automated AWS deployment.
 
 Do not design a deployment around those unimplemented components. The current
 release is one Python 3.12 Streamlit service.
+
+The `stephen-develop` integration branch also includes Tan Dat's weather
+notebook, preparation scripts, reports, and experimental search backend. These
+are not started by `paddydash/app.py` or covered by the root runtime dependency
+file. See the [branch integration status](docs/project/branch-integration-status.md)
+for branch coverage, validation limits, and remaining integration work.
 
 ## Architecture
 
@@ -114,8 +121,8 @@ The launcher reads the ignored `.env` file and never accepts or prints the key.
 ```bash
 python3.12 -m venv .venv
 source .venv/bin/activate
-python -m pip install -r requirements.txt
-FINALFLOW_DISABLE_OPENAI=true python -m streamlit run paddydash/app.py
+python3 -m pip install -r requirements.txt
+FINALFLOW_DISABLE_OPENAI=true python3 -m streamlit run paddydash/app.py
 ```
 
 For optional OpenAI mode, copy `.env.example` to `.env`, add the server-side
