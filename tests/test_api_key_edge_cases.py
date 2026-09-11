@@ -71,6 +71,7 @@ class APIKeyEdgeCaseTests(unittest.TestCase):
                     self.assertTrue(api_is_configured())
 
     def test_model_name_is_trimmed_and_blank_values_use_the_default(self) -> None:
+        self.assertEqual(DEFAULT_MODEL, "gpt-5")
         with patch.dict(os.environ, {}, clear=True):
             self.assertEqual(get_model_name(), DEFAULT_MODEL)
         with patch.dict(os.environ, {"OPENAI_MODEL": "   "}, clear=True):

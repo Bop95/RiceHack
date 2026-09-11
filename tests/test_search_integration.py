@@ -59,8 +59,7 @@ class SearchIntegrationTests(unittest.TestCase):
         retrieval = attach_web_context(self.retrieval, self.search)
         with patch.dict(os.environ, {'OPENAI_API_KEY': 'mock-openai'}, clear=True), patch('openai.OpenAI', side_effect=RuntimeError('mock-openai')):
             response, warning = answer_with_fallback('current transit advisory', retrieval)
-        self.assertTrue(warning)
-        self.assertNotIn('mock-openai', warning)
+        self.assertIsNone(warning)
         self.assertEqual(response.answer, self.retrieval.local_answer)
         self.assertEqual(response.web_sources, [self.source.model_dump()])
 

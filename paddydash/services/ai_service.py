@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import os
 import json
+import logging
 from dataclasses import replace
 from pathlib import Path
 
@@ -13,10 +14,11 @@ from paddydash.services.analytics import ChatResponse, RetrievalResult
 from paddydash.services.search_models import SearchResponse
 
 
-DEFAULT_MODEL = "gpt-5.6-luna"
+DEFAULT_MODEL = "gpt-5"
 DEFAULT_MAX_AI_REQUESTS_PER_SESSION = 10
 MAX_ALLOWED_AI_REQUESTS_PER_SESSION = 100
 REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
+LOGGER = logging.getLogger(__name__)
 
 
 # Local development uses the leader-provided `.env` convention. Existing
@@ -225,7 +227,10 @@ Return only the answer narrative and limitations copied from this approved list:
             raise AIServiceError("The AI backend returned no structured answer.")
     except AIServiceError:
         raise
-    except Exception:
+    except Exception as error:
+        # Provider details may contain request URLs or credentials. Keep only the
+        # exception class for server-side diagnostics.
+        LOGGER.warning("OpenAI narrative request failed: %s", type(error).__name__)
         raise AIServiceError(
             "The AI backend is temporarily unavailable. The prepared-data answer "
             "can still be shown safely."
@@ -264,8 +269,6 @@ def answer_with_fallback(
     try:
         return answer_with_openai(question, retrieval, safety_identifier), None
     except AIServiceError:
-        return (
-            prepared_data_response(retrieval),
-            "The AI narrative service is temporarily unavailable, so FinalFlow "
-            "is showing the verified prepared-data answer instead. Please try again later.",
-        )
+        # Prepared data is a fully supported answer mode, not an application
+        # failure. The UI already identifies its provenance and answer mode.
+        return prepared_data_response(retrieval), None

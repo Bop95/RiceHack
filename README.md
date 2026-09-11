@@ -2,96 +2,82 @@
   <img src="asset/rice_hack.png" alt="Rice Hack banner" width="100%">
 </p>
 
-# FinalFlow
+<h1 align="center">FinalFlow</h1>
 
-FinalFlow is a tested Streamlit application for exploring commercial activity
-and illustrative mobility-readiness scenarios around the 2026 World Cup Final.
-The case study follows the Midtown Manhattan to New York New Jersey Stadium
-corridor for a hypothetical Spain versus Argentina final.
+<p align="center">
+  <strong>Match-Synchronized Mobility Readiness for the 2026 World Cup Final</strong><br>
+  Midtown Manhattan → Penn Station → Secaucus Junction → Meadowlands Station → Stadium
+</p>
 
-The application combines compact approved store-visit summaries, clearly
-labeled synthetic scenarios, a derived spatial/urban-heat explorer, reviewed
-historical weather evidence, deterministic analytics, and optional server-side
-OpenAI narration. It never loads the restricted raw Rice datasets or the
-multi-gigabyte clean Parquet file at runtime.
+<p align="center">
+  <a href="#run-the-demo">Run the demo</a> ·
+  <a href="#seven-page-journey">Explore the app</a> ·
+  <a href="#data-and-provenance">Understand the data</a> ·
+  <a href="#documentation">Read the guides</a>
+</p>
 
-## Release status
+![FinalFlow interface preview](asset/finalflow.jpeg)
 
-Implemented now:
+> **Scenario-planning tool, not a real-time operations system.** FinalFlow makes
+> synthetic event-day assumptions explicit, calculates their consequences, and
+> keeps historical and web evidence visibly separate.
 
-- five Streamlit pages: Overview, Store-Visit Explorer, Scenario Explorer,
-  Spatial & Heat Map, and Ask FinalFlow;
-- compact `derived` summary tables and reproducible `synthetic` scenarios;
-- a 9,889-location NY/NJ exploratory map with commercial tiers, nearest UHI
-  evidence, an accessible table, and explicit missing-evidence handling;
-- eight deterministic historical-weather metrics for grounded chatbot answers,
-  with station-date units and forecast refusal;
-- grounded answers with validated evidence, data labels, limitations, and plots;
-- deterministic prepared-data operation when OpenAI is disabled or unavailable;
-- optional server-side OpenAI Responses API narration;
-- local launchers, deployment validation, unit/AppTest coverage, and GitHub CI;
-- Streamlit Community Cloud deployment instructions for the `main` branch.
+## The Decision Story
 
-Not integrated into the deployed Streamlit application:
-
-- a standalone REST/FastAPI service (a contributor prototype now exists under
-  `notebooks/tan-dat/backend/`);
-- a TypeScript/React frontend;
-- AWS infrastructure or automated AWS deployment.
-
-Do not design a deployment around those unimplemented components. The current
-release is one Python 3.12 Streamlit service.
-
-The `stephen-develop` working branch integrates the synthetic mobility replay,
-prepared teammate evidence and optional server-side SerpAPI search. The future
-release target remains `main`; this work does not deploy either branch.
-Tan Dat's standalone backend prototype is not started by `paddydash/app.py`;
-it reuses the app's shared search service. See the
-[current evidence inventory](docs/project/teammate-evidence-integration.md) and
-[earlier branch integration status](docs/project/branch-integration-status.md).
-
-## Architecture
+FinalFlow models a hypothetical Spain versus Argentina final at New York New
+Jersey Stadium. A judge or planner can choose a match phase and scenario, trace
+pressure along the five-node corridor, compare interventions, then inspect the
+weather and commercial context behind a decision.
 
 ```text
-Approved compact CSVs
-        |
-        v
-data_service.py -- validates schema and data labels
-        |
-        v
-analytics.py -- deterministic retrieval, evidence, and local answer
-        |
-        +-------------------------------+
-        |                               |
-        v                               v
-prepared-data response          optional OpenAI narration
-        |                        (server-side, grounded)
-        +---------------+---------------+
-                        |
-                        v
-               five Streamlit pages
+Match phase + scenario
+          │
+          ▼
+Synthetic demand and capacity assumptions
+          │
+          ▼
+Derived queues, waits, utilization and clearance
+          │
+          ├──────────────► Weather / heat context
+          ├──────────────► Commercial / POI context
+          └──────────────► Grounded FinalFlow explanation
 ```
 
-OpenAI can improve wording, but the local analytics layer controls the selected
-entity, values, units, ranking direction, evidence, data type, limitations, and
-related plot.
+The mobility replay is intentionally explainable: five-minute intervals,
+transparent capacities, canonical match phases, and deterministic derived
+outputs. It is not calibrated to official event passenger counts.
 
-## Requirements
+## Seven-Page Journey
 
-- Python 3.12
-- Git
-- Windows PowerShell for the included one-command launcher, or any shell for the
-  direct Streamlit command
-- optional OpenAI project key for AI narration
+| View | Decision it supports | Primary evidence |
+| --- | --- | --- |
+| **Executive Overview** | What needs attention now? | Current derived queue, utilization, wait, clearance, and scoped actions |
+| **Matchday Timeline** | When does pressure change? | Canonical phase markers and queue/throughput time series |
+| **Mobility & Access** | Where is the corridor constrained? | Node queues, edge throughput, first/last-mile indicators, approximate corridor reference |
+| **Commercial & POI Intelligence** | Where should activity be encouraged, controlled, or avoided? | Historical visit context, POIs, heat context, labeled synthetic placement examples |
+| **Weather & Heat** | How do rain and heat change operating conditions? | Historical station context, heat locations, and derived rain comparisons |
+| **Scenario Lab** | Which intervention changes the modeled outcome? | Baseline, disruption, capacity boost, rain, and staggered-departure comparisons |
+| **Ask FinalFlow** | Why did this recommendation change? | Deterministic project evidence, optional OpenAI wording, and separate current web sources |
 
-The root `requirements.txt` is the single source of runtime dependencies.
-`requirements-dev.txt` contains CI/development-only tools.
+## Run the Demo
 
-## Quick start
+The dashboard is a single Streamlit application at `paddydash/app.py`. It runs
+fully without API keys in deterministic prepared-data mode.
 
-### Windows: prepared-data mode
+### macOS or Linux
 
-From the repository root:
+```bash
+cd /Users/macbook/Hack/RiceHack
+python3 -m venv .venv
+source .venv/bin/activate
+python3 -m pip install -r requirements.txt
+FINALFLOW_DISABLE_OPENAI=true FINALFLOW_DISABLE_SEARCH=true \
+  python3 -m streamlit run paddydash/app.py
+```
+
+Open <http://localhost:8501>.
+
+### Windows PowerShell
 
 ```powershell
 py -3.12 -m venv .venv
@@ -99,154 +85,113 @@ py -3.12 -m venv .venv
 .\run_finalflow_local.cmd -PreparedDataOnly
 ```
 
-Open `http://localhost:8501` if the browser does not open automatically. This
-mode is complete and makes no OpenAI request.
+### Optional AI and current-public-information mode
 
-### Windows: optional OpenAI mode
-
-```powershell
-Copy-Item .env.example .env
-```
-
-Edit `.env`, add a project key after `OPENAI_API_KEY=`, then validate and run:
-
-```powershell
-.\.venv\Scripts\python.exe scripts\validation\check_local_env.py .env
-.\run_finalflow_local.cmd
-```
-
-The launcher reads the ignored `.env` file and never accepts or prints the key.
-
-### macOS or Linux
+Copy the secret-free template, add server-side keys locally, then restart the
+application:
 
 ```bash
-python3.12 -m venv .venv
-source .venv/bin/activate
-python3 -m pip install -r requirements.txt
-FINALFLOW_DISABLE_OPENAI=true FINALFLOW_DISABLE_SEARCH=true python3 -m streamlit run paddydash/app.py
+cp .env.example .env
 ```
 
-For optional OpenAI mode, copy `.env.example` to `.env`, add the server-side
-key, and run the same Streamlit command without `FINALFLOW_DISABLE_OPENAI=true`.
+| Variable | Role | Default |
+| --- | --- | --- |
+| `OPENAI_API_KEY` | Optional server-side narration | unset |
+| `OPENAI_MODEL` | Responses API model | `gpt-5` |
+| `SERPAPI_API_KEY` | Optional current-public-information search | unset |
+| `FINALFLOW_DISABLE_OPENAI` | Disables model calls for CI/offline demos | `false` |
+| `FINALFLOW_DISABLE_SEARCH` | Disables public search independently | `false` |
 
-## Environment variables
+Keys never belong in browser code, Git, `.env.example`, or screenshots. Project
+questions are answered from FinalFlow data; only explicit current-public
+questions such as transit alerts, weather alerts, or venue notices may use
+SerpAPI. Search results appear in **Web Sources**, separate from project evidence.
 
-| Variable | Required | Default | Purpose |
-| --- | --- | --- | --- |
-| `OPENAI_API_KEY` | No | unset | Enables server-side OpenAI narration. Without it, the app uses prepared-data mode. |
-| `OPENAI_MODEL` | No | `gpt-5.6-luna` | Model used by the OpenAI Responses API. |
-| `FINALFLOW_MAX_AI_REQUESTS_PER_SESSION` | No | `10` | Best-effort per-browser-session allowance, clamped to 1-100. |
-| `FINALFLOW_DISABLE_OPENAI` | No | false | `true`, `1`, `yes`, or `on` forces prepared-data mode. CI sets this to `true`. |
-| `SERPAPI_API_KEY` | No | unset | Server-only search credential for explicit current public-information requests. |
-| `FINALFLOW_DISABLE_SEARCH` | No | false | `true`, `1`, `yes`, or `on` disables web search independently. |
+## Data and Provenance
 
-Project questions never require search. Safe search failures preserve project
-answers; web source cards remain separate from deterministic project evidence.
-For local development, store values in the ignored `.env` file. For hosted
-deployment, store them only in Streamlit Community Cloud Secrets.
+| Label | Meaning in FinalFlow | Example |
+| --- | --- | --- |
+| `provided` | Source-backed context supplied to the project | Historical source data and reviewed inputs |
+| `derived` | Calculated from prepared data or scenario inputs | Queues, utilization, waits, comparisons, summaries |
+| `synthetic` | Transparent scenario assumption, never observed reality | Event demand, capacity, corridor coordinates, placement examples |
+| `web` | Current external public information | A transit advisory returned by a requested search |
 
-## Validate the release
+The application does **not** load restricted raw Rice datasets or large Parquet
+files at runtime. It reads compact prepared exports and scenario inputs from
+`data/`. Store visits are a historical commercial-activity proxy, not attendance
+or ridership. Weather observations are historical multi-station context, not a
+venue forecast. Approximate map points and vendor examples require site review.
 
-Run the same quality gates used by CI:
-
-```powershell
-.\.venv\Scripts\python.exe -m pip check
-.\.venv\Scripts\python.exe -m ruff check paddydash scripts tests
-.\.venv\Scripts\python.exe -m compileall -q paddydash scripts tests
-$env:FINALFLOW_DISABLE_OPENAI = "true"
-.\.venv\Scripts\python.exe scripts\validation\check_streamlit_deployment.py --require-tracked
-.\.venv\Scripts\python.exe -m unittest discover -s tests -v
-```
-
-Normal CI deliberately does not receive an OpenAI key and does not make paid,
-nondeterministic live requests. The committed live-test evidence is under
-`reports/testing/`.
-
-## Deploy
-
-The supported release target is Streamlit Community Cloud:
+## Architecture
 
 ```text
-Repository: Bop95/RiceHack
-Branch: main
-Entrypoint: paddydash/app.py
-Python: 3.12
-Dependency file: requirements.txt (repository root)
-Configuration: .streamlit/config.toml
+data/synthetic/ + data/exports/ + approved summaries
+                         │
+                         ▼
+     paddydash/services/finalflow_data.py
+       validates schema, IDs, units, provenance
+                         │
+                         ▼
+ deterministic retrieval + mobility context + recommendation rules
+                         │
+          ┌──────────────┴──────────────┐
+          ▼                             ▼
+  seven Streamlit views       optional server-side AI/search
+  (always usable offline)     (never authoritative for metrics)
 ```
 
-Protect `main`, require the **Python 3.12 quality gate**, and deploy only merged
-commits. Add optional OpenAI values in Streamlit Secrets, never GitHub Actions.
-See the [hosted deployment guide](paddydash/DEPLOYMENT_GUIDE.md) for the complete
-procedure and smoke checklist.
+OpenAI may improve presentation, but deterministic local analytics control
+metrics, evidence, provenance, limitations, and recommendations. If the model
+is disabled, unavailable, or its output cannot pass the factual guard, Ask
+FinalFlow still returns the verified deterministic answer without exposing
+provider details.
 
-## Application API boundary
+## Quality Checks
 
-The current application has an in-process Python service API; it does not expose
-HTTP routes. Streamlit imports `data_service.py`, `analytics.py`, and
-`ai_service.py` directly. The callable signatures, response schema, errors, and
-future backend boundary are documented in
-[Application API](docs/api/application-api.md).
+```bash
+python3 -m pip check
+python3 -m ruff check paddydash scripts tests
+python3 -m compileall -q paddydash scripts tests
+FINALFLOW_DISABLE_OPENAI=true FINALFLOW_DISABLE_SEARCH=true \
+  python3 -m unittest discover -s tests -v
+python3 scripts/validation/check_streamlit_deployment.py --require-tracked
+```
 
-## Repository structure
+Normal CI does not receive API keys or make paid live requests. See the
+[demo rehearsal](docs/handoff/demo-rehearsal.md) for current visual checks and
+known limitations.
+
+## Repository Map
 
 ```text
-.
-|-- .github/workflows/       GitHub Actions quality gate
-|-- .streamlit/              tracked, non-secret Streamlit configuration
-|-- asset/                   README and project images
-|-- data/summaries/          compact approved derived runtime data
-|-- data/synthetic/          reproducible, clearly labeled scenario data
-|-- docs/api/                current service/API contract
-|-- docs/engineering/        CI/CD setup and beginner guide
-|-- docs/handoff/            deployment-owner handoff notes
-|-- paddydash/               Streamlit pages, components, and services
-|-- reports/                 figures, screenshots, and test evidence
-|-- scripts/                 data preparation, validation, and launch utilities
-|-- tests/                   unit, service, release, and Streamlit AppTest checks
-|-- requirements.txt         runtime dependency source of truth
-`-- requirements-dev.txt     local CI/development tools
+asset/          project and README visuals
+data/           compact exports, summaries, sample structure, synthetic inputs
+docs/           project contracts, engineering notes, and deployment handoffs
+paddydash/      the Streamlit application, components, pages, and services
+scripts/        reproducible data, validation, and deployment helpers
+tests/          deterministic, service, and Streamlit AppTest coverage
 ```
-
-## Data and security boundary
-
-Never commit:
-
-- `.env`, `.streamlit/secrets.toml`, or credentials;
-- restricted raw/external/processed data;
-- Parquet files or the large clean dataset;
-- virtual environments, caches, bytecode, or generated interactive HTML.
-
-Runtime data uses these labels:
-
-- `derived`: approved transformed summary data;
-- `synthetic`: reproducible scenario assumptions, never observed attendance;
-- `provided` and `web`: reserved shared project labels, not runtime inputs to the
-  current dashboard.
-
-Store visits are a historical commercial-activity proxy. They are not World Cup
-attendance, pedestrian flow, transit ridership, or a causal forecast.
-Weather percentages count station-date observations in the reviewed
-multi-station table; they are not calendar-day probabilities or live forecasts.
-Map heat labels and recommended actions are FinalFlow heuristics. The current
-rectangular NY/NJ extent is exploratory and must not be described as a verified
-venue boundary.
 
 ## Documentation
 
-- [Beginner build and run guide](paddydash/BUILD_GUIDE.md)
+- [Streamlit application guide](paddydash/README.md)
+- [Build and local-run guide](paddydash/BUILD_GUIDE.md)
 - [Hosted deployment guide](paddydash/DEPLOYMENT_GUIDE.md)
-- [Application API](docs/api/application-api.md)
-- [Minh Tue deployment handoff](docs/handoff/minh-tue-deployment-handoff.md)
-- [CI/CD beginner guide](docs/engineering/ci-cd-beginner-guide.md)
-- [CI/CD maintainer guide](docs/engineering/ci-cd-guide.md)
+- [Application API and response contracts](docs/api/application-api.md)
+- [Mobility contract](docs/project/mobility-contract.md)
+- [Teammate evidence inventory](docs/project/teammate-evidence-integration.md)
 - [Data contracts](docs/project/data-contracts.md)
-- [Spatial and weather integration design](docs/engineering/spatial-weather-streamlit-integration-design.md)
-- [Final validation report](reports/testing/final_handoff_validation_report.md)
+- [Minh Tue deployment handoff](docs/handoff/minh-tue-deployment-handoff.md)
+- [CI/CD maintainer guide](docs/engineering/ci-cd-guide.md)
 
-## Ownership and handoff
+## Release Boundaries
 
-Minh Tue receives the tested repository, setup/environment/API documentation,
-deployment checklist, and known limitations. No AWS resources should be created
-from this release without a separate architecture decision. The immediate
-handoff target is the protected `main` branch and Streamlit Community Cloud.
+Implemented: the seven-page Streamlit experience, scenario-based mobility replay,
+prepared contextual evidence, conditional web-source display, optional
+server-side AI wording, tests, and deployment documentation.
+
+Still unfinished: official event-count calibration, venue/site validation,
+live-provider monitoring, a standalone HTTP backend, React frontend, AWS
+infrastructure, and production operational validation. The supported deployment
+target remains Streamlit Community Cloud from protected `main`; work is prepared
+and reviewed on `stephen-develop` before merging.

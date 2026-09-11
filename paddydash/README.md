@@ -1,5 +1,9 @@
 # FinalFlow Streamlit Application
 
+> **Demo rule:** mobility metrics are derived from synthetic scenario inputs;
+> historical commercial/weather context and current web sources keep their own
+> provenance and must not be presented as observed match-day operations.
+
 For a step-by-step explanation of how the site was created, how each layer
 works, and how to modify it, see `paddydash/BUILD_GUIDE.md`.
 
@@ -205,7 +209,7 @@ Set these server-side environment variables:
 
 ```text
 OPENAI_API_KEY=your_key_here
-OPENAI_MODEL=gpt-5.6-luna
+OPENAI_MODEL=gpt-5
 FINALFLOW_MAX_AI_REQUESTS_PER_SESSION=10
 ```
 
@@ -224,7 +228,7 @@ deterministic prepared-data answers and explains the mode to the user.
 
 The tests cover data contracts, deterministic builders, controlled analytics,
 weather routing and forecast refusal, evidence-based fallback responses, and all
-five Streamlit pages.
+seven Streamlit pages.
 
 ## Hosted Streamlit Community Cloud deployment
 
@@ -255,7 +259,8 @@ The application response includes `answer`, `key_findings`, `recommendations`,
 not entrusted to model generation. The factual guard accepts only the prepared
 narrative (whitespace changes allowed); other wording falls back to the local
 answer. This intentionally limits free-form AI interpretation until semantic
-validation is available. Missing or malformed provider responses are safe fallbacks.
+validation is available. Missing or malformed provider responses silently
+preserve the verified answer rather than surfacing provider failures to a user.
 
 Sources are node/edge time series, scenario summaries, recommendation rules,
 commercial/weather summaries, and the AI context/executive baseline references
