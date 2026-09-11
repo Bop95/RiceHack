@@ -7,6 +7,7 @@ from pathlib import Path
 import streamlit as st
 
 from paddydash.components.match_controls import get_selected_match_state, render_match_controls
+from paddydash.components.ui import stretch_width
 from paddydash.services.project_context import selected_context
 
 
@@ -18,14 +19,14 @@ PROVENANCE_TEXT = (
 
 def render_header(repository_root: Path) -> None:
     """Render the consistent shell header and the currently selected model state."""
-    left, right = st.columns([5, 1])
+    left, right = st.columns([4, 2])
     with left:
         st.title("FinalFlow")
         st.caption("Match-Synchronized Mobility Readiness Platform | 2026 World Cup Final - NY/NJ Corridor")
     with right:
         logo = repository_root / "asset" / "rice_hack.png"
         if logo.is_file():
-            st.image(str(logo), width=112)
+            st.image(str(logo), **stretch_width(st.image))
     with st.sidebar:
         st.subheader('Match state')
         render_match_controls(compact=True)
