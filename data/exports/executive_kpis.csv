@@ -1,0 +1,7 @@
+kpi_id,label,value,unit,data_type,source_data_type,source_file,limitation
+baseline_peak_queue,Baseline peak queue,128,modeled people,derived,synthetic,scenario_summary.csv,Derived from synthetic scenario inputs; not observed real-time mobility.
+baseline_clearance,Baseline clearance after final whistle,110,modeled minutes,derived,synthetic,scenario_summary.csv,Derived from synthetic scenario inputs; not an operational forecast.
+historical_hot_share,Historical hot June-July observation share,56.22,percent,derived,derived,weather_risk_summary.csv,Historical multi-station evidence; not a live forecast or a venue-specific claim.
+historical_rain_share,Historical rainy June-July observation share,37.94,percent,derived,derived,weather_risk_summary.csv,Historical multi-station evidence; not a live forecast or a venue-specific claim.
+reviewed_spatial_locations,Reviewed exploratory spatial locations,9889,locations,derived,derived,spatial_heat_locations.csv,Exploratory NY/NJ context; locations are not verified event vendor sites.
+historical_store_records,Historical transformed store-day records,223342163,records,derived,derived,summary_statistics.csv,"Commercial activity proxy; not event attendance, pedestrian counts, or forecast demand."

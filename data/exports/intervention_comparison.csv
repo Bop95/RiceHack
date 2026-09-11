@@ -1,0 +1,14 @@
+intervention_id,name,target_id,comparison_scenario_id,evaluation_status,baseline_peak_queue_passengers,scenario_peak_queue_passengers,peak_queue_improvement,baseline_delay_proxy_person_minutes,scenario_delay_proxy_person_minutes,delay_proxy_improvement,data_type,assumption_note
+rail_capacity_15,15% rail capacity boost,rail_edges,,catalog_only_not_modeled,,,,,,,derived,Catalog entry is synthetic; no matching deterministic scenario transformation exists yet.
+rail_capacity_30,30% rail capacity boost,rail_edges,,catalog_only_not_modeled,,,,,,,derived,Catalog entry is synthetic; no matching deterministic scenario transformation exists yet.
+rail_capacity_50,50% rail capacity boost,rail_edges,rail_capacity_boost,modeled,128,128,0,1750,1705,45,derived,Derived from synthetic FinalFlow scenario inputs; not observed event operations.
+post_match_shuttle,Additional post-match shuttle,stadium_egress,,catalog_only_not_modeled,,,,,,,derived,Catalog entry is synthetic; no matching deterministic scenario transformation exists yet.
+rideshare_geofence,Rideshare geofencing,stadium_egress,,catalog_only_not_modeled,,,,,,,derived,Catalog entry is synthetic; no matching deterministic scenario transformation exists yet.
+staggered_departure,Staggered departure messaging,stadium,staggered_departure,modeled,128,128,0,1750,1705,45,derived,Derived from synthetic FinalFlow scenario inputs; not observed event operations.
+commercial_dwell,Commercial dwell incentive,stadium_egress,,catalog_only_not_modeled,,,,,,,derived,Catalog entry is synthetic; no matching deterministic scenario transformation exists yet.
+pedestrian_only,Pedestrian-only corridor,meadowlands_stadium_walk,,catalog_only_not_modeled,,,,,,,derived,Catalog entry is synthetic; no matching deterministic scenario transformation exists yet.
+wayfinding,Additional wayfinding,secaucus_transfer,,catalog_only_not_modeled,,,,,,,derived,Catalog entry is synthetic; no matching deterministic scenario transformation exists yet.
+shaded_queue,Temporary shaded queue,stadium_egress,,catalog_only_not_modeled,,,,,,,derived,Catalog entry is synthetic; no matching deterministic scenario transformation exists yet.
+covered_transfer,Covered transfer area,meadowlands_platform,,catalog_only_not_modeled,,,,,,,derived,Catalog entry is synthetic; no matching deterministic scenario transformation exists yet.
+platform_management,Platform management,meadowlands,,catalog_only_not_modeled,,,,,,,derived,Catalog entry is synthetic; no matching deterministic scenario transformation exists yet.
+parking_reservation,Parking reservation messaging,stadium_parking,,catalog_only_not_modeled,,,,,,,derived,Catalog entry is synthetic; no matching deterministic scenario transformation exists yet.

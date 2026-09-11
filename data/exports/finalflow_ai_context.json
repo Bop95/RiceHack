@@ -1,0 +1,322 @@
+{
+  "access_zones": [
+    {
+      "associated_node": "midtown",
+      "assumption_note": "Synthetic analysis zone anchored to an approximate demonstration map point; not an official boundary.",
+      "confidence_type": "scenario",
+      "data_type": "synthetic",
+      "latitude": "40.7549",
+      "longitude": "-73.984",
+      "zone_id": "midtown_access",
+      "zone_name": "Midtown access",
+      "zone_type": "access"
+    },
+    {
+      "associated_node": "penn_station",
+      "assumption_note": "Synthetic analysis zone anchored to an approximate demonstration map point; not an official boundary.",
+      "confidence_type": "scenario",
+      "data_type": "synthetic",
+      "latitude": "40.7506",
+      "longitude": "-73.9935",
+      "zone_id": "penn_station_access",
+      "zone_name": "Penn Station access",
+      "zone_type": "access"
+    },
+    {
+      "associated_node": "secaucus",
+      "assumption_note": "Synthetic analysis zone anchored to an approximate demonstration map point; not an official boundary.",
+      "confidence_type": "scenario",
+      "data_type": "synthetic",
+      "latitude": "40.7614",
+      "longitude": "-74.0755",
+      "zone_id": "secaucus_transfer",
+      "zone_name": "Secaucus transfer",
+      "zone_type": "transfer"
+    },
+    {
+      "associated_node": "meadowlands",
+      "assumption_note": "Synthetic analysis zone anchored to an approximate demonstration map point; not an official boundary.",
+      "confidence_type": "scenario",
+      "data_type": "synthetic",
+      "latitude": "40.8135",
+      "longitude": "-74.0745",
+      "zone_id": "meadowlands_access",
+      "zone_name": "Meadowlands access",
+      "zone_type": "access"
+    },
+    {
+      "associated_node": "stadium",
+      "assumption_note": "Synthetic analysis zone anchored to an approximate demonstration map point; not an official boundary.",
+      "confidence_type": "scenario",
+      "data_type": "synthetic",
+      "latitude": "40.813",
+      "longitude": "-74.074",
+      "zone_id": "stadium_egress",
+      "zone_name": "Stadium egress",
+      "zone_type": "egress"
+    }
+  ],
+  "corridor_nodes": [
+    {
+      "assumption_note": "Approximate synthetic map point for FinalFlow demonstration; not an official access coordinate.",
+      "confidence_type": "scenario",
+      "data_type": "synthetic",
+      "display_name": "Midtown Manhattan",
+      "latitude": "40.7549",
+      "longitude": "-73.984",
+      "node_id": "midtown",
+      "node_type": "origin",
+      "order": "0"
+    },
+    {
+      "assumption_note": "Approximate synthetic map point for FinalFlow demonstration; not an official access coordinate.",
+      "confidence_type": "scenario",
+      "data_type": "synthetic",
+      "display_name": "Penn Station",
+      "latitude": "40.7506",
+      "longitude": "-73.9935",
+      "node_id": "penn_station",
+      "node_type": "station",
+      "order": "1"
+    },
+    {
+      "assumption_note": "Approximate synthetic map point for FinalFlow demonstration; not an official access coordinate.",
+      "confidence_type": "scenario",
+      "data_type": "synthetic",
+      "display_name": "Secaucus Junction",
+      "latitude": "40.7614",
+      "longitude": "-74.0755",
+      "node_id": "secaucus",
+      "node_type": "station",
+      "order": "2"
+    },
+    {
+      "assumption_note": "Approximate synthetic map point for FinalFlow demonstration; not an official access coordinate.",
+      "confidence_type": "scenario",
+      "data_type": "synthetic",
+      "display_name": "Meadowlands Station",
+      "latitude": "40.8135",
+      "longitude": "-74.0745",
+      "node_id": "meadowlands",
+      "node_type": "station",
+      "order": "3"
+    },
+    {
+      "assumption_note": "Approximate synthetic map point for FinalFlow demonstration; not an official access coordinate.",
+      "confidence_type": "scenario",
+      "data_type": "synthetic",
+      "display_name": "Stadium",
+      "latitude": "40.813",
+      "longitude": "-74.074",
+      "node_id": "stadium",
+      "node_type": "venue",
+      "order": "4"
+    }
+  ],
+  "executive_kpis": [
+    {
+      "data_type": "derived",
+      "kpi_id": "baseline_peak_queue",
+      "label": "Baseline peak queue",
+      "limitation": "Derived from synthetic scenario inputs; not observed real-time mobility.",
+      "source_data_type": "synthetic",
+      "source_file": "scenario_summary.csv",
+      "unit": "modeled people",
+      "value": 128
+    },
+    {
+      "data_type": "derived",
+      "kpi_id": "baseline_clearance",
+      "label": "Baseline clearance after final whistle",
+      "limitation": "Derived from synthetic scenario inputs; not an operational forecast.",
+      "source_data_type": "synthetic",
+      "source_file": "scenario_summary.csv",
+      "unit": "modeled minutes",
+      "value": 110
+    },
+    {
+      "data_type": "derived",
+      "kpi_id": "historical_hot_share",
+      "label": "Historical hot June-July observation share",
+      "limitation": "Historical multi-station evidence; not a live forecast or a venue-specific claim.",
+      "source_data_type": "derived",
+      "source_file": "weather_risk_summary.csv",
+      "unit": "percent",
+      "value": "56.22"
+    },
+    {
+      "data_type": "derived",
+      "kpi_id": "historical_rain_share",
+      "label": "Historical rainy June-July observation share",
+      "limitation": "Historical multi-station evidence; not a live forecast or a venue-specific claim.",
+      "source_data_type": "derived",
+      "source_file": "weather_risk_summary.csv",
+      "unit": "percent",
+      "value": "37.94"
+    },
+    {
+      "data_type": "derived",
+      "kpi_id": "reviewed_spatial_locations",
+      "label": "Reviewed exploratory spatial locations",
+      "limitation": "Exploratory NY/NJ context; locations are not verified event vendor sites.",
+      "source_data_type": "derived",
+      "source_file": "spatial_heat_locations.csv",
+      "unit": "locations",
+      "value": 9889
+    },
+    {
+      "data_type": "derived",
+      "kpi_id": "historical_store_records",
+      "label": "Historical transformed store-day records",
+      "limitation": "Commercial activity proxy; not event attendance, pedestrian counts, or forecast demand.",
+      "source_data_type": "derived",
+      "source_file": "summary_statistics.csv",
+      "unit": "records",
+      "value": 223342163
+    }
+  ],
+  "limitations": [
+    "Mobility inputs and outputs are synthetic scenario assumptions, not observed operations or forecasts.",
+    "Weather context is historical multi-station evidence, not a venue forecast.",
+    "Spatial POI/heat data is exploratory context, not verified vendor or access-site evidence.",
+    "Synthetic business zone classifications are demonstration examples, not observed recommendations.",
+    "Emissions totals are unavailable because documented mode-distance assumptions are missing."
+  ],
+  "project": "FinalFlow World Cup mobility readiness demonstration",
+  "provenance": {
+    "data_type": "derived",
+    "source_data_types": [
+      "derived",
+      "synthetic"
+    ]
+  },
+  "recommendation_rules": [
+    {
+      "assumption_note": "Curated operational heuristic; requires review and does not establish an optimal or safety-approved action.",
+      "condition_id": "modeled_queue_present",
+      "data_type": "derived",
+      "evidence_type": "derived",
+      "metric": "queue_passengers",
+      "operator": ">",
+      "recommendation": "Keep critical exits clear and review added staging or throughput.",
+      "threshold": "0"
+    },
+    {
+      "assumption_note": "Curated operational heuristic; requires review and does not establish an optimal or safety-approved action.",
+      "condition_id": "modeled_wait_present",
+      "data_type": "derived",
+      "evidence_type": "derived",
+      "metric": "estimated_wait_minutes",
+      "operator": ">",
+      "recommendation": "Communicate waiting conditions and review wayfinding or staging.",
+      "threshold": "0"
+    },
+    {
+      "assumption_note": "Curated operational heuristic; requires review and does not establish an optimal or safety-approved action.",
+      "condition_id": "rain_scenario_selected",
+      "data_type": "derived",
+      "evidence_type": "synthetic",
+      "metric": "scenario_id",
+      "operator": "==",
+      "recommendation": "Prioritize covered waiting and transfer staging.",
+      "threshold": "rain"
+    },
+    {
+      "assumption_note": "Curated operational heuristic; requires review and does not establish an optimal or safety-approved action.",
+      "condition_id": "high_heat_context",
+      "data_type": "derived",
+      "evidence_type": "derived",
+      "metric": "heat_concern",
+      "operator": "==",
+      "recommendation": "Review shade and water provision before outdoor concentration.",
+      "threshold": "High"
+    },
+    {
+      "assumption_note": "Curated operational heuristic; requires review and does not establish an optimal or safety-approved action.",
+      "condition_id": "synthetic_avoidance_zone",
+      "data_type": "derived",
+      "evidence_type": "synthetic",
+      "metric": "placement_class",
+      "operator": "==",
+      "recommendation": "Keep vendor activity away from the modeled high-risk zone.",
+      "threshold": "Avoided"
+    }
+  ],
+  "scenario_summaries": [
+    {
+      "assumption_note": "Metrics are deterministic results from synthetic demand and capacity assumptions; not observed operations.",
+      "data_type": "derived",
+      "description": "Use the illustrative base capacities, travel times, and uniform release.",
+      "name": "Baseline",
+      "overloaded_intervals": 1,
+      "passenger_delay_proxy_person_minutes": 1750,
+      "peak_post_final_whistle_queue_passengers": 9,
+      "peak_queue_passengers": 128,
+      "primary_change": "Base illustrative demand, capacity, and travel assumptions",
+      "scenario_id": "baseline",
+      "source_data_type": "synthetic",
+      "source_file": "scenario_summary.csv; mobility_config.py",
+      "total_clearance_minutes": 110
+    },
+    {
+      "assumption_note": "Metrics are deterministic results from synthetic demand and capacity assumptions; not observed operations.",
+      "data_type": "derived",
+      "description": "Halve capacity on all rail edges in both directions for the whole run.",
+      "name": "Rail disruption",
+      "overloaded_intervals": 12,
+      "passenger_delay_proxy_person_minutes": 32200,
+      "peak_post_final_whistle_queue_passengers": 705,
+      "peak_queue_passengers": 705,
+      "primary_change": "-50% capacity on rail",
+      "scenario_id": "rail_disruption",
+      "source_data_type": "synthetic",
+      "source_file": "scenario_summary.csv; mobility_config.py",
+      "total_clearance_minutes": 110
+    },
+    {
+      "assumption_note": "Metrics are deterministic results from synthetic demand and capacity assumptions; not observed operations.",
+      "data_type": "derived",
+      "description": "Increase capacity on all rail edges by 50%; no new route is implied.",
+      "name": "Increased rail capacity",
+      "overloaded_intervals": 0,
+      "passenger_delay_proxy_person_minutes": 1705,
+      "peak_post_final_whistle_queue_passengers": 0,
+      "peak_queue_passengers": 128,
+      "primary_change": "+50% capacity on rail",
+      "scenario_id": "rail_capacity_boost",
+      "source_data_type": "synthetic",
+      "source_file": "scenario_summary.csv; mobility_config.py",
+      "total_clearance_minutes": 110
+    },
+    {
+      "assumption_note": "Metrics are deterministic results from synthetic demand and capacity assumptions; not observed operations.",
+      "data_type": "derived",
+      "description": "Illustrative rain reduces walk/rail capacity by 20% and increases travel times by 25%.",
+      "name": "Bad weather",
+      "overloaded_intervals": 1,
+      "passenger_delay_proxy_person_minutes": 2035,
+      "peak_post_final_whistle_queue_passengers": 4,
+      "peak_queue_passengers": 145,
+      "primary_change": "-20% capacity on walk, rail",
+      "scenario_id": "rain",
+      "source_data_type": "synthetic",
+      "source_file": "scenario_summary.csv; mobility_config.py",
+      "total_clearance_minutes": 130
+    },
+    {
+      "assumption_note": "Metrics are deterministic results from synthetic demand and capacity assumptions; not observed operations.",
+      "data_type": "derived",
+      "description": "Double the post-match release window without adding passengers; commercial dwell is assumed, not measured.",
+      "name": "Staggered departure",
+      "overloaded_intervals": 0,
+      "passenger_delay_proxy_person_minutes": 1705,
+      "peak_post_final_whistle_queue_passengers": 0,
+      "peak_queue_passengers": 128,
+      "primary_change": "2x post-match release duration",
+      "scenario_id": "staggered_departure",
+      "source_data_type": "synthetic",
+      "source_file": "scenario_summary.csv; mobility_config.py",
+      "total_clearance_minutes": 170
+    }
+  ]
+}

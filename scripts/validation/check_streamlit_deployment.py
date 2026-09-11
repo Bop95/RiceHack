@@ -24,9 +24,18 @@ from paddydash.services.data_service import load_dashboard_data, load_spatial_he
 
 
 DEPLOYABLE_FILES = (
+    "paddydash/pages/project_evidence.py",
+    "paddydash/services/project_context.py",
+    "paddydash/services/search_service.py",
+    "paddydash/services/search_models.py",
+    "notebooks/tan-dat/data/summaries/weather_monthly.csv",
+    "notebooks/duc-anh/data_clean/finalflow_business_integration.csv",
     "paddydash/app.py",
     "paddydash/components/charts.py",
     "paddydash/components/ui.py",
+    "paddydash/components/match_controls.py",
+    "paddydash/components/mobility_charts.py",
+    "paddydash/pages/mobility.py",
     "paddydash/pages/overview.py",
     "paddydash/pages/store_visit_explorer.py",
     "paddydash/pages/scenario_explorer.py",
@@ -35,6 +44,10 @@ DEPLOYABLE_FILES = (
     "paddydash/services/ai_service.py",
     "paddydash/services/analytics.py",
     "paddydash/services/data_service.py",
+    "paddydash/services/mobility_contract.py",
+    "paddydash/services/mobility_config.py",
+    "paddydash/services/mobility_simulator.py",
+    "asset/rice_hack.png",
     "paddydash/DEPLOYMENT_GUIDE.md",
     "requirements.txt",
     ".streamlit/config.toml",
@@ -198,7 +211,7 @@ def run_checks(
     else:
         untracked_required = [item for item in DEPLOYABLE_FILES if item not in tracked]
         if untracked_required:
-            message = "Deployable files are not committed yet: " + ", ".join(
+            message = "Deployable files are not tracked in the Git index: " + ", ".join(
                 untracked_required
             )
             (errors if require_tracked else warnings).append(message)
@@ -250,7 +263,7 @@ def main() -> int:
     parser.add_argument(
         "--require-tracked",
         action="store_true",
-        help="Fail unless every deployable file has been committed to Git.",
+        help="Fail unless every deployable file is tracked in the Git index.",
     )
     args = parser.parse_args()
     report = run_checks(

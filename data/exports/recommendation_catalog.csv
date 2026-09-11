@@ -1,0 +1,6 @@
+condition_id,metric,operator,threshold,recommendation,evidence_type,data_type,assumption_note
+modeled_queue_present,queue_passengers,>,0,Keep critical exits clear and review added staging or throughput.,derived,derived,Curated operational heuristic; requires review and does not establish an optimal or safety-approved action.
+modeled_wait_present,estimated_wait_minutes,>,0,Communicate waiting conditions and review wayfinding or staging.,derived,derived,Curated operational heuristic; requires review and does not establish an optimal or safety-approved action.
+rain_scenario_selected,scenario_id,==,rain,Prioritize covered waiting and transfer staging.,synthetic,derived,Curated operational heuristic; requires review and does not establish an optimal or safety-approved action.
+high_heat_context,heat_concern,==,High,Review shade and water provision before outdoor concentration.,derived,derived,Curated operational heuristic; requires review and does not establish an optimal or safety-approved action.
+synthetic_avoidance_zone,placement_class,==,Avoided,Keep vendor activity away from the modeled high-risk zone.,synthetic,derived,Curated operational heuristic; requires review and does not establish an optimal or safety-approved action.

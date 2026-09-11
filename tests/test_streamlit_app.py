@@ -10,14 +10,15 @@ from streamlit.testing.v1 import AppTest
 
 
 class StreamlitAppTests(unittest.TestCase):
-    def test_entrypoint_renders_overview_without_exception(self) -> None:
+    def test_entrypoint_renders_mobility_without_exception(self) -> None:
         with patch.dict(
             os.environ, {"FINALFLOW_DISABLE_OPENAI": "true"}, clear=False
         ):
             app = AppTest.from_file("paddydash/app.py", default_timeout=30).run()
         self.assertFalse(app.exception)
-        self.assertIn("FinalFlow Store-Visit Intelligence", [item.value for item in app.title])
-        self.assertGreaterEqual(len(app.metric), 5)
+        self.assertIn("FinalFlow", [item.value for item in app.title])
+        self.assertIn("Mobility readiness", [item.value for item in app.subheader])
+        self.assertGreaterEqual(len(app.metric), 6)
         self.assertGreaterEqual(len(app.get("plotly_chart")), 1)
 
     def test_each_page_function_renders_without_exception(self) -> None:

@@ -1,0 +1,6 @@
+scenario_id,peak_pedestrian_load_ratio,peak_parking_utilization,peak_rideshare_passengers,peak_shuttle_passengers,rail_passenger_total,walk_passenger_total,road_passenger_total,shuttle_passenger_total,shuttle_utilization_status,data_type,assumption_note
+baseline,0.1221001221001221,0.3275,21,24,5912,1679,3265,1144,not_derived_no_shuttle_capacity_input,derived,Derived from synthetic FinalFlow scenario inputs; not observed event operations.
+rail_disruption,0.1221001221001221,0.3275,21,24,5912,1679,3265,1144,not_derived_no_shuttle_capacity_input,derived,Derived from synthetic FinalFlow scenario inputs; not observed event operations.
+rail_capacity_boost,0.1221001221001221,0.3275,21,24,5912,1679,3265,1144,not_derived_no_shuttle_capacity_input,derived,Derived from synthetic FinalFlow scenario inputs; not observed event operations.
+rain,0.10114503816793893,0.32666666666666666,21,51,5692,903,3334,2071,not_derived_no_shuttle_capacity_input,derived,Derived from synthetic FinalFlow scenario inputs; not observed event operations.
+staggered_departure,0.08913308913308914,0.3275,15,17,5439,1796,3580,1185,not_derived_no_shuttle_capacity_input,derived,Derived from synthetic FinalFlow scenario inputs; not observed event operations.

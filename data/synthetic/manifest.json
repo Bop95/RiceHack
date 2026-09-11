@@ -1,0 +1,106 @@
+{
+  "assumptions": [
+    "All capacities, travel times, demand, and phase timings are illustrative, not operator or event measurements.",
+    "Track one 6000-person corridor cohort through inbound travel, stadium holding, and outbound travel.",
+    "Start empty; inject the cohort once, uniformly over 120 minutes. Release holding after final whistle.",
+    "The default replay assumes extra time, a 15-minute halftime, no stoppage time, no extra-time breaks, and no penalties.",
+    "Reverse edges have independent symmetric capacities; shared train and platform resources are not modeled.",
+    "Store visits and commercial scores are not converted to observed passenger counts."
+  ],
+  "config_id": "finalflow_corridor_v1",
+  "datasets": {
+    "corridor_reference.csv": {
+      "rows": 5,
+      "sha256": "4afeb27e0f6ff349a38e6c3a83bcee760eb9f23fbe0ec535ff5331949e670262"
+    },
+    "emissions_factors.csv": {
+      "rows": 5,
+      "sha256": "d94a2bef3f5c307b6202cc95ae3b019844f757e36a364e142efb3e374e3adc6f"
+    },
+    "first_last_mile_demand.csv": {
+      "rows": 10000,
+      "sha256": "1a1748d2d3714ea75079fb72cb0597b1f981010c50af8c48c45bc4d2124981c5"
+    },
+    "interventions.csv": {
+      "rows": 13,
+      "sha256": "9caa31be53125f2b3e402d089c47fabcf4f2a893ebdd3589b9842735494eee8f"
+    },
+    "matchday_passenger_demand.csv": {
+      "rows": 16000,
+      "sha256": "2c7fd033e4e08e3969beeee1875c3aab4d7ebe5461021c94062edc5bd6778772"
+    },
+    "parking_demand.csv": {
+      "rows": 2000,
+      "sha256": "82635070f54bfa49fa3d2ff0a09497b64186944c20075a1541119f729298f8dd"
+    },
+    "pedestrian_demand.csv": {
+      "rows": 3000,
+      "sha256": "cb835f572300f91b16bb1d8b854d024412bd1df5254edbdc4e00aa7a1e8c758a"
+    },
+    "road_access_demand.csv": {
+      "rows": 7500,
+      "sha256": "2e5c4132752a8cd9695931b740914c649049d5dee5692f946f387529d8978de0"
+    },
+    "transit_service_capacity.csv": {
+      "rows": 4000,
+      "sha256": "e31779d3aab38a16145093ca3fb7f30e1b5d565767ac73275d07b9c7eb7bc7cc"
+    },
+    "zone_reference.csv": {
+      "rows": 5,
+      "sha256": "f163260bd36e5ea8cfe7a4da513e292b65fd2c7a9253fd40c725b4cfadf582e0"
+    }
+  },
+  "generated_at": "2026-07-19T15:00:00Z",
+  "generator_version": "1.0.0",
+  "phase_ids": [
+    "pre_match",
+    "gates_open",
+    "ceremony",
+    "kickoff",
+    "first_half",
+    "first_half_end",
+    "halftime",
+    "second_half",
+    "regulation_end",
+    "extra_time",
+    "extra_time_end",
+    "final_whistle",
+    "post_match"
+  ],
+  "provenance": {
+    "confidence_type": "scenario",
+    "data_type": "synthetic",
+    "statement": "Synthetic scenario assumption for FinalFlow demonstration; not observed event operations."
+  },
+  "random_seed": 2026,
+  "row_counts": {
+    "corridor_reference.csv": 5,
+    "emissions_factors.csv": 5,
+    "first_last_mile_demand.csv": 10000,
+    "interventions.csv": 13,
+    "matchday_passenger_demand.csv": 16000,
+    "parking_demand.csv": 2000,
+    "pedestrian_demand.csv": 3000,
+    "road_access_demand.csv": 7500,
+    "transit_service_capacity.csv": 4000,
+    "zone_reference.csv": 5
+  },
+  "scenario_ids": [
+    "baseline",
+    "rail_disruption",
+    "rail_capacity_boost",
+    "rain",
+    "staggered_departure"
+  ],
+  "schema_version": "1.0.0",
+  "source_references": [
+    "paddydash/services/mobility_config.py",
+    "docs/data/synthetic-data-plan.md"
+  ],
+  "timeline": {
+    "demonstration_start": "2026-07-19T15:00:00Z",
+    "end_time_minutes": 315,
+    "start_time_minutes": -180,
+    "time_step_minutes": 5
+  }
+}

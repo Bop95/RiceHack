@@ -1,0 +1,6 @@
+zone_id,zone_name,zone_type,associated_node,latitude,longitude,data_type,confidence_type,assumption_note
+midtown_access,Midtown access,access,midtown,40.7549,-73.984,synthetic,scenario,Synthetic analysis zone anchored to an approximate demonstration map point; not an official boundary.
+penn_station_access,Penn Station access,access,penn_station,40.7506,-73.9935,synthetic,scenario,Synthetic analysis zone anchored to an approximate demonstration map point; not an official boundary.
+secaucus_transfer,Secaucus transfer,transfer,secaucus,40.7614,-74.0755,synthetic,scenario,Synthetic analysis zone anchored to an approximate demonstration map point; not an official boundary.
+meadowlands_access,Meadowlands access,access,meadowlands,40.8135,-74.0745,synthetic,scenario,Synthetic analysis zone anchored to an approximate demonstration map point; not an official boundary.
+stadium_egress,Stadium egress,egress,stadium,40.813,-74.074,synthetic,scenario,Synthetic analysis zone anchored to an approximate demonstration map point; not an official boundary.

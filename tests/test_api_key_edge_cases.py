@@ -111,7 +111,7 @@ class APIKeyEdgeCaseTests(unittest.TestCase):
 
     def test_openai_request_uses_bounded_client_and_never_includes_the_key(self) -> None:
         retrieval = sample_retrieval()
-        parsed = SimpleNamespace(answer="Walmart leads.", limitations=[])
+        parsed = SimpleNamespace(answer=retrieval.local_answer, limitations=[])
         fake_response = SimpleNamespace(output_parsed=parsed)
         secret_value = "test-secret-value-that-must-not-enter-the-request"
         with patch.dict(
@@ -143,12 +143,12 @@ class APIKeyEdgeCaseTests(unittest.TestCase):
         self.assertIn("<validated_answer>", system_prompt)
         self.assertIn(retrieval.local_answer, system_prompt)
         self.assertIn("deterministic local", system_prompt)
-        self.assertIn("analytics. You may make it clearer", system_prompt)
+        self.assertIn("analytics. Return that answer verbatim", system_prompt)
         self.assertEqual(response.mode, "openai")
 
     def test_safety_identifier_is_omitted_when_not_supplied(self) -> None:
         retrieval = sample_retrieval()
-        parsed = SimpleNamespace(answer="Walmart leads.", limitations=[])
+        parsed = SimpleNamespace(answer=retrieval.local_answer, limitations=[])
         with patch.dict(os.environ, {"OPENAI_API_KEY": "test-key"}, clear=True):
             with patch("openai.OpenAI") as mock_openai:
                 mock_openai.return_value.responses.parse.return_value = SimpleNamespace(
@@ -187,10 +187,10 @@ class APIKeyEdgeCaseTests(unittest.TestCase):
     def test_model_and_local_limitations_are_deduplicated(self) -> None:
         retrieval = sample_retrieval()
         parsed = SimpleNamespace(
-            answer="Walmart leads.",
+            answer=retrieval.local_answer,
             limitations=[
                 "Store visits are a commercial-activity proxy.",
-                "Totals combine footprint and intensity.",
+                "Store visits are a commercial-activity proxy.",
             ],
         )
         with patch.dict(os.environ, {"OPENAI_API_KEY": "test-key"}, clear=True):
@@ -203,9 +203,82 @@ class APIKeyEdgeCaseTests(unittest.TestCase):
             response.limitations,
             [
                 "Store visits are a commercial-activity proxy.",
-                "Totals combine footprint and intensity.",
             ],
         )
+
+    def test_fabricated_facts_cannot_override_prepared_evidence(self) -> None:
+        retrieval = RetrievalResult(
+            context='Brand A: total=10; Brand B: total=5',
+            evidence=[EvidenceItem('Brand A visits', 10, 'prepared summary'),
+                      EvidenceItem('Brand B visits', 5, 'prepared summary')],
+            related_plot_id='brand_ranking',
+            data_type='derived',
+            limitations=['Commercial activity is not transit demand.'],
+            local_answer='Brand A has 10 visits and Brand B has 5 visits.',
+        )
+        answers = [
+            'Brand A has 999999 visits.',
+            'Brand C has 10 visits and Brand B has 5 visits.',
+            'Brand A has 5 visits and Brand B has 10 visits.',
+            'Brand A has ten million visits.',
+            'Brand A has 10 passengers and Brand B has 5 passengers.',
+            'Brand A has a 10% queue risk score.',
+            retrieval.local_answer + ' There is no rain risk.',
+        ]
+        for answer in answers:
+            with self.subTest(answer=answer):
+                with patch.dict(os.environ, {'OPENAI_API_KEY': 'test-key'}, clear=True):
+                    with patch('openai.OpenAI') as client:
+                        client.return_value.responses.parse.return_value = SimpleNamespace(
+                            output_parsed=SimpleNamespace(answer=answer, limitations=[])
+                        )
+                        response = answer_with_openai('Compare brands', retrieval)
+                self.assertEqual(response.answer, retrieval.local_answer)
+                self.assertEqual(response.evidence, retrieval.evidence)
+                self.assertEqual(response.mode, 'prepared-data')
+
+    def test_unapproved_limitations_cannot_introduce_facts(self) -> None:
+        retrieval = sample_retrieval()
+        with patch.dict(os.environ, {'OPENAI_API_KEY': 'test-key'}, clear=True):
+            with patch('openai.OpenAI') as client:
+                client.return_value.responses.parse.return_value = SimpleNamespace(
+                    output_parsed=SimpleNamespace(
+                        answer=retrieval.local_answer,
+                        limitations=['The queue contains 999999 people.'],
+                    )
+                )
+                response = answer_with_openai('Which brand leads?', retrieval)
+        self.assertEqual(response.mode, 'prepared-data')
+        self.assertEqual(response.limitations, retrieval.limitations)
+
+    def test_missing_evidence_does_not_call_model(self) -> None:
+        retrieval = RetrievalResult(
+            context='', evidence=[], related_plot_id=None, data_type='derived',
+            limitations=[], local_answer='',
+        )
+        for environment in ({}, {'OPENAI_API_KEY': 'test-key'}):
+            with self.subTest(environment=environment):
+                with patch.dict(os.environ, environment, clear=True):
+                    with patch('openai.OpenAI') as client:
+                        response = answer_with_openai('How long is the queue?', retrieval)
+                client.assert_not_called()
+                self.assertIn('unavailable', response.answer)
+                self.assertEqual(response.mode, 'prepared-data')
+                self.assertEqual(response.evidence, [])
+
+    def test_whitespace_changes_preserve_prepared_facts(self) -> None:
+        retrieval = sample_retrieval()
+        with patch.dict(os.environ, {'OPENAI_API_KEY': 'test-key'}, clear=True):
+            with patch('openai.OpenAI') as client:
+                client.return_value.responses.parse.return_value = SimpleNamespace(
+                    output_parsed=SimpleNamespace(
+                        answer='\n' + retrieval.local_answer.replace(' ', '  ') + '\n',
+                        limitations=[],
+                    )
+                )
+                response = answer_with_openai('Which brand leads?', retrieval)
+        self.assertEqual(response.mode, 'openai')
+        self.assertEqual(' '.join(response.answer.split()), retrieval.local_answer)
 
 
 class LocalEnvironmentEdgeCaseTests(unittest.TestCase):

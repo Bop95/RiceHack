@@ -1,18 +1,10 @@
-from typing import List, Optional
-from pydantic import BaseModel
+"""Compatibility imports for the shared search response contract."""
 
+import sys
+from pathlib import Path
 
-class SearchResult(BaseModel):
-  title: str
-  link: str
-  source: Optional[str] = None
-  snippet: Optional[str] = None
-  date: Optional[str] = None
+ROOT = Path(__file__).resolve().parents[4]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
-
-class SearchResponse(BaseModel):
-  query: str
-  results: List[SearchResult]
-  search_used: bool
-  ai_summary: Optional[str] = None  # New field for OpenAI response
-  error: Optional[str] = None
+from paddydash.services.search_models import SearchResponse, SearchResult  # noqa: E402,F401

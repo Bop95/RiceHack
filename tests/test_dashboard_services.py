@@ -269,7 +269,7 @@ class DashboardServiceTests(unittest.TestCase):
 
     def test_openai_request_shape_preserves_validated_evidence(self) -> None:
         retrieval = retrieve_for_question("Which brand leads?", self.data)
-        parsed = SimpleNamespace(answer="Walmart leads.", limitations=[])
+        parsed = SimpleNamespace(answer=retrieval.local_answer, limitations=[])
         fake_response = SimpleNamespace(output_parsed=parsed)
         with patch.dict(os.environ, {"OPENAI_API_KEY": "test-key"}, clear=True):
             with patch("openai.OpenAI") as mock_openai:
@@ -314,10 +314,7 @@ class DashboardServiceTests(unittest.TestCase):
             "How common was historical rain?", self.data
         )
         parsed = SimpleNamespace(
-            answer=(
-                "Rain appeared in 2,911 of 7,672 station-date observations "
-                "(37.94%)."
-            ),
+            answer=retrieval.local_answer,
             limitations=[],
         )
         with patch.dict(os.environ, {"OPENAI_API_KEY": "test-key"}, clear=True):

@@ -56,6 +56,17 @@ data/synthetic/*
 !data/synthetic/.gitkeep
 !data/synthetic/store_visit_scenarios.csv
 !data/synthetic/store_visit_scenarios_dictionary.md
+!data/synthetic/matchday_passenger_demand.csv
+!data/synthetic/transit_service_capacity.csv
+!data/synthetic/first_last_mile_demand.csv
+!data/synthetic/road_access_demand.csv
+!data/synthetic/parking_demand.csv
+!data/synthetic/pedestrian_demand.csv
+!data/synthetic/interventions.csv
+!data/synthetic/emissions_factors.csv
+!data/synthetic/manifest.json
+!data/synthetic/corridor_reference.csv
+!data/synthetic/zone_reference.csv
 *.parquet
 
 # Generated reports

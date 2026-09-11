@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import os
-import re
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -57,76 +56,36 @@ def get_max_ai_requests_per_session() -> int:
 
 def prepared_data_response(retrieval: RetrievalResult) -> ChatResponse:
     return ChatResponse(
-        answer=retrieval.local_answer,
+        answer=(
+            retrieval.local_answer if retrieval.evidence else
+            'The requested information is unavailable in the prepared project data.'
+        ),
         evidence=retrieval.evidence,
-        related_plot_id=retrieval.related_plot_id,
+        related_plot_id=retrieval.related_plot_id if retrieval.evidence else None,
         data_type=retrieval.data_type,
         limitations=retrieval.limitations,
         mode="prepared-data",
     )
 
 
-def _normalized_numbers(value: str) -> set[str]:
-    return {
-        token.replace(",", "")
-        for token in re.findall(r"(?<![\w.])[-+]?\d[\d,]*(?:\.\d+)?%?", value)
-    }
-
-
-def weather_narrative_is_grounded(
+def narrative_is_grounded(
     answer: str,
     limitations: list[str],
     retrieval: RetrievalResult,
 ) -> bool:
-    """Fail closed when an optional weather narrative changes local facts or scope."""
-    is_weather = (
-        retrieval.related_plot_id == "weather_risk_summary"
-        or "weather" in retrieval.context.casefold()
-        or any("weather" in item.source.casefold() for item in retrieval.evidence)
-    )
-    if not is_weather:
-        return True
+    """Accept only prepared wording; number matching alone cannot verify facts.
 
-    combined = " ".join([answer, *limitations]).casefold()
-    forbidden = (
-        r"\b(?:forecast|probabilit(?:y|ies)|chance|predict(?:ion|ed|s)?|will be|"
-        r"going to be)\b",
-        r"\b(?:stadium|venue|metlife|corridor|new york|new jersey)\b",
-        r"\b(?:days?|people|persons?|events?|locations?)\b",
-        r"\bsynthetic\b",
+    Reusing approved numbers can still swap brands, reverse comparisons, or
+    change units. Until richer validation exists, allow whitespace changes only.
+    """
+    approved_answer = ' '.join(retrieval.local_answer.split())
+    approved_limitations = {' '.join(item.split()) for item in retrieval.limitations}
+    return (
+        bool(retrieval.evidence)
+        and bool(approved_answer)
+        and ' '.join(answer.split()) == approved_answer
+        and all(' '.join(item.split()) in approved_limitations for item in limitations)
     )
-    if any(re.search(pattern, combined) for pattern in forbidden):
-        return False
-
-    approved_text = " ".join(
-        [
-            retrieval.local_answer,
-            retrieval.context,
-            *(str(item.value) for item in retrieval.evidence),
-        ]
-    )
-    if not _normalized_numbers(combined) <= _normalized_numbers(approved_text):
-        return False
-
-    if _normalized_numbers(combined) and "station-date observation" not in combined:
-        return False
-
-    thresholds = [
-        str(item.value).casefold()
-        for item in retrieval.evidence
-        if item.label.casefold().endswith("rule")
-    ]
-    text_without_approved_thresholds = combined
-    for threshold in thresholds:
-        text_without_approved_thresholds = text_without_approved_thresholds.replace(
-            threshold, ""
-        )
-    unapproved_comparison = re.search(
-        r"(?:>=|<=|>|<|\bgreater than\b|\bless than\b|\babove\b|\bbelow\b|"
-        r"\bat least\b|\bat most\b)",
-        text_without_approved_thresholds,
-    )
-    return unapproved_comparison is None
 
 
 def answer_with_openai(
@@ -134,7 +93,7 @@ def answer_with_openai(
     retrieval: RetrievalResult,
     safety_identifier: str | None = None,
 ) -> ChatResponse:
-    if not api_is_configured():
+    if not retrieval.evidence or not api_is_configured():
         return prepared_data_response(retrieval)
 
     try:
@@ -193,15 +152,16 @@ the word `synthetic` or `illustrative`.
 </validated_answer>
 
 The validated answer is the factual baseline selected by deterministic local
-analytics. You may make it clearer or more concise, but do not change its entity,
-ranking direction, value, unit, data label, or scope decision.
+analytics. Return that answer verbatim; only whitespace may change. Explanations
+must already be present in that prepared answer. Do not add or paraphrase facts.
 
 <approved_data>
 {retrieval.context}
 </approved_data>
 
 The application will attach its own validated evidence items and related plot.
-Return only the answer narrative and applicable limitations.
+Return only the answer narrative and limitations copied from this approved list:
+{retrieval.limitations}
 """
 
     request: dict[str, object] = {
@@ -233,7 +193,7 @@ Return only the answer narrative and applicable limitations.
         ) from error
 
     limitations = list(dict.fromkeys([*parsed.limitations, *retrieval.limitations]))
-    if not weather_narrative_is_grounded(
+    if not narrative_is_grounded(
         parsed.answer, parsed.limitations, retrieval
     ):
         return prepared_data_response(retrieval)

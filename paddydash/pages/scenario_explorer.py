@@ -65,13 +65,13 @@ def render_scenario_explorer() -> None:
 
     st.plotly_chart(
         scenario_comparison_rows_figure(filtered),
-        width="stretch",
+        use_container_width=True,
         theme="streamlit",
         config={"displaylogo": False},
     )
     st.plotly_chart(
         scenario_risk_figure(filtered),
-        width="stretch",
+        use_container_width=True,
         theme="streamlit",
         config={"displaylogo": False},
     )

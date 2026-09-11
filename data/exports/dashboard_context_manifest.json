@@ -1,0 +1,26 @@
+{
+  "config_id": "finalflow_corridor_v1",
+  "generator_version": "1.0.0",
+  "provenance": {
+    "data_type": "derived",
+    "source_data_types": [
+      "derived",
+      "synthetic"
+    ]
+  },
+  "row_counts": {
+    "commercial_context.csv": 12,
+    "executive_kpis.csv": 6,
+    "match_timeline_summary.csv": 13,
+    "recommendation_catalog.csv": 5,
+    "scenario_comparison.csv": 5,
+    "weather_heat_context.csv": 9
+  },
+  "schema_version": "1.0.0",
+  "sources": [
+    "data/summaries",
+    "data/synthetic",
+    "data/exports/scenario_summary.csv",
+    "notebooks/duc-anh/data_clean/finalflow_business_integration.csv"
+  ]
+}

@@ -3,26 +3,64 @@
 For a step-by-step explanation of how the site was created, how each layer
 works, and how to modify it, see `paddydash/BUILD_GUIDE.md`.
 
-This application implements a five-page FinalFlow prototype. It uses compact
+This application implements a seven-page FinalFlow prototype. It uses compact
 approved store-visit and historical-weather summaries, a bounded derived
 spatial/urban-heat table, and an explicitly synthetic scenario dataset; it never
 loads the restricted raw files or the 5.2 GB clean Parquet at runtime.
 
 ## Pages
 
-1. **Overview** - project scope, summary cards, monthly trend, leading categories,
+1. **Mobility readiness** (default) - shared match timeline and scenario controls,
+   modeled queues, utilization, waits, corridor bottlenecks, and baseline comparison.
+2. **Overview** - project scope, summary cards, monthly trend, leading categories,
    market intensity, and dataset limitations.
-2. **Store-Visit Explorer** - brand/category rankings and filters, interactive
+3. **Store-Visit Explorer** - brand/category rankings and filters, interactive
    brand/category monthly time series, category scatter, weekdays, markets,
    distribution percentiles, and the four report-ready static plots.
-3. **Scenario Explorer** - filters and charts for six reproducible synthetic
+4. **Scenario Explorer** - filters and charts for six reproducible synthetic
    interface-testing scenarios with the required disclaimer.
-4. **Spatial & Heat Map** - an interactive NY/NJ exploratory map with city,
+5. **Spatial & Heat Map** - an interactive NY/NJ exploratory map with city,
    category, heat, recommendation, and parking filters; commercial tiers;
    nearest-UHI evidence; and a table fallback.
-5. **Ask FinalFlow** - suggested questions, chat input, grounded answers,
+6. **Ask FinalFlow** - suggested questions, chat input, grounded answers,
    supporting evidence, related charts, data-type labels, limitations, loading,
    friendly fallback errors, and reviewed historical-weather retrieval.
+7. **Commercial & weather context** - visit trends, POI spending tiers, parking
+   flags, historical weather and heat, plus separately labeled vendor scenarios.
+
+## Shared match state
+
+The global controls use canonical phase/scenario IDs from the
+[mobility contract](../docs/project/mobility-contract.md). Existing business,
+store-visit, spatial/heat and assistant features retain their historical data.
+They are not silently filtered or reinterpreted as match-day measurements.
+
+Session keys available to future integrations:
+
+- `finalflow_phase_id`, `finalflow_scenario_id`: current canonical selection.
+- `finalflow_time_minutes`: selected elapsed replay minute, when mobility is rendered.
+- `finalflow_mobility_snapshot`: JSON-compatible validated synthetic snapshot.
+
+Changing the controls invalidates the old snapshot/time until the mobility page
+renders the new selection. Consumers must handle their absence, not reuse stale
+results. The replay slider moves within intervals; event markers use their exact
+times. The pre-match preview starts during arrivals; the post-match preview is
+30 minutes after final whistle. Markers at the same timestamp intentionally share
+the same passenger state.
+
+The small deterministic engine in `services/mobility_simulator.py` uses no raw
+files or provider calls. It assumes one linear round-trip cohort and independent
+directed capacities, and caches five immutable default runs. All readiness
+metrics are **Scenario / modeled**, never observed real-time values. The
+capacity-boost scenario may show no benefit when baseline demand is already
+below capacity. Staggering may lengthen clearance while reducing release pressure.
+
+Run locally from the repository root:
+
+```bash
+FINALFLOW_DISABLE_OPENAI=true FINALFLOW_DISABLE_SEARCH=true python3 -m streamlit run paddydash/app.py
+python3 -m unittest discover -s tests -p 'test_mobility*.py' -v
+```
 
 ## Data boundary
 
@@ -47,10 +85,14 @@ data/summaries/
 data/synthetic/
 |-- store_visit_scenarios.csv
 `-- store_visit_scenarios_dictionary.md
+
+notebooks/tan-dat/data/summaries/weather_monthly.csv
+notebooks/duc-anh/data_clean/finalflow_business_integration.csv
 ```
 
-Derived summary rows are labeled `derived`. Scenario rows are labeled
-`synthetic` and set `is_synthetic=true`.
+Derived summary rows are labeled `derived`. Store-visit scenario rows set
+`is_synthetic=true`; vendor examples use `data_type=synthetic` and
+`data_confidence=scenario` with explicit assumptions.
 
 ## Install and run
 
@@ -185,3 +227,11 @@ and verification sequence.
   multi-station dataset. They are not live forecasts or venue-specific claims.
 - A standalone `/api/chat` endpoint and TypeScript frontend are later project
   stages; this prototype's secure backend function runs inside Streamlit.
+
+## Teammate evidence layer
+
+The Commercial & weather context page combines prepared visit trends, reviewed
+POI/spending tiers, historical weather and heat, with separately labeled synthetic
+vendor examples. The assistant retains the selected replay scope and separates
+web sources from project evidence. See the
+[integration inventory and limitations](../docs/project/teammate-evidence-integration.md).
