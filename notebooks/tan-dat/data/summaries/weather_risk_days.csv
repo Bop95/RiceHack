@@ -1,0 +1,6 @@
+metric,count,total_summer_days,percentage
+Hot Days (>=30°C),4318,7698,56.09249155624838
+Rainy Days (>0mm),2924,7698,37.983891919979214
+Heavy Rain Days (>20mm),394,7698,5.118212522733177
+Windy Days (>=20 knots),27,7698,0.35074045206547155
+Low Visibility Days (<=5km),333,7698,4.325798908807482
