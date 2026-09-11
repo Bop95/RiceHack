@@ -37,7 +37,7 @@ remote branch is an ancestor of the integration branch.
 
 ## Repository contents
 
-- `paddydash/`: five-page Streamlit dashboard, prepared-data analytics, spatial
+- `paddydash/`: seven-page Streamlit dashboard, prepared-data analytics, spatial
   and weather evidence, and optional grounded OpenAI narration.
 - `scripts/`, `tests/`: audit and store-visit pipelines, scenario generation,
   summary builders, charting, deployment checks, and automated tests.

@@ -25,8 +25,8 @@ RetrievalResult (validated context + local answer + evidence)
         v
 answer_with_fallback(question, retrieval, safety_identifier)
         |
-        +-- OpenAI configured and successful --> mode="openai"
-        `-- disabled/missing/error -----------> mode="prepared-data"
+        +-- OpenAI configured and validated --> mode="openai"
+        `-- disabled/missing/unavailable ------> mode="prepared-data"
 ```
 
 Evidence, related plot, data type, and factual baseline always come from local
@@ -133,7 +133,9 @@ as forecasts or venue-specific measurements.
 ```
 
 `mode` is `prepared-data` or `openai`. `relatedPlotId` can be `null` for a
-refusal. The current implementation does not return web sources.
+refusal. Search-aware responses may also include `web_sources`, `search_used`,
+and `web_status`; these are public snippets displayed separately from project
+evidence and never alter simulator metrics.
 
 ## AI service
 
@@ -178,21 +180,23 @@ incorrect observation entities, synthetic wording, or an unapproved threshold
 comparison. Evidence, data labels, limitations, and plots remain local in all
 cases.
 
-Returns prepared-data mode when OpenAI is not configured. Raises the sanitized
-`AIServiceError` when a configured request cannot complete safely.
+Returns prepared-data mode when OpenAI is not configured. Raises a sanitized
+`AIServiceError` when a configured request cannot complete safely; provider
+messages, request URLs, and credentials are never propagated to the browser.
 
 ### `answer_with_fallback(question, retrieval, safety_identifier=None)`
 
 Returns `(ChatResponse, warning_or_none)`. It uses OpenAI when possible and
-catches `AIServiceError`, returning the verified prepared-data response plus a
-safe user message. Provider exception details and credentials are not returned.
+catches `AIServiceError`, returning the verified prepared-data response without
+turning a supported deterministic answer into a visible application error.
+Provider exception details and credentials are not returned.
 
 ## Environment contract
 
 | Variable | Behavior |
 | --- | --- |
 | `OPENAI_API_KEY` | Optional server credential. Absence selects prepared-data mode. |
-| `OPENAI_MODEL` | Optional model name; defaults to `gpt-5.6-luna`. |
+| `OPENAI_MODEL` | Optional model name; defaults to `gpt-5`. |
 | `FINALFLOW_MAX_AI_REQUESTS_PER_SESSION` | Optional integer, safely clamped to 1-100. |
 | `FINALFLOW_DISABLE_OPENAI` | Optional boolean-like safety switch that disables OpenAI calls. |
 | `SERPAPI_API_KEY` | Optional backend-only search credential; never sent to the browser. |

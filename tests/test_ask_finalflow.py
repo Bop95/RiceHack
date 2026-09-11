@@ -42,16 +42,17 @@ class AskFinalFlowTests(unittest.TestCase):
         self.assertNotIn('999999', response.answer)
         self.assertEqual(response.evidence, self.retrieval.evidence)
 
-    def test_malformed_and_provider_errors_are_safe(self):
+    def test_malformed_and_provider_errors_use_silent_prepared_fallback(self):
         for parsed in [None, SimpleNamespace(answer=12, limitations=[]),
                        SimpleNamespace(answer='text', limitations='invalid')]:
             with self.subTest(parsed=parsed), patch.dict(os.environ, {'OPENAI_API_KEY': 'secret-test'}, clear=True), patch('openai.OpenAI') as provider:
                 provider.return_value.responses.parse.return_value = SimpleNamespace(output_parsed=parsed)
                 response, warning = answer_with_fallback('Why?', self.retrieval)
-                self.assertTrue(warning)
+                self.assertIsNone(warning)
                 self.assertEqual(response.answer, self.retrieval.local_answer)
         with patch.dict(os.environ, {'OPENAI_API_KEY': 'secret-test'}, clear=True), patch('openai.OpenAI', side_effect=RuntimeError('secret-test')):
             response, warning = answer_with_fallback('Why?', self.retrieval)
+        self.assertIsNone(warning)
         self.assertNotIn('secret-test', repr((response, warning)))
 
     def test_explicit_scope_does_not_mutate_selection(self):

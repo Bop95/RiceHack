@@ -279,7 +279,7 @@ class DashboardServiceTests(unittest.TestCase):
                 )
 
         request = mock_openai.return_value.responses.parse.call_args.kwargs
-        self.assertEqual(request["model"], "gpt-5.6-luna")
+        self.assertEqual(request["model"], "gpt-5")
         self.assertEqual(request["reasoning"], {"effort": "low"})
         self.assertEqual(request["max_output_tokens"], 500)
         self.assertFalse(request["store"])
@@ -339,10 +339,11 @@ class DashboardServiceTests(unittest.TestCase):
         self.assertEqual(response.mode, "prepared-data")
         self.assertEqual(response.evidence, retrieval.evidence)
         self.assertNotIn("sensitive", warning or "")
+        self.assertIsNone(warning)
 
     def test_server_configuration_is_bounded_and_has_safe_defaults(self) -> None:
         with patch.dict(os.environ, {}, clear=True):
-            self.assertEqual(get_model_name(), "gpt-5.6-luna")
+            self.assertEqual(get_model_name(), "gpt-5")
             self.assertEqual(get_max_ai_requests_per_session(), 10)
         with patch.dict(
             os.environ,

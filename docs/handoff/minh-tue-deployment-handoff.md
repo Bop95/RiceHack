@@ -72,8 +72,8 @@ git clone https://github.com/Bop95/RiceHack.git
 cd RiceHack
 python3.12 -m venv .venv
 source .venv/bin/activate
-python -m pip install -r requirements.txt
-FINALFLOW_DISABLE_OPENAI=true python -m streamlit run paddydash/app.py
+python3 -m pip install -r requirements.txt
+FINALFLOW_DISABLE_OPENAI=true python3 -m streamlit run paddydash/app.py
 ```
 
 Prepared-data mode is the safest first smoke test and is a supported operating
@@ -84,22 +84,22 @@ mode, not an error state.
 | Variable | Required | Hosted location | Notes |
 | --- | --- | --- | --- |
 | `OPENAI_API_KEY` | No | Streamlit Secrets | Enables optional narration. Never place it in GitHub or a committed file. |
-| `OPENAI_MODEL` | No | Streamlit Secrets | Defaults to `gpt-5.6-luna`. |
+| `OPENAI_MODEL` | No | Streamlit Secrets | Defaults to `gpt-5`. |
 | `FINALFLOW_MAX_AI_REQUESTS_PER_SESSION` | No | Streamlit Secrets | Defaults to 10; valid effective range is 1-100. |
 | `FINALFLOW_DISABLE_OPENAI` | No | CI/process environment | Forces prepared-data mode for tests or emergency cost control. |
 | `SERPAPI_API_KEY` | No | Server secrets | Enables explicit current public-information searches only. |
 | `FINALFLOW_DISABLE_SEARCH` | No | CI/process environment | true/1/yes/on forces no-search mode. |
 
 Local values may be stored in `.env`, which is ignored by Git. Copy
-`.env.example`; never edit the example with real credentials. Search failures show
-a fixed safe message while project answers remain available. Web source cards
-are separate from project evidence and never modify simulator inputs.
+`.env.example`; never edit the example with real credentials. Search failures
+preserve project answers without provider details. Web source cards are separate
+from project evidence and never modify simulator inputs.
 
 Streamlit Secrets example:
 
 ```toml
 OPENAI_API_KEY = "replace-in-streamlit-settings"
-OPENAI_MODEL = "gpt-5.6-luna"
+OPENAI_MODEL = "gpt-5"
 FINALFLOW_MAX_AI_REQUESTS_PER_SESSION = "10"
 ```
 
@@ -131,8 +131,10 @@ troubleshooting procedure.
   threshold; a future match-weather question is declined as unavailable.
 - [ ] Suggested questions show evidence, data type, limitation, and related plot.
 - [ ] An unrelated or prompt-override question is refused.
-- [ ] Optional OpenAI mode displays the model name but never the key.
-- [ ] OpenAI failure or allowance exhaustion falls back safely.
+- [ ] Optional OpenAI mode returns a grounded answer while model configuration
+  and keys remain server-only.
+- [ ] OpenAI failure or allowance exhaustion returns a verified prepared-data
+  answer without provider details.
 - [ ] No raw data, traceback, provider error, or secret appears in the browser.
 - [ ] The layout remains usable at phone width.
 

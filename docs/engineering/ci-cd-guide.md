@@ -211,7 +211,7 @@ GitHub access performs this once:
 
 ```toml
 OPENAI_API_KEY = "replace-in-streamlit-settings"
-OPENAI_MODEL = "gpt-5.6-luna"
+OPENAI_MODEL = "gpt-5"
 FINALFLOW_MAX_AI_REQUESTS_PER_SESSION = "10"
 ```
 

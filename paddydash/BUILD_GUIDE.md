@@ -352,7 +352,7 @@ Set the variables in the same PowerShell window before launching Streamlit:
 
 ```powershell
 $env:OPENAI_API_KEY = "your-key-here"
-$env:OPENAI_MODEL = "gpt-5.6-luna"
+$env:OPENAI_MODEL = "gpt-5"
 $env:FINALFLOW_MAX_AI_REQUESTS_PER_SESSION = "10"
 .\.venv\Scripts\python.exe -m streamlit run paddydash\app.py
 ```
@@ -381,7 +381,7 @@ The tests verify:
 - out-of-scope handling;
 - the mocked OpenAI request and safe fallback;
 - reviewed Plotly encodings; and
-- successful rendering of all five Streamlit pages.
+- successful rendering of all seven Streamlit pages.
 
 ## 12. Common changes you may want to make
 

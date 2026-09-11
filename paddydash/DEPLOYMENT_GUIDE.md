@@ -101,7 +101,7 @@ TOML in this form:
 
 ```toml
 OPENAI_API_KEY = "your-real-project-key"
-OPENAI_MODEL = "gpt-5.6-luna"
+OPENAI_MODEL = "gpt-5"
 FINALFLOW_MAX_AI_REQUESTS_PER_SESSION = "10"
 ```
 
@@ -110,8 +110,9 @@ development. Never edit that example to contain a real value. For Community
 Cloud, paste the equivalent TOML values only into the deployment's Secrets box.
 Optional `SERPAPI_API_KEY` is a server-only credential for explicit current
 transit/weather/access questions. `FINALFLOW_DISABLE_SEARCH=true` disables search.
-Project questions do not search. Provider failures show a fixed safe message;
-external source cards remain separate from deterministic project evidence.
+Project questions do not search. Provider failures preserve the verified
+prepared-data answer without exposing an error detail; external source cards
+remain separate from deterministic project evidence.
 
 `FINALFLOW_DISABLE_OPENAI` is also supported as a process/CI safety switch but
 does not need to be added to hosted Secrets during normal operation.
@@ -121,8 +122,8 @@ variables. The OpenAI Python SDK reads `OPENAI_API_KEY` there. The application
 does not render or log the value.
 
 After saving secrets, reboot or redeploy the app if Streamlit does not do so
-automatically. Ask FinalFlow should display that secure OpenAI mode is configured
-and show the model name, never the key.
+automatically. Ask FinalFlow should return grounded answers with local evidence;
+the model name and key remain server-only.
 
 ## 7. Configure access and spending before sharing broadly
 
@@ -171,7 +172,7 @@ and readiness checker before opening or updating each pull request.
 The key is missing or not visible to the server. Confirm the secret name is
 exactly `OPENAI_API_KEY`, save it in the deployed app's settings, and reboot.
 
-### The AI backend temporarily falls back
+### Ask FinalFlow uses a verified prepared-data answer
 
 Check OpenAI project billing, usage limits, model access, and Streamlit logs. The
 visitor still receives the verified prepared-data answer, while internal error
